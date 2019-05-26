@@ -69,13 +69,7 @@
                                 <th> Name </th>
                                 <th> Branch </th>
                                 <th> Phone </th>
-                                <th> alt - Phone </th>
-                                <th> Email </th>
-                                <th> Address </th>
                                 <th> Opening Balance </th>
-                                <th> Starting Date </th>
-                                <th> Ending Date </th>
-                                <th> Status </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -87,14 +81,12 @@
                                     <td>{{ $farmer->name }}</td>
                                     <td>{{ $farmer->branch->name }}</td>
                                     <td>{{ $farmer->phone1 }}</td>
-                                    <td>{{ $farmer->phone2 }}</td>
-                                    <td>{{ $farmer->email }}</td>
-                                    <td>{{ str_limit($farmer->address, 15) }}</td>
                                     <td>{{ $farmer->opening_balance }}</td>
-                                    <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
-                                    <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td>
-                                    <td>{{ $farmer->status }}</td>
+                                    {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
+                                    <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">description</i></a>
+
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.farmer.edit', $farmer->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"

@@ -20,11 +20,12 @@ class FarmerController extends Controller
      */
     public function index()
     {
+        /* show all the farmers */
         if (auth()->user()->can('view_farmer')) {
-                
-                $farmers = Farmer::latest()->get();
-                return view('admin.farmer.index', compact('farmers'));
-            }
+            
+            $farmers = Farmer::latest()->get();
+            return view('admin.farmer.index', compact('farmers'));
+        }
         abort(403);
     }
 
@@ -37,9 +38,9 @@ class FarmerController extends Controller
     {
        if (auth()->user()->can('create_farmer')) {
                
-                $branches = Branch::all();
-                return view('admin.farmer.create', compact('branches'));
-           }
+            $branches = Branch::all();
+            return view('admin.farmer.create', compact('branches'));
+        }
        abort(403);
     }
 
@@ -83,7 +84,7 @@ class FarmerController extends Controller
      */
     public function show(Farmer $farmer)
     {
-        //
+        return view('admin.Farmer.view', compact('farmer'));
     }
 
     /**
