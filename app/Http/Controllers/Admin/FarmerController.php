@@ -20,8 +20,12 @@ class FarmerController extends Controller
      */
     public function index()
     {
-        $farmers = Farmer::latest()->get();
-        return view('admin.farmer.index', compact('farmers'));
+        if (auth()->user()->can('view_farmer')) {
+                
+                $farmers = Farmer::latest()->get();
+                return view('admin.farmer.index', compact('farmers'));
+            }
+        abort(403);
     }
 
     /**
@@ -31,8 +35,12 @@ class FarmerController extends Controller
      */
     public function create()
     {
-        $branches = Branch::all();
-        return view('admin.farmer.create', compact('branches'));
+       if (auth()->user()->can('create_farmer')) {
+               
+                $branches = Branch::all();
+                return view('admin.farmer.create', compact('branches'));
+           }
+       abort(403);
     }
 
     /**
@@ -43,24 +51,28 @@ class FarmerController extends Controller
      */
     public function store(FarmerStoreRequest $request)
     {
-        /* Insert Farmer */
-        $farmer = Farmer::create([
-            'branch_id'        =>      $request->branch,
-            'name'             =>      $request->name,
-            'phone1'           =>      $request->phone1,
-            'phone2'           =>      $request->phone2,
-            'email'            =>      $request->email,
-            'address'          =>      $request->address,
-            'opening_balance'  =>      $request->opening_balance,
-            'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-            'status'           =>      'active',
-        ]);
-        /* Check famer insertion  and Toastr */
-        if($farmer){
-            Toastr::success('Farmer Inserted Successfully', 'Success');
-            return redirect()->route('admin.farmer.index');
-        }
+        if (auth()->user()->can('create_farmer')) {
+                
+                        /* Insert Farmer */
+                $farmer = Farmer::create([
+                    'branch_id'        =>      $request->branch,
+                    'name'             =>      $request->name,
+                    'phone1'           =>      $request->phone1,
+                    'phone2'           =>      $request->phone2,
+                    'email'            =>      $request->email,
+                    'address'          =>      $request->address,
+                    'opening_balance'  =>      $request->opening_balance,
+                    'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                    'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
+                    'status'           =>      'active',
+                ]);
+                /* Check famer insertion  and Toastr */
+                if($farmer){
+                    Toastr::success('Farmer Inserted Successfully', 'Success');
+                    return redirect()->route('admin.farmer.index');
+                }
+            }
+        abort(403);
     }
 
     /**
@@ -82,8 +94,12 @@ class FarmerController extends Controller
      */
     public function edit(Farmer $farmer)
     {
-        $branches = Branch::all();
-        return view('admin.farmer.edit', compact('farmer', 'branches'));
+        if (auth()->user()->can('edit_farmer')) {
+                
+                $branches = Branch::all();
+                return view('admin.farmer.edit', compact('farmer', 'branches'));
+            }
+        abort(403);
     }
 
     /**
@@ -95,24 +111,28 @@ class FarmerController extends Controller
      */
     public function update(FarmerUpdateRequest $request, Farmer $farmer)
     {
-        /* update Farmer */
-        $resultFarmer = $farmer->update([
-            'branch_id'        =>      $request->branch,
-            'name'             =>      $request->name,
-            'phone1'           =>      $request->phone1,
-            'phone2'           =>      $request->phone2,
-            'email'            =>      $request->email,
-            'address'          =>      $request->address,
-            'opening_balance'  =>      $request->opening_balance,
-            'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-            'status'           =>      'active',
-        ]);
-        /* Check famer insertion  and Toastr */
-        if($farmer){
-            Toastr::success('Farmer Updated Successfully', 'Success');
-            return redirect()->route('admin.farmer.index');
-        }
+       if (auth()->user()->can('edit_farmer')) {
+               
+                        /* update Farmer */
+                $resultFarmer = $farmer->update([
+                    'branch_id'        =>      $request->branch,
+                    'name'             =>      $request->name,
+                    'phone1'           =>      $request->phone1,
+                    'phone2'           =>      $request->phone2,
+                    'email'            =>      $request->email,
+                    'address'          =>      $request->address,
+                    'opening_balance'  =>      $request->opening_balance,
+                    'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                    'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
+                    'status'           =>      'active',
+                ]);
+                /* Check famer insertion  and Toastr */
+                if($farmer){
+                    Toastr::success('Farmer Updated Successfully', 'Success');
+                    return redirect()->route('admin.farmer.index');
+                }
+           }
+       abort(403);
     }
 
     /**
@@ -123,8 +143,12 @@ class FarmerController extends Controller
      */
     public function destroy(Farmer $farmer)
     {
-        $farmer->delete();
-        Toastr::success('Farmer Deleted Successfully', 'Success');
-        return redirect()->route('admin.farmer.index');
+       if (auth()->user()->can('delete_farmer')) {
+               
+                $farmer->delete();
+                Toastr::success('Farmer Deleted Successfully', 'Success');
+                return redirect()->route('admin.farmer.index');
+           }
+       abort(403);
     }
 }

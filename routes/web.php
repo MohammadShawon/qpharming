@@ -13,10 +13,10 @@
 
 
 
-Route::get('/', function (\Illuminate\Http\Request $request) {
-    $user = $request->user();
-    dump($user->refreshPermissions('delete'));
-});
+// Route::get('/', function (\Illuminate\Http\Request $request) {
+//     $user = $request->user();
+//     dump($user->refreshPermissions('delete'));
+// });
 
 // Route::group(['as'=>'admin.', 'prefix' => 'manager', 'namespace'=>'Admin','middleware' => 'role:manager'], function () {
 
@@ -24,7 +24,7 @@ Route::get('/', function (\Illuminate\Http\Request $request) {
     
 // });
 
-Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middleware' => ['role:admin|manager|employee,create']], function () {
+Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
    Route::resource('area', 'AreaController');
@@ -73,4 +73,4 @@ Route::get('locale/{locale}', function ($locale){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

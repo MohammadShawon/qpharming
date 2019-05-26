@@ -19,8 +19,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::latest()->get();
-        return view('admin.company.index', compact('companies'));
+        if (auth()->user()->can('view_company')) {
+                
+                $companies = Company::latest()->get();
+                 return view('admin.company.index', compact('companies'));
+                
+            }
+        abort(403);
     }
 
     /**
@@ -30,7 +35,11 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('admin.company.create');
+        if (auth()->user()->can('create_company')) {
+                
+                return view('admin.company.create');
+            }
+        abort(403);
     }
 
     /**
@@ -42,24 +51,28 @@ class CompanyController extends Controller
     public function store(CompanyStoreRequest $request)
     {
 
-        $company = Company::create([
-            'name'                  => $request->company,
-            'slug'                  => str_slug($request->company),
-            'representative_name'   => $request->representative_name,
-            'phone1'                => $request->phone1,
-            'phone2'                => $request->phone2,
-            'email'                 => $request->email,
-            'address'               => $request->address,
-            'opening_balance'       => $request->opening_balance,
-            'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
-        ]);
-        /* cheack and showing toastr message */
-        if($company){
-            Toastr::success('Company Successfully Added', 'Success');
-            return redirect()->route('admin.company.index');
-        }
-        abort(404);
+        if (auth()->user()->can('create_company')) {
+                
+                $company = Company::create([
+                'name'                  => $request->company,
+                'slug'                  => str_slug($request->company),
+                'representative_name'   => $request->representative_name,
+                'phone1'                => $request->phone1,
+                'phone2'                => $request->phone2,
+                'email'                 => $request->email,
+                'address'               => $request->address,
+                'opening_balance'       => $request->opening_balance,
+                'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
+            ]);
+            /* cheack and showing toastr message */
+            if($company){
+                Toastr::success('Company Successfully Added', 'Success');
+                return redirect()->route('admin.company.index');
+            }
+            abort(404);
+            }
+        abort(403);
     }
 
     /**
@@ -81,8 +94,12 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = Company::findOrFail($id);
-        return view('admin.company.edit', compact('company'));
+        if (auth()->user()->can('edit_company')) {
+                
+                $company = Company::findOrFail($id);
+                return view('admin.company.edit', compact('company'));
+            }
+        abort(403);
     }
 
     /**
@@ -94,25 +111,29 @@ class CompanyController extends Controller
      */
     public function update(CompanyUpdateRequest $request, $id)
     {
-        $company = Company::findOrFail($id);
-        $Resultcompany = $company->update([
-            'name'                  => $request->company,
-            'slug'                  => str_slug($request->company),
-            'representative_name'   => $request->representative_name,
-            'phone1'                => $request->phone1,
-            'phone2'                => $request->phone2,
-            'email'                 => $request->email,
-            'address'               => $request->address,
-            'opening_balance'       => $request->opening_balance,
-            'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
-        ]);
-        /* cheack and showing toastr message */
-        if($Resultcompany){
-            Toastr::success('Company Successfully Update', 'Success');
-            return redirect()->route('admin.company.index');
-        }
-        abort(404);
+        if (auth()->user()->can('edit_company')) {
+                
+                    $company = Company::findOrFail($id);
+            $Resultcompany = $company->update([
+                'name'                  => $request->company,
+                'slug'                  => str_slug($request->company),
+                'representative_name'   => $request->representative_name,
+                'phone1'                => $request->phone1,
+                'phone2'                => $request->phone2,
+                'email'                 => $request->email,
+                'address'               => $request->address,
+                'opening_balance'       => $request->opening_balance,
+                'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
+            ]);
+            /* cheack and showing toastr message */
+            if($Resultcompany){
+                Toastr::success('Company Successfully Update', 'Success');
+                return redirect()->route('admin.company.index');
+            }
+            abort(404);
+            }
+        abort(403);
     }
 
     /**
@@ -123,8 +144,12 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        Company::findOrFail($id)->delete();
-        Toastr::success('Company Successfully Deleted', 'Success');
-        return redirect()->route('admin.company.index');
+        if (auth()->user()->can('delete_company')) {
+                
+                Company::findOrFail($id)->delete();
+                Toastr::success('Company Successfully Deleted', 'Success');
+                return redirect()->route('admin.company.index');
+            }
+        abort(403);
     }
 }

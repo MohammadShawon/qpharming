@@ -19,9 +19,13 @@ class AreaController extends Controller
      */
     public function index()
     {
-            $areas = Area::latest()->get();
+            if (auth()->user()->can('view_area')) {
+                    
+                    $areas = Area::latest()->get();
 
-            return view('admin.area.index', compact('areas'));
+                    return view('admin.area.index', compact('areas'));
+                }
+            abort(403);
         
     }
 
@@ -32,7 +36,11 @@ class AreaController extends Controller
      */
     public function create()
     {
-            return view('admin.area.create');
+            if (auth()->user()->can('create_area')) {
+                    
+                    return view('admin.area.create');
+                }
+            abort(403);
         
     }
 
@@ -44,20 +52,24 @@ class AreaController extends Controller
      */
     public function store(AreaStoreRequest $request)
     {
-        //  store area
-        $area = Area::create([
-            'name'  => $request->area,
-            'slug'  => str_slug($request->slug)
-        ]);
+        if (auth()->user()->can('create_area')) {
+                
+                        //  store area
+                $area = Area::create([
+                    'name'  => $request->area,
+                    'slug'  => str_slug($request->slug)
+                ]);
 
-        
-        // check area and toast message
-        if($area)
-        {
-            Toastr::success('Area Successfully Inserted', 'Success');
-            return redirect()->route('admin.area.index');
-        }
-        abort(404);
+                
+                // check area and toast message
+                if($area)
+                {
+                    Toastr::success('Area Successfully Inserted', 'Success');
+                    return redirect()->route('admin.area.index');
+                }
+                abort(404);
+            }
+        abort(403);
         
     }
 
@@ -80,8 +92,12 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
-        $area = Area::findOrFail($id);
-        return view('admin.area.edit', compact('area'));
+        if (auth()->user()->can('edit_area')) {
+                
+                $area = Area::findOrFail($id);
+                return view('admin.area.edit', compact('area'));
+            }
+        abort(403);
     }
 
     /**
@@ -93,19 +109,23 @@ class AreaController extends Controller
      */
     public function update(AreaUpdateRequest $request, $id)
     {
-        /* update Area */
-        $area = Area::findOrFail($id);
-        $resutArea = $area->update([
-            'name' => $request->area,
-            'slug' => str_slug($request->area),
-        ]);
+        if (auth()->user()->can('edit_area')) {
+                
+                        /* update Area */
+                $area = Area::findOrFail($id);
+                $resutArea = $area->update([
+                    'name' => $request->area,
+                    'slug' => str_slug($request->area),
+                ]);
 
-        //check and toast message
-        if($resutArea){
-            Toastr::success('Area Successfully Updated', 'Success');
-            return redirect()->route('admin.area.index');
-        }
-        abort(404);
+                //check and toast message
+                if($resutArea){
+                    Toastr::success('Area Successfully Updated', 'Success');
+                    return redirect()->route('admin.area.index');
+                }
+                abort(404);
+            }
+        abort(403);
         
     }
 
@@ -117,8 +137,12 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        Area::findOrFail($id)->delete();
-        Toastr::success('Area Successfully Deleted', 'Success');
-        return redirect()->route('admin.area.index');
+       if (auth()->user()->can('delete_area')) {
+               
+                Area::findOrFail($id)->delete();
+                Toastr::success('Area Successfully Deleted', 'Success');
+                return redirect()->route('admin.area.index');
+           }
+       abort(403);
     }
 }

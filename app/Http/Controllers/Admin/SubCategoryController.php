@@ -19,9 +19,13 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subcategories = SubCategory::latest()->get();
+        if (auth()->user()->can('view_sub-category')) {
+                
+                $subcategories = SubCategory::latest()->get();
 
-        return view('admin.subcategory.index', compact('subcategories'));
+                return view('admin.subcategory.index', compact('subcategories'));
+            }
+        abort(403);
     }
 
     /**
@@ -31,8 +35,12 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        if (auth()->user()->can('create_sub-category')) {
+                
+                $categories = Category::all();
         return view('admin.subcategory.create', compact('categories'));
+            }
+        abort(403);
 
     }
 
@@ -44,7 +52,9 @@ class SubCategoryController extends Controller
      */
     public function store(SubCategoryStoreRequest $request)
     {
-        /* create sub-category */
+        if (auth()->user()->can('create_sub-category')) {
+                
+                /* create sub-category */
         $subcategory = SubCategory::create([
             'name' => $request->subcategory,
             'slug' => str_slug($request->subcategory),
@@ -56,6 +66,8 @@ class SubCategoryController extends Controller
             return redirect()->route('admin.sub-category.index');
         }
         abort(404);
+            }
+        abort(403);
 
     }
 
@@ -78,8 +90,12 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        $categories = Category::all();
-        return view('admin.subcategory.edit', compact('subCategory', 'categories'));
+        if (auth()->user()->can('edit_sub-category')) {
+                
+                $categories = Category::all();
+                return view('admin.subcategory.edit', compact('subCategory', 'categories'));
+            }
+        abort(403);
     }
 
     /**
@@ -91,20 +107,24 @@ class SubCategoryController extends Controller
      */
     public function update(SubCategoryUpdateRequest $request, SubCategory $subCategory)
     {
-        /* update sub-category */
-        $resultSubCategory = $subCategory->update([
-            
-            'category_id'  =>   $request->category,
-            'name'         =>   $request->subcategory,
-            'slug'         =>   str_slug($request->subcategory),
-        ]);
+        if (auth()->user()->can('edit_sub-category')) {
+                
+                        /* update sub-category */
+                $resultSubCategory = $subCategory->update([
+                    
+                    'category_id'  =>   $request->category,
+                    'name'         =>   $request->subcategory,
+                    'slug'         =>   str_slug($request->subcategory),
+                ]);
 
-        /* cheack and showing toastr message */
-        if($resultSubCategory){
-            Toastr::success('Sub-Category Successfully Updated', 'Success');
-            return redirect()->route('admin.sub-category.index');
-        }
-        abort(404);
+                /* cheack and showing toastr message */
+                if($resultSubCategory){
+                    Toastr::success('Sub-Category Successfully Updated', 'Success');
+                    return redirect()->route('admin.sub-category.index');
+                }
+                abort(404);
+            }
+        abort(403);
     }
 
     /**
@@ -115,8 +135,12 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        $subCategory->delete();
-        Toastr::success('Sub-Category Successfully Deleted', 'Success');
-        return redirect()->route('admin.sub-category.index');
+        if (auth()->user()->can('delete_sub-category')) {
+                
+                $subCategory->delete();
+                Toastr::success('Sub-Category Successfully Deleted', 'Success');
+                return redirect()->route('admin.sub-category.index');
+            }
+        abort(403);
     }
 }
