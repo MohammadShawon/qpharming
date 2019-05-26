@@ -11,8 +11,9 @@ $factory->define(Role::class, function (Faker $faker) {
         'name' => $faker->randomElement([
             'admin',
             'manager',
+            'employee',
             'user'
 
-        ]),
+        ])
     ];
 });

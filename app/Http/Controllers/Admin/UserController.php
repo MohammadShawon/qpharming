@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Branch;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\User\UserStoreRequest;
+use App\Models\Role;
+use App\Http\Requests\User\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -31,7 +33,8 @@ class UserController extends Controller
     public function create()
     {
         $branches = Branch::all();
-        return view('admin.user.create', compact('branches'));
+        $roles = Role::all();
+        return view('admin.user.create', compact('branches', 'roles'));
     }
 
     /**
@@ -52,10 +55,14 @@ class UserController extends Controller
             'email'            =>      $request->email,
             'password'         =>      bcrypt($request->password),
             'address'          =>      $request->address,
-            'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
             'status'           =>      'active',
         ]);
+
+        /* assigning roles to the user */
+        if($user){
+            $user->roles()->attach($request->roles);
+        }
+
         /* Check famer insertion  and Toastr */
         if($user){
             Toastr::success('User Inserted Successfully', 'Success');
@@ -82,7 +89,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Role::all();
+        $branches = Branch::all();
+        $user = User::findOrFail($id);
+        return view('admin.user.edit', compact('user','branches', 'roles'));
     }
 
     /**
@@ -92,9 +102,47 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        /* update user with password */
+        if(!empty($request->password)){
+            $user->update([
+                'branch_id'        =>      $request->branch,
+                'name'             =>      $request->user,
+                'username'         =>      $request->username,
+                'phone1'           =>      $request->phone1,
+                'phone2'           =>      $request->phone2,
+                'email'            =>      $request->email,
+                'password'         =>      bcrypt($request->password),
+                'address'          =>      $request->address,
+                'status'           =>      $request->status,
+            ]);
+        } 
+        /* update user without password */
+        else{
+            $user->update([
+                'branch_id'        =>      $request->branch,
+                'name'             =>      $request->user,
+                'username'         =>      $request->username,
+                'phone1'           =>      $request->phone1,
+                'phone2'           =>      $request->phone2,
+                'email'            =>      $request->email,
+                'address'          =>      $request->address,
+                'status'           =>      $request->status,
+            ]);
+        }
+
+        /* update roles to the user */
+        if($user){
+            $user->roles()->sync($request->roles);
+        }
+
+        /* Check famer insertion  and Toastr */
+        if($user){
+            Toastr::success('User Updated Successfully', 'Success');
+            return redirect()->route('admin.user.index');
+        }
     }
 
     /**
@@ -105,6 +153,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userDelete = User::findOrFail($id)->delete();
+        
+        if($userDelete){
+            Toastr::success('User Deleted Successfully', 'Success');
+            return redirect()->route('admin.user.index');
+        }
     }
 }

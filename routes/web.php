@@ -50,7 +50,7 @@ Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'Sup
 
 Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware('role:admin');
+});
 
 
 
