@@ -55,6 +55,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+        // dd($request);
         /* INSERT USER */
         if(auth()->user()->can('create_user')){
             $user = User::create([

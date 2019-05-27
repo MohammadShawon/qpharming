@@ -27,7 +27,7 @@
 Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
-   Route::resource('area', 'AreaController');
+    Route::resource('area', 'AreaController');
     Route::resource('category', 'CategoryController');
     Route::resource('sub-category', 'SubCategoryController');
     Route::resource('branch', 'BranchController');
