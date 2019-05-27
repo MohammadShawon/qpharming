@@ -38,7 +38,7 @@ Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middlew
 
 /* Super Admin route start */
 
-Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'SuperAdmin'], function () {
+Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'SuperAdmin', ], function () {
 
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');
@@ -50,7 +50,7 @@ Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'Sup
 
 Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware('role:admin');
+});
 
 
 

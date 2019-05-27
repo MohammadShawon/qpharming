@@ -70,7 +70,7 @@
                                 <th> Name </th>
                                 
                                 <th> Permissions </th>
-                                <th> Created </th>
+                                {{-- <th> Created </th> --}}
                                 <th> Actions </th>
                             </tr>
                         </thead>
@@ -83,12 +83,12 @@
                                     
                                     <td>
                                         @foreach ($role->permissions as $rolePermission)
-                                        <span class="btn" style="background-color: #3fcc7e; color:#fff"> {{ $rolePermission->name }} </span>  
+                                        <span class="btn" style="background-color: #3fcc7e; color:#fff; padding: 0px 2px 2px 0"> {{ $rolePermission->name }} </span>  
                                         @endforeach
                                     </td>
-                                    <td>{{ $role->created_at->toDayDateTimeString() }}</td>
+                                    {{-- <td>{{ $role->created_at->toDayDateTimeString() }}</td> --}}
                                     <td>
-                                        <a  class="waves-effect  btn btn-primary" href="{{ route('super-admin.role.edit', $role->id) }}"><i class="material-icons">edit</i></a>
+                                        <a style="margin-bottom: 4px;"  class="waves-effect  btn btn-primary" href="{{ route('super-admin.role.edit', $role->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
                                         onclick="deleteRole({{$role->id}})">

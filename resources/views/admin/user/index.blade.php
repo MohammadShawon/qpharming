@@ -18,31 +18,31 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-                <div class="btn-group">
-                    <a href="{{ route('admin.user.create') }}" id="addRow1" class="btn btn-primary">
-                        Add New <i style="color:white;" class="fa fa-plus"></i>
-                    </a>
-                    <span class="btn btn-primary ml-3"> {{ $users->count() }} </span>
-                </div>
-                <div class="btn-group pull-right">
-                        <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="btn-group">
+                <a href="{{ route('admin.user.create') }}" id="addRow1" class="btn btn-primary">
+                    Add New <i style="color:white;" class="fa fa-plus"></i>
+                </a>
+                <span class="btn btn-primary ml-3"> {{ $users->count() }} </span>
+            </div>
+            <div class="btn-group pull-right">
+                <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-print"></i> Print </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                        <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                    </li>
+                </ul>
+            </div>
             <div class="card card-topline-red">
                 <div class="card-head">
                     <header>ALL - User's</header>
@@ -70,10 +70,6 @@
                                 <th> Branch </th>
                                 <th> Roles </th>
                                 <th> Phone </th>
-                                <th> alt - Phone </th>
-                                <th> Email </th>
-                                <th> Address </th>
-                                <th> Status </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -90,11 +86,9 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $user->phone1 }}</td>
-                                    <td>{{ $user->phone2 }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ str_limit($user->address, 15) }}</td>
-                                    <td>{{ $user->status }}</td>
                                     <td>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.user.show', $user->id) }}"><i class="material-icons">description</i></a>
+                                        
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.user.edit', $user->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
