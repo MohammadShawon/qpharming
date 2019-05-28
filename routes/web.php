@@ -24,7 +24,7 @@
     
 // });
 
-Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
+Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
     Route::resource('area', 'AreaController');
@@ -38,7 +38,7 @@ Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middlew
 
 /* Super Admin route start */
 
-Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'SuperAdmin', ], function () {
+Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');
@@ -48,7 +48,7 @@ Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'Sup
 /* Super Admin route end */
 
 
-Route::get('admin/dashboard', function () {
+Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
