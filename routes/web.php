@@ -34,6 +34,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('farmer', 'FarmerController');
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
+    Route::resource('product', 'ProductController');
 });
 
 /* Super Admin route start */

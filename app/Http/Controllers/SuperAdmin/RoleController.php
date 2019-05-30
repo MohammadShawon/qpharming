@@ -43,7 +43,7 @@ class RoleController extends Controller
     {
         //  store role
         $role = Role::create([
-            'name'  => $request->role
+            'name'  => strtolower($request->role)
         ]);
 
         
@@ -92,7 +92,7 @@ class RoleController extends Controller
         /* update Role */
         $role = Role::findOrFail($id);
         $resultRole = $role->update([
-            'name' => $request->role
+            'name' => strtolower($request->role)
         ]);
         /* 
             Update assigining roles permissions

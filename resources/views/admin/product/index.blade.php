@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Branch')
+@section('title', 'Product')
 
 @push('css')
     <!-- data tables -->
@@ -18,34 +18,34 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-                <div class="btn-group">
-                    <a href="{{ route('admin.branch.create') }}" id="addRow1" class="btn btn-primary">
-                        Add New <i style="color:white;" class="fa fa-plus"></i>
-                    </a>
-                    <span class="btn btn-primary ml-3"> {{ $branches->count() }} </span>
-                </div>
-                <div class="btn-group pull-right">
-                        <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="btn-group">
+                <a href="{{ route('admin.product.create') }}" id="addRow1" class="btn btn-primary">
+                    Add New <i style="color:white;" class="fa fa-plus"></i>
+                </a>
+                <span class="btn btn-primary ml-3"> {{ $products->count() }} </span>
+            </div>
+            <div class="btn-group pull-right">
+                <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-print"></i> Print </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                        <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                    </li>
+                </ul>
+            </div>
             <div class="card card-topline-red">
                 <div class="card-head">
-                    <header>ALL - BRANCH</header>
+                    <header>ALL - Product's</header>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -64,39 +64,32 @@
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
                         <thead>
                             <tr>
-                                
                                 <th> Serial </th>
                                 <th> Name </th>
-                                <th> Manager </th>
-                                <th> Created </th>
-                                <th> Actions </th>
+                                <th> Category </th>
+                                <th> Sub Category </th>
+                                <th> Action </th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach ($branches as $key=>$branch)
+                            @foreach ($products as $key=>$product)
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
-                                    <td>{{ $branch->name }}</td>
+                                    <td>{{ $product->product_name }}</td>
+                                    
+                                    <td>{{ $product->subcategory->category->name }}</td>
+                                    <td>{{ $product->subcategory->name }}</td>
                                     <td>
-                                        @foreach ($branch->users as $user)
-                                            @foreach ($user->roles as $userRoles)
-                                                @if ($userRoles->name == 'manager' )
-                                                <a href="{{ route('admin.user.show', $user->id) }}">{{ $user->name }}</a>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $branch->created_at->toDayDateTimeString() }}</td>
-                                    <td>
-                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.branch.edit', $branch->id) }}"><i class="material-icons">edit</i></a>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.product.show', $product->id) }}"><i class="material-icons">visibility</i></a>
+                                        
+                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.product.edit', $product->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
-                                        onclick="deleteBranch({{$branch->id}})">
+                                        onclick="deleteProduct({{$product->id}})">
                                         <i class="material-icons">delete</i>
                                         </button>
     
-                                        <form id="delete-form-{{$branch->id}}" action="{{ route('admin.branch.destroy', $branch->id) }}" method="post" style="display:none;">
+                                        <form id="delete-form-{{$product->id}}" action="{{ route('admin.product.destroy', $product->id) }}" method="post" style="display:none;">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -122,7 +115,7 @@
 
     <script type="text/javascript">
     
-    function deleteBranch(id) {
+    function deleteProduct(id) {
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -150,7 +143,7 @@
             ) {
                 swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your Branch name is safe :)',
+                'Your Product name is safe :)',
                 'error'
                 )
             }

@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('category_id')->unsigned()->index();
-            $table->bigInteger('sub_category_id')->unsigned()->index();
+            // $table->bigInteger('category_id')->unsigned()->index();
+            $table->bigInteger('subcategory_id')->unsigned()->index();
             $table->string('sku')->unique();
             $table->string('product_name');
             $table->string('barcode')->unique();
@@ -26,8 +26,8 @@ class CreateProductsTable extends Migration
             $table->decimal('quantity',20,2);
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('restrict');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
+            $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('restrict');
         });
     }
 

@@ -94,8 +94,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.user.view', compact('user'));
+        if(auth()->user()->can('view_user')){
+            $user = User::findOrFail($id);
+            return view('admin.user.show', compact('user'));
+        }
+        abort(403);
     }
 
     /**
