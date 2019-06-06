@@ -35,6 +35,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
     Route::resource('product', 'ProductController');
+    Route::resource('product-price', 'ProductPriceController');
+    Route::resource('unit', 'UnitController');
+    Route::resource('unit-convert', 'UnitConvertController');
 });
 
 /* Super Admin route start */

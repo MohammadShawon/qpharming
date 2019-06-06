@@ -6,7 +6,7 @@
                     <div class="sidebar-toggler">
                         <span></span>
                     </div>
-                </li>{{-- 
+                </li>
                 <li class="sidebar-user-panel">
                     <div class="user-panel">
                         <div class="pull-left image">
@@ -18,10 +18,10 @@
                                     {{ $role->name }}
                                 @endforeach
                             </p>
-                            <a href="#"><i class="fa fa-circle user-online"></i><span class="txtOnline"> @lang('dashboard.online')</span></a>
+                            {{-- <a href="#"><i class="fa fa-circle user-online"></i><span class="txtOnline"> @lang('dashboard.online')</span></a> --}}
                         </div>
                     </div>
-                </li> --}}
+                </li>
                 <li class="nav-item start {{ Request::is('dashboard*') ? 'active' : '' }}">
                     <a href="/dashboard" class="nav-link nav-toggle">
                         <i class="material-icons">dashboard</i>
@@ -67,6 +67,26 @@
                         <li class="nav-item {{ Request::is('company*') ? 'active' : '' }}">
                             <a href="{{ route('admin.company.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
                                 <span class="title">Company</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('product*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.product.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                                <span class="title">Product</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('product-price*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.product-price.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                                <span class="title">Product-Price</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('unit*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.unit.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                                <span class="title">Unit</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('unit-convert*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.unit-convert.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                                <span class="title">Unit Convert</span> 
                             </a>
                         </li>
                      </ul>

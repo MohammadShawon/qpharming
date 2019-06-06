@@ -26,7 +26,15 @@ class PermissionsTableSeeder extends Seeder
         	['name' => 'view_farmer'], 		['name' => 'create_farmer'],
 			['name' => 'edit_farmer'], 		['name' => 'delete_farmer'],
 			['name' => 'view_user'], 		['name' => 'create_user'],
-        	['name' => 'edit_user'], 		['name' => 'delete_user'],
+			['name' => 'edit_user'], 		['name' => 'delete_user'],
+			['name' => 'view_product'], 	['name' => 'create_product'],
+			['name' => 'edit_product'], 	['name' => 'delete_product'],
+			['name' => 'view_product-price'], 	['name' => 'create_product-price'],
+			['name' => 'edit_product-price'], 	['name' => 'delete_product-price'],
+			['name' => 'view_unit'], 		['name' => 'create_unit'],
+			['name' => 'edit_unit'], 		['name' => 'delete_unit'],
+			['name' => 'view_unit-convert'],['name' => 'create_unit-convert'],
+        	['name' => 'edit_unit-convert'],['name' => 'delete_unit-convert'],
         ];
 
         foreach ($permissions as $permission) {

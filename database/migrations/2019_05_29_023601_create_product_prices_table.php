@@ -20,8 +20,8 @@ class CreateProductPricesTable extends Migration
             $table->decimal('quantity',20,2);
             $table->decimal('cost_price',20,2);
             $table->decimal('selling_price',20,2);
-            $table->date('mfg_date');
-            $table->date('exp_date');
+            $table->dateTime('mfg_date');
+            $table->dateTime('exp_date');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
