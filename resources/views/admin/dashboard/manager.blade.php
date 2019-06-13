@@ -1,1 +1,0 @@
-   I am from manager, fuck you superadmin
