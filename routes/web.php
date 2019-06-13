@@ -24,6 +24,9 @@
     
 // });
 
+Auth::routes();
+
+
 Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
@@ -38,6 +41,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('product-price', 'ProductPriceController');
     Route::resource('unit', 'UnitController');
     Route::resource('unit-convert', 'UnitConvertController');
+
+    
 });
 
 /* Super Admin route start */
@@ -75,6 +80,6 @@ Route::get('locale/{locale}', function ($locale){
 });
 /*Language route END*/
 
-Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+
+// Route::get('/', 'HomeController@index')->name('home');

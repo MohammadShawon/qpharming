@@ -36,6 +36,7 @@
                         <span class="title">@lang('dashboard.farmer')</span> 
                     </a>
                 </li>
+
                 <li class="nav-item {{ Request::is('area*')||Request::is('branch*')||Request::is('category*')||Request::is('sub-category*')||Request::is('company*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">build</i>
