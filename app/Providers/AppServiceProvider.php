@@ -25,5 +25,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+
+            view()->composer('template.partials.sidebar', function($view) {
+
+            $branches = \App\Models\Branch::latest()->get();
+            $view->with('branches', $branches);
+          });
+        
+
     }
 }

@@ -15,6 +15,16 @@
             </ol>
         </div>
     </div>
+   <div class="row">
+       @if(Auth::user()->hasRole('superadmin'))
+       @include('admin.dashboard.admin')
+
+       @endif
+
+       @if(Auth::user()->hasRole('admin'))
+       @include('admin.dashboard.manager')
+       @endif
+   </div>
     <div class="state-overview">
         <div class="row">
             
