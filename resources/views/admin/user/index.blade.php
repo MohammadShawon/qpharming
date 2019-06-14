@@ -76,8 +76,11 @@
                         <tbody>
 
                             @foreach ($users as $key=>$user)
+                            @if(!Auth::user()->hasRole('superadmin'))
+                                @if ($loop->first) @continue @endif
+                            @endif
                                 <tr class="odd gradeX">
-                                    <td> {{ $key+1 }} </td>
+                                    <td> {{ $key }} </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->branch->name }}</td>
                                     <td>

@@ -130,11 +130,13 @@
                                 <span class="title">Role</span> 
                             </a>
                         </li>
+                        @if(Auth::user()->hasRole('superadmin'))
                         <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
                             <a href="{{ route('super-admin.permission.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Permission</span> 
                             </a>
                         </li>
+                        @endif
                      </ul>
                 </li>
                 @endif

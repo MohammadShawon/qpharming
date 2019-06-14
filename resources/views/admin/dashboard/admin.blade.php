@@ -11,6 +11,9 @@
                 <div class="row">
                     <ul class="docListWindow small-slimscroll-style">
                         @foreach ($users as $user)
+                        @if(!Auth::user()->hasRole('superadmin'))
+                                @if ($loop->first) @continue @endif
+                            @endif
                             <li>
                                 <div class="prog-avatar">
                                     <img src="assets/img/user/user1.jpg" alt="" width="40" height="40">

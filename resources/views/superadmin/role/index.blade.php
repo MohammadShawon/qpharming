@@ -69,7 +69,7 @@
                         <thead>
                             <tr>
                                 
-                                <th> Serila </th>
+                                <th> Serial </th>
                                 <th> Name </th>
                                 
                                 <th> Permissions </th>
@@ -80,8 +80,11 @@
                         <tbody>
 
                             @foreach ($roles as $key=>$role)
+                            @if(!Auth::user()->hasRole('superadmin'))
+                                @if ($loop->first) @continue @endif
+                            @endif
                                 <tr class="odd gradeX">
-                                    <td> {{ $key+1 }} </td>
+                                    <td> {{ $key }} </td>
                                     <td>{{ $role->name }}</td>
                                     
                                     <td>

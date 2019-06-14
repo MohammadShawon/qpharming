@@ -20,9 +20,11 @@
     <div class="row">
         <div class="col-md-12">
                 <div class="btn-group">
+                    @if(Auth::user()->hasRole('superadmin'))
                      <a href="{{ route('super-admin.permission.create')}}" id="addRow1" class="btn btn-primary">
                         Add New <i style="color:white;" class="fa fa-plus"></i>
                     </a>
+                    @endif
                     <span class="btn btn-primary ml-3"> {{ $permissions->count() }} </span>
                 </div>
                 <div class="btn-group pull-right">
