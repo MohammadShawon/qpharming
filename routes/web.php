@@ -43,6 +43,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('unit-convert', 'UnitConvertController');
 
     
+
+    
 });
 
 /* Super Admin route start */
@@ -57,11 +59,11 @@ Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 /* Super Admin route end */
 
 
-Route::get('dashboard', function () {
-    return view('admin.dashboard');
-});
+// Route::get('dashboard', function () {
+//     return view('admin.dashboard');
+// });
 
-
+Route::get('dashboard', 'Admin\DashboardController@index');
 
 
 /*For checking errors page  START*/
@@ -82,4 +84,4 @@ Route::get('locale/{locale}', function ($locale){
 
 
 
-// Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'Admin\DashboardController@index')->name('home');

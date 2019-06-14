@@ -1,5 +1,7 @@
-<div class="col-md-8">
-        
+
+<div class="row">
+    <div class="col-md-8">
+            
     </div>
 
     <div class="col-lg-4 col-md-12 col-sm-12 col-12">
@@ -31,11 +33,12 @@
                         
                         
                     </ul>
-                       <div class="full-width text-center p-t-10" >
+                        <div class="full-width text-center p-t-10" >
                             <a href="#" class="btn purple btn-outline btn-circle margin-0">View All</a>
                         </div>
-                   </div>
+                    </div>
                 </div>
             </div>
-       </div>
-   </div>
+        </div>
+    </div>
+</div>

@@ -33,11 +33,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('users', $users);
           });
           
-          view()->composer('*', function($view) {
+          // view()->composer('*', function($view) {
 
-            $branches = \App\Models\Branch::latest()->get();
-            $view->with('branches', $branches);
-          });
+          //   $branches = \App\Models\Branch::latest()->get();
+          //   $view->with('branches', $branches);
+          // });
           
           view()->composer('admin.dashboard.manager', function($view) {
 

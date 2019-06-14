@@ -9,7 +9,7 @@
         
     </div>
 </div>
-<div class="row">
+
 
     @if (Auth::user()->hasRole('admin'))
         @include('admin.dashboard.admin')
@@ -20,6 +20,6 @@
     @endif
     
 
-</div>
+<
     
 @endsection
