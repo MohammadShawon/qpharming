@@ -17,7 +17,7 @@ class BranchesTableSeeder extends Seeder
 
         foreach ($branches as $branch) { 
             Branch::create([
-                'area_id' => rand(1, 4),
+                'area_id' => rand(1, 5),
                 'name' => $branch,
                 'slug' => str_slug($branch),
                 'created_at' => new DateTime,

@@ -18,8 +18,13 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units = Unit::latest()->get();
-        return view('admin.unit.index', compact('units'));
+        if (auth()->user()->can('view_unit')) {
+                
+                
+                $units = Unit::latest()->get();
+                return view('admin.unit.index', compact('units'));
+            }
+        abort(403);
     }
 
     /**
@@ -29,7 +34,11 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('admin.unit.create');
+        if (auth()->user()->can('create_unit')) {
+                
+                return view('admin.unit.create');
+            }
+        abort(403);
     }
 
     /**
@@ -40,7 +49,7 @@ class UnitController extends Controller
      */
     public function store(UnitStoreRequest $request)
     {
-        // if (auth()->user()->can('create_area')) {
+         if (auth()->user()->can('create_unit')) {
             //  Store Unit
             $unit = Unit::create([
                 'name'  => $request->unit
@@ -54,8 +63,8 @@ class UnitController extends Controller
                 return redirect()->route('admin.unit.index');
             }
             abort(404);
-        // }
-        // abort(403);
+         }
+     abort(403);
     }
 
     /**
@@ -77,7 +86,11 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        return view('admin.unit.edit', compact('unit'));
+        if (auth()->user()->can('edit_unit')) {
+                
+                return view('admin.unit.edit', compact('unit'));
+            }
+        abort(403);
     }
 
     /**
@@ -89,7 +102,7 @@ class UnitController extends Controller
      */
     public function update(UnitUpdateRequest $request, Unit $unit)
     {
-        // if (auth()->user()->can('edit_area')) {
+        if (auth()->user()->can('edit_unit')) {
                 
             /* update Unit */
             $unitUpdate = $unit->update([
@@ -102,8 +115,8 @@ class UnitController extends Controller
                 return redirect()->route('admin.unit.index');
             }
             abort(404);
-        // }
-        // abort(403);
+         }
+         abort(403);
     }
 
     /**
@@ -114,10 +127,14 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        $unitDelete = $unit->delete();
-        if($unitDelete){
-            Toastr::success('Unit Successfully Deleted', 'Success');
-            return redirect()->route('admin.unit.index');
-        }
+        if (auth()->user()->can('delete_unit')) {
+                
+                $unitDelete = $unit->delete();
+                if($unitDelete){
+                    Toastr::success('Unit Successfully Deleted', 'Success');
+                    return redirect()->route('admin.unit.index');
+                }
+            }
+        abort(403); 
     }
 }

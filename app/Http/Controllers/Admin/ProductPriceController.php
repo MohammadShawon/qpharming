@@ -20,8 +20,13 @@ class ProductPriceController extends Controller
      */
     public function index()
     {
-        $productPrices = ProductPrice::latest()->get();
-        return view('admin.productprice.index', compact('productPrices'));
+        if (auth()->user()->can('view_product-price')) {
+                
+                $productPrices = ProductPrice::latest()->get();
+                return view('admin.productprice.index', compact('productPrices'));
+            }
+        abort(403);
+        
     }
 
     /**
@@ -31,8 +36,13 @@ class ProductPriceController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
-        return view('admin.productprice.create', compact('products'));
+        if (auth()->user()->can('create_product-price')) {
+                $products = Product::all();
+                return view('admin.productprice.create', compact('products'));
+                
+            }
+        abort(403);
+        
     }
 
     /**
@@ -43,22 +53,27 @@ class ProductPriceController extends Controller
      */
     public function store(ProductPriceStoreRequest $request)
     {
-        /* Insert Product - Price */
-        $productPrice = ProductPrice::create([
-            'product_id'       =>      $request->product_id,
-            'batch_no'         =>      $request->batch,
-            'quantity'         =>      $request->quantity,
-            'cost_price'       =>      $request->cost,
-            'selling_price'    =>      $request->sell,
-            'mfg_date'         =>      Carbon::parse($request->mfg_date)->format('Y-m-d H:i'),
-            'exp_date'         =>      Carbon::parse($request->exp_date)->format('Y-m-d H:i'),
-        ]);
-        /* Check Product-Price insertion  and Toastr */
-        if($productPrice){
-            Toastr::success('Product-Price Inserted Successfully', 'Success');
-            return redirect()->route('admin.product-price.index');
-        }
-        abort(404);
+        if (auth()->user()->can('create_product-price')) {
+                /* Insert Product - Price */
+                $productPrice = ProductPrice::create([
+                    'product_id'       =>      $request->product_id,
+                    'batch_no'         =>      $request->batch,
+                    'quantity'         =>      $request->quantity,
+                    'cost_price'       =>      $request->cost,
+                    'selling_price'    =>      $request->sell,
+                    'mfg_date'         =>      Carbon::parse($request->mfg_date)->format('Y-m-d H:i'),
+                    'exp_date'         =>      Carbon::parse($request->exp_date)->format('Y-m-d H:i'),
+                ]);
+                /* Check Product-Price insertion  and Toastr */
+                if($productPrice){
+                    Toastr::success('Product-Price Inserted Successfully', 'Success');
+                    return redirect()->route('admin.product-price.index');
+                }
+                abort(404);
+                
+            }
+        abort(403);
+        
     }
 
     /**
@@ -80,8 +95,12 @@ class ProductPriceController extends Controller
      */
     public function edit(ProductPrice $productPrice)
     {
-        $products = Product::all();
-        return view('admin.productprice.edit', compact('productPrice', 'products'));
+        if (auth()->user()->can('edit_product-price')) {
+                
+                $products = Product::all();
+                return view('admin.productprice.edit', compact('productPrice', 'products'));
+            }
+        abort(403); 
     }
 
     /**
@@ -93,22 +112,26 @@ class ProductPriceController extends Controller
      */
     public function update(ProductPriceUpdateRequest $request, ProductPrice $productPrice)
     {
-        /* Update Product - Price */
-        $updateProductPrice = productPrice::update([
-            'product_id'       =>      $request->product_id,
-            'batch_no'         =>      $request->batch,
-            'quantity'         =>      $request->quantity,
-            'cost_price'       =>      $request->cost,
-            'selling_price'    =>      $request->sell,
-            'mfg_date'         =>      Carbon::parse($request->mfg_date)->format('Y-m-d H:i'),
-            'exp_date'         =>      Carbon::parse($request->exp_date)->format('Y-m-d H:i'),
-        ]);
-        /* Check Product-Price Update  and Toastr */
-        if($updateProductPrice){
-            Toastr::success('Product-Price Updated Successfully', 'Success');
-            return redirect()->route('admin.product-price.index');
-        }
-        abort(404);
+        if (auth()->user()->can('delete_product-price')) {
+                
+                        /* Update Product - Price */
+                $updateProductPrice = productPrice::update([
+                    'product_id'       =>      $request->product_id,
+                    'batch_no'         =>      $request->batch,
+                    'quantity'         =>      $request->quantity,
+                    'cost_price'       =>      $request->cost,
+                    'selling_price'    =>      $request->sell,
+                    'mfg_date'         =>      Carbon::parse($request->mfg_date)->format('Y-m-d H:i'),
+                    'exp_date'         =>      Carbon::parse($request->exp_date)->format('Y-m-d H:i'),
+                ]);
+                /* Check Product-Price Update  and Toastr */
+                if($updateProductPrice){
+                    Toastr::success('Product-Price Updated Successfully', 'Success');
+                    return redirect()->route('admin.product-price.index');
+                }
+                abort(404);
+            }
+        abort(403); 
     }
 
     /**
@@ -119,10 +142,14 @@ class ProductPriceController extends Controller
      */
     public function destroy(ProductPrice $productPrice)
     {
-        $deleteProductPrice = $productPrice->delete();
-        if($deleteProductPrice){
-            Toastr::success('Product-Price Deleted Successfully', 'Success');
-            return redirect()->route('admin.product-price.index');
-        }
+        if (auth()->user()->can('delete_prodcut')) {
+                
+                $deleteProductPrice = $productPrice->delete();
+                if($deleteProductPrice){
+                    Toastr::success('Product-Price Deleted Successfully', 'Success');
+                    return redirect()->route('admin.product-price.index');
+                }
+            }
+        abort(403); 
     }
 }
