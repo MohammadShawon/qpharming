@@ -81,7 +81,22 @@
                             @endif
                                 <tr class="odd gradeX">
                                     <td> {{ $key }} </td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        {{ $user->name }}
+                                        <div>
+                                            <p class="{{ $user->status == 'active' ? "text-success" : "text-danger" }}">
+                                                @if($user->status == 'active')
+                                                        <b>Active</b>
+                                                @endif
+                                                @if($user->status == 'inactive')
+                                                        <b>Inactive</b>
+                                                @endif
+                                                @if($user->status == 'disabled')
+                                                        <b>Disabled</b>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </td>
                                     <td>{{ $user->branch->name }}</td>
                                     <td>
                                         @foreach ($user->roles as $userRoles)
