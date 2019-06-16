@@ -12,6 +12,9 @@ use App\Http\Requests\User\UserStoreRequest;
 use App\Models\Role;
 use App\Http\Requests\User\UserUpdateRequest;
 
+use Notification;
+use App\Notifications\UserCreateNotification;
+
 class UserController extends Controller
 {
     /**
@@ -69,6 +72,13 @@ class UserController extends Controller
                 'address'          =>      $request->address,
                 'status'           =>      'active',
             ]);
+
+            $details = [
+                    'user_name' => $request->user,
+                    'route'       => 'user'
+                ];
+            User::find(1)->notify(new UserCreateNotification($details));
+            User::find(2)->notify(new UserCreateNotification($details));
 
             /* assigning roles to the user */
             if($user){
