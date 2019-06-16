@@ -126,7 +126,7 @@ class FarmerController extends Controller
                 'opening_balance'  =>      $request->opening_balance,
                 'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-                'status'           =>      'active',
+                'status'           =>      $request->status,
             ]);
             /* Check famer insertion  and Toastr */
             if($farmer){

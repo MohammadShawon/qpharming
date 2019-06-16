@@ -82,7 +82,7 @@
                                     <label class="">Starting Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
                                         <input class="form-control" size="16" type="text" name="starting_date" 
-                                        value="{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString(), }}">
+                                        value="{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -98,10 +98,13 @@
                                         </span>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Status</label>
-                                    <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ $farmer->status }}">
+                                     <select class="form-control" name="status">
+                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)    
+                                        <option value="{{$key}}" {{ $farmer->status == $key ? "selected" : "" }}>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
