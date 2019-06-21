@@ -43,7 +43,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('unit-convert', 'UnitConvertController');
 
     
-
+    Route::get('info/branch', 'BranchInfoController@index');
     
 });
 

@@ -14,7 +14,7 @@ class Branch extends Model
         return $this->belongsTo(Area::class);
     }
 
-    public function farmer() {
+    public function farmers() {
         return $this->hasMany(Farmer::class);
     }
 

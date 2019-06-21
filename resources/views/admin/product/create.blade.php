@@ -32,7 +32,8 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Name</label>
-                                    <input type="text" name="product_name" class="form-control" id="simpleFormEmail" placeholder="Enter Products's name" value="{{ old('product_name') }}">
+                                    <input type="text" name="product_name" class="form-control" id="simpleFormEmail" placeholder="Enter Products's name" value="{{ old('product_name') }}"
+                                    autocomplete="off">
                                 </div>
 
                                 <div class="form-group">

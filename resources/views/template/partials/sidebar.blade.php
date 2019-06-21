@@ -30,6 +30,16 @@
                         <span class="arrow open"></span>
                     </a>
                 </li>
+                @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
+                    <li class="nav-item start {{ Request::is('info*') ? 'active' : '' }}">
+                        <a href="/info/branch" class="nav-link nav-toggle">
+                            <i class="material-icons">people</i>
+                            <span class="title">Branch - Info</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                @endif
+                
 
                 @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
                    
@@ -38,8 +48,10 @@
                         <span class="title">@lang('dashboard.farmer')</span> 
                     </a>
                 </li>
+                
+                
 
-                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">group</i>
                          <span class="title">Branches</span>
@@ -54,7 +66,7 @@
                         </li>
                         @endforeach
                      </ul>
-                </li>
+                </li> --}}
 
                 <li class="nav-item {{ Request::is('area*')||Request::is('branch*')||Request::is('category*')||Request::is('sub-category*')||Request::is('company*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">

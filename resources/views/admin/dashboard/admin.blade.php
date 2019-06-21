@@ -53,7 +53,8 @@
                                         @endforeach)
                                     </div>
                                         <div>
-                                            <span class="clsAvailable">{{$user->branch->name}}</span>
+                                            <span class="clsAvailable">
+                                                {{$user->branch->name}}</span>
                                         </div>
                                 </div>
                             </li>

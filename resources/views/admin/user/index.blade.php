@@ -80,7 +80,7 @@
                                 @if ($loop->first) @continue @endif
                             @endif
                                 <tr class="odd gradeX">
-                                    <td> {{ $key }} </td>
+                                    <td> {{ $key+1 }} </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->branch->name }}</td>
                                     <td>

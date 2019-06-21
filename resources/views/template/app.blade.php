@@ -130,7 +130,7 @@
         <script>
             $(window).on("load", function () {
             $(".loader").fadeOut();
-            $("#preloader").delay(500).fadeOut("slow");
+            $("#preloader").delay(100).fadeOut("fast");
             });
         </script>
  {{-- PAGE LOADER JS SCRIPT END --}}
