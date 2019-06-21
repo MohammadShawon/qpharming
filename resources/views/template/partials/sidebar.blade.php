@@ -10,7 +10,7 @@
                 <li class="sidebar-user-panel">
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="{{ asset('admin/assets/img/dp.jpg') }}" class="img-circle user-img-circle" alt="User Image" />
+                            <img src="{{ asset('admin/assets/img/user-avator.png') }}" class="img-circle user-img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p> 
@@ -151,6 +151,122 @@
                         @endif
                      </ul>
                 </li>
+
+                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link nav-toggle">
+                         <i class="material-icons">library_books</i>
+                         <span class="title">Records</span>
+                         <span class="arrow"></span>
+                     </a>
+                     <ul class="sub-menu">
+                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                <span class="title">Chick</span> 
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Feed</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Medicin</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Farmer</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Company</span> 
+                            </a>
+                        </li>
+                     </ul>
+                </li>
+                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link nav-toggle">
+                         <i class="material-icons">insert_chart</i>
+                         <span class="title">Stocks</span>
+                         <span class="arrow"></span>
+                     </a>
+                     <ul class="sub-menu">
+                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                <span class="title">Chick</span> 
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Feed</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Medicin</span> 
+                            </a>
+                        </li>
+                     </ul>
+                </li>
+                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link nav-toggle">
+                         <i class="material-icons">equalizer</i>
+                         <span class="title">Accounts</span>
+                         <span class="arrow"></span>
+                     </a>
+                     <ul class="sub-menu">
+                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                <span class="title">Purpose Head</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Payments</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Collection</span>
+                            </a>
+                        </li>
+                         <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                 <span class="title">All Transactions</span>
+                             </a>
+                         </li>
+                     </ul>
+                </li>
+                    <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="material-icons">equalizer</i>
+                            <span class="title">All Reports</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                    <span class="title">Daily</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                    <span class="title">Weekly</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                    <span class="title">Monthly</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
                 @if(Auth::user()->hasRole('manager'))

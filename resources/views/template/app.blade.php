@@ -150,6 +150,11 @@
         @endforeach
     @endif
 </script>
+<script>
+   $(".link-button").click(function () {
+  window.location.href = $(this).data('href');
+});
+</script>
 
  @stack('js')
 

@@ -41,6 +41,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('product-price', 'ProductPriceController');
     Route::resource('unit', 'UnitController');
     Route::resource('unit-convert', 'UnitConvertController');
+    Route::get('notifications', 'NotificationsController@allNotification');
+    Route::get('markallasread', 'NotificationsController@markallasread');
 
     
     Route::get('info/branch', 'BranchInfoController@index');

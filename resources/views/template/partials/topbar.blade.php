@@ -46,25 +46,44 @@
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge headerBadgeColor1"> 1 </span>
+                        @if(Auth::user()->unreadNotifications->count())
+                        <span class="badge headerBadgeColor1"> 
+                            {{ Auth::user()->unreadNotifications->count() }}
+                        </span>
+                         @endif
                     </a>
                     <ul class="dropdown-menu animated swing">
                         <li class="external">
                             <h3><span class="bold">Notifications</span></h3>
-                            <span class="notification-label purple-bgcolor">New 1</span>
+                        <span class="notification-label defaul-bgcolor">
+                            <a href="{{ url('/markallasread') }}">Mark all as Read</a>
+                        </span>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
+                                @foreach(Auth::user()->unreadNotifications as $notification)
                                 <li>
-                                    <a href="javascript:;">
-                                        <span class="time">just now</span>
+                                @if($notification->type == 'App\Notifications\FarmerCreateNotification')
+                                
+                                <a href="/{{ $notification->data['route'] }}" class="text-success">
+                                        <span class="time">{{ str_replace(['minutes', 'minute', 'second', 'seconds'], ['mins', 'min', 'sec', 'secs'], $notification->created_at->diffForHumans()) }}</span>
                                         <span class="details">
-                                        <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span> Congratulations!. </span>
+                                        <span><mark>{{ $notification->data['farmer_name'] }}</mark></span> registered as a farmer in {{ $notification->data['branch_name'] }}</span>
                                     </a>
+                                @endif
+                                @if($notification->type == 'App\Notifications\UserCreateNotification')
+                                
+                                <a href="/{{ $notification->data['route'] }}" class="text-success">
+                                        <span class="time">{{ str_replace(['minutes', 'minute', 'second', 'seconds'], ['mins', 'min', 'sec', 'secs'], $notification->created_at->diffForHumans()) }}</span>
+                                        <span class="details">
+                                        <span><mark>{{ $notification->data['user_name'] }}</mark></span> registered as a user</span>
+                                    </a>
+                                @endif
                                 </li>
+                                @endforeach
                             </ul>
                             <div class="dropdown-menu-footer">
-                                <a href="javascript:void(0)"> All notifications </a>
+                                <a href="{{ url('/notifications') }}"> All notifications </a>
                             </div>
                         </li>
                     </ul>

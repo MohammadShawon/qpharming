@@ -96,7 +96,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Status</label>
-                                    <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ $user->status }}">
+                                     <select class="form-control" name="status">
+                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)    
+                                        <option value="{{$key}}" {{ $user->status == $key ? "selected" : "" }}>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 
