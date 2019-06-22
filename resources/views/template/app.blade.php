@@ -130,7 +130,7 @@
         <script>
             $(window).on("load", function () {
             $(".loader").fadeOut();
-            $("#preloader").delay(500).fadeOut("slow");
+            $("#preloader").delay(100).fadeOut("fast");
             });
         </script>
  {{-- PAGE LOADER JS SCRIPT END --}}
@@ -149,6 +149,11 @@
         });
         @endforeach
     @endif
+</script>
+<script>
+   $(".link-button").click(function () {
+  window.location.href = $(this).data('href');
+});
 </script>
 
  @stack('js')

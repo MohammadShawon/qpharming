@@ -47,7 +47,10 @@ $(document).ready(function() {
     $('#addRow').click();
     
     $('#example4').DataTable( {
-        "scrollX": true
+        "scrollX": true,
+        "buttons": [
+            'copy', 'excel', 'pdf'
+        ]
     } );
     
     $('#saveStage').DataTable( {

@@ -2,8 +2,8 @@
     <div class="page-header-inner ">
         <!-- logo start -->
         <div class="page-logo">
-            <a href="/admin/dashboard">
-            <img alt="" src="{{ asset('admin/assets/img/logo.png')}}">
+            <a href="/dashboard">
+{{--             <img alt="" src="{{ asset('admin/assets/img/logo.png')}}"> --}}
             <span class="logo-default" >@lang('dashboard.smile')</span> </a>
         </div>
         <!-- logo end -->
@@ -15,7 +15,7 @@
                 <input type="text" class="form-control" placeholder="@lang('dashboard.search')" name="query">
                 <span class="input-group-btn">
                     <a href="javascript:;" class="btn submit">
-                        <i class="icon-magnifier"></i>
+                        <i class="icon-magnifier"></i> 
                     </a>
                 </span>
             </div>
@@ -46,69 +46,50 @@
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge headerBadgeColor1"> 6 </span>
+                        @if(Auth::user()->unreadNotifications->count())
+                        <span class="badge headerBadgeColor1"> 
+                            {{ Auth::user()->unreadNotifications->count() }}
+                        </span>
+                         @endif
                     </a>
                     <ul class="dropdown-menu animated swing">
                         <li class="external">
                             <h3><span class="bold">Notifications</span></h3>
-                            <span class="notification-label purple-bgcolor">New 6</span>
+                        <span class="notification-label defaul-bgcolor">
+                            <a href="{{ url('/markallasread') }}">Mark all as Read</a>
+                        </span>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
+                                @foreach(Auth::user()->unreadNotifications as $notification)
                                 <li>
-                                    <a href="javascript:;">
-                                        <span class="time">just now</span>
+                                @if($notification->type == 'App\Notifications\FarmerCreateNotification')
+                                
+                                <a href="/{{ $notification->data['route'] }}" class="text-success">
+                                        <span class="time">{{ str_replace(['minutes', 'minute', 'second', 'seconds'], ['mins', 'min', 'sec', 'secs'], $notification->created_at->diffForHumans()) }}</span>
                                         <span class="details">
-                                        <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span> Congratulations!. </span>
+                                        <span><mark>{{ $notification->data['farmer_name'] }}</mark></span> registered as a farmer in {{ $notification->data['branch_name'] }}</span>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 mins</span>
+                                @endif
+                                @if($notification->type == 'App\Notifications\UserCreateNotification')
+                                
+                                <a href="/{{ $notification->data['route'] }}" class="text-success">
+                                        <span class="time">{{ str_replace(['minutes', 'minute', 'second', 'seconds'], ['mins', 'min', 'sec', 'secs'], $notification->created_at->diffForHumans()) }}</span>
                                         <span class="details">
-                                        <span class="notification-icon circle purple-bgcolor"><i class="fa fa-user o"></i></span>
-                                        <b>John Micle </b>is now following you. </span>
+                                        <span><mark>{{ $notification->data['user_name'] }}</mark></span> registered as a user</span>
                                     </a>
+                                @endif
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">7 mins</span>
-                                        <span class="details">
-                                        <span class="notification-icon circle blue-bgcolor"><i class="fa fa-comments-o"></i></span>
-                                        <b>Sneha Jogi </b>sent you a message. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">12 mins</span>
-                                        <span class="details">
-                                        <span class="notification-icon circle pink"><i class="fa fa-heart"></i></span>
-                                        <b>Ravi Patel </b>like your photo. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">15 mins</span>
-                                        <span class="details">
-                                        <span class="notification-icon circle yellow"><i class="fa fa-warning"></i></span> Warning! </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">10 hrs</span>
-                                        <span class="details">
-                                        <span class="notification-icon circle red"><i class="fa fa-times"></i></span> Application error. </span>
-                                    </a>
-                                </li>
+                                @endforeach
                             </ul>
                             <div class="dropdown-menu-footer">
-                                <a href="javascript:void(0)"> All notifications </a>
+                                <a href="{{ url('/notifications') }}"> All notifications </a>
                             </div>
                         </li>
                     </ul>
                 </li>
                 <!-- end notification dropdown -->
-                <!-- start message dropdown -->
+                <!-- start message dropdown -->{{-- 
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-envelope-o"></i>
@@ -182,12 +163,12 @@
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- end message dropdown -->
                     <!-- start manage user dropdown -->
                     <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle " src="{{ asset('admin/assets/img/dp.jpg')}}" />
+                        {{-- <img alt="" class="img-circle " src="{{ asset('admin/assets/img/dp.jpg')}}" /> --}}
                             <span class="username username-hide-on-mobile"> {{ auth()->user()->name }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
@@ -200,6 +181,7 @@
                             <a href="#">
                                 <i class="icon-settings"></i> Settings
                             </a>
+                            {{-- 
                         </li>
                         <li>
                             <a href="#">
@@ -211,7 +193,7 @@
                             <a href="lock_screen.html">
                                 <i class="icon-lock"></i> Lock
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
 
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -227,11 +209,6 @@
                     </ul>
                 </li>
                 <!-- end manage user dropdown -->
-                <li class="dropdown dropdown-quick-sidebar-toggler">
-                        <a id="headerSettingButton" class="mdl-button mdl-js-button mdl-button--icon pull-right" data-upgraded=",MaterialButton">
-                        <i class="material-icons">more_vert</i>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

@@ -78,7 +78,22 @@
                             @foreach ($farmers as $key=>$farmer)
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
-                                    <td>{{ $farmer->name }}</td>
+                                    <td>
+                                        {{ $farmer->name }}
+                                        <div>
+                                            <p class="{{ $farmer->status == 'active' ? "text-success" : "text-danger" }}">
+                                                @if($farmer->status == 'active')
+                                                        <b>Active</b>
+                                                @endif
+                                                @if($farmer->status == 'inactive')
+                                                        <b>Inactive</b>
+                                                @endif
+                                                @if($farmer->status == 'disabled')
+                                                        <b>Disabled</b>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </td>
                                     <td>{{ $farmer->branch->name }}</td>
                                     <td>{{ $farmer->phone1 }}</td>
                                     <td>{{ $farmer->opening_balance }}</td>

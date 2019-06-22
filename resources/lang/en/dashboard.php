@@ -7,7 +7,7 @@ return [
     'language'		=> 'Language',
     'search'		=> 'Search...',
     'home'			=> 'Home',
-    'smile'			=> 'Smile',
+    'smile'			=> 'Forazi Agro Ltd',
     'online'		=> 'Online',
     'area'			=> 'Area',
     'branch'		=> 'Branch',

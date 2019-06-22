@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
 		        [
 		        	'id' 		=> 1, 
 		        	'name'      => 'Mr. Super Admin',
-			        'branch_id' => rand(1, 5),
+			        'branch_id' => 0,
 			        'username'  => 'superadmin',
-			        'email'     => 'superadmin@qfarming@com',
+			        'email'     => 'superadmin@qfarming.com',
 			//        'email_verified_at' => now(),
 			        'password'  => bcrypt('12345678'), // password
 			        'phone1'    => '0123456789',
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
 		        	'name'      => 'Mr. Admin',
 			        'branch_id' => rand(1, 5),
 			        'username'  => 'admin',
-			        'email'     => 'admin@qfarming@com',
+			        'email'     => 'admin@qfarming.com',
 			//        'email_verified_at' => now(),
 			        'password'  => bcrypt('12345678'), // password
 			        'phone1'    => '0123456789',
@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
 		        	'name'      => 'Mr. Manager',
 			        'branch_id' => rand(1, 5),
 			        'username'  => 'manager',
-			        'email'     => 'manager@qfarming@com',
+			        'email'     => 'manager@qfarming.com',
 			//        'email_verified_at' => now(),
 			        'password'  => bcrypt('12345678'), // password
 			        'phone1'    => '0123456789',
@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
 		        	'name'      => 'Mr. Employee',
 			        'branch_id' => rand(1, 5),
 			        'username'  => 'employee',
-			        'email'     => 'emoployee@qfarming@com',
+			        'email'     => 'emoployee@qfarming.com',
 			//        'email_verified_at' => now(),
 			        'password'  => bcrypt('12345678'), // password
 			        'phone1'    => '0123456789',
@@ -74,7 +74,7 @@ class UsersTableSeeder extends Seeder
 		        	'name'      => 'Mr. User',
 			        'branch_id' => rand(1, 5),
 			        'username'  => 'user',
-			        'email'     => 'user@qfarming@com',
+			        'email'     => 'user@qfarming.com',
 			//        'email_verified_at' => now(),
 			        'password'  => bcrypt('12345678'), // password
 			        'phone1'    => '0123456789',

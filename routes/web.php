@@ -24,21 +24,34 @@
     
 // });
 
-Route::group(['as'=>'admin.', 'prefix' => 'admin', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
+Auth::routes();
+
+
+Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
-   Route::resource('area', 'AreaController');
+    Route::resource('area', 'AreaController');
     Route::resource('category', 'CategoryController');
     Route::resource('sub-category', 'SubCategoryController');
     Route::resource('branch', 'BranchController');
     Route::resource('farmer', 'FarmerController');
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
+    Route::resource('product', 'ProductController');
+    Route::resource('product-price', 'ProductPriceController');
+    Route::resource('unit', 'UnitController');
+    Route::resource('unit-convert', 'UnitConvertController');
+    Route::get('notifications', 'NotificationsController@allNotification');
+    Route::get('markallasread', 'NotificationsController@markallasread');
+
+    
+    Route::get('info/branch', 'BranchInfoController@index');
+    
 });
 
 /* Super Admin route start */
 
-Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'SuperAdmin', ], function () {
+Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');
@@ -48,11 +61,11 @@ Route::group(['as'=>'super-admin.', 'prefix' => 'super-admin', 'namespace'=>'Sup
 /* Super Admin route end */
 
 
-Route::get('admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+// Route::get('dashboard', function () {
+//     return view('admin.dashboard');
+// });
 
-
+Route::get('dashboard', 'Admin\DashboardController@index');
 
 
 /*For checking errors page  START*/
@@ -71,6 +84,6 @@ Route::get('locale/{locale}', function ($locale){
 });
 /*Language route END*/
 
-Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/', 'Admin\DashboardController@index')->name('home');

@@ -67,6 +67,7 @@
                                 
                                 <th> Serial </th>
                                 <th> Name </th>
+                                <th> Manager </th>
                                 <th> Created </th>
                                 <th> Actions </th>
                             </tr>
@@ -77,6 +78,15 @@
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
                                     <td>{{ $branch->name }}</td>
+                                    <td>
+                                        @foreach ($branch->users as $user)
+                                            @foreach ($user->roles as $userRoles)
+                                                @if ($userRoles->name == 'manager' )
+                                                <a href="{{ route('admin.user.show', $user->id) }}">{{ $user->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                    </td>
                                     <td>{{ $branch->created_at->toDayDateTimeString() }}</td>
                                     <td>
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.branch.edit', $branch->id) }}"><i class="material-icons">edit</i></a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Farmer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
@@ -10,6 +11,9 @@ use App\Http\Requests\Farmer\FarmerStoreRequest;
 use Carbon\Carbon;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Farmer\FarmerUpdateRequest;
+
+use Notification;
+use App\Notifications\FarmerCreateNotification;
 
 class FarmerController extends Controller
 {
@@ -54,25 +58,36 @@ class FarmerController extends Controller
     {
         if (auth()->user()->can('create_farmer')) {
                 
-                        /* Insert Farmer */
-                $farmer = Farmer::create([
-                    'branch_id'        =>      $request->branch,
-                    'name'             =>      $request->name,
-                    'phone1'           =>      $request->phone1,
-                    'phone2'           =>      $request->phone2,
-                    'email'            =>      $request->email,
-                    'address'          =>      $request->address,
-                    'opening_balance'  =>      $request->opening_balance,
-                    'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-                    'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-                    'status'           =>      'active',
-                ]);
-                /* Check famer insertion  and Toastr */
-                if($farmer){
-                    Toastr::success('Farmer Inserted Successfully', 'Success');
-                    return redirect()->route('admin.farmer.index');
-                }
+            /* Insert Farmer */
+            $farmer = Farmer::create([
+                'branch_id'        =>      $request->branch,
+                'name'             =>      $request->name,
+                'phone1'           =>      $request->phone1,
+                'phone2'           =>      $request->phone2,
+                'email'            =>      $request->email,
+                'address'          =>      $request->address,
+                'opening_balance'  =>      $request->opening_balance,
+                'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
+                'status'           =>      'inactive',
+            ]);
+                // Notification  to admin
+            $details = [
+                    'farmer_name' => $request->name,
+                    'branch_name' => Branch::find($request->branch)->name,
+                    'route'       => 'farmer'
+                ];
+            User::find(1)->notify(new FarmerCreateNotification($details));
+            User::find(2)->notify(new FarmerCreateNotification($details));
+
+
+            /* Check famer insertion  and Toastr */
+            if($farmer){
+                Toastr::success('Farmer Inserted Successfully', 'Success');
+                return redirect()->route('admin.farmer.index');
             }
+            abort(404);
+        }
         abort(403);
     }
 
@@ -114,25 +129,34 @@ class FarmerController extends Controller
     {
        if (auth()->user()->can('edit_farmer')) {
                
-                        /* update Farmer */
-                $resultFarmer = $farmer->update([
-                    'branch_id'        =>      $request->branch,
-                    'name'             =>      $request->name,
-                    'phone1'           =>      $request->phone1,
-                    'phone2'           =>      $request->phone2,
-                    'email'            =>      $request->email,
-                    'address'          =>      $request->address,
-                    'opening_balance'  =>      $request->opening_balance,
-                    'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-                    'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-                    'status'           =>      'active',
-                ]);
-                /* Check famer insertion  and Toastr */
-                if($farmer){
-                    Toastr::success('Farmer Updated Successfully', 'Success');
-                    return redirect()->route('admin.farmer.index');
-                }
-           }
+            /* update Farmer */
+            $resultFarmer = $farmer->update([
+                'branch_id'        =>      $request->branch,
+                'name'             =>      $request->name,
+                'phone1'           =>      $request->phone1,
+                'phone2'           =>      $request->phone2,
+                'email'            =>      $request->email,
+                'address'          =>      $request->address,
+                'opening_balance'  =>      $request->opening_balance,
+                'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+                'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
+                'status'           =>      $request->status,
+            ]);
+
+            $user = User::first();
+  
+                $details = [
+                    'farmer_name' => $request->name
+                ];
+          
+                Notification::send($user, new FarmerCreateNotification($details));
+            /* Check famer insertion  and Toastr */
+            if($farmer){
+                Toastr::success('Farmer Updated Successfully', 'Success');
+                return redirect()->route('admin.farmer.index');
+            }
+            abort(404);
+        }
        abort(403);
     }
 
