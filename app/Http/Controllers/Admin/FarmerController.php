@@ -27,7 +27,7 @@ class FarmerController extends Controller
         /* show all the farmers */
         if (auth()->user()->can('view_farmer')) {
             
-            $farmers = Farmer::latest()->get();
+            $farmers = Farmer::with('branch')->latest()->get();
             return view('admin.farmer.index', compact('farmers'));
         }
         abort(403);

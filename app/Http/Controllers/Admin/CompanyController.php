@@ -21,10 +21,10 @@ class CompanyController extends Controller
     {
         if (auth()->user()->can('view_company')) {
                 
-                $companies = Company::latest()->get();
-                 return view('admin.company.index', compact('companies'));
-                
-            }
+            $companies = Company::latest()->get();
+            return view('admin.company.index', compact('companies'));
+            
+        }
         abort(403);
     }
 
@@ -37,8 +37,8 @@ class CompanyController extends Controller
     {
         if (auth()->user()->can('create_company')) {
                 
-                return view('admin.company.create');
-            }
+            return view('admin.company.create');
+        }
         abort(403);
     }
 
@@ -83,7 +83,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Company::findOrFail($id);
+        return view('admin.company.show', compact('company'));
     }
 
     /**
