@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Farmer')
+@section('title', 'farmer')
 
 @push('css')
     <!-- data tables -->
@@ -163,7 +163,7 @@
             ) {
                 swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your Farmer name is safe :)',
+                'Your farmer name is safe :)',
                 'error'
                 )
             }

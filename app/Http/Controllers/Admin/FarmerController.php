@@ -58,7 +58,7 @@ class FarmerController extends Controller
     {
         if (auth()->user()->can('create_farmer')) {
                 
-            /* Insert Farmer */
+            /* Insert farmer */
             $farmer = Farmer::create([
                 'branch_id'        =>      $request->branch,
                 'name'             =>      $request->name,
@@ -83,7 +83,7 @@ class FarmerController extends Controller
 
             /* Check famer insertion  and Toastr */
             if($farmer){
-                Toastr::success('Farmer Inserted Successfully', 'Success');
+                Toastr::success('farmer Inserted Successfully', 'Success');
                 return redirect()->route('admin.farmer.index');
             }
             abort(404);
@@ -99,7 +99,7 @@ class FarmerController extends Controller
      */
     public function show(Farmer $farmer)
     {
-        return view('admin.Farmer.view', compact('farmer'));
+        return view('admin.farmer.view', compact('farmer'));
     }
 
     /**
@@ -129,7 +129,7 @@ class FarmerController extends Controller
     {
        if (auth()->user()->can('edit_farmer')) {
                
-            /* update Farmer */
+            /* update farmer */
             $resultFarmer = $farmer->update([
                 'branch_id'        =>      $request->branch,
                 'name'             =>      $request->name,
@@ -152,7 +152,7 @@ class FarmerController extends Controller
                 Notification::send($user, new FarmerCreateNotification($details));
             /* Check famer insertion  and Toastr */
             if($farmer){
-                Toastr::success('Farmer Updated Successfully', 'Success');
+                Toastr::success('farmer Updated Successfully', 'Success');
                 return redirect()->route('admin.farmer.index');
             }
             abort(404);
@@ -171,7 +171,7 @@ class FarmerController extends Controller
        if (auth()->user()->can('delete_farmer')) {
                
                 $farmer->delete();
-                Toastr::success('Farmer Deleted Successfully', 'Success');
+                Toastr::success('farmer Deleted Successfully', 'Success');
                 return redirect()->route('admin.farmer.index');
            }
        abort(403);
