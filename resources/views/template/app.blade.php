@@ -44,6 +44,9 @@
 
     <link href="{{ asset('admin/assets/css/pageloader/preloader.css') }} " rel="stylesheet" type="text/css" />
 
+    <!--  quicklink css -->
+    <link href="{{ asset('admin/assets/quicklink/style.css') }} " rel="stylesheet" type="text/css" />
+
     
     
     @stack('css')
@@ -64,6 +67,7 @@
     <div class="page-wrapper">
         <!-- start header -->
         @include('template.partials.topbar')
+        @include('template.partials.quicklink')
         <!-- end header -->
 
 
@@ -123,6 +127,9 @@
  <!-- summernote -->
  <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>
+<!--  quicklink js -->
+<script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>
+
  <!-- end js include path -->
 
  {{-- PAGE LOADER JS SCRIPT START --}}
