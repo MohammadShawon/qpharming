@@ -12,7 +12,7 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        $areas = ['Paharpur', 'Nagessor', 'Chondi', 'Ram SangKarpur'];
+        $areas = ['Paharpur', 'Nagessor', 'Chondi', 'Ram SangKarpur', 'Phulbaria'];
 
         foreach ($areas as $area) { 
             Area::create([

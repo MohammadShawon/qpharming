@@ -21,6 +21,7 @@ class CreateExpensesTable extends Migration
             $table->string('recipient_name');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
+            
         });
     }
 

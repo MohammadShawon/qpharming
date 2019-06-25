@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    public function expenseHead(){
+	protected $fillable = [
+        'expensehead_id', 'amount', 'description', 'recipient_name', 'user_id'
+    ];
+    public function expensehead(){
         return $this->belongsTo(ExpenseHead::class);
     }
 

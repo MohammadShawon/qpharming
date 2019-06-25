@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
 		        [
 		        	'id' 		=> 1, 
 		        	'name'      => 'Mr. Super Admin',
-			        'branch_id' => 0,
+			        'branch_id' => 1,
 			        'username'  => 'superadmin',
 			        'email'     => 'superadmin@qfarming.com',
 			//        'email_verified_at' => now(),
