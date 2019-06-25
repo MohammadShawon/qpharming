@@ -13,4 +13,11 @@ class Payment extends Model
     public function purposeHead(){
         return $this->belongsTo(PurposeHead::class);
     }
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+    
+    public function farmer(){
+        return $this->belongsTo(Farmer::class);
+    }
 }
