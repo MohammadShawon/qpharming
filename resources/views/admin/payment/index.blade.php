@@ -45,7 +45,7 @@
                     </div>
             <div class="card card-topline-red">
                 <div class="card-head">
-                    <header>ALL - Farmers</header>
+                    <header>Payment List</header>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>

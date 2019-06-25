@@ -5,6 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use App\Models\PurposeHead;
+use App\Models\Farmer;
+use App\Models\Company;
+use App\Http\Requests\Payment\PaymentStoreRequest;
+use Carbon\Carbon;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Models\Branch;
+use App\Http\Requests\Payment\PayentUpdateRequest;
 
 class PaymentController extends Controller
 {
@@ -26,7 +35,12 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $data['banks']          = Bank::get(['id','bank_name']);
+        $data['purposeheads']   = PurposeHead::get(['id','name']);
+        $data['farmers']        = Farmer::get(['id','name']);
+        $data['companies']      = Company::get(['id','name']);
+        
+        return view('admin.payment.create', $data, compact('branch'));
     }
 
     /**
@@ -35,9 +49,29 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PaymentStoreRequest $request)
     {
-        //
+        /* Insert Payment */
+        $payment = Payment::create([
+            'bank_id'        =>      $request->bank_id,
+            'purposehead_id' =>      $request->purposehead_id,
+            'company_id'     =>      $request->company_id,
+            'farmer_id'      =>      $request->farmer_id,
+            'payment_amount' =>      $request->payment_amount,
+            'payment_type'   =>      $request->payment_type,
+            'bank_name'      =>      $request->bank_name,
+            'received_by'    =>      $request->received_by,
+            'remarks'        =>      $request->remarks,
+            'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),
+        ]);
+
+
+        /* Check Payment insertion  and Toastr */
+        if($payment){
+            Toastr::success('Payment Inserted Successfully', 'Success');
+            return redirect()->route('admin.payment.index');
+        }
+        abort(404);
     }
 
     /**
@@ -48,7 +82,8 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        /* Details of a Single Payment */
+        return view('admin.payment.show', compact('payment'));
     }
 
     /**
@@ -59,7 +94,13 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        //
+        /* Payment Edit form */
+        $data['banks']          = Bank::get(['id','bank_name']);
+        $data['purposeheads']   = PurposeHead::get(['id','name']);
+        $data['farmers']        = Farmer::get(['id','name']);
+        $data['companies']      = Company::get(['id','name']);
+        
+        return view('admin.payment.edit', $data, compact('payment'));
     }
 
     /**
@@ -69,9 +110,29 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(PayentUpdateRequest $request, Payment $payment)
     {
-        //
+        /* Update Payment */
+        $paymentUpdate = $payment->update([
+            'bank_id'        =>      $request->bank_id,
+            'purposehead_id' =>      $request->purposehead_id,
+            'company_id'     =>      $request->company_id,
+            'farmer_id'      =>      $request->farmer_id,
+            'payment_amount' =>      $request->payment_amount,
+            'payment_type'   =>      $request->payment_type,
+            'bank_name'      =>      $request->bank_name,
+            'received_by'    =>      $request->received_by,
+            'remarks'        =>      $request->remarks,
+            'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),
+        ]);
+
+
+        /* Check Payment insertion  and Toastr */
+        if($paymentUpdate){
+            Toastr::success('Payment Updated Successfully', 'Success');
+            return redirect()->route('admin.payment.index');
+        }
+        abort(404);
     }
 
     /**
@@ -82,6 +143,10 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        $paymentDelete = $payment->delete();
+        if($paymentDelete){
+            Toastr::success('Payment Deleted Successfully', 'Success');
+            return redirect()->route('admin.payment.index');
+        }
     }
 }
