@@ -34,6 +34,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('category', 'CategoryController');
     Route::resource('sub-category', 'SubCategoryController');
     Route::resource('branch', 'BranchController');
+    Route::resource('purposehead', 'PurposeheadCotroller');
+    Route::resource('expensehead', 'ExpenseheadCotroller');
+    Route::resource('expense', 'ExpenseCotroller');
     Route::resource('farmer', 'FarmerController');
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
