@@ -40,7 +40,7 @@ class PaymentController extends Controller
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
         
-        return view('admin.payment.create', $data, compact('branch'));
+        return view('admin.payment.create', $data);
     }
 
     /**
@@ -143,6 +143,7 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
+        /* Payment Delete */
         $paymentDelete = $payment->delete();
         if($paymentDelete){
             Toastr::success('Payment Deleted Successfully', 'Success');

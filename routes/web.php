@@ -46,6 +46,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('unit-convert', 'UnitConvertController');
     Route::resource('bank', 'BankController');
     Route::resource('payment', 'PaymentController');
+    Route::resource('collection', 'CollectionController');
+
+
     Route::get('notifications', 'NotificationsController@allNotification');
     Route::get('markallasread', 'NotificationsController@markallasread');
 

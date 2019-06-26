@@ -212,27 +212,42 @@
                         </li>
                      </ul>
                 </li>
-                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('bank*')||Request::is('purposehead*')||Request::is('payment*') ||Request::is('collection*')||Request::is('expensehead*')||Request::is('expense*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">equalizer</i>
                          <span class="title">Accounts</span>
                          <span class="arrow"></span>
                      </a>
                      <ul class="sub-menu">
-                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                        <li class="nav-item {{ Request::is('bank*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.bank.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                <span class="title">Bank</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('purposehead*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.purposehead.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
                                 <span class="title">Purpose Head</span>
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                        <li class="nav-item {{ Request::is('payment*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.payment.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Payments</span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                        <li class="nav-item {{ Request::is('collection*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.collection.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Collection</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('expensehead*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.expensehead.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Expense Head</span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('expense*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.expense.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <span class="title">Expense</span>
                             </a>
                         </li>
                          <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
