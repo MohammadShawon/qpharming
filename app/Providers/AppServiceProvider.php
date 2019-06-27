@@ -27,22 +27,22 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer('*', function($view) {
+        // view()->composer('*', function($view) {
 
-            $users = \App\Models\User::latest()->get();
-            $view->with('users', $users);
-          });
+        //     $users = \App\Models\User::latest()->get();
+        //     $view->with('users', $users);
+        //   });
           
-          view()->composer('*', function($view) {
+        //   view()->composer('*', function($view) {
 
-            $branches = \App\Models\Branch::latest()->get();
-            $view->with('branches', $branches);
-          });
+        //     $branches = \App\Models\Branch::latest()->get();
+        //     $view->with('branches', $branches);
+        //   });
           
-          view()->composer('admin.dashboard.manager', function($view) {
+        //   view()->composer('admin.dashboard.manager', function($view) {
 
-            $usersBranch = \App\Models\User::where('branch_id', Auth::user()->branch_id)->latest()->get();
-            $view->with('usersBranch', $usersBranch);
-          });
+        //     $usersBranch = \App\Models\User::where('branch_id', Auth::user()->branch_id)->latest()->get();
+        //     $view->with('usersBranch', $usersBranch);
+        //   });
     }
 }
