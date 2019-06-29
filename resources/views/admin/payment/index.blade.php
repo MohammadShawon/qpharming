@@ -70,7 +70,7 @@
                                 <th> Payment Amount </th>
                                 <th> Payment Type </th>
                                 <th> Recieved By </th>
-                                
+                                <th> Payment Date </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -91,6 +91,7 @@
                                     <td>{{ $payment->payment_amount }}</td>
                                     <td>{{ $payment->payment_type }}</td>
                                     <td>{{ $payment->received_by }}</td>
+                                    <td>{{ Carbon::parse($payment->payment_date)->toDayDateTimeString() }}</td>
                                     {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>

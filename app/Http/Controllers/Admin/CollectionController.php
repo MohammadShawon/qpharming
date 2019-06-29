@@ -23,8 +23,9 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $collections = Collection::latest()->get();
-        return view('admin.collection.index', compact('collections'));
+        /* Collection List */
+        $data['collections'] = Collection::latest()->get(['id','company_id','farmer_id','collection_amount','collection_type','given_by','collection_date']);
+        return view('admin.collection.index', $data);
     }
 
     /**
@@ -34,6 +35,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
+        /* Collection CREATE form */
         $data['banks']          = Bank::get(['id','bank_name']);
         $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
@@ -148,5 +150,6 @@ class CollectionController extends Controller
             Toastr::success('Collection Deleted Successfully', 'Success');
             return redirect()->route('admin.collection.index');
         }
+        abort(404);
     }
 }

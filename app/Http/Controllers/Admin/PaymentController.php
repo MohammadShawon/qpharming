@@ -24,8 +24,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::latest()->get();
-        return view('admin.payment.index', compact('payments'));
+        /* Payment List */
+        $data['payments'] = Payment::latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date']);
+        return view('admin.payment.index', $data);
     }
 
     /**
@@ -35,6 +36,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
+        /* Payment CREATE form */
         $data['banks']          = Bank::get(['id','bank_name']);
         $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
@@ -51,7 +53,7 @@ class PaymentController extends Controller
      */
     public function store(PaymentStoreRequest $request)
     {
-        /* Insert Payment */
+        /* CREATE Payment */
         $payment = Payment::create([
             'bank_id'        =>      $request->bank_id,
             'purposehead_id' =>      $request->purposehead_id,
@@ -143,11 +145,12 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        /* Payment Delete */
+        /* Payment DELETE */
         $paymentDelete = $payment->delete();
         if($paymentDelete){
             Toastr::success('Payment Deleted Successfully', 'Success');
             return redirect()->route('admin.payment.index');
         }
+        abort(404);
     }
 }

@@ -18,6 +18,7 @@ class ExpenseheadCotroller extends Controller
      */
     public function index()
     {
+        /* Expensehead List */
         $expenseheads = ExpenseHead::latest()->get();
         return view('admin.expensehead.index', compact('expenseheads'));
     }
@@ -29,6 +30,7 @@ class ExpenseheadCotroller extends Controller
      */
     public function create()
     {
+        /* Expensehead CREATE form */
         return view('admin.expensehead.create');
     }
 
@@ -40,14 +42,16 @@ class ExpenseheadCotroller extends Controller
      */
     public function store(ExpenseheadStoreRequest $request)
     {
+        /* Expense head STORE */
         $expensehead = ExpenseHead::create([
-                    'name' => $request->name
-                ]);
+            'name' => $request->name
+        ]);
 
         if($expensehead){
             Toastr::success('Expense Head Successfully Added', 'Success');
             return redirect()->route('admin.expensehead.index');
         }
+        abort(404);
     }
 
     /**
@@ -69,6 +73,7 @@ class ExpenseheadCotroller extends Controller
      */
     public function edit($id)
     {
+        /* Expensehead EDIT form */
         $expensehead = ExpenseHead::find($id);
         return view('admin.expensehead.edit', compact('expensehead'));
     }
@@ -82,14 +87,16 @@ class ExpenseheadCotroller extends Controller
      */
     public function update(ExpenseheadUpdateRequest $request, ExpenseHead $expensehead)
     {
+        /* Expense head UPDATE */
         $expensehead = $expensehead->update([
-                    'name' => $request->name
-                ]);
+            'name' => $request->name
+        ]);
 
         if($expensehead){
             Toastr::success('Expense Head Successfully Update', 'Success');
             return redirect()->route('admin.expensehead.index');
         }
+        abort(404);
     }
 
     /**
@@ -100,8 +107,12 @@ class ExpenseheadCotroller extends Controller
      */
     public function destroy(ExpenseHead $expensehead)
     {
-        $expensehead->delete();
-        Toastr::success('Expense head Successfully Deleted', 'Success');
-        return redirect()->route('admin.expensehead.index');
+        /* Expensehead DELETE */
+        $expenseheadDelete = $expensehead->delete();
+        if($expenseheadDelete){
+            Toastr::success('Expense head Successfully Deleted', 'Success');
+            return redirect()->route('admin.expensehead.index');
+        }
+        abort(404);
     }
 }

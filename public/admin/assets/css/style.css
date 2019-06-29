@@ -1810,7 +1810,7 @@ form.search-form-opened .btn.submit {
 .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu .sub-menu>li.active>a>i,
 .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu .sub-menu>li.open>a>i,
 .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu .sub-menu>li:hover>a>i {
-    color: #ffffff;
+    color: #3fcc7e;
 }
 .sidemenu-container .sidemenu .sub-menu>li.open>a>i,
 .sidemenu-container .sidemenu .sub-menu>li:hover>a>i{

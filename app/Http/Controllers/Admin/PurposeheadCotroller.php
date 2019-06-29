@@ -18,6 +18,7 @@ class PurposeheadCotroller extends Controller
      */
     public function index()
     {
+        /* Purpose Head List */
         $purposeheads = PurposeHead::latest()->get();
         return view('admin.purposehead.index', compact('purposeheads'));
     }
@@ -29,6 +30,7 @@ class PurposeheadCotroller extends Controller
      */
     public function create()
     {
+        /* Purpose head CREATE form */
         return view('admin.purposehead.create');
     }
 
@@ -40,14 +42,16 @@ class PurposeheadCotroller extends Controller
      */
     public function store(PurposeheadStoreRequest $request)
     {
+        /* Purpose head STORE */
         $purposehead = PurposeHead::create([
-                    'name' => $request->name
-                ]);
+            'name' => $request->name
+        ]);
 
         if($purposehead){
             Toastr::success('Purpose Head Successfully Added', 'Success');
             return redirect()->route('admin.purposehead.index');
         }
+        abort(404);
     }
 
     /**
@@ -69,6 +73,7 @@ class PurposeheadCotroller extends Controller
      */
     public function edit($id)
     {
+        /* Purpose head EDIT form */
         $purposehead = PurposeHead::find($id);
         return view('admin.purposehead.edit', compact('purposehead'));
     }
@@ -82,9 +87,10 @@ class PurposeheadCotroller extends Controller
      */
     public function update(PurposeheadUpdateRequest $request, PurposeHead $purposehead)
     {
+        /* Purpose head UPDATE */
         $purposehead = $purposehead->update([
-                    'name' => $request->name
-                ]);
+            'name' => $request->name
+        ]);
 
         if($purposehead){
             Toastr::success('Purpose Head Successfully Update', 'Success');
@@ -100,8 +106,12 @@ class PurposeheadCotroller extends Controller
      */
     public function destroy(PurposeHead $purposehead)
     {
-        $purposehead->delete();
-        Toastr::success('Purpose head Successfully Deleted', 'Success');
-        return redirect()->route('admin.purposehead.index');
+        /* Purpose head DELETE */
+        $purpseheadDelete = $purposehead->delete();
+        if($purpseheadDelete){
+            Toastr::success('Purpose head Successfully Deleted', 'Success');
+            return redirect()->route('admin.purposehead.index');
+        }
+        abort(404);
     }
 }

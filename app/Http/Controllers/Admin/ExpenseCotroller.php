@@ -31,6 +31,7 @@ class ExpenseCotroller extends Controller
      */
     public function create()
     {
+        /* Expense CREATE form */
         $users = User::latest()->get();
         $expenseheads = ExpenseHead::latest()->get();
         $expenses = Expense::latest()->get();
@@ -45,13 +46,14 @@ class ExpenseCotroller extends Controller
      */
     public function store(ExpenseStoreRequest $request)
     {
+        /* Expense STORE */
         $expense = Expense::create([
-                    'expensehead_id' => $request->expensehead_id,
-                    'amount' => $request->amount,
-                    'description' => $request->description,
-                    'recipient_name' => $request->recipient_name,
-                    'user_id' => $request->user_id
-                ]);
+            'expensehead_id' => $request->expensehead_id,
+            'amount'         => $request->amount,
+            'description'    => $request->description,
+            'recipient_name' => $request->recipient_name,
+            'user_id'        => $request->user_id
+        ]);
 
         if($expense){
             Toastr::success('Expense Successfully Added', 'Success');
@@ -78,6 +80,7 @@ class ExpenseCotroller extends Controller
      */
     public function edit($id)
     {
+        /* Expense EDIT form */
         $users = User::latest()->get();
         $expenseheads = ExpenseHead::latest()->get();
         $expense = Expense::find($id);
@@ -93,18 +96,20 @@ class ExpenseCotroller extends Controller
      */
     public function update(ExpenseUpdateRequest $request, Expense $expense)
     {
-        $expense = $expense->update([
-                    'expensehead_id' => $request->expensehead_id,
-                    'amount' => $request->amount,
-                    'description' => $request->description,
-                    'recipient_name' => $request->recipient_name,
-                    'user_id' => $request->user_id
-                ]);
+        /* Expense UPDATE */
+        $expenseUpdate = $expense->update([
+            'expensehead_id' => $request->expensehead_id,
+            'amount' => $request->amount,
+            'description' => $request->description,
+            'recipient_name' => $request->recipient_name,
+            'user_id' => $request->user_id
+        ]);
 
-        if($expense){
+        if($expenseUpdate){
             Toastr::success('Expense Successfully Update', 'Success');
             return redirect()->route('admin.expense.index');
         }
+        abort(404);
     }
 
     /**
@@ -115,8 +120,12 @@ class ExpenseCotroller extends Controller
      */
     public function destroy(Expense $expense)
     {
-        $expense->delete();
-        Toastr::success('Expense Successfully Deleted', 'Success');
-        return redirect()->route('admin.expense.index');
+        /* Expense Delete */
+        $expenseDelete = $expense->delete();
+        if($expenseDelete){
+            Toastr::success('Expense Successfully Deleted', 'Success');
+            return redirect()->route('admin.expense.index');
+        }
+        abort(404);
     }
 }

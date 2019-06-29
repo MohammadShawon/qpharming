@@ -70,6 +70,7 @@
                                 <th> Collection Amount </th>
                                 <th> Collection Type </th>
                                 <th> Given By </th>
+                                <th> Collection Date</th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -90,7 +91,9 @@
                                     <td>{{ $collection->collection_amount }}</td>
                                     <td>{{ $collection->collection_type }}</td>
                                     <td>{{ $collection->given_by }}</td>
-                                    {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
+                                    <td>{{ $collection->given_by }}</td>
+                                    <td>{{ Carbon::parse($collection->collectin_date)->toDayDateTimeString() }}</td>
+                                    {{-- 
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
                                         <a  class="waves-effect btn btn-success" href="{{ route('admin.collection.show', $collection->id) }}"><i class="material-icons">visibility</i></a>

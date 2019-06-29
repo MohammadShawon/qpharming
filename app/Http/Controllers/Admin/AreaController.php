@@ -39,9 +39,9 @@ class AreaController extends Controller
     {
         /* area create page */
         if (auth()->user()->can('create_area')) {
-                
-                return view('admin.area.create');
-            }
+            
+            return view('admin.area.create');
+        }
         abort(403);
         
     }

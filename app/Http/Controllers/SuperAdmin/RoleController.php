@@ -20,8 +20,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        /* ROLE list */
         if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')){
-            $roles = Role::latest()->get();
+            $roles = Role::with('permissions')->latest()->get();
             return view('superadmin.role.index', compact('roles'));
         }
         abort(403);
@@ -35,6 +36,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        /* Role CREATE form */
         if(Auth::user()->hasRole('superadmin')){
             return view('superadmin.role.create');
         }
@@ -50,14 +52,14 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request)
     {
+        /*  store role */
         if(Auth::user()->hasRole('superadmin')){
-           //  store role
+            
             $role = Role::create([
                 'name'  => strtolower($request->role)
             ]);
 
-            
-            // check rolee and toast message
+            /* Cheack role and toast message */
             if($role)
             {
                 Toastr::success('Role Successfully Inserted', 'Success');
@@ -88,10 +90,11 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        /* Role EDIT form */
         if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')){
             $role = Role::findOrFail($id);
-            $permissions = Permission::all();
-            return view('superadmin.role.edit', compact('role', 'permissions'));
+            $data['permissions'] = Permission::get(['id','name']);
+            return view('superadmin.role.edit', $data, compact('role'));
         }
         abort(403);
     }
@@ -105,19 +108,18 @@ class RoleController extends Controller
      */
     public function update(RoleUpdateRequest $request, $id)
     {
+        /*  Role  UPDATE*/
         if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin')){
-            /* update Role */
+            
             $role = Role::findOrFail($id);
             $resultRole = $role->update([
                 'name' => strtolower($request->role)
             ]);
-            /* 
-                Update assigining roles permissions
-            */
+            
+            /* Update assigining roles permissions */
             $role->permissions()->sync($request->permissions);
 
-            //check Role and toast message
-            
+            /* check Role and toast message */
             if($resultRole){
                 Toastr::success('Role Successfully Updated', 'Success');
                 return redirect()->route('super-admin.role.index');
@@ -136,10 +138,14 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        /* Role DELETE */
         if(Auth::user()->hasRole('superadmin')){
-             Role::findOrFail($id)->delete();
-            Toastr::success('Role Successfully Deleted', 'Success');
-            return redirect()->route('super-admin.role.index');
+            $roleDelete = Role::findOrFail($id)->delete();
+            if($roleDelete){
+                Toastr::success('Role Successfully Deleted', 'Success');
+                return redirect()->route('super-admin.role.index');
+            }
+            abort(404);
         }
         abort(403);
        

@@ -18,7 +18,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        /* All bank list in index page */
+        /* Bank List */
         $banks = Bank::latest()->get();
         return view('admin.bank.index', compact('banks'));
     }
@@ -30,7 +30,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        /* bank create page */
+        /* Bank CREATE page */
         return view('admin.bank.create');
     }
 
@@ -42,7 +42,7 @@ class BankController extends Controller
      */
     public function store(BankStoreRequest $request)
     {
-        /*  store bank */
+        /*  Bank STORE */
         $bank = Bank::create([
             'bank_name'        => $request->bank_name,
             'account_name'     => $request->account_name,
@@ -78,6 +78,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
+        /* Bank EDIT form */
         return view('admin.bank.edit', compact('bank'));
     }
 
@@ -90,7 +91,7 @@ class BankController extends Controller
      */
     public function update(BankUpdateRequest $request, Bank $bank)
     {
-        /* update Bank */
+        /* Bank UPDATE */
         
         $bank = $bank->update([
             'bank_name'        => $request->bank_name,
@@ -115,11 +116,12 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        /* delete bank */
+        /* Bank Delete */
         $bankDelete = $bank->delete();
         if($bankDelete){
             Toastr::success('Bank Successfully Deleted', 'Success');
             return redirect()->route('admin.bank.index');
         }
+        abort(404);
     }
 }
