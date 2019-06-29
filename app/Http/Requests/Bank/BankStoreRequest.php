@@ -25,9 +25,9 @@ class BankStoreRequest extends FormRequest
     {
         return [
             'bank_name'      => 'required',
-            'account_name'   => 'required|unique:banks',
+            'account_name'   => 'required',
             'account_number' => 'required|unique:banks',
-            'opening_balance'=> 'required|numeric',
+            'opening_balance'=> 'numeric|nullable',
         ];
     }
 }

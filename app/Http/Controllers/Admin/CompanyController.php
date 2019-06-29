@@ -60,9 +60,9 @@ class CompanyController extends Controller
                 'representative_name'   => $request->representative_name,
                 'phone1'                => $request->phone1,
                 'phone2'                => $request->phone2,
-                'email'                 => $request->email,
-                'address'               => $request->address,
-                'opening_balance'       => $request->opening_balance,
+                'email'                 => ($request->email != null ? $request->email : null),
+                'address'               => ($request->address != null ? $request->address : null),
+                'opening_balance'       => ($request->opening_balance != null?$request->opening_balance:0),
                 'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
             ]);

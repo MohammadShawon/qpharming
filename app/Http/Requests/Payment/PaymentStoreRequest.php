@@ -24,11 +24,14 @@ class PaymentStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'purposehead_id' => 'exists:purpose_heads,id',
+            'bank_id'        => 'exists:banks,id',
             'payment_amount' => 'required|numeric',
             'payment_type' => 'required',
-            'bank_name' => 'required',
+            'bank_name' => 'nullable',
             'received_by' => 'required',
-            'remarks' => 'required',
+            'remarks' => 'nullable',
+            'reference' => 'required',
             'payment_date' => 'required',
         ];
     }

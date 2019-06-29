@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
@@ -41,6 +42,7 @@ class PaymentController extends Controller
         $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
+        $data['users']          = User::get(['id','name']);
         
         return view('admin.payment.create', $data);
     }
@@ -57,11 +59,14 @@ class PaymentController extends Controller
         $payment = Payment::create([
             'bank_id'        =>      $request->bank_id,
             'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      $request->company_id,
-            'farmer_id'      =>      $request->farmer_id,
+            'company_id'     =>      ($request->company_id != null ?$request->company_id : null),
+            'farmer_id'      =>      ($request->farmer_id != null ? $request->farmer_id : null),
+            'user_id'        =>      ($request->user_id != null ? $request->user_id : null),
+            'payee_type'     =>      $request->payee_type,
             'payment_amount' =>      $request->payment_amount,
             'payment_type'   =>      $request->payment_type,
             'bank_name'      =>      $request->bank_name,
+            'reference'      =>      $request->reference,
             'received_by'    =>      $request->received_by,
             'remarks'        =>      $request->remarks,
             'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),
