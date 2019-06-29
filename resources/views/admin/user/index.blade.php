@@ -90,7 +90,7 @@
                                     </td>
                                     <td>{{ $user->phone1 }}</td>
                                     <td>
-                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.user.show', $user->id) }}"><i class="material-icons">description</i></a>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.user.show', $user->id) }}"><i class="material-icons">visibility</i></a>
                                         
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.user.edit', $user->id) }}"><i class="material-icons">edit</i></a>
                                         

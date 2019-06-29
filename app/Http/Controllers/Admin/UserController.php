@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         /* show all users */
         if(auth()->user()->can('view_user')){
-            $users = User::latest()->get();
+            $users = User::with('branch','roles')->latest()->get();
             return view('admin.user.index', compact('users'));
         }
         abort(403);

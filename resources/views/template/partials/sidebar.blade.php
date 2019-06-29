@@ -68,7 +68,7 @@
                      </ul>
                 </li> --}}
 
-                <li class="nav-item {{ Request::is('area*')||Request::is('branch*')||Request::is('category*')||Request::is('sub-category*')||Request::is('company*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('area*')||Request::is('branch*')||Request::is('category*')||Request::is('sub-category*')||Request::is('company*')||Request::is('product*')||Request::is('product-price*')||Request::is('unit*')||Request::is('unit-convert*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">build</i>
                          <span class="title">Utility's</span>

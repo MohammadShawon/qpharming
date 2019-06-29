@@ -42,12 +42,13 @@ use Carbon\Carbon;
                                 <label for="simpleFormEmail">Alternative Phone</label>
                                 <input type="number" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter Alternative Phone">
                             </div>
+                            
+                        </div>
+                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="simpleFormEmail">Email</label>
                                 <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter Email">
                             </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label for="simpleFormEmail">Address</label>
                                 <textarea class="form-control" name="address" placeholder="Enter address"></textarea>
@@ -70,7 +71,7 @@ use Carbon\Carbon;
                             </div>
                             
                             
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="">Ending Date</label>
                                 <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
                                     <input class="form-control" size="16" type="text" name="ending_date" value="{{ old('ending_date') }}">
@@ -79,12 +80,13 @@ use Carbon\Carbon;
                                     </span>
                                 </div>
                                 <input type="hidden" id="dtp_input1" value="" />
-                            </div>
+                            </div> --}}
                             
-                            <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.company.index') }}">BACK</a>
-                            <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
+                            
                         </div>
                     </div>
+                    <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.company.index') }}">BACK</a>
+                            <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                 </form>
             </div>
         </div>

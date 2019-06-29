@@ -9,7 +9,7 @@ use App\Models\Branch;
 class BranchInfoController extends Controller
 {
     public function index() {
-        $branches = Branch::latest()->get();
+        $branches = Branch::with('users')->latest()->get();
         
         return view('admin.branchinfo.index', compact('branches'));
     }

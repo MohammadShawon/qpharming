@@ -174,7 +174,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default animated jello">
                         <li>
-                            <a href="user_profile.html">
+                            <a href="{{ route('admin.user.show', auth()->user()->id) }}">
                                 <i class="icon-user"></i> Profile </a>
                         </li>
                         <li>

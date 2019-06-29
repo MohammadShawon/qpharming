@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use App\Http\Requests\Product\ProductStoreRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Models\Unit;
 
 class ProductController extends Controller
 {
@@ -35,7 +36,8 @@ class ProductController extends Controller
     {
         if(auth()->user()->can('create_product')){
             $subCategories = SubCategory::all();
-            return view('admin.product.create', compact('subCategories'));
+            $baseUnits = Unit::all();
+            return view('admin.product.create', compact('subCategories', 'baseUnits'));
         }
     }
 

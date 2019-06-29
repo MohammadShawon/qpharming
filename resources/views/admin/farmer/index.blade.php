@@ -100,7 +100,7 @@
                                     {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
-                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">description</i></a>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">visibility</i></a>
 
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.farmer.edit', $farmer->id) }}"><i class="material-icons">edit</i></a>
                                         
