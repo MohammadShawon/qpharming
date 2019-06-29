@@ -19,12 +19,13 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
+        /* List of Sub-Category */
         if (auth()->user()->can('view_sub-category')) {
                 
-                $subcategories = SubCategory::latest()->get();
+            $data['subcategories'] = SubCategory::latest()->get(['id','name','created_at']);
 
-                return view('admin.subcategory.index', compact('subcategories'));
-            }
+            return view('admin.subcategory.index', $data);
+        }
         abort(403);
     }
 
@@ -35,11 +36,12 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
+        /* Sub-Category Create form */
         if (auth()->user()->can('create_sub-category')) {
                 
-                $categories = Category::all();
-        return view('admin.subcategory.create', compact('categories'));
-            }
+            $data['categories'] = Category::get(['id','name']);
+            return view('admin.subcategory.create', $data);
+        }
         abort(403);
 
     }
@@ -54,19 +56,19 @@ class SubCategoryController extends Controller
     {
         if (auth()->user()->can('create_sub-category')) {
                 
-                /* create sub-category */
-        $subcategory = SubCategory::create([
-            'name' => $request->subcategory,
-            'slug' => str_slug($request->subcategory),
-            'category_id' => $request->category,
-        ]);
-        /* cheack and showing toastr message */
-        if($subcategory){
-            Toastr::success('Sub-Category Successfully Added', 'Success');
-            return redirect()->route('admin.sub-category.index');
-        }
-        abort(404);
+            /* create sub-category */
+            $subcategory = SubCategory::create([
+                'name' => $request->subcategory,
+                'slug' => str_slug($request->subcategory),
+                'category_id' => $request->category,
+            ]);
+            /* cheack and showing toastr message */
+            if($subcategory){
+                Toastr::success('Sub-Category Successfully Added', 'Success');
+                return redirect()->route('admin.sub-category.index');
             }
+            abort(404);
+        }
         abort(403);
 
     }
@@ -90,11 +92,12 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
+        /* Sub-Category Edit form */
         if (auth()->user()->can('edit_sub-category')) {
                 
-                $categories = Category::all();
-                return view('admin.subcategory.edit', compact('subCategory', 'categories'));
-            }
+            $data['categories'] = Category::get(['id','name']);
+            return view('admin.subcategory.edit', $data, compact('subCategory'));
+        }
         abort(403);
     }
 
@@ -109,21 +112,21 @@ class SubCategoryController extends Controller
     {
         if (auth()->user()->can('edit_sub-category')) {
                 
-                        /* update sub-category */
-                $resultSubCategory = $subCategory->update([
-                    
-                    'category_id'  =>   $request->category,
-                    'name'         =>   $request->subcategory,
-                    'slug'         =>   str_slug($request->subcategory),
-                ]);
+            /* update sub-category */
+            $resultSubCategory = $subCategory->update([
+                
+                'category_id'  =>   $request->category,
+                'name'         =>   $request->subcategory,
+                'slug'         =>   str_slug($request->subcategory),
+            ]);
 
-                /* cheack and showing toastr message */
-                if($resultSubCategory){
-                    Toastr::success('Sub-Category Successfully Updated', 'Success');
-                    return redirect()->route('admin.sub-category.index');
-                }
-                abort(404);
+            /* cheack and showing toastr message */
+            if($resultSubCategory){
+                Toastr::success('Sub-Category Successfully Updated', 'Success');
+                return redirect()->route('admin.sub-category.index');
             }
+            abort(404);
+        }
         abort(403);
     }
 
@@ -135,12 +138,15 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
+        /* Sub-Category Delete */
         if (auth()->user()->can('delete_sub-category')) {
-                
-                $subCategory->delete();
+            
+            $subCategoryDelete = $subCategory->delete();
+            if($subCategoryDelete){
                 Toastr::success('Sub-Category Successfully Deleted', 'Success');
                 return redirect()->route('admin.sub-category.index');
             }
+        }
         abort(403);
     }
 }

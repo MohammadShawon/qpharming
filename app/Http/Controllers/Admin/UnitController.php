@@ -18,12 +18,11 @@ class UnitController extends Controller
      */
     public function index()
     {
+        /* Unit list */
         if (auth()->user()->can('view_unit')) {
-                
-                
-                $units = Unit::latest()->get();
-                return view('admin.unit.index', compact('units'));
-            }
+            $units = Unit::latest()->get();
+            return view('admin.unit.index', compact('units'));
+        }
         abort(403);
     }
 
@@ -34,10 +33,11 @@ class UnitController extends Controller
      */
     public function create()
     {
+        /* Unit Create Form */
         if (auth()->user()->can('create_unit')) {
                 
-                return view('admin.unit.create');
-            }
+            return view('admin.unit.create');
+        }
         abort(403);
     }
 
@@ -49,21 +49,19 @@ class UnitController extends Controller
      */
     public function store(UnitStoreRequest $request)
     {
-         if (auth()->user()->can('create_unit')) {
+        if (auth()->user()->can('create_unit')) {
             //  Store Unit
             $unit = Unit::create([
                 'name'  => $request->unit
             ]);
 
-            
             // check Unit and toast message
-            if($unit)
-            {
+            if($unit){
                 Toastr::success('Unit Successfully Inserted', 'Success');
                 return redirect()->route('admin.unit.index');
             }
             abort(404);
-         }
+        }
      abort(403);
     }
 
@@ -86,10 +84,11 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
+        /* Unit Edit form */
         if (auth()->user()->can('edit_unit')) {
-                
-                return view('admin.unit.edit', compact('unit'));
-            }
+            
+            return view('admin.unit.edit', compact('unit'));
+        }
         abort(403);
     }
 
@@ -129,12 +128,13 @@ class UnitController extends Controller
     {
         if (auth()->user()->can('delete_unit')) {
                 
-                $unitDelete = $unit->delete();
-                if($unitDelete){
-                    Toastr::success('Unit Successfully Deleted', 'Success');
-                    return redirect()->route('admin.unit.index');
-                }
+            $unitDelete = $unit->delete();
+            if($unitDelete){
+                Toastr::success('Unit Successfully Deleted', 'Success');
+                return redirect()->route('admin.unit.index');
             }
+            abort(404);
+        }
         abort(403); 
     }
 }

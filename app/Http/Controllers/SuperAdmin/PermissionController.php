@@ -19,6 +19,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        /* Permission List */
         if (Auth::user()->hasRole('superadmin')) {
             $permissions = Permission::latest()->get();
             return view('superadmin.permission.index', compact('permissions'));
@@ -33,6 +34,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        /* Permission CREATE form */
         if (Auth::user()->hasRole('superadmin')) {
             return view('superadmin.permission.create');
         }
@@ -48,14 +50,13 @@ class PermissionController extends Controller
      */
     public function store(PermissionStoreRequest $request)
     {
+        /* Permission STORE  */
         if (Auth::user()->hasRole('superadmin')) {
-            //  store Permission name
             $permission = Permission::create([
                 'name'  => $request->permission
             ]);
 
-            
-            // check Permission and toast message
+            /*  check Permission and toast message */
             if($permission)
             {
                 Toastr::success('Permission Successfully Inserted', 'Success');
@@ -103,14 +104,15 @@ class PermissionController extends Controller
      */
     public function update(PermissionUpdateRequest $request, $id)
     {
+        /* Update Permission name */
         if (Auth::user()->hasRole('superadmin')) {
-            /* update Permission name */
+            
             $permission = Permission::findOrFail($id);
             $resultPermission = $permission->update([
                 'name' => $request->permission
             ]);
 
-            //check Permission and toast message
+            /* check Permission and toast message */
             if($resultPermission){
                 Toastr::success('Permission Successfully Updated', 'Success');
                 return redirect()->route('super-admin.permission.index');
@@ -129,10 +131,14 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
+        /* Permission DELETE */
         if (Auth::user()->hasRole('superadmin')) {
-            Permission::findOrFail($id)->delete();
-            Toastr::success('Permission Successfully Deleted', 'Success');
-            return redirect()->route('super-admin.permission.index');
+            $permissionDelete = Permission::findOrFail($id)->delete();
+            if($permissionDelete){
+                Toastr::success('Permission Successfully Deleted', 'Success');
+                return redirect()->route('super-admin.permission.index');
+            }
+            abort(404);
         }
         abort(403);
         

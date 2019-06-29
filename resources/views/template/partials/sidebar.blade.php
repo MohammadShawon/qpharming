@@ -76,22 +76,22 @@
                      </a>
                         <ul class="sub-menu">
                                 <li class="nav-item {{ Request::is('area*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
+                            <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> <i class="material-icons">local_shipping</i>
                                 <span class="title">@lang('dashboard.area')</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('branch*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.branch.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
+                            <a href="{{ route('admin.branch.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event_seat</i>
                                 <span class="title">@lang('dashboard.branch')</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('category*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">toc</i>
+                            <a href="{{ route('admin.category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">format_align_justify</i>
                                 <span class="title">@lang('dashboard.category')</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('sub-category*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.sub-category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">toc</i>
+                            <a href="{{ route('admin.sub-category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">format_align_left</i>
                                 <span class="title">@lang('dashboard.sub-category')</span> 
                             </a>
                         </li>
@@ -102,22 +102,22 @@
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('product*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.product.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                            <a href="{{ route('admin.product.index') }}" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Product</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('product-price*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.product-price.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
-                                <span class="title">Product-Price</span> 
+                            <a href="{{ route('admin.product-price.index') }}" class="nav-link nav-toggle"> <i class="material-icons">local_atm</i>
+                                <span class="title">Product Price</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('unit*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.unit.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                            <a href="{{ route('admin.unit.index') }}" class="nav-link nav-toggle"> <i class="material-icons">bubble_chart</i>
                                 <span class="title">Unit</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('unit-convert*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.unit-convert.index') }}" class="nav-link nav-toggle"> <i class="material-icons">location_city</i>
+                            <a href="{{ route('admin.unit-convert.index') }}" class="nav-link nav-toggle"> <i class="material-icons">format_size</i>
                                 <span class="title">Unit Convert</span> 
                             </a>
                         </li>
@@ -138,13 +138,13 @@
                         </li>
 
                         <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
-                            <a href="{{ route('super-admin.role.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('super-admin.role.index') }}" class="nav-link nav-toggle"> <i class="material-icons">format_list_numbered</i>
                                 <span class="title">Role</span> 
                             </a>
                         </li>
                         @if(Auth::user()->hasRole('superadmin'))
                         <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
-                            <a href="{{ route('super-admin.permission.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('super-admin.permission.index') }}" class="nav-link nav-toggle"> <i class="material-icons">highlight</i>
                                 <span class="title">Permission</span> 
                             </a>
                         </li>
@@ -160,18 +160,18 @@
                      </a>
                      <ul class="sub-menu">
                         <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span> 
                             </a>
                         </li>
 
                         <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span> 
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicin</span> 
                             </a>
                         </li>
@@ -220,7 +220,7 @@
                      </a>
                      <ul class="sub-menu">
                         <li class="nav-item {{ Request::is('bank*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.bank.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                            <a href="{{ route('admin.bank.index') }}" class="nav-link nav-toggle"> <i class="material-icons">closed_caption</i>
                                 <span class="title">Bank</span>
                             </a>
                         </li>
@@ -231,22 +231,22 @@
                         </li>
 
                         <li class="nav-item {{ Request::is('payment*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.payment.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.payment.index') }}" class="nav-link nav-toggle"> <i class="material-icons">local_grocery_store</i>
                                 <span class="title">Payments</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('collection*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.collection.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.collection.index') }}" class="nav-link nav-toggle"> <i class="material-icons">local_grocery_store</i>
                                 <span class="title">Collection</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('expensehead*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.expensehead.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.expensehead.index') }}" class="nav-link nav-toggle"> <i class="material-icons">euro_symbol</i>
                                 <span class="title">Expense Head</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('expense*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.expense.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.expense.index') }}" class="nav-link nav-toggle"> <i class="material-icons">euro_symbol</i>
                                 <span class="title">Expense</span>
                             </a>
                         </li>

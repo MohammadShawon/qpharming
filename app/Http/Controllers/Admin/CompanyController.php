@@ -21,8 +21,8 @@ class CompanyController extends Controller
     {
         if (auth()->user()->can('view_company')) {
                 
-            $companies = Company::latest()->get();
-            return view('admin.company.index', compact('companies'));
+            $data['companies'] = Company::latest()->get(['id','name','phone1','representative_name','status','created_at']);
+            return view('admin.company.index', $data);
             
         }
         abort(403);
@@ -35,6 +35,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        /* Company Create Form */
         if (auth()->user()->can('create_company')) {
                 
             return view('admin.company.create');
@@ -50,7 +51,7 @@ class CompanyController extends Controller
      */
     public function store(CompanyStoreRequest $request)
     {
-
+        /* Create Compnay */
         if (auth()->user()->can('create_company')) {
                 
                 $company = Company::create([
@@ -97,9 +98,9 @@ class CompanyController extends Controller
     {
         if (auth()->user()->can('edit_company')) {
                 
-                $company = Company::findOrFail($id);
-                return view('admin.company.edit', compact('company'));
-            }
+            $company = Company::findOrFail($id);
+            return view('admin.company.edit', compact('company'));
+        }
         abort(403);
     }
 
@@ -112,9 +113,10 @@ class CompanyController extends Controller
      */
     public function update(CompanyUpdateRequest $request, $id)
     {
+        /* Update Company */
         if (auth()->user()->can('edit_company')) {
                 
-                    $company = Company::findOrFail($id);
+            $company = Company::findOrFail($id);
             $Resultcompany = $company->update([
                 'name'                  => $request->company,
                 'slug'                  => str_slug($request->company),
@@ -133,7 +135,7 @@ class CompanyController extends Controller
                 return redirect()->route('admin.company.index');
             }
             abort(404);
-            }
+        }
         abort(403);
     }
 
@@ -145,12 +147,16 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+        /* Delete Company */
         if (auth()->user()->can('delete_company')) {
                 
-                Company::findOrFail($id)->delete();
+            $companyDelete = Company::findOrFail($id)->delete();
+            if($companyDelete){
                 Toastr::success('Company Successfully Deleted', 'Success');
                 return redirect()->route('admin.company.index');
             }
+            abort(404);
+        }
         abort(403);
     }
 }

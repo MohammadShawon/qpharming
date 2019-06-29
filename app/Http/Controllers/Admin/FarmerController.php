@@ -42,8 +42,8 @@ class FarmerController extends Controller
     {
        if (auth()->user()->can('create_farmer')) {
                
-            $branches = Branch::all();
-            return view('admin.farmer.create', compact('branches'));
+            $data['branches'] = Branch::get(['id','name']);
+            return view('admin.farmer.create', $data);
         }
        abort(403);
     }
@@ -99,7 +99,10 @@ class FarmerController extends Controller
      */
     public function show(Farmer $farmer)
     {
-        return view('admin.farmer.view', compact('farmer'));
+        /* View a Single Farmer Informations */
+        if (auth()->user()->can('view_farmer')) {
+            return view('admin.farmer.view', compact('farmer'));
+        }
     }
 
     /**
@@ -112,9 +115,9 @@ class FarmerController extends Controller
     {
         if (auth()->user()->can('edit_farmer')) {
                 
-                $branches = Branch::all();
-                return view('admin.farmer.edit', compact('farmer', 'branches'));
-            }
+            $branches = Branch::all();
+            return view('admin.farmer.edit', compact('farmer', 'branches'));
+        }
         abort(403);
     }
 

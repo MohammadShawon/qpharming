@@ -21,9 +21,9 @@ class BranchController extends Controller
     {
         if (auth()->user()->can('view_branch')) {
                 
-                $branches = Branch::latest()->get();
-                return view('admin.branch.index', compact('branches'));
-            }
+            $branches = Branch::with('users')->latest()->get();
+            return view('admin.branch.index', compact('branches'));
+        }
         abort(403);
     }
 
@@ -36,9 +36,9 @@ class BranchController extends Controller
     {
         if (auth()->user()->can('create_branch')) {
                 
-                $areas = Area::all();
-                return view('admin.branch.create', compact('areas'));
-            }
+            $data['areas'] = Area::get(['id','name']);
+            return view('admin.branch.create', $data);
+        }
         abort(403); 
     }
 
@@ -51,20 +51,20 @@ class BranchController extends Controller
     public function store(BranchStoreRequest $request)
     {
         if (auth()->user()->can('create_branch')) {
-                        /* create branch */
-                $branch = Branch::create([
-                    'name' => $request->branch,
-                    'slug' => str_slug($request->branch),
-                    'area_id' => $request->area,
-                ]);
-                /* cheack and showing toastr message */
-                if($branch){
-                    Toastr::success('Branch Successfully Added', 'Success');
-                    return redirect()->route('admin.branch.index');
-                }
-                abort(404);
-                
+            /* create branch */
+            $branch = Branch::create([
+                'name' => $request->branch,
+                'slug' => str_slug($request->branch),
+                'area_id' => $request->area,
+            ]);
+            /* cheack and showing toastr message */
+            if($branch){
+                Toastr::success('Branch Successfully Added', 'Success');
+                return redirect()->route('admin.branch.index');
             }
+            abort(404);
+            
+        }
         abort(403);
     }
 
@@ -87,11 +87,12 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
+        /* Branch Edit form */
        if (auth()->user()->can('edit_branch')) {
                
-                $areas = Area::all();
-                return view('admin.branch.edit', compact('branch', 'areas'));
-           }
+            $data['areas'] = Area::get(['id','name']);
+            return view('admin.branch.edit', $data, compact('branch'));
+        }
        abort(403);
     }
 
@@ -104,23 +105,23 @@ class BranchController extends Controller
      */
     public function update(BranchUpdateRequest $request, Branch $branch)
     {
-         if (auth()->user()->can('edit_branch')) {
+        if (auth()->user()->can('edit_branch')) {
                  
-                         /* update branch */
-                 $resultBranch = $branch->update([
-                    
-                    'area_id'  =>   $request->area,
-                    'name'     =>   $request->branch,
-                    'slug'     =>   str_slug($request->branch),
-                ]);
+            /* update branch */
+            $resultBranch = $branch->update([
+            
+                'area_id'  =>   $request->area,
+                'name'     =>   $request->branch,
+                'slug'     =>   str_slug($request->branch),
+            ]);
 
-                /* cheack and showing toastr message */
-                if($resultBranch){
-                    Toastr::success('Branch Successfully Updated', 'Success');
-                    return redirect()->route('admin.branch.index');
-                }
-                abort(404);
-             }
+            /* cheack and showing toastr message */
+            if($resultBranch){
+                Toastr::success('Branch Successfully Updated', 'Success');
+                return redirect()->route('admin.branch.index');
+            }
+            abort(404);
+        }
          abort(403);
     }
 
@@ -132,12 +133,16 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
+        /* Branch Delete */
         if (auth()->user()->can('delete_branch')) {
                 
-                $branch->delete();
+            $branchDelete = $branch->delete();
+            if($branchDelete){
                 Toastr::success('Branch Successfully Deleted', 'Success');
                 return redirect()->route('admin.branch.index');
             }
+            abort(404);
+        }
         abort(403);
     }
 }

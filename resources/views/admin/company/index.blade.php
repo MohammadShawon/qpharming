@@ -68,8 +68,10 @@
                                 
                                 <th> Serial </th>
                                 <th> Name </th>
+                                <th> Phone </th>
+                                <th> Representative Name </th>
                                 <th> Status </th>
-                                <th> Created </th>
+                                <th> Created At </th>
                                 <th> Actions </th>
                             </tr>
                         </thead>
@@ -79,6 +81,8 @@
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
                                     <td>{{ $company->name }}</td>
+                                    <td>{{ $company->phone1 }}</td>
+                                    <td>{{ $company->representative_name }}</td>
                                     <td>{{ $company->status }}</td>
                                     <td>{{ $company->created_at->toDayDateTimeString() }}</td>
                                     <td>
