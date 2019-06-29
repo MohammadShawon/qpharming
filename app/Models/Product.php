@@ -16,4 +16,12 @@ class Product extends Model
     public function subcategory(){
         return $this->belongsTo(SubCategory::class);
     }
+    
+    public function saleitems(){
+        return $this->belongsTo(SaleItem::class);
+    }
+
+    public function purchaseitems(){
+        return $this->belongsTo(PurchaseItem::class);
+    }
 }

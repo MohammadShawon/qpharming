@@ -9,4 +9,8 @@ class Unit extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function saleitems(){
+        return $this->hasMany(SaleItem::class);
+    }
 }

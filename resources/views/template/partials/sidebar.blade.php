@@ -76,7 +76,8 @@
                      </a>
                         <ul class="sub-menu">
                                 <li class="nav-item {{ Request::is('area*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> <i class="material-icons">local_shipping</i>
+                            <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> 
+                                <i class="material-icons">local_shipping</i>
                                 <span class="title">@lang('dashboard.area')</span> 
                             </a>
                         </li>
