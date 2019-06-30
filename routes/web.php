@@ -47,6 +47,10 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('bank', 'BankController');
     Route::resource('payment', 'PaymentController');
     Route::resource('collection', 'CollectionController');
+    Route::resource('farmer-records', 'FarmerRecordsController');
+
+
+    Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
 
 
     Route::get('notifications', 'NotificationsController@allNotification');
