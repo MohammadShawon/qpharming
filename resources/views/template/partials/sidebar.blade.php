@@ -30,7 +30,6 @@
                         <span class="arrow open"></span>
                     </a>
                 </li>
-<<<<<<< HEAD
                 <li class="nav-item {{ Request::is('admin/area') ? 'active' : '' }}">
                     <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
                         <span class="title">@lang('dashboard.area')</span> 
@@ -55,7 +54,6 @@
                     <a href="{{ route('admin.category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">apps</i>
                         <span class="title">@lang('dashboard.category')</span> 
                     </a>
-=======
                 @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
                     <li class="nav-item start {{ Request::is('info*') ? 'active' : '' }}">
                         <a href="/info/branch" class="nav-link nav-toggle">
@@ -148,7 +146,6 @@
                             </a>
                         </li>
                      </ul>
->>>>>>> 24ad286171b4ee07905be7e086a35a8a2dbf9ef7
                 </li>
                 
                 <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
