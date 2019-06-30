@@ -1,9 +1,9 @@
 $(document).ready(function(){
     /*
-    * Based on Payment Type Selection
+    * Based on Collection Type Selection
     * */
     $(".bank").hide();
-    $("#payment_type").change(function(){
+    $("#collection_type").change(function(){
         var bank = $(this).val();
         if(bank == 'cash')
         {
@@ -17,14 +17,14 @@ $(document).ready(function(){
     });
 
     /*
-    * Based on Payee Type Selection
+    * Based od Payee Type Selection
     * */
     $(".company").hide();
     $(".farmer").hide();
     $(".staff").hide();
-    $("#payee_type").change(function () {
-        let payee = $(this).val();
-        switch (payee) {
+    $("#collect_type").change(function () {
+        let collect = $(this).val();
+        switch (collect) {
             case 'authority':
                 $(".company").hide();
                 $(".farmer").hide();

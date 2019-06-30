@@ -13,6 +13,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use App\Http\Requests\Collection\CollectionStoreRequest;
 use App\Http\Requests\Collection\CollectionUpdateRequest;
+use App\Models\User;
 
 class CollectionController extends Controller
 {
@@ -40,6 +41,7 @@ class CollectionController extends Controller
         $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
+        $data['users']          = User::get(['id','name']);
         
         return view('admin.collection.create', $data);
     }
@@ -52,14 +54,17 @@ class CollectionController extends Controller
      */
     public function store(CollectionStoreRequest $request)
     {
+        
         /* Insert Collection */
         $collection = Collection::create([
             'bank_id'           =>      $request->bank_id,
             'purposehead_id'    =>      $request->purposehead_id,
             'company_id'        =>      $request->company_id,
             'farmer_id'         =>      $request->farmer_id,
+            'user_id'           =>      $request->user_id,   
             'collection_amount' =>      $request->collection_amount,
             'collection_type'   =>      $request->collection_type,
+            'collect_type'      =>      $request->collect_type,
             'bank_name'         =>      $request->bank_name,
             'given_by'          =>      $request->given_by,
             'remarks'           =>      $request->remarks,

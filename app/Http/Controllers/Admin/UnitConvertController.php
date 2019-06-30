@@ -15,14 +15,13 @@ class UnitConvertController extends Controller
      */
     public function index()
     {
+        /* All Unit Converters */
         if (auth()->user()->can('view_unit-convert')) {
-                $unitConverts = UnitConvert::latest()->get();
-                return $unitConverts;
-                return view('admin.unitconvert.index', compact('uniConverts'));
+            $unitConverts = UnitConvert::latest()->get();
+            return view('admin.unitconvert.index', compact('unitConverts'));
                 
-            }
+        }
         abort(403);
-        
         
     }
 

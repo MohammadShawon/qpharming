@@ -45,7 +45,7 @@
 
                                 </div>
 
-{{--                                Bank Name--}}
+                                {{--     Bank Name--}}
                                 <div class="form-group bank">
                                     <label for="bank_name">Bank name</label>
                                     <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ old('bank_name') }}">

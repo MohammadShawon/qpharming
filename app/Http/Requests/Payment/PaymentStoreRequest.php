@@ -27,12 +27,12 @@ class PaymentStoreRequest extends FormRequest
             'purposehead_id' => 'exists:purpose_heads,id',
             'bank_id'        => 'exists:banks,id',
             'payment_amount' => 'required|numeric',
-            'payment_type' => 'required',
-            'bank_name' => 'nullable',
-            'received_by' => 'required',
-            'remarks' => 'nullable',
-            'reference' => 'required',
-            'payment_date' => 'required',
+            'payment_type'   => 'required',
+            'bank_name'      => 'nullable',
+            'received_by'    => 'required',
+            'remarks'        => 'nullable',
+            'reference'      => 'required',
+            'payment_date'   => 'required',
         ];
     }
 }

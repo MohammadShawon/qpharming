@@ -19,11 +19,14 @@ class CreateCollectionsTable extends Migration
             $table->bigInteger('purposehead_id')->unsigned()->index();
             $table->bigInteger('company_id')->unsigned()->index()->nullable();
             $table->bigInteger('farmer_id')->unsigned()->index()->nullable();
+            $table->bigInteger('user_id')->unsigned()->index()->nullable();
             $table->decimal('collection_amount', 15, 2)->default(0);
             $table->string('collection_type');
-            $table->string('bank_name');
+            $table->string('collect_type');
+            $table->string('bank_name')->nullable();
             $table->string('given_by');
-            $table->string('remarks');
+            $table->string('reference');
+            $table->string('remarks')->nullable();
             $table->dateTime('collection_date');
             $table->softDeletes();
             $table->timestamps();

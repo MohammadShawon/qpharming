@@ -9,6 +9,10 @@ class Product extends Model
     protected $fillable = [
         'subcategory_id','product_name','sku','barcode','base_unit_id','description','size','quantity'
     ];
+
+    public function unit(){
+        return $this->belongsTo(Unit::class);
+    }
     
     public function category(){
         return $this->belongsTo(Category::class);

@@ -92,7 +92,7 @@
                                     <td>{{ $collection->collection_type }}</td>
                                     <td>{{ $collection->given_by }}</td>
                                     <td>{{ $collection->given_by }}</td>
-                                    <td>{{ Carbon::parse($collection->collectin_date)->toDayDateTimeString() }}</td>
+                                     <td>{{ Carbon::parse($collection->collectin_date)->toDayDateTimeString() }}</td>
                                     {{-- 
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
