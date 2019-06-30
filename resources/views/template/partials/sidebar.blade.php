@@ -152,6 +152,32 @@
                         @endif
                      </ul>
                 </li>
+                {{--Invoice Area--}}
+                    <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="material-icons">library_books</i>
+                            <span class="title">Invoice</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+
+
+                            <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.sales.index') }}" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
+                                    <span class="title">Sales</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.purchases.index') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                    <span class="title">Purchase</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                {{--Records Area--}}
 
                 <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicin*')||Request::is('farmer*')||Request::is('company*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">

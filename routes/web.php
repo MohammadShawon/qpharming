@@ -54,6 +54,16 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
 
     
     Route::get('info/branch', 'BranchInfoController@index');
+
+    /*
+     * Sales
+     * */
+    Route::resource('sales','SaleInvoice\SaleInvoiceController');
+
+    /*
+     * Purchase
+     * */
+    Route::resource('purchases','PurchaseInvoice\PurchaseInvoiceController');
     
 });
 

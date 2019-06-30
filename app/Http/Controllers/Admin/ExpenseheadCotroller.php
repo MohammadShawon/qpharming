@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseHead\ExpenseheadStoreRequest;
-use App\Http\Requests\Expensehead\ExpenseheadUpdateRequest;
+use App\Http\Requests\ExpenseHead\ExpenseheadUpdateRequest;
 use App\Models\ExpenseHead;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;

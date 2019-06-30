@@ -17,7 +17,7 @@ class CreateBanksTable extends Migration
             $table->bigIncrements('id');
             $table->string('bank_name');
             $table->string('account_name');
-            $table->string('account_number');
+            $table->string('account_number')->unique();
             $table->decimal('opening_balance', 15,2)->default(0);
             $table->timestamps();
         });

@@ -47,7 +47,7 @@ class BankController extends Controller
             'bank_name'        => $request->bank_name,
             'account_name'     => $request->account_name,
             'account_number'   => $request->account_number,
-            'opening_balance'  => $request->opening_balance,
+            'opening_balance'  => ($request->opening_balance != null?$request->opening_balance:0),
             
         ]);
         /*  check bank and toast message */
