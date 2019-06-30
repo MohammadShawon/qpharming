@@ -60,16 +60,21 @@
 
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Base Unit ID</label>
-                                    <input type="text" name="unit_id" class="form-control" id="simpleFormEmail" placeholder="Enter base unit id" value="{{ old('unit_id') }}">
+                                    <select name="unit_id" class="form-control  select2 " >
+                                        @foreach ($baseUnits as $baseUnit)
+                                            <option value="{{ $baseUnit->id }}">{{ $baseUnit->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Size</label>
-                                    <input type="text" name="size" class="form-control" id="simpleFormEmail" placeholder="Enter alternativee phone number" value="{{ old('size') }}">
+                                    <input type="text" name="size" class="form-control" id="simpleFormEmail" placeholder="Enter Size of the product" value="{{ old('size') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" placeholder="Enter User email" value="{{ old('quantity') }}">
+                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" placeholder="Enter Quantity of the product" value="{{ old('quantity') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Description</label> 

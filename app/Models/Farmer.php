@@ -13,4 +13,8 @@ class Farmer extends Model
     public function branch(){
         return $this->belongsTo(Branch::class);
     }
+
+    public function sales(){
+        return $this->hasMany(Sale::class);
+    }
 }

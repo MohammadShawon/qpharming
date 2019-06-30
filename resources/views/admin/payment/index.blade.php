@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Farmer')
+@section('title', 'Payments')
 
 @push('css')
     <!-- data tables -->
@@ -19,10 +19,10 @@
     <div class="row">
         <div class="col-md-12">
                 <div class="btn-group">
-                    <a href="{{ route('admin.farmer.create') }}" id="addRow1" class="btn btn-primary">
+                    <a href="{{ route('admin.payment.create') }}" id="addRow1" class="btn btn-primary">
                         Add New <i style="color:white;" class="fa fa-plus"></i>
                     </a>
-                    <span class="btn btn-primary ml-3"> {{ $farmers->count() }} </span>
+                    <span class="btn btn-primary ml-3"> {{ $payments->count() }} </span>
                 </div>
                 <div class="btn-group pull-right">
                         <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -45,7 +45,7 @@
                     </div>
             <div class="card card-topline-red">
                 <div class="card-head">
-                    <header>ALL - Farmers</header>
+                    <header>Payment List</header>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -66,50 +66,45 @@
                             <tr>
                                 
                                 <th> Serial </th>
-                                <th> Name </th>
-                                <th> Branch </th>
-                                <th> Phone </th>
-                                <th> Opening Balance </th>
+                                <th> Company / Farmer </th>
+                                <th> Payment Amount </th>
+                                <th> Payment Type </th>
+                                <th> Recieved By </th>
+                                <th> Payment Date </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($farmers as $key=>$farmer)
+                            @foreach ($payments as $key=>$payment)
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
                                     <td>
-                                        {{ $farmer->name }}
-                                        <div>
-                                            <p class="{{ $farmer->status == 'active' ? "text-success" : "text-danger" }}">
-                                                @if($farmer->status == 'active')
-                                                        <b>Active</b>
-                                                @endif
-                                                @if($farmer->status == 'inactive')
-                                                        <b>Inactive</b>
-                                                @endif
-                                                @if($farmer->status == 'disabled')
-                                                        <b>Disabled</b>
-                                                @endif
-                                            </p>
-                                        </div>
+                                        @if (is_null($payment->company_id))
+                                        {{ $payment->farmer->name }}
+                                        @endif
+                                        
+                                        @if (is_null($payment->farmer_id))
+                                        {{ $payment->company->name }}
+                                        @endif
                                     </td>
-                                    <td>{{ $farmer->branch->name }}</td>
-                                    <td>{{ $farmer->phone1 }}</td>
-                                    <td>{{ $farmer->opening_balance }}</td>
+                                    <td>{{ $payment->payment_amount }}</td>
+                                    <td>{{ $payment->payment_type }}</td>
+                                    <td>{{ $payment->received_by }}</td>
+                                    <td>{{ Carbon::parse($payment->payment_date)->toDayDateTimeString() }}</td>
                                     {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
-                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">description</i></a>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.payment.show', $payment->id) }}"><i class="material-icons">visibility</i></a>
 
-                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.farmer.edit', $farmer->id) }}"><i class="material-icons">edit</i></a>
+                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.payment.edit', $payment->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
-                                        onclick="deleteFarmer({{$farmer->id}})">
+                                        onclick="deletePayment({{$payment->id}})">
                                         <i class="material-icons">delete</i>
                                         </button>
     
-                                        <form id="delete-form-{{$farmer->id}}" action="{{ route('admin.farmer.destroy', $farmer->id) }}" method="post" style="display:none;">
+                                        <form id="delete-form-{{$payment->id}}" action="{{ route('admin.payment.destroy', $payment->id) }}" method="post" style="display:none;">
                                             @csrf
                                             @method("DELETE")
                                         </form>
@@ -135,7 +130,7 @@
 
     <script type="text/javascript">
     
-    function deleteFarmer(id) {
+    function deletePayment(id) {
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -163,7 +158,7 @@
             ) {
                 swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your Farmer name is safe :)',
+                'Your Payment name is safe :)',
                 'error'
                 )
             }

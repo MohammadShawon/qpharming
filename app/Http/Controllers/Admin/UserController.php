@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         /* show all users */
         if(auth()->user()->can('view_user')){
-            $users = User::latest()->get();
+            $users = User::with('branch','roles')->latest()->get();
             return view('admin.user.index', compact('users'));
         }
         abort(403);
@@ -42,9 +42,9 @@ class UserController extends Controller
     {
         /* CREATE   USER */
         if(auth()->user()->can('create_user')){
-            $branches = Branch::all();
-            $roles = Role::all();
-            return view('admin.user.create', compact('branches', 'roles'));
+            $data['branches'] = Branch::get(['id','name']);
+            $data['roles'] = Role::get(['id','name']);
+            return view('admin.user.create', $data);
         }
         abort(403);
         
@@ -58,7 +58,6 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        // dd($request);
         /* INSERT USER */
         if(auth()->user()->can('create_user')){
             $user = User::create([
@@ -104,6 +103,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        /* Single User Details */
         if(auth()->user()->can('view_user')){
             $user = User::findOrFail($id);
             return view('admin.user.show', compact('user'));
@@ -119,11 +119,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        /* User EDIT form */
         if(auth()->user()->can('edit_user')){
-            $roles = Role::all();
-            $branches = Branch::all();
+            $data['branches'] = Branch::get(['id','name']);
+            $data['roles'] = Role::get(['id','name']);
             $user = User::findOrFail($id);
-            return view('admin.user.edit', compact('user','branches', 'roles'));
+            return view('admin.user.edit', $data,  compact('user'));
         }
         abort(403);
     }
@@ -190,6 +191,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        /* User DELETE */
         if(auth()->user()->can('delete_user')){
             $userDelete = User::findOrFail($id)->delete();
         
@@ -197,6 +199,7 @@ class UserController extends Controller
                 Toastr::success('User Deleted Successfully', 'Success');
                 return redirect()->route('admin.user.index');
             }
+            abort(404);
         }
         abort(403);
     }

@@ -19,13 +19,14 @@ class AreaController extends Controller
      */
     public function index()
     {
-            if (auth()->user()->can('view_area')) {
-                    
-                    $areas = Area::latest()->get();
+        /* All area lists in index page */
+        if (auth()->user()->can('view_area')) {
+                
+                $areas = Area::latest()->get();
 
-                    return view('admin.area.index', compact('areas'));
-                }
-            abort(403);
+                return view('admin.area.index', compact('areas'));
+            }
+        abort(403);
         
     }
 
@@ -36,11 +37,12 @@ class AreaController extends Controller
      */
     public function create()
     {
-            if (auth()->user()->can('create_area')) {
-                    
-                    return view('admin.area.create');
-                }
-            abort(403);
+        /* area create page */
+        if (auth()->user()->can('create_area')) {
+            
+            return view('admin.area.create');
+        }
+        abort(403);
         
     }
 
@@ -54,21 +56,21 @@ class AreaController extends Controller
     {
         if (auth()->user()->can('create_area')) {
                 
-                        //  store area
-                $area = Area::create([
-                    'name'  => $request->area,
-                    'slug'  => str_slug($request->slug)
-                ]);
+            //  store area
+            $area = Area::create([
+                'name'  => $request->area,
+                'slug'  => str_slug($request->slug)
+            ]);
 
-                
-                // check area and toast message
-                if($area)
-                {
-                    Toastr::success('Area Successfully Inserted', 'Success');
-                    return redirect()->route('admin.area.index');
-                }
-                abort(404);
+            
+            // check area and toast message
+            if($area)
+            {
+                Toastr::success('Area Successfully Inserted', 'Success');
+                return redirect()->route('admin.area.index');
             }
+            abort(404);
+        }
         abort(403);
         
     }
@@ -94,9 +96,9 @@ class AreaController extends Controller
     {
         if (auth()->user()->can('edit_area')) {
                 
-                $area = Area::findOrFail($id);
-                return view('admin.area.edit', compact('area'));
-            }
+            $area = Area::findOrFail($id);
+            return view('admin.area.edit', compact('area'));
+        }
         abort(403);
     }
 
@@ -111,20 +113,20 @@ class AreaController extends Controller
     {
         if (auth()->user()->can('edit_area')) {
                 
-                        /* update Area */
-                $area = Area::findOrFail($id);
-                $resutArea = $area->update([
-                    'name' => $request->area,
-                    'slug' => str_slug($request->area),
-                ]);
+            /* update Area */
+            $area = Area::findOrFail($id);
+            $resutArea = $area->update([
+                'name' => $request->area,
+                'slug' => str_slug($request->area),
+            ]);
 
-                //check and toast message
-                if($resutArea){
-                    Toastr::success('Area Successfully Updated', 'Success');
-                    return redirect()->route('admin.area.index');
-                }
-                abort(404);
+            //check and toast message
+            if($resutArea){
+                Toastr::success('Area Successfully Updated', 'Success');
+                return redirect()->route('admin.area.index');
             }
+            abort(404);
+        }
         abort(403);
         
     }

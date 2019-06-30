@@ -34,6 +34,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('category', 'CategoryController');
     Route::resource('sub-category', 'SubCategoryController');
     Route::resource('branch', 'BranchController');
+    Route::resource('purposehead', 'PurposeheadCotroller');
+    Route::resource('expensehead', 'ExpenseheadCotroller');
+    Route::resource('expense', 'ExpenseCotroller');
     Route::resource('farmer', 'FarmerController');
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
@@ -41,11 +44,26 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('product-price', 'ProductPriceController');
     Route::resource('unit', 'UnitController');
     Route::resource('unit-convert', 'UnitConvertController');
+    Route::resource('bank', 'BankController');
+    Route::resource('payment', 'PaymentController');
+    Route::resource('collection', 'CollectionController');
+
+
     Route::get('notifications', 'NotificationsController@allNotification');
     Route::get('markallasread', 'NotificationsController@markallasread');
 
     
     Route::get('info/branch', 'BranchInfoController@index');
+
+    /*
+     * Sales
+     * */
+    Route::resource('sales','SaleInvoice\SaleInvoiceController');
+
+    /*
+     * Purchase
+     * */
+    Route::resource('purchases','PurchaseInvoice\PurchaseInvoiceController');
     
 });
 

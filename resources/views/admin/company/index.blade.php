@@ -68,7 +68,10 @@
                                 
                                 <th> Serial </th>
                                 <th> Name </th>
-                                <th> Created </th>
+                                <th> Phone </th>
+                                <th> Representative Name </th>
+                                <th> Status </th>
+                                <th> Created At </th>
                                 <th> Actions </th>
                             </tr>
                         </thead>
@@ -78,8 +81,13 @@
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
                                     <td>{{ $company->name }}</td>
+                                    <td>{{ $company->phone1 }}</td>
+                                    <td>{{ $company->representative_name }}</td>
+                                    <td>{{ $company->status }}</td>
                                     <td>{{ $company->created_at->toDayDateTimeString() }}</td>
                                     <td>
+                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.company.show', $company->id) }}"><i class="material-icons">visibility</i></a>
+                                        
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.company.edit', $company->id) }}"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"

@@ -233,7 +233,7 @@
 .white-sidebar-color .sidemenu-container .sidemenu li.active>a>.arrow:before, 
 .white-sidebar-color .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu li.active>a>.arrow.open:before, 
 .white-sidebar-color .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu li.active>a>.arrow:before{
-	color: #4680ff;
+	color: #3fcc7e;
 }
 
 /* Dark sidebar color */

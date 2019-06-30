@@ -18,4 +18,13 @@ class Company extends Model
         'starting_date',
         'ending_date',
     ];
+
+    // protected $casts = [
+    //     'starting_date' => 'datetime',
+        
+    // ];
+    
+    public function purchases(){
+        return $this->hasMany(Purchase::class);
+    }
 }

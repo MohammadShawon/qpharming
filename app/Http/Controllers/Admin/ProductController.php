@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use App\Http\Requests\Product\ProductStoreRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Models\Unit;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        /* Product List */
         if(auth()->user()->can('view_product')){
             $products = Product::latest()->get();
             return view('admin.product.index', compact('products'));
@@ -33,9 +35,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        /* Product Create form */
         if(auth()->user()->can('create_product')){
-            $subCategories = SubCategory::all();
-            return view('admin.product.create', compact('subCategories'));
+            $data['subCategories'] = SubCategory::get(['id','name']);
+            $data['baseUnits'] = Unit::get(['id','name']);
+            return view('admin.product.create', $data);
         }
     }
 
@@ -76,6 +80,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        /* Single Product Details */
         if(auth()->user()->can('view_product')){
             return view('admin.product.show', compact('product'));
         }
@@ -90,9 +95,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        /* Product Edit form */
         if(auth()->user()->can('edit_product')){
-            $subCategories = SubCategory::all();
-            return view('admin.product.edit', compact('product','subCategories'));
+            $data['subCategories'] = SubCategory::get(['id','name']);
+            return view('admin.product.edit', $data, compact('product'));
         }
         abort(403);
     }
