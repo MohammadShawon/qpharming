@@ -153,61 +153,61 @@
                      </ul>
                 </li>
 
-                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicin*')||Request::is('farmer*')||Request::is('company*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">library_books</i>
                          <span class="title">Records</span>
                          <span class="arrow"></span>
                      </a>
                      <ul class="sub-menu">
-                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span> 
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('feed*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span> 
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('medicin*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicin</span> 
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('farmer*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Farmer</span> 
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('company*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Company</span> 
                             </a>
                         </li>
                      </ul>
                 </li>
-                <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicin*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">insert_chart</i>
                          <span class="title">Stocks</span>
                          <span class="arrow"></span>
                      </a>
                      <ul class="sub-menu">
-                        <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                        <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span> 
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                        <li class="nav-item {{ Request::is('feed*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span> 
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                        <li class="nav-item {{ Request::is('medicin*') ? 'active' : '' }}">
+                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicin</span> 
                             </a>
                         </li>
@@ -258,25 +258,25 @@
                          </li>
                      </ul>
                 </li>
-                    <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('daily*')||Request::is('weekly*')||Request::is('monthly*') ? 'active' : '' }}">
                         <a href="#" class="nav-link nav-toggle">
                             <i class="material-icons">equalizer</i>
                             <span class="title">All Reports</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item {{ Request::is('user*') ? 'active' : '' }}">
+                            <li class="nav-item {{ Request::is('daily*') ? 'active' : '' }}">
                                 <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
                                     <span class="title">Daily</span>
                                 </a>
                             </li>
 
-                            <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
+                            <li class="nav-item {{ Request::is('weekly*') ? 'active' : '' }}">
                                 <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Weekly</span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ Request::is('permission*') ? 'active' : '' }}">
+                            <li class="nav-item {{ Request::is('monthly*') ? 'active' : '' }}">
                                 <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Monthly</span>
                                 </a>
