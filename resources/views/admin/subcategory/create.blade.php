@@ -21,16 +21,19 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Sub-Category</header>
+                    <header>Create Sub-Category</header>
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.sub-category.store') }}">
                         @csrf
+
+                        {{-- Sub-Category --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">SubCatagory Name</label>
-                            <input type="text" name="subcategory" class="form-control" id="simpleFormEmail" placeholder="Enter sub-category name">
+                            <label for="subcategory">SubCatagory Name</label>
+                            <input type="text" name="subcategory" class="form-control" id="subcategory" placeholder="Enter sub-category name">
                         </div>
 
+                        {{-- Category --}}
                         <div class="form-group">
                             <label>Select Main Category</label>
                             <select name="category" class="form-control select2 ">

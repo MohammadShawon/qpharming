@@ -19,14 +19,16 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>ROLE</header>
+                    <header>Create Role</header>
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('super-admin.role.store') }}">
                         @csrf
+
+                        {{-- Role --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Role Name</label>
-                            <input type="text" name="role" class="form-control" id="simpleFormEmail" placeholder="Enter role name">
+                            <label for="role">Role Name</label>
+                            <input type="text" name="role" class="form-control" id="role" placeholder="Enter role name">
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('super-admin.role.index') }}">BACK</a>

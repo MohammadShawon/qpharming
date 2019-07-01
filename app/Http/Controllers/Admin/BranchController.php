@@ -19,10 +19,12 @@ class BranchController extends Controller
      */
     public function index()
     {
+        /* All Branch */
         if (auth()->user()->can('view_branch')) {
                 
             $branches = Branch::with('users')->latest()->get();
             return view('admin.branch.index', compact('branches'));
+
         }
         abort(403);
     }
@@ -34,10 +36,12 @@ class BranchController extends Controller
      */
     public function create()
     {
+        /* CREATE Branch */
         if (auth()->user()->can('create_branch')) {
                 
             $data['areas'] = Area::get(['id','name']);
             return view('admin.branch.create', $data);
+
         }
         abort(403); 
     }
@@ -50,13 +54,15 @@ class BranchController extends Controller
      */
     public function store(BranchStoreRequest $request)
     {
+        /* create branch */
         if (auth()->user()->can('create_branch')) {
-            /* create branch */
+            
             $branch = Branch::create([
                 'name' => $request->branch,
                 'slug' => str_slug($request->branch),
                 'area_id' => $request->area,
             ]);
+
             /* cheack and showing toastr message */
             if($branch){
                 Toastr::success('Branch Successfully Added', 'Success');
@@ -87,11 +93,12 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
-        /* Branch Edit form */
+        /* Branch EDIT form */
        if (auth()->user()->can('edit_branch')) {
                
             $data['areas'] = Area::get(['id','name']);
             return view('admin.branch.edit', $data, compact('branch'));
+
         }
        abort(403);
     }
@@ -105,18 +112,17 @@ class BranchController extends Controller
      */
     public function update(BranchUpdateRequest $request, Branch $branch)
     {
+        /* UPDATE branch */
         if (auth()->user()->can('edit_branch')) {
                  
-            /* update branch */
-            $resultBranch = $branch->update([
-            
+            $branchUpdate = $branch->update([
                 'area_id'  =>   $request->area,
                 'name'     =>   $request->branch,
                 'slug'     =>   str_slug($request->branch),
             ]);
 
             /* cheack and showing toastr message */
-            if($resultBranch){
+            if($branchUpdate){
                 Toastr::success('Branch Successfully Updated', 'Success');
                 return redirect()->route('admin.branch.index');
             }

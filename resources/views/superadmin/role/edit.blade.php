@@ -27,9 +27,11 @@
                     <form method="post" action="{{ route('super-admin.role.update', $role->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Role --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Role Name</label>
-                            <input type="text" name="role" class="form-control" id="simpleFormEmail" value="{{ $role->name }}">
+                            <label for="role">Role Name</label>
+                            <input type="text" name="role" class="form-control" id="role" value="{{ $role->name }}">
                         </div>
 
                         <div class="form-group">
@@ -51,7 +53,7 @@
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('super-admin.role.index') }}">BACK</a>
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
+                        <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
                     </form>
                 </div>
             </div>

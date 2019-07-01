@@ -31,11 +31,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Name</label>
-                                    <input type="text" name="user" class="form-control" id="simpleFormEmail" placeholder="Enter User's name" value="{{ old('user') }}">
+                                    <label for="user">Name</label>
+                                    <input type="text" name="user" class="form-control" id="user" placeholder="Enter User's name" value="{{ old('user') }}">
                                 </div>
 
+                                {{-- Branch --}}
                                 <div class="form-group">
                                     <label>Select Branch</label>
                                     <select name="branch" class="form-control  select2 " >
@@ -45,6 +48,7 @@
                                     </select>
                                 </div>
 
+                                {{-- Role --}}
                                 <div class="form-group">
                                     <label>Select Roles</label>
                                     <select name="roles[]" class="form-control select2 " multiple>
@@ -56,38 +60,45 @@
                                     </select>
                                 </div>
 
+                                {{-- Username --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Username</label>
-                                    <input type="text" name="username" class="form-control" id="simpleFormEmail" placeholder="Enter Username" value="{{ old('username') }}">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" value="{{ old('username') }}">
                                 </div>
+
+                                {{-- Password --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Password</label>
-                                    <input id="password-1" type="password" name="password" class="form-control" id="simpleFormEmail" placeholder="Enter password" >
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" >
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Phone 1 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Phone</label>
-                                    <input type="text" name="phone1" class="form-control" id="simpleFormEmail" placeholder="Enter User phone number" value="{{ old('phone1') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Alternative Phone</label>
-                                    <input type="text" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter alternativee phone number" value="{{ old('phone2') }}">
+                                    <label for="phone1">Phone</label>
+                                    <input type="text" name="phone1" class="form-control" id="phone1" placeholder="Enter phone number" value="{{ old('phone1') }}">
                                 </div>
 
+                                {{-- phone 2 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Email</label>
-                                    <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter User email" value="{{ old('email') }}">
+                                    <label for="phone2">Alternative Phone</label>
+                                    <input type="text" name="phone2" class="form-control" id="phone2" placeholder="Enter alternativee phone number" value="{{ old('phone2') }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Address</label> 
-                                    <textarea name="address" id="simpleFormEmail" class="form-control">{{old('address')}}</textarea>
-                                </div>
-                                
 
+                                {{-- Email --}}
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter  Email  address" value="{{ old('email') }}">
+                                </div>
+
+                                {{-- Address --}}
+                                <div class="form-group">
+                                    <label for="address">Address</label> 
+                                    <textarea name="address" id="address" class="form-control">{{old('address')}}</textarea>
+                                </div>
                                 
                             </div>
                         </div>

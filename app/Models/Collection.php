@@ -8,7 +8,7 @@ class Collection extends Model
 {
 
     protected $fillable = [
-        'company_id','farmer_id','purposehead_id','bank_id','collection_amount','collection_type','bank_name','given_by','remarks','collection_date'
+        'company_id','farmer_id','purposehead_id','bank_id','collection_amount','collection_type','collect_type','bank_name','given_by','remarks','collection_date','reference'
     ];
 
     public function bank(){

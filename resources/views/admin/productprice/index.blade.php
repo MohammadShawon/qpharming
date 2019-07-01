@@ -18,34 +18,34 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-                <div class="btn-group">
-                    <a href="{{ route('admin.product-price.create') }}" id="addRow1" class="btn btn-primary">
-                        Add New <i style="color:white;" class="fa fa-plus"></i>
-                    </a>
-                    <span class="btn btn-primary ml-3"> {{ $productPrices->count() }} </span>
+            <div class="btn-group">
+                <a href="{{ route('admin.product-price.create') }}" id="addRow1" class="btn btn-primary" style="font-size:14px; padding: 6px 12px;" >
+                    Add New Product - Price <i style="color:white;" class="fa fa-plus"></i>
+                </a>
+                
+            </div>
+            <div class="btn-group pull-right">
+                    <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-print"></i> Print </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                            <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="btn-group pull-right">
-                        <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                            </li>
-                        </ul>
-                    </div>
             <div class="card card-topline-red">
-                <div class="card-head">
-                    <header>Product Price List</header>
+                <div class="card-head" style="text-align: center;">
+                    <header>Product - Price </header><span class="btn btn-primary ml-1"> {{ $productPrices->count() }} </span>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -64,7 +64,6 @@
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
                         <thead>
                             <tr>
-                                
                                 <th> Serial </th>
                                 <th> Name </th>
                                 <th> Batch No </th>
@@ -77,7 +76,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($productPrices as $key=>$productPrice)
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
@@ -106,6 +104,19 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th> Serial </th>
+                                <th> Name </th>
+                                <th> Batch No </th>
+                                <th> Quantity </th>
+                                <th> Cost </th>
+                                <th> Sell </th>
+                                <th> Mfg Date </th>
+                                <th> Exp Date </th>
+                                <th> Action </th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

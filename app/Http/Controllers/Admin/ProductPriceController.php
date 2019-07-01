@@ -54,8 +54,9 @@ class ProductPriceController extends Controller
      */
     public function store(ProductPriceStoreRequest $request)
     {
+        /* Insert Product - Price */
         if (auth()->user()->can('create_product-price')) {
-            /* Insert Product - Price */
+
             $productPrice = ProductPrice::create([
                 'product_id'       =>      $request->product_id,
                 'batch_no'         =>      $request->batch,
@@ -96,7 +97,7 @@ class ProductPriceController extends Controller
      */
     public function edit(ProductPrice $productPrice)
     {
-        /* Product Edit form */
+        /* Product- price EDIT form */
         if (auth()->user()->can('edit_product-price')) {
                 
             $data['products'] = Product::get(['id','product_name']);
@@ -114,9 +115,10 @@ class ProductPriceController extends Controller
      */
     public function update(ProductPriceUpdateRequest $request, ProductPrice $productPrice)
     {
+        
+        /* Update Product - Price */
         if (auth()->user()->can('delete_product-price')) {
                 
-            /* Update Product - Price */
             $updateProductPrice = productPrice::update([
                 'product_id'       =>      $request->product_id,
                 'batch_no'         =>      $request->batch,
@@ -145,7 +147,7 @@ class ProductPriceController extends Controller
     public function destroy(ProductPrice $productPrice)
     {
         /* Product-Price Delete */
-        if (auth()->user()->can('delete_prodcut')) {
+        if (auth()->user()->can('delete_product')) {
                 
             $deleteProductPrice = $productPrice->delete();
             if($deleteProductPrice){

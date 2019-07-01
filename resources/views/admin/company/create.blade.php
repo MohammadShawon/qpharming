@@ -19,50 +19,66 @@ use Carbon\Carbon;
     <div class="col-md-12 col-sm-12">
         <div class="card card-box">
             <div class="card-head text-white " style="background-color:#3FCC7E;">
-                <header>Company</header>
+                <header>Create Company</header>
             </div>
             <div class="card-body " id="bar-parent">
                 <form method="post" action="{{ route('admin.company.store') }}">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
+
+                            {{-- Company Name --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Company Name</label>
-                                <input type="text" name="company" class="form-control" id="simpleFormEmail" placeholder="Enter Company name">
+                                <label for="company">Company Name</label>
+                                <input type="text" name="company" class="form-control" id="company" placeholder="Enter Company name">
                             </div>
+
+                            {{-- Representative Name --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Representative Name</label>
-                                <input type="text" name="representative_name" class="form-control" id="simpleFormEmail" placeholder="Enter Representative Name">
+                                <label for="representative_name">Representative Name</label>
+                                <input type="text" name="representative_name" class="form-control" id="representative_name" placeholder="Enter Representative Name">
                             </div>
+                            
+                            {{-- Phone 1 --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Phone </label>
-                                <input type="number" name="phone1" class="form-control" id="simpleFormEmail" placeholder="Enter Phone">
+                                <label for="phone1">Phone </label>
+                                <input type="text" name="phone1" class="form-control" id="phone1" placeholder="Enter Phone number">
                             </div>
+
+
+                            {{-- Alternative Phone --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Alternative Phone</label>
-                                <input type="number" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter Alternative Phone">
+                                <label for="phone2">Alternative Phone</label>
+                                <input type="text" name="phone2" class="form-control" id="phone2" placeholder="Enter Alternative Phone number">
                             </div>
                             
                         </div>
                         <div class="col-md-6 col-sm-6">
+
+                            {{-- Email --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Email</label>
-                                <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter Email">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email address">
                             </div>
+
+                            {{-- Address --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Address</label>
-                                <textarea class="form-control" name="address" placeholder="Enter address"></textarea>
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="address" placeholder="Enter address" id="address"></textarea>
                                 
                             </div>
+
+                            {{-- Balance --}}
                             <div class="form-group">
-                                <label for="simpleFormEmail">Opening Balance</label>
-                                <input type="number" name="opening_balance" class="form-control" id="simpleFormEmail" placeholder="Enter Opening Balance">
+                                <label for="opening_balance">Opening Balance</label>
+                                <input type="number" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter Opening Balance">
                             </div>
                             
+                            {{-- Date --}}
                             <div class="form-group">
                                 <label class="">Starting Date</label>
                                 <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                    <input class="form-control" size="16" type="text" name="starting_date" value="{{ old('starting_date') }}">
+                                    <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::now()->toDayDateTimeString() }}">
                                     <span class="input-group-addon ml-2">
                                         <span class="fa fa-calendar"></span>
                                     </span>

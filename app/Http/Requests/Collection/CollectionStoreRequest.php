@@ -24,11 +24,13 @@ class CollectionStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'bank_id'           => 'exists:banks,id',
             'collection_amount' => 'required|numeric',
             'collection_type'   => 'required',
-            'bank_name'         => 'required',
-            'given_by'          => 'required',
-            'remarks'           => 'required',
+            'bank_name'         => 'nullable',
+            'given_by'          => 'nullable',
+            'remarks'           => 'nullable',
+            'reference'         => 'required',
             'collection_date'   => 'required',
         ];
     }

@@ -24,7 +24,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Update USER</header>
+                    <header>Update User</header>
                 </div>
                 <div class="card-body" id="bar-parent">
                     <form method="post" action="{{ route('admin.user.update', $user->id) }}">
@@ -32,11 +32,14 @@
                         @method('PATCH')
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Name</label>
-                                    <input type="text" name="user" class="form-control" id="simpleFormEmail" placeholder="Enter User's name" value="{{ $user->name }}">
+                                    <label for="user">Name</label>
+                                    <input type="text" name="user" class="form-control" id="user" value="{{ $user->name }}">
                                 </div>
 
+                                {{-- Branch --}}
                                 <div class="form-group">
                                     <label>Select Branch</label>
                                     <select name="branch" class="form-control  select2 " >
@@ -49,6 +52,7 @@
                                     </select>
                                 </div>
                                 
+                                {{-- Role --}}
                                 <div class="form-group">
                                     <label>Select Role</label>
                                     <select name="roles[]" class="form-control select2 " multiple>
@@ -64,36 +68,45 @@
                                     </select>
                                 </div>
 
+                                {{-- Username --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Username</label>
-                                    <input type="text" name="username" class="form-control" id="simpleFormEmail" placeholder="Enter Username" value="{{ $user->username }}">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username" value="{{ $user->username }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Update Password</label>
-                                    <input id="password-1" type="password" name="password" class="form-control" id="simpleFormEmail" placeholder="Enter password" >
+                                    <label for="password">Update Password</label>
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" >
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Phone 1 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Phone</label>
-                                    <input type="text" name="phone1" class="form-control" id="simpleFormEmail" placeholder="Enter User phone number" value="{{ $user->phone1 }}">
+                                    <label for="phone1">Phone</label>
+                                    <input type="text" name="phone1" class="form-control" id="phone1" value="{{ $user->phone1 }}">
                                 </div>
 
+                                {{-- Phone 2 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Alternative Phone</label>
-                                    <input type="text" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter alternaive phone" value="{{ $user->phone2 }}">
+                                    <label for="phone2">Alternative Phone</label>
+                                    <input type="text" name="phone2" class="form-control" id="phone2" value="{{ $user->phone2 }}">
                                 </div>
+
+                                {{-- Email --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Email</label>
-                                    <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter User email" value="{{ $user->email }}">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter User email" value="{{ $user->email }}">
                                 </div>
+
+                                {{-- Address --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Address</label> 
-                                    <textarea name="address" id="simpleFormEmail" class="form-control">{{ $user->address }}</textarea>
+                                    <label for="address">Address</label> 
+                                    <textarea name="address" id="address" class="form-control">{{ $user->address }}</textarea>
                                 </div>
+
+                                {{-- Status --}}
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Status</label>
                                      <select class="form-control" name="status">
@@ -102,8 +115,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                
                             </div>
                         </div>
 

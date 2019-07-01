@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'farmer')
+@section('title', 'Update - Farmer')
 
 @push('css')
    <!--select2-->
@@ -32,52 +32,59 @@
                         @method('PATCH')
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Farmer Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Farmer Name</label>
-                                    <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter farmer name" value="{{ $farmer->name }}">
+                                    <label for="name">Farmer Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter farmer name" value="{{ $farmer->name }}">
                                 </div>
 
+                                {{-- Branch --}}
                                 <div class="form-group">
                                     <label>Select Branch</label>
                                     <select name="branch" class="form-control  select2 " >
                                         @foreach ($branches as $branch)
-                                            <option 
-                                            {{ $branch->id == $farmer->branch->id ? 'selected' : ''}}
-                                            value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                            <option value="{{ $branch->id }}"
+                                                {{ $branch->id == $farmer->branch->id ? 'selected' : ''}}>
+                                                {{ $branch->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
 
+                                {{-- Phone 1 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Phone</label>
-                                    <input type="text" name="phone1" class="form-control" id="simpleFormEmail" placeholder="Enter farmer phone number" value="{{ $farmer->phone1 }}">
+                                    <label for="phone1">Phone</label>
+                                    <input type="text" name="phone1" class="form-control" id="phone1" placeholder="Enter farmer phone number" value="{{ $farmer->phone1 }}">
                                 </div>
 
+                                {{-- Phone  Alternative --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Alternative Phone</label>
-                                    <input type="text" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter alternaive phone" value="{{ $farmer->phone2 }}">
+                                    <label for="phone2">Alternative Phone</label>
+                                    <input type="text" name="phone2" class="form-control" id="phone2" placeholder="Enter alternaive phone" value="{{ $farmer->phone2 }}">
                                 </div>
 
+                                {{-- Balance --}}
                                 <div class="form-group">
+                                    <label for="opening_balance">Opening Balance</label>
+                                    <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter farmer opening balance" value="{{ $farmer->opening_balance }}">
+                                </div>
+
+                                {{-- <div class="form-group">
                                     <label for="simpleFormEmail">Email</label>
                                     <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter farmer email" value="{{ $farmer->email }}">
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Address --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Address</label> 
-                                    <textarea name="address" id="simpleFormEmail" class="form-control">{{$farmer->address}}</textarea>
+                                    <label for="address">Address</label> 
+                                    <textarea name="address" id="address" class="form-control">{{$farmer->address}}</textarea>
                                 </div>
 
-                                
-
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Opening Balance</label>
-                                    <input type="text" name="opening_balance" class="form-control" id="simpleFormEmail" placeholder="Enter farmer opening balance" value="{{ $farmer->opening_balance }}">
-                                </div>
-
+                                {{-- Stating Date --}}
                                 <div class="form-group">
                                     <label class="">Starting Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
@@ -89,6 +96,7 @@
                                     </div>
                                 </div>
 
+                                {{-- Ending Date  --}}
                                 <div class="form-group">
                                     <label class="">Ending Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy  HH:ii p" data-link-field="dtp_input1">
@@ -98,6 +106,8 @@
                                         </span>
                                     </div>
                                 </div>
+
+                                {{-- Status --}}
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Status</label>
                                      <select class="form-control" name="status">
@@ -110,7 +120,7 @@
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.farmer.index') }}">BACK</a>
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">Update</button>
+                        <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
                     </form>
                 </div>
             </div>

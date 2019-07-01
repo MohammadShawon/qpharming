@@ -30,30 +30,30 @@
                         <span class="arrow open"></span>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('admin/area') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ Request::is('admin/area') ? 'active' : '' }}">
                     <a href="{{ route('admin.area.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
                         <span class="title">@lang('dashboard.area')</span> 
                     </a>
-                </li>
+                </li> --}}
                @role('superadmin')
-                    <li class="nav-item {{ Request::is('admin/branch') ? 'active' : '' }}">
+                    {{-- <li class="nav-item {{ Request::is('admin/branch') ? 'active' : '' }}">
                     <a href="{{ route('admin.branch.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
                         <span class="title">@lang('dashboard.branch')</span> 
                     </a>
-                </li>
+                </li> --}}
                @endrole
 
                @role('admin')
-                    <li class="nav-item {{ Request::is('admin/branch') ? 'active' : '' }}">
+                    {{-- <li class="nav-item {{ Request::is('admin/branch') ? 'active' : '' }}">
                     <a href="{{ route('admin.branch.index') }}" class="nav-link nav-toggle"> <i class="material-icons">event</i>
                         <span class="title">@lang('dashboard.branch')</span> 
                     </a>
-                </li>
+                </li> --}}
                @endrole
-                <li class="nav-item {{ Request::is('admin/category') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ Request::is('admin/category') ? 'active' : '' }}">
                     <a href="{{ route('admin.category.index') }}" class="nav-link nav-toggle"> <i class="material-icons">apps</i>
                         <span class="title">@lang('dashboard.category')</span> 
-                    </a>
+                    </a> --}}
                 @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
                     <li class="nav-item start {{ Request::is('info*') ? 'active' : '' }}">
                         <a href="/info/branch" class="nav-link nav-toggle">

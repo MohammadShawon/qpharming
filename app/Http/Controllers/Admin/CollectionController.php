@@ -25,7 +25,7 @@ class CollectionController extends Controller
     public function index()
     {
         /* Collection List */
-        $data['collections'] = Collection::latest()->get(['id','company_id','farmer_id','collection_amount','collection_type','given_by','collection_date']);
+        $data['collections'] = Collection::latest()->get(['id','company_id','farmer_id','collection_amount','collection_type','given_by','collection_date','collect_type','reference']);
         return view('admin.collection.index', $data);
     }
 
@@ -67,6 +67,7 @@ class CollectionController extends Controller
             'collect_type'      =>      $request->collect_type,
             'bank_name'         =>      $request->bank_name,
             'given_by'          =>      $request->given_by,
+            'reference'         =>      $request->reference,
             'remarks'           =>      $request->remarks,
             'collection_date'   =>      Carbon::parse($request->collection_date)->format('Y-m-d H:i'),
         ]);

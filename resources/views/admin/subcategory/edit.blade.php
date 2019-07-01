@@ -27,9 +27,11 @@
                     <form method="post" action="{{ route('admin.sub-category.update', $subCategory->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Sub-Category --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">SubCatagory Name</label>
-                            <input type="text" name="subcategory" class="form-control" id="simpleFormEmail" placeholder="Enter sub-category name" value="{{ $subCategory->name}}">
+                            <label for="subcategory">SubCatagory Name</label>
+                            <input type="text" name="subcategory" class="form-control" id="subcategory"  value="{{ $subCategory->name}}">
                         </div>
 
                         <div class="form-group">

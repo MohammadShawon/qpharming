@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'farmer')
+@section('title', 'Create - Farmer')
 
 @push('css')
    <!--select2-->
@@ -31,11 +31,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Farmer Name</label>
-                                    <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter farmer name" value="{{ old('name') }}">
+                                    <label for="name">Farmer Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter farmer name" value="{{ old('name') }}">
                                 </div>
 
+                                {{-- Branch --}}
                                 <div class="form-group">
                                     <label>Select Branch</label>
                                     <select name="branch" class="form-control  select2 " >
@@ -45,37 +48,44 @@
                                     </select>
                                 </div>
 
+                                {{-- Phone 1 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Phone</label>
-                                    <input type="text" name="phone1" class="form-control" id="simpleFormEmail" placeholder="Enter farmer phone number" value="{{ old('phone1') }}">
+                                    <label for="phone1">Phone</label>
+                                    <input type="text" name="phone1" class="form-control" id="phone1" placeholder="Enter Phone number" value="{{ old('phone1') }}">
                                 </div>
 
+                                {{-- Phone 2 --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Alternative Phone</label>
-                                    <input type="text" name="phone2" class="form-control" id="simpleFormEmail" placeholder="Enter alternaive phone" value="{{ old('phone2') }}">
+                                    <label for="phone2">Alternative Phone</label>
+                                    <input type="text" name="phone2" class="form-control" id="phone2" placeholder="Enter alternaive phone" value="{{ old('phone2') }}">
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="simpleFormEmail">Email</label>
                                     <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter farmer email" value="{{ old('email') }}">
-                                </div>
+                                </div> --}}
+
+                                {{-- Address --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Address</label> 
-                                    <textarea name="address" id="simpleFormEmail" class="form-control">{{old('address')}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Opening Balance</label>
-                                    <input type="text" name="opening_balance" class="form-control" id="simpleFormEmail" placeholder="Enter farmer opening balance" value="{{ old('opening_balance') }}">
+                                    <label for="address">Address</label> 
+                                    <textarea name="address" id="address" class="form-control">{{old('address')}}</textarea>
                                 </div>
 
+                                {{-- Balance --}}
+                                <div class="form-group">
+                                    <label for="opening_balance">Opening Balance</label>
+                                    <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter farmer opening balance" value="{{ old('opening_balance') }}">
+                                </div>
+
+                                {{-- Starting Date --}}
                                 <div class="form-group">
                                     <label class="">Starting Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="starting_date" value="{{ old('starting_date') }}">
+                                        <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::now()->toDayDateTimeString() }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>

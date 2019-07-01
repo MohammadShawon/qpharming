@@ -68,9 +68,7 @@
                                 <div class="form-group">
                                     <label for="collect_type">Collect Type</label>
                                     <select name="collect_type" class="form-control  select2 " id="collect_type">
-                                        <option value="authority">Authority</option>
                                         <option value="farmer">Farmer</option>
-                                        <option value="staff">Staff</option>
                                         <option value="company">Company</option>
                                         <option value="others">Others</option>
                                     </select>

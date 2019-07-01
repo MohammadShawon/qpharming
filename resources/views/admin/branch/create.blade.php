@@ -26,11 +26,14 @@
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.branch.store') }}">
                         @csrf
+
+                        {{-- Branch --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Brach Name</label>
-                            <input type="text" name="branch" class="form-control" id="simpleFormEmail" placeholder="Enter branch name">
+                            <label for="branch">Brach Name</label>
+                            <input type="text" name="branch" class="form-control" id="branch" placeholder="Enter branch name">
                         </div>
 
+                        {{-- Area --}}
                         <div class="form-group">
                             <label>Select Area</label>
                             <select name="area" class="form-control  select2 " >

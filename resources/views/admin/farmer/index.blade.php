@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'farmer')
+@section('title', 'Farmer')
 
 @push('css')
     <!-- data tables -->
@@ -19,10 +19,11 @@
     <div class="row">
         <div class="col-md-12">
                 <div class="btn-group">
-                    <a href="{{ route('admin.farmer.create') }}" id="addRow1" class="btn btn-primary">
-                        Add New <i style="color:white;" class="fa fa-plus"></i>
+                    <a href="{{ route('admin.farmer.create') }}" id="addRow1" class="btn btn-primary" 
+                    style="font-size:14px; padding: 6px 12px;">
+                        Add New Farmer <i style="color:white;" class="fa fa-plus"></i>
                     </a>
-                    <span class="btn btn-primary ml-3"> {{ $farmers->count() }} </span>
+                    
                 </div>
                 <div class="btn-group pull-right">
                         <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -44,8 +45,8 @@
                         </ul>
                     </div>
             <div class="card card-topline-red">
-                <div class="card-head">
-                    <header>ALL - Farmers</header>
+                <div class="card-head" style="text-align: center;">
+                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -70,6 +71,7 @@
                                 <th> Branch </th>
                                 <th> Phone </th>
                                 <th> Opening Balance </th>
+                                <th> Status </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -80,6 +82,11 @@
                                     <td> {{ $key+1 }} </td>
                                     <td>
                                         {{ $farmer->name }}
+                                    </td>
+                                    <td>{{ $farmer->branch->name }}</td>
+                                    <td>{{ $farmer->phone1 }}</td>
+                                    <td>{{ $farmer->opening_balance }}</td>
+                                    <td>
                                         <div>
                                             <p class="{{ $farmer->status == 'active' ? "text-success" : "text-danger" }}">
                                                 @if($farmer->status == 'active')
@@ -94,9 +101,6 @@
                                             </p>
                                         </div>
                                     </td>
-                                    <td>{{ $farmer->branch->name }}</td>
-                                    <td>{{ $farmer->phone1 }}</td>
-                                    <td>{{ $farmer->opening_balance }}</td>
                                     {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
                                     <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                     <td>
@@ -117,6 +121,18 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                
+                                <th> Serial </th>
+                                <th> Name </th>
+                                <th> Branch </th>
+                                <th> Phone </th>
+                                <th> Opening Balance </th>
+                                <th> Status </th>
+                                <th> Action </th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

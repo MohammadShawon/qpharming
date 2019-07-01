@@ -24,7 +24,7 @@ class BranchUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'branch' => 'required|unique:branches,name'
+            'branch' => 'required'
         ];
     }
 }

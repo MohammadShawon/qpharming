@@ -19,12 +19,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        /* Category List */
         if (auth()->user()->can('view_category')) {
                 
-                $categories = Category::latest()->get();
-
-                 return view('admin.category.index', compact('categories'));
-            }
+            $categories = Category::latest()->get();
+            return view('admin.category.index', compact('categories'));
+        }
         abort(403);
          
     }
@@ -36,10 +36,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        /* Category CREATE form */
         if (auth()->user()->can('create_category')) {
-                
-                return view('admin.category.create');
-            }
+            return view('admin.category.create');
+        }
         abort(403);
     }
 
@@ -51,20 +51,21 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
+        /* CREATE category */
         if (auth()->user()->can('create_category')) {
-                            /* category created */
-                $category = Category::create([
-                    'name' => $request->category,
-                    'slug' => str_slug($request->category),
-                ]);
-                
-                if($category) {
-                    Toastr::success('Category Successfully Inserted', 'Success');
-                    return redirect()->route('admin.category.index');
-                }
-                abort(404);
-                
+                        
+            $category = Category::create([
+                'name' => $request->category,
+                'slug' => str_slug($request->category),
+            ]);
+            
+            if($category) {
+                Toastr::success('Category Successfully Inserted', 'Success');
+                return redirect()->route('admin.category.index');
             }
+            abort(404);
+            
+        }
         abort(403);
        
     }
@@ -88,10 +89,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        /* EDIT form */
         if (auth()->user()->can('edit_category')) {
                 
-                return view('admin.category.edit', compact('category'));
-            }
+            return view('admin.category.edit', compact('category'));
+        }
         abort(403);
     }
 
@@ -104,22 +106,22 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
-       if (auth()->user()->can('edit_category')) {
+        /* UPDATE category */
+        if (auth()->user()->can('edit_category')) {
                
-                        /* update category */
-                $resultCategory = $category->update([
-                    'name'  => $request->category,
-                    'slug'  => str_slug($request->category),
-                ]);
+            $resultCategory = $category->update([
+                'name'  => $request->category,
+                'slug'  => str_slug($request->category),
+            ]);
 
-                /* check and toastr message */
-                if($resultCategory) {
-                    Toastr::success('Category Successfully Updated', 'Success');
-                    return redirect()->route('admin.category.index');
-                }
-                abort(404);
-           }
-       abort(403);
+            /* check and toastr message */
+            if($resultCategory) {
+                Toastr::success('Category Successfully Updated', 'Success');
+                return redirect()->route('admin.category.index');
+            }
+            abort(404);
+        }
+        abort(403);
         
     }
 
@@ -131,12 +133,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-       if (auth()->user()->can('delete_category')) {
+        /* DELETE category */
+        if (auth()->user()->can('delete_category')) {
                
-                $category->delete();
+            $deleteCategory = $category->delete();
+            if($deleteCategory){
                 Toastr::success('Category Successfully Deleted', 'Success');
                 return redirect()->route('admin.category.index');
-           }
-       abort(403);
+            }
+            abort(404);
+        }
+        abort(403);
     }
 }

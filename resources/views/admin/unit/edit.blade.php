@@ -25,6 +25,8 @@
                     <form method="post" action="{{ route('admin.unit.update', $unit->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Unit --}}
                         <div class="form-group">
                             <label for="simpleFormEmail">Unit Name</label>
                             <input type="text" name="unit" class="form-control" id="simpleFormEmail" 

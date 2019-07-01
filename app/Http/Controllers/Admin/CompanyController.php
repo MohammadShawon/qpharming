@@ -19,6 +19,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        /* Company List */
         if (auth()->user()->can('view_company')) {
                 
             $data['companies'] = Company::latest()->get(['id','name','phone1','representative_name','status','created_at']);
@@ -37,7 +38,6 @@ class CompanyController extends Controller
     {
         /* Company Create Form */
         if (auth()->user()->can('create_company')) {
-                
             return view('admin.company.create');
         }
         abort(403);
@@ -54,25 +54,26 @@ class CompanyController extends Controller
         /* Create Compnay */
         if (auth()->user()->can('create_company')) {
                 
-                $company = Company::create([
-                'name'                  => $request->company,
-                'slug'                  => str_slug($request->company),
-                'representative_name'   => $request->representative_name,
-                'phone1'                => $request->phone1,
-                'phone2'                => $request->phone2,
-                'email'                 => ($request->email != null ? $request->email : null),
-                'address'               => ($request->address != null ? $request->address : null),
-                'opening_balance'       => ($request->opening_balance != null?$request->opening_balance:0),
-                'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-                'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
+            $company = Company::create([
+            'name'                  => $request->company,
+            'slug'                  => str_slug($request->company),
+            'representative_name'   => $request->representative_name,
+            'phone1'                => $request->phone1,
+            'phone2'                => $request->phone2,
+            'email'                 => ($request->email != null ? $request->email : null),
+            'address'               => ($request->address != null ? $request->address : null),
+            'opening_balance'       => ($request->opening_balance != null?$request->opening_balance:0),
+            'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
+            'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
             ]);
+
             /* cheack and showing toastr message */
             if($company){
                 Toastr::success('Company Successfully Added', 'Success');
                 return redirect()->route('admin.company.index');
             }
             abort(404);
-            }
+        }
         abort(403);
     }
 
@@ -84,6 +85,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+        /* Company Details */
         $company = Company::findOrFail($id);
         return view('admin.company.show', compact('company'));
     }
@@ -126,6 +128,7 @@ class CompanyController extends Controller
                 'email'                 => $request->email,
                 'address'               => $request->address,
                 'opening_balance'       => $request->opening_balance,
+                'status'                => $request->status,
                 'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
             ]);

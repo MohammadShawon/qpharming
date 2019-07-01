@@ -24,9 +24,11 @@
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.category.store') }}">
                         @csrf
+
+                        {{-- Category --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Catagory Name</label>
-                            <input type="text" name="category" class="form-control" id="simpleFormEmail" placeholder="Enter category name">
+                            <label for="category">Catagory Name</label>
+                            <input type="text" name="category" class="form-control" id="category" placeholder="Enter category name">
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.category.index') }}">BACK</a>

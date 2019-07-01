@@ -64,14 +64,13 @@ class FarmerController extends Controller
                 'name'             =>      $request->name,
                 'phone1'           =>      $request->phone1,
                 'phone2'           =>      $request->phone2,
-                'email'            =>      $request->email,
                 'address'          =>      $request->address,
                 'opening_balance'  =>      $request->opening_balance,
                 'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
-                'status'           =>      'inactive',
+                'status'           =>      'active',
             ]);
-                // Notification  to admin
+            // Notification  to admin
             $details = [
                     'farmer_name' => $request->name,
                     'branch_name' => Branch::find($request->branch)->name,
@@ -115,8 +114,8 @@ class FarmerController extends Controller
     {
         if (auth()->user()->can('edit_farmer')) {
                 
-            $branches = Branch::all();
-            return view('admin.farmer.edit', compact('farmer', 'branches'));
+            $data['branches'] = Branch::get(['id','name']);
+            return view('admin.farmer.edit', $data, compact('farmer'));
         }
         abort(403);
     }
@@ -138,7 +137,6 @@ class FarmerController extends Controller
                 'name'             =>      $request->name,
                 'phone1'           =>      $request->phone1,
                 'phone2'           =>      $request->phone2,
-                'email'            =>      $request->email,
                 'address'          =>      $request->address,
                 'opening_balance'  =>      $request->opening_balance,
                 'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
@@ -146,15 +144,15 @@ class FarmerController extends Controller
                 'status'           =>      $request->status,
             ]);
 
-            $user = User::first();
+            // $user = User::first();
   
-                $details = [
-                    'farmer_name' => $request->name
-                ];
+            //     $details = [
+            //         'farmer_name' => $request->name
+            //     ];
           
-                Notification::send($user, new FarmerCreateNotification($details));
+            //     Notification::send($user, new FarmerCreateNotification($details));
             /* Check famer insertion  and Toastr */
-            if($farmer){
+            if($resultFarmer){
                 Toastr::success('farmer Updated Successfully', 'Success');
                 return redirect()->route('admin.farmer.index');
             }

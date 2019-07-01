@@ -31,6 +31,8 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Product Name --}}
                                 <div class="form-group">
                                     <label>Product Name</label>
                                     <select name="product_id" class="form-control  select2 " >
@@ -40,34 +42,36 @@
                                     </select>
                                 </div>
 
-                                
-
+                                {{-- Batch no --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Batch No </label>
+                                    <label for="batch">Batch No </label>
                                     
-                                    <input type="text" class="form-control" id="simpleFormEmail" value="{{substr(uniqid(), -6).'-'.date("d").'-'.date("M").'-'.date("y")}}"  name="batch" >
+                                    <input id="batch" type="text" class="form-control" id="simpleFormEmail" value="{{substr(uniqid(), -6).'-'.date("d").'-'.date("M").'-'.date("y")}}"  name="batch" >
                                 </div>
 
+                                {{-- Quantity --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" placeholder="Enter Quantity" value="{{ old('quantity') }}">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity" value="{{ old('quantity') }}">
                                 </div>
+
+                                {{-- Cost --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Cost Price</label>
-                                    <input type="text" name="cost" class="form-control" id="simpleFormEmail" placeholder="Enter Cost Price" value="{{ old('cost') }}">
+                                    <label for="cost">Cost Price</label>
+                                    <input type="text" name="cost" class="form-control" id="cost" placeholder="Enter Cost Price" value="{{ old('cost') }}">
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
                                 
+                                {{-- Sell --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Sell Price</label>
-                                    <input type="text" name="sell" class="form-control" id="simpleFormEmail" placeholder="Enter Selling price" value="{{ old('sell') }}">
+                                    <label for="sell">Sell Price</label>
+                                    <input type="text" name="sell" class="form-control" id="sell" placeholder="Enter Selling price" value="{{ old('sell') }}">
                                 </div>
                                 
-                                
-
+                                {{-- M.F.G   date --}}
                                 <div class="form-group">
                                     <label class="">M.F.G Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
@@ -78,6 +82,8 @@
                                     </div>
                                     <input type="hidden" id="dtp_input1" value="" />
                                 </div>
+
+                                {{-- E.X.P   date --}}
                                 <div class="form-group">
                                     <label class="">EXP Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy  HH:ii p" data-link-field="dtp_input1">
@@ -98,7 +104,7 @@
                             <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ old('status') }}">
                         </div> --}}
                         
-                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.farmer.index') }}">BACK</a>
+                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.product-price.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                     </form>
                 </div>

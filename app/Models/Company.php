@@ -14,6 +14,7 @@ class Company extends Model
         'phone2',
         'email',
         'address',
+        'status',
         'opening_balance',
         'starting_date',
         'ending_date',

@@ -24,7 +24,12 @@ class CompanyUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'company' => 'required|unique:companies,name'
+            'company'               => 'required',
+            'phone1'                => 'required',
+            'email'                 => 'required',
+            'address'               => 'required',
+            'representative_name'   => 'required',
+            'opening_balance'       => 'required|numeric'
         ];
     }
 }

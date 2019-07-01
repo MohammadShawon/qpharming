@@ -24,7 +24,12 @@ class CompanyStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'company' => 'required|unique:companies,name'
+            'company'               => 'required|unique:companies,name',
+            'phone1'                => 'required|unique:companies,phone1',
+            'email'                 => 'required|unique:companies,email',
+            'address'               => 'required',
+            'representative_name'   => 'required',
+            'opening_balance'       => 'required|numeric'
         ];
     }
 }

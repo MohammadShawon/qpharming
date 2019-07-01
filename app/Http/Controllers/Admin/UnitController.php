@@ -33,9 +33,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        /* Unit Create Form */
+        /* Unit CREATE Form */
         if (auth()->user()->can('create_unit')) {
-                
             return view('admin.unit.create');
         }
         abort(403);
@@ -49,8 +48,9 @@ class UnitController extends Controller
      */
     public function store(UnitStoreRequest $request)
     {
+        /* STORE Unit */
         if (auth()->user()->can('create_unit')) {
-            //  Store Unit
+            
             $unit = Unit::create([
                 'name'  => $request->unit
             ]);
@@ -86,7 +86,6 @@ class UnitController extends Controller
     {
         /* Unit Edit form */
         if (auth()->user()->can('edit_unit')) {
-            
             return view('admin.unit.edit', compact('unit'));
         }
         abort(403);
@@ -101,9 +100,9 @@ class UnitController extends Controller
      */
     public function update(UnitUpdateRequest $request, Unit $unit)
     {
+        /* update Unit */
         if (auth()->user()->can('edit_unit')) {
                 
-            /* update Unit */
             $unitUpdate = $unit->update([
                 'name' => $request->unit
             ]);

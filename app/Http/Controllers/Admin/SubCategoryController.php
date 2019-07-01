@@ -23,7 +23,6 @@ class SubCategoryController extends Controller
         if (auth()->user()->can('view_sub-category')) {
                 
             $data['subcategories'] = SubCategory::latest()->get(['id','name','created_at']);
-
             return view('admin.subcategory.index', $data);
         }
         abort(403);
@@ -54,14 +53,15 @@ class SubCategoryController extends Controller
      */
     public function store(SubCategoryStoreRequest $request)
     {
+        /* create sub-category */
         if (auth()->user()->can('create_sub-category')) {
                 
-            /* create sub-category */
             $subcategory = SubCategory::create([
-                'name' => $request->subcategory,
-                'slug' => str_slug($request->subcategory),
+                'name'        => $request->subcategory,
+                'slug'        => str_slug($request->subcategory),
                 'category_id' => $request->category,
             ]);
+
             /* cheack and showing toastr message */
             if($subcategory){
                 Toastr::success('Sub-Category Successfully Added', 'Success');
@@ -146,6 +146,7 @@ class SubCategoryController extends Controller
                 Toastr::success('Sub-Category Successfully Deleted', 'Success');
                 return redirect()->route('admin.sub-category.index');
             }
+            abort(404);
         }
         abort(403);
     }

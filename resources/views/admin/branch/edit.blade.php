@@ -27,11 +27,14 @@
                     <form method="post" action="{{ route('admin.branch.update', $branch->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Branch --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Branch Name</label>
-                            <input type="text" name="branch" class="form-control" id="simpleFormEmail" placeholder="Enter branch name" value="{{ $branch->name}}">
+                            <label for="branch">Branch Name</label>
+                            <input type="text" name="branch" class="form-control" id="branch" value="{{ $branch->name}}">
                         </div>
 
+                        {{-- Area --}}
                         <div class="form-group">
                             <label>Select Area</label>
                             <select name="area" class="form-control  select2 " >

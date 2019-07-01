@@ -23,7 +23,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Edit Product</header>
+                    <header>Update Product</header>
                 </div>
                 <div class="card-body" id="bar-parent">
                     <form method="post" action="{{ route('admin.product.update', $product->id) }}">
@@ -31,11 +31,14 @@
                         @method('PATCH')
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Product Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Name</label>
-                                    <input type="text" name="product_name" class="form-control" id="simpleFormEmail" value="{{ $product->product_name }}">
+                                    <label for="product_name">Name</label>
+                                    <input type="text" name="product_name" class="form-control" id="product_name" value="{{ $product->product_name }}">
                                 </div>
 
+                                {{-- Sub-Category --}}
                                 <div class="form-group">
                                     <label>Select SubCategory</label>
                                     <select name="sub_category" class="form-control  select2 " >
@@ -47,35 +50,44 @@
                                     </select>
                                 </div>
 
+                                {{-- S.K.U --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">S.K.U</label>
-                                    <input type="text" name="sku" class="form-control" id="simpleFormEmail" value="{{ $product->sku }}">
+                                    <label for="sku">S.K.U</label>
+                                    <input type="text" name="sku" class="form-control" id="sku" value="{{ $product->sku }}">
                                 </div>
+
+                                {{-- Barcode --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Generate Barcode</label>
-                                    <input id="simpleFormEmail" type="text" name="barcode" class="form-control" id="simpleFormEmail" value="{{ $product->barcode }}" >
+                                    <label for="barcode">Generate Barcode</label>
+                                    <input id="barcode" type="text" name="barcode" class="form-control" id="simpleFormEmail" value="{{ $product->barcode }}" >
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Base unit ID --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Base Unit ID</label>
-                                    <input type="text" name="unit_id" class="form-control" id="simpleFormEmail" value="{{ $product->base_unit_id }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Size</label>
-                                    <input type="text" name="size" class="form-control" id="simpleFormEmail" placeholder="Enter alternativee phone number" value="{{ $product->size }}">
+                                    <label for="unit_id">Base Unit ID</label>
+                                    <input type="text" name="unit_id" class="form-control" id="unit_id" value="{{ $product->base_unit_id }}">
                                 </div>
 
+                                {{-- Size --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" value="{{ $product->quantity }}">
+                                    <label for="size">Size</label>
+                                    <input type="text" name="size" class="form-control" id="size" placeholder="Enter alternativee phone number" value="{{ $product->size }}">
                                 </div>
+
+                                {{-- Quantity --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Description</label> 
-                                    <textarea name="description" id="simpleFormEmail" class="form-control">{{ $product->description }}</textarea>
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="quantity" value="{{ $product->quantity }}">
+                                </div>
+
+                                {{-- Description --}}
+                                <div class="form-group">
+                                    <label for="description">Description</label> 
+                                    <textarea name="description" id="description" class="form-control">{{ $product->description }}</textarea>
                                 </div>
                                 
 

@@ -24,7 +24,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Edit Product Price</header>
+                    <header>Update Product - Price</header>
                 </div>
                 <div class="card-body" id="bar-parent">
                     <form method="post" action="{{ route('admin.product-price.update', $productPrice->id) }}">
@@ -32,6 +32,8 @@
                         @method('PATCH')
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Product Name --}}
                                 <div class="form-group">
                                     <label>Product Name</label>
                                     <select name="product_id" class="form-control  select2 " >
@@ -43,34 +45,36 @@
                                     </select>
                                 </div>
 
-                                
-
+                                {{-- Batch No --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Batch No </label>
+                                    <label for="batch">Batch No </label>
                                     
-                                    <input type="text" class="form-control" id="simpleFormEmail" value="{{ $productPrice->batch_no }}"  name="batch" >
+                                    <input type="text" class="form-control" id="batch" value="{{ $productPrice->batch_no }}"  name="batch" >
                                 </div>
 
+                                {{-- Quantity --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" value="{{ $productPrice->quantity }}">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="quantity" value="{{ $productPrice->quantity }}">
                                 </div>
+
+                                {{-- Cost --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Cost Price</label>
-                                    <input type="text" name="cost" class="form-control" id="simpleFormEmail" value="{{ $productPrice->cost_price }}">
+                                    <label for="cost">Cost Price</label>
+                                    <input type="text" name="cost" class="form-control" id="cost" value="{{ $productPrice->cost_price }}">
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
                                 
+                                {{-- Sell --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Sell Price</label>
-                                    <input type="text" name="sell" class="form-control" id="simpleFormEmail" placeholder="Enter Selling price" value="{{ $productPrice->selling_price }}">
+                                    <label for="sell">Sell Price</label>
+                                    <input type="text" name="sell" class="form-control" id="sell" placeholder="Enter Selling price" value="{{ $productPrice->selling_price }}">
                                 </div>
                                 
-                                
-
+                                {{-- M.F.G  date --}}
                                 <div class="form-group">
                                     <label class="">M.F.G Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
@@ -81,6 +85,8 @@
                                     </div>
                                     <input type="hidden" id="dtp_input1" value="" />
                                 </div>
+
+                                {{-- E.X.P  date --}}
                                 <div class="form-group">
                                     <label class="">EXP Date</label>
                                     <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy  HH:ii p" data-link-field="dtp_input1">
@@ -101,7 +107,7 @@
                             <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ old('status') }}">
                         </div> --}}
                         
-                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.farmer.index') }}">BACK</a>
+                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.product-price.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                     </form>
                 </div>

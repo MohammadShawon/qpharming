@@ -19,15 +19,17 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Category</header> 
+                    <header>Update Category</header> 
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.category.update', $category->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Category --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Category Name</label>
-                            <input type="text" name="category" class="form-control" id="simpleFormEmail" 
+                            <label for="category">Category Name</label>
+                            <input type="text" name="category" class="form-control" id="category" 
                             value="{{ $category->name }}">
                         </div>
                         

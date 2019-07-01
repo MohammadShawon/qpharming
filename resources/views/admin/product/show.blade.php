@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Product - details')
+@section('title', 'Product - Details')
 
 @push('css')
 @endpush

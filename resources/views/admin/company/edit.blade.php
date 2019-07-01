@@ -16,7 +16,7 @@ use Carbon\Carbon;
     <div class="col-md-12 col-sm-12">
         <div class="card card-box">
             <div class="card-head text-white " style="background-color:#3FCC7E;">
-            <header>Company</header>
+            <header>Update Company</header>
         </div>
         <div class="card-body " id="bar-parent">
             <form method="post" action="{{ route('admin.company.update', $company->id) }}">
@@ -24,60 +24,91 @@ use Carbon\Carbon;
                 @method('PATCH')
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
+
+                        {{-- Company Name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Company Name</label>
-                            <input type="text" name="company" class="form-control" id="simpleFormEmail" value="{{ $company->name }}">
+                            <label for="company">Company Name</label>
+                            <input type="text" name="company" class="form-control" id="company" value="{{ $company->name }}">
                         </div>
+
+                        {{-- Representative Name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Representative Name</label>
-                            <input type="text" name="representative_name" class="form-control" id="simpleFormEmail" value="{{ $company->representative_name }}">
+                            <label for="representative_name">Representative Name</label>
+                            <input type="text" name="representative_name" class="form-control" id="representative_name" value="{{ $company->representative_name }}">
                         </div>
+
+                        {{-- Phone 1 --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Phone </label>
-                            <input type="number" name="phone1" class="form-control" id="simpleFormEmail" value="{{ $company->phone1 }}">
+                            <label for="phone1">Phone </label>
+                            <input type="text" name="phone1" class="form-control" id="phone1" value="{{ $company->phone1 }}">
                         </div>
+
+                         {{-- Phone 2 --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Alternative Phone</label>
-                            <input type="number" name="phone2" class="form-control" id="simpleFormEmail" value="{{ $company->phone2 }}">
+                            <label for="phone2">Alternative Phone</label>
+                            <input type="text" name="phone2" class="form-control" id="phone2" value="{{ $company->phone2 }}">
                         </div>
+
+                        {{-- Email --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Email</label>
-                            <input type="email" name="email" class="form-control" id="simpleFormEmail" value="{{ $company->email }}">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" value="{{ $company->email }}">
                         </div>
+                        
                     </div>
                     
                     <div class="col-md-6 col-sm-6">
+                        
+                        {{-- Address --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Address</label>
-                            <input type="textarea" name="address" class="form-control" id="simpleFormEmail" value="{{ $company->address }}">
+                            <label for="address">Address</label>
+                            <input type="textarea" name="address" class="form-control" id="address" value="{{ $company->address }}">
                         </div>
+
+                        {{-- Balance --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Opening Balance</label>
-                            <input type="number" name="opening_balance" class="form-control" id="simpleFormEmail" value="{{ $company->opening_balance }}">
+                            <label for="opening_balance">Opening Balance</label>
+                            <input type="number" name="opening_balance" class="form-control" id="opening_balance" value="{{ $company->opening_balance }}">
                         </div>
+
+                         {{-- Starting Date --}}
                         <div class="form-group">
                             <label>Starting Date</label>
                             <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}">
-                                <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::parse($company->starting_date)->format('Y-m-d H:i') }}">
+                                <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::parse($company->starting_date)->toDayDateTimeString() }}">
                                 <span class="input-group-addon ml-2">
                                     <span class="fa fa-calendar"></span>
                                 </span>
                             </div>
                         </div>
+
+                        {{-- Ending Date  --}}
                         <div class="form-group">
                             <label>Ending Date</label>
                             <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                <input class="form-control" size="16" type="text" name="ending_date" value="{{ Carbon::parse($company->ending_date)->format('Y-m-d H:i') }}">
+                                <input class="form-control" size="16" type="text" name="ending_date" >
                                 <span class="input-group-addon ml-2">
                                     <span class="fa fa-calendar"></span>
                                 </span>
                             </div>
                         </div>
                         
-                        <a class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.company.index') }}">BACK</a>
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
+                        {{-- Status --}}
+                        <div class="form-group">
+                            <label >Status</label>
+                                <select class="form-control" name="status">
+                                @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)    
+                                    <option value="{{$key}}" 
+                                        {{ $company->status == $key ? "selected" : "" }}>
+                                        {{ $value }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
+                <a class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.company.index') }}">BACK</a>
+                <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
             </form>
         </div>
     </div>

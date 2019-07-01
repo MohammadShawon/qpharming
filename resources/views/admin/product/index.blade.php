@@ -19,10 +19,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="btn-group">
-                <a href="{{ route('admin.product.create') }}" id="addRow1" class="btn btn-primary">
-                    Add New <i style="color:white;" class="fa fa-plus"></i>
+                <a href="{{ route('admin.product.create') }}" id="addRow1" class="btn btn-primary"
+                style="font-size:14px; padding: 6px 12px;" >
+                    Add New Product <i style="color:white;" class="fa fa-plus"></i>
                 </a>
-                <span class="btn btn-primary ml-3"> {{ $products->count() }} </span>
+                
             </div>
             <div class="btn-group pull-right">
                 <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -44,8 +45,8 @@
                 </ul>
             </div>
             <div class="card card-topline-red">
-                <div class="card-head">
-                    <header>ALL - Product's</header>
+                <div class="card-head" style="text-align: center;">
+                    <header>PRODUCT</header><span class="btn btn-primary ml-3"> {{ $products->count() }} </span>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -68,6 +69,8 @@
                                 <th> Name </th>
                                 <th> Category </th>
                                 <th> Sub Category </th>
+                                <th> Size </th>
+                                <th> Quantity </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -79,6 +82,9 @@
                                     
                                     <td>{{ $product->subcategory->category->name }}</td>
                                     <td>{{ $product->subcategory->name }}</td>
+                                    <td>{{ $product->size }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    
                                     <td>
                                         <a  class="waves-effect btn btn-success" href="{{ route('admin.product.show', $product->id) }}"><i class="material-icons">visibility</i></a>
                                         
@@ -97,6 +103,17 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th> Serial </th>
+                                <th> Name </th>
+                                <th> Category </th>
+                                <th> Sub Category </th>
+                                <th> Size </th>
+                                <th> Quantity </th>
+                                <th> Action </th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

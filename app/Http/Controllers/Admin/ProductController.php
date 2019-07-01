@@ -53,6 +53,7 @@ class ProductController extends Controller
     {
         /* Product Store */
         if(auth()->user()->can('create_user')){
+            
             $product = Product::create([
                 'subcategory_id' => $request->sub_category,
                 'product_name'   => $request->product_name,
@@ -97,6 +98,7 @@ class ProductController extends Controller
     {
         /* Product Edit form */
         if(auth()->user()->can('edit_product')){
+
             $data['subCategories'] = SubCategory::get(['id','name']);
             return view('admin.product.edit', $data, compact('product'));
         }
@@ -114,6 +116,7 @@ class ProductController extends Controller
     {
         /* Product Update */
         if(auth()->user()->can('edit_product')){
+
             $productResult = $product->update([
                 'subcategory_id' => $request->sub_category,
                 'product_name'   => $request->product_name,
@@ -142,8 +145,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        /* Product delete */
+        /* DELETE Product */
         if(auth()->user()->can('delete_product')){
+
             $deleteProduct = $product->delete();
             if($deleteProduct){
                 Toastr::success('Product Successfully Deleted', 'Success');

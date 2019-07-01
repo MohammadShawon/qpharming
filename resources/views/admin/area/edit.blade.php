@@ -25,6 +25,8 @@
                     <form method="post" action="{{ route('admin.area.update', $area->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Area --}}
                         <div class="form-group">
                             <label for="simpleFormEmail">Area Name</label>
                             <input type="text" name="area" class="form-control" id="simpleFormEmail" 

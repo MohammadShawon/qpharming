@@ -30,12 +30,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+
+                                {{-- Product Name --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Name</label>
-                                    <input type="text" name="product_name" class="form-control" id="simpleFormEmail" placeholder="Enter Products's name" value="{{ old('product_name') }}"
-                                    autocomplete="off">
+                                    <label for="product_name">Name</label>
+                                    <input type="text" name="product_name" class="form-control" id="product_name" placeholder="Enter Products's name" value="{{ old('product_name') }}">
                                 </div>
 
+                                {{-- Sub-Category --}}
                                 <div class="form-group">
                                     <label>Select SubCategory</label>
                                     <select name="sub_category" class="form-control  select2 " >
@@ -45,19 +47,23 @@
                                     </select>
                                 </div>
 
+                                {{-- S.K.U --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">S.K.U</label>
-                                    <input type="text" name="sku" class="form-control" id="simpleFormEmail" placeholder="Enter sku number" value="{{ old('sku') }}">
+                                    <label for="sku">S.K.U</label>
+                                    <input type="text" name="sku" class="form-control" id="sku" placeholder="Enter sku number" value="{{ old('sku') }}">
                                 </div>
+
+                                {{-- Barcode --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Generate Barcode</label>
-                                    <input id="password-1" type="text" name="barcode" class="form-control" id="simpleFormEmail" placeholder="Generate Barcode" >
+                                    <label for="barcode">Generate Barcode</label>
+                                    <input id="barcode" type="text" name="barcode" class="form-control" id="simpleFormEmail" placeholder="Generate Barcode" >
                                 </div>
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Base Unit ID --}}
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Base Unit ID</label>
                                     <select name="unit_id" class="form-control  select2 " >
@@ -65,20 +71,24 @@
                                             <option value="{{ $baseUnit->id }}">{{ $baseUnit->name }}</option>
                                         @endforeach
                                     </select>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Size</label>
-                                    <input type="text" name="size" class="form-control" id="simpleFormEmail" placeholder="Enter Size of the product" value="{{ old('size') }}">
                                 </div>
 
+                                {{-- Size --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="simpleFormEmail" placeholder="Enter Quantity of the product" value="{{ old('quantity') }}">
+                                    <label for="size">Size</label>
+                                    <input type="text" name="size" class="form-control" id="size" placeholder="Enter Size of the product" value="{{ old('size') }}">
                                 </div>
+
+                                {{-- Quantity --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Description</label> 
-                                    <textarea name="description" id="simpleFormEmail" class="form-control">{{old('description')}}</textarea>
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity of the product" value="{{ old('quantity') }}">
+                                </div>
+
+                                {{-- Description --}}
+                                <div class="form-group">
+                                    <label for="description">Description</label> 
+                                    <textarea name="description" id="description" class="form-control">{{old('description')}}</textarea>
                                 </div>
                                 
 
@@ -102,7 +112,7 @@
                             <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ old('status') }}">
                         </div> --}}
                         
-                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.user.index') }}">BACK</a>
+                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.product.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                     </form>
                 </div>

@@ -21,11 +21,9 @@ class AreaController extends Controller
     {
         /* All area lists in index page */
         if (auth()->user()->can('view_area')) {
-                
-                $areas = Area::latest()->get();
-
-                return view('admin.area.index', compact('areas'));
-            }
+            $areas = Area::latest()->get();
+            return view('admin.area.index', compact('areas'));
+        }
         abort(403);
         
     }
@@ -39,7 +37,6 @@ class AreaController extends Controller
     {
         /* area create page */
         if (auth()->user()->can('create_area')) {
-            
             return view('admin.area.create');
         }
         abort(403);
@@ -94,8 +91,8 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
+        /* EDIT form */
         if (auth()->user()->can('edit_area')) {
-                
             $area = Area::findOrFail($id);
             return view('admin.area.edit', compact('area'));
         }
@@ -139,12 +136,16 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
+        /* DELETE Area */
        if (auth()->user()->can('delete_area')) {
                
-                Area::findOrFail($id)->delete();
+            $areaDelete = Area::findOrFail($id)->delete();
+            if($areaDelete){
                 Toastr::success('Area Successfully Deleted', 'Success');
                 return redirect()->route('admin.area.index');
-           }
+            }
+            abort(404);
+        }
        abort(403);
     }
 }
