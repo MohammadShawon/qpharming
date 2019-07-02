@@ -122,7 +122,7 @@ class UserController extends Controller
         /* User EDIT form */
         if(auth()->user()->can('edit_user')){
             $data['branches'] = Branch::get(['id','name']);
-            $data['roles'] = Role::get(['id','name']);
+            $data['roles'] = Role::where('id', '!=', 1)->get(['id','name']);
             $user = User::findOrFail($id);
             return view('admin.user.edit', $data,  compact('user'));
         }
