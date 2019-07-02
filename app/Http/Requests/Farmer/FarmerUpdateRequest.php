@@ -27,7 +27,7 @@ class FarmerUpdateRequest extends FormRequest
         return [
             'name'           => 'required',
             'phone1'         => 'required',
-            'address'        => 'required',
+            'address'        => 'nullable',
             'opening_balance'=> 'required|numeric',
             'status'         => 'required',
         ];

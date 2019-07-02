@@ -24,12 +24,15 @@ class PayentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'purposehead_id' => 'exists:purpose_heads,id',
+            'bank_id'        => 'exists:banks,id',
             'payment_amount' => 'required|numeric',
-            'payment_type' => 'required',
-            'bank_name' => 'nullable',
-            'received_by' => 'nullable',
-            'remarks' => 'nullable',
-            'payment_date' => 'required',
+            'payment_type'   => 'required',
+            'bank_name'      => 'nullable',
+            'received_by'    => 'nullable',
+            'remarks'        => 'nullable',
+            'reference'      => 'nullable',
+            'payment_date'   => 'required',
         ];
     }
 }

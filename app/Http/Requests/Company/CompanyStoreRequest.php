@@ -26,9 +26,9 @@ class CompanyStoreRequest extends FormRequest
         return [
             'company'               => 'required|unique:companies,name',
             'phone1'                => 'required|unique:companies,phone1',
-            'email'                 => 'required|unique:companies,email',
-            'address'               => 'required',
-            'representative_name'   => 'required',
+            'email'                 => 'nullable|unique:companies,email',
+            'address'               => 'nullable',
+            'representative_name'   => 'nullable',
             'opening_balance'       => 'required|numeric'
         ];
     }

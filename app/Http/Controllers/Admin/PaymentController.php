@@ -125,9 +125,9 @@ class PaymentController extends Controller
         $paymentUpdate = $payment->update([
             'bank_id'        =>      $request->bank_id,
             'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      ($request->company_id != null ? $request->company_id : null),
-            'farmer_id'      =>      ($request->farmer_id != null ? $request->farmer_id : null),
-            'user_id'        =>      ($request->user_id != null ? $request->user_id : null),
+            'company_id'     =>      ($request->payee_type == 'company' ? $request->company_id : null),
+            'farmer_id'      =>      ($request->payee_type == 'farmer' ? $request->farmer_id : null),
+            'user_id'        =>      ($request->payee_type == 'staff' ? $request->user_id : null),
             'payee_type'     =>      $request->payee_type,
             'payment_amount' =>      $request->payment_amount,
             'payment_type'   =>      $request->payment_type,

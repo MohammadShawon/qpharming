@@ -121,7 +121,7 @@ class CollectionController extends Controller
             'collection_amount' =>      $request->collection_amount,
             'collection_type'   =>      $request->collection_type,
             'collect_type'      =>      $request->collect_type,
-            'bank_name'         =>      $request->bank_name,
+            'bank_name'         =>      ($request->collection_type == 'cash') ? null : $request->bank_name,
             'given_by'          =>      $request->given_by,
             'reference'         =>      $request->reference,
             'remarks'           =>      $request->remarks,
