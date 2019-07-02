@@ -33,6 +33,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Bank  --}}
                                 <div class="form-group">
                                     <label>Select Bank</label>
                                     <select name="bank_id" class="form-control  select2 " >
@@ -45,34 +46,41 @@
                                     </select>
                                 </div>
 
+
+                                {{-- Collection Type --}}
                                 <div class="form-group">
-                                    <label>Select PurposeHead</label>
-                                    <select name="purposehead_id" class="form-control  select2 " >
-                                        @foreach ($purposeheads as $purposehead)
-                                            <option value="{{ $purposehead->id }}"
-                                                {{ $purposehead->id == $collection->purposehead_id ? 'selected' : ''}} >
-                                                {{ $purposehead->name }}
-                                            </option>
-                                        @endforeach
+                                    <label for="collection_type">Collection Type</label>
+                                    <select name="collection_type" class="form-control  select2 " id="collection_type">
+
+                                        <option {{ $collection->collection_type == 'cash' ? 'selected' :  '' }} value="cash">Cash</option>
+                                        <option {{ $collection->collection_type == 'check' ? 'selected' :  '' }} value="check">Check</option>
+                                        <option {{ $collection->collection_type == 'bank' ? 'selected' :  '' }} value="bank">Bank | Bkash | Rocket | Nagad</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Select Company</label>
-                                    <select name="company_id" class="form-control  select2 " >
-                                        @foreach ($companies as $company)
-                                            <option value=""></option>
-                                            <option value="{{ $company->id }}"
-                                                {{ $company->id == $collection->company_id ? 'selected' : ''}} >
-                                                {{ $company->name }}
-                                            </option>
-                                        @endforeach
+
+
+                                {{-- Bank --}}
+                                <div class="form-group bank">
+                                    <label for="bank_name">Bank name</label>
+                                    <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ $collection->bank_name }}">
+                                </div> 
+
+                               {{-- Purpose Head --}}
+                               <div class="form-group">
+                                    <label for="collect_type">Purpose Head</label>
+                                    <select name="collect_type" class="form-control  select2 " id="collect_type">
+                                        <option {{ $collection->collect_type == 'egg' ? 'selected' : ''}} value="egg">Egg Sell</option>
+                                        <option {{ $collection->collect_type == 'hen' ? 'selected' : ''}} value="hen">Hen Sell</option>
+                                        <option {{ $collection->collect_type == 'farmer' ? 'selected' : ''}} value="farmer">Farmer</option>
                                     </select>
                                 </div>
+
+                                {{-- Farmer --}}
                                 <div class="form-group">
                                     <label>Select Farmer</label>
                                     <select name="farmer_id" class="form-control  select2 " >
                                         @foreach ($farmers as $farmer)
-                                            <option value=""></option>
+                                        <option value=""></option>
                                             <option value="{{ $farmer->id }}"
                                                 {{ $farmer->id == $collection->farmer_id ? 'selected' : ''}} >
                                                 {{ $farmer->name }}
@@ -80,23 +88,20 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Collection Amount</label>
-                                    <input type="text" name="collection_amount" class="form-control" id="simpleFormEmail" placeholder="Enter Collection Amount" value="{{ $collection->collection_amount }}">
-                                </div>
+
+                               
                                 
                             </div>
                         
                             <div class="col-md-6 col-sm-6">
 
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Payment Type</label>
-                                    <input type="text" name="collection_type" class="form-control" id="simpleFormEmail" placeholder="Enter collection type" value="{{ $collection->collection_type }}">
+                                 {{-- Collection Amount --}}
+                                 <div class="form-group">
+                                    <label for="simpleFormEmail">Collection Amount</label>
+                                    <input type="text" name="collection_amount" class="form-control" id="simpleFormEmail" placeholder="Enter Collection Amount" value="{{ $collection->collection_amount }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Bank name</label>
-                                    <input type="text" name="bank_name" class="form-control" id="simpleFormEmail" placeholder="Enter bank name" value="{{ $collection->bank_name }}">
-                                </div> 
+
+                                
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Given By</label>
                                     <input type="text" name="given_by" class="form-control" id="simpleFormEmail" placeholder="Enter Giver name" value="{{ $collection->given_by }}">
@@ -132,6 +137,8 @@
 @endsection
 
 @push('js')
+    {{--Custom Select show hide--}}
+    <script src="{{ asset('js/collection-form.js') }}"></script>
     <!--select2-->
     <script src="{{ asset('admin/assets/plugins/select2/js/select2.js') }}" ></script>
     <script src="{{ asset('admin/assets/js/pages/select2/select2-init.js') }}" ></script>

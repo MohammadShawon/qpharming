@@ -26,7 +26,8 @@ class PaymentController extends Controller
     public function index()
     {
         /* Payment List */
-        $data['payments'] = Payment::latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date']);
+        $data['payments'] = Payment::latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date','user_id','payee_type']);
+
         return view('admin.payment.index', $data);
     }
 
@@ -59,7 +60,7 @@ class PaymentController extends Controller
         $payment = Payment::create([
             'bank_id'        =>      $request->bank_id,
             'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      ($request->company_id != null ?$request->company_id : null),
+            'company_id'     =>      ($request->company_id != null ? $request->company_id : null),
             'farmer_id'      =>      ($request->farmer_id != null ? $request->farmer_id : null),
             'user_id'        =>      ($request->user_id != null ? $request->user_id : null),
             'payee_type'     =>      $request->payee_type,
@@ -106,6 +107,7 @@ class PaymentController extends Controller
         $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
+        $data['users']          = User::get(['id','name']);
         
         return view('admin.payment.edit', $data, compact('payment'));
     }
@@ -123,11 +125,14 @@ class PaymentController extends Controller
         $paymentUpdate = $payment->update([
             'bank_id'        =>      $request->bank_id,
             'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      $request->company_id,
-            'farmer_id'      =>      $request->farmer_id,
+            'company_id'     =>      ($request->payee_type == 'company' ? $request->company_id : null),
+            'farmer_id'      =>      ($request->payee_type == 'farmer' ? $request->farmer_id : null),
+            'user_id'        =>      ($request->payee_type == 'staff' ? $request->user_id : null),
+            'payee_type'     =>      $request->payee_type,
             'payment_amount' =>      $request->payment_amount,
             'payment_type'   =>      $request->payment_type,
             'bank_name'      =>      $request->bank_name,
+            'reference'      =>      $request->reference,
             'received_by'    =>      $request->received_by,
             'remarks'        =>      $request->remarks,
             'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),

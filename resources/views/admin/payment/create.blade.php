@@ -39,8 +39,7 @@
                                         <option value="cash">Cash</option>
                                         <option value="check">Check</option>
                                         <option value="bank">Bank | Bkash | Rocket | Nagad</option>
-
-
+                                        
                                     </select>
 
                                 </div>
@@ -63,9 +62,7 @@
                                         <option value="company">Company</option>
                                         <option value="others">Others</option>
 
-
                                     </select>
-
                                 </div>
 
 
@@ -78,7 +75,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            {{--     Company      --}}
+                                {{--   Company      --}}
                                 <div class="form-group company">
                                     <label>Select Company</label>
                                     <select name="company_id" class="form-control  select2 " >
@@ -88,7 +85,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            {{--   Farmer   --}}
+                                {{--  Farmer   --}}
                                 <div class="form-group farmer">
                                     <label>Select Farmer</label>
                                     <select name="farmer_id" class="form-control  select2 " >
@@ -162,7 +159,7 @@
                         </div>
                        
                         
-                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.farmer.index') }}">BACK</a>
+                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.payment.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                         
                     </form>

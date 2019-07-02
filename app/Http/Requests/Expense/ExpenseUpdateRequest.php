@@ -25,10 +25,10 @@ class ExpenseUpdateRequest extends FormRequest
     {
         return [
             'expensehead_id' => 'required',
-            'amount' => 'required',
-            'description' => 'required',
-            'recipient_name' => 'required',
-            'user_id' => 'required',
+            'amount'         => 'required',
+            'description'    => 'nullable',
+            'recipient_name' => 'nullable',
+            'user_id'        => 'required',
         ];
     }
 }

@@ -31,7 +31,7 @@
                 <div class="tab-pane active fontawesome-demo" id="tab1">
                     <div id="biography" >
                         <div class="row">
-                            <div class="col-md-3 col-6 b-r"> <strong>Bank Name</strong>
+                            <div class="col-md-3 col-6 b-r"> <strong>Payment From Account</strong>
                                 <br>
                                 <p class="text-muted">{{ $payment->bank->bank_name }}</p>
                             </div>
@@ -41,7 +41,17 @@
                                 <p class="text-muted">{{ $payment->purposehead->name }}</p>
                             </div>
 
-                            @if (is_null($payment->farmer_id))
+                            @if (is_null($payment->company_id) && is_null($payment->user_id) && is_null($payment->farmer_id))
+                                <div class="col-md-3 col-6"> <strong>Company</strong>
+                                    <br>
+                                    <p class="text-muted">
+                                        
+                                        {{ ucwords($payment->payee_type) }}
+                                    
+                                    </p>
+                                </div>
+                            @endif
+                            @if (is_null($payment->farmer_id) && is_null($payment->user_id))
                                 <div class="col-md-3 col-6"> <strong>Company</strong>
                                     <br>
                                     <p class="text-muted">
@@ -51,12 +61,22 @@
                                     </p>
                                 </div>
                             @endif
-                            @if (is_null($payment->company_id))
+                            @if (is_null($payment->company_id) && is_null($payment->user_id))
                                 <div class="col-md-3 col-6 b-r"> <strong>Farmer</strong>
                                     <br>
                                     <p class="text-muted">
                                         
                                         {{ $payment->farmer->name }}
+                                    
+                                    </p>
+                                </div>
+                            @endif 
+                            @if (is_null($payment->company_id) && is_null($payment->farmer_id))
+                                <div class="col-md-3 col-6 b-r"> <strong>Staff</strong>
+                                    <br>
+                                    <p class="text-muted">
+                                        
+                                        {{ $payment->user->name }}
                                     
                                     </p>
                                 </div>
@@ -85,7 +105,7 @@
                             </div>
                             <div class="col-md-3 col-6 b-r"> <strong>Paymet Date</strong>
                                 <br>
-                                <p class="text-muted">{{ $payment->payment_date }}</p>
+                                <p class="text-muted">{{ Carbon::parse($payment->payment_date)->toDayDateTimeString() }}</p>
                             </div>
                             
                         </div>

@@ -24,8 +24,8 @@ class CreatePaymentsTable extends Migration
             $table->decimal('payment_amount', 15, 2)->default(0);
             $table->string('payment_type');
             $table->string('bank_name')->nullable();
-            $table->string('reference');
-            $table->string('received_by');
+            $table->string('reference')->nullable();
+            $table->string('received_by')->nullable();
             $table->string('remarks')->nullable();
             $table->dateTime('payment_date');
             $table->softDeletes();

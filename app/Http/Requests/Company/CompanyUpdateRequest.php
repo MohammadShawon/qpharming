@@ -26,9 +26,9 @@ class CompanyUpdateRequest extends FormRequest
         return [
             'company'               => 'required',
             'phone1'                => 'required',
-            'email'                 => 'required',
-            'address'               => 'required',
-            'representative_name'   => 'required',
+            'email'                 => 'nullable',
+            'address'               => 'nullable',
+            'representative_name'   => 'nullable',
             'opening_balance'       => 'required|numeric'
         ];
     }

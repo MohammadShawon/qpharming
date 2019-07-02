@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Update Expense Head')
+@section('title', 'Update Expense - Head')
 
 @push('css')
    <!--select2-->
@@ -21,12 +21,14 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box ">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Update Purpose Head</header>
+                    <header>Update Expense Head</header>
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.expensehead.update', $expensehead->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- name --}}
                         <div class="form-group">
                             <label for="simpleFormEmail">Expense Head Name</label>
                             <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter branch name" value="{{ $expensehead->name}}">

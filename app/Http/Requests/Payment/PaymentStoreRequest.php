@@ -29,9 +29,9 @@ class PaymentStoreRequest extends FormRequest
             'payment_amount' => 'required|numeric',
             'payment_type'   => 'required',
             'bank_name'      => 'nullable',
-            'received_by'    => 'required',
+            'received_by'    => 'nullable',
             'remarks'        => 'nullable',
-            'reference'      => 'required',
+            'reference'      => 'nullable',
             'payment_date'   => 'required',
         ];
     }

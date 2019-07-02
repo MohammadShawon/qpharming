@@ -26,6 +26,8 @@
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.expense.store') }}">
                         @csrf
+
+                        {{-- Expense Head --}}
                         <div class="form-group">
                             <label>Select Expense Head</label>
                             <select name="expensehead_id" class="form-control select2 ">
@@ -35,21 +37,25 @@
                             </select>
                         </div>
 
+                        {{-- Amount --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Expense Amount</label>
-                            <input type="number" name="amount" class="form-control" id="simpleFormEmail" placeholder="Enter expense amount">
+                            <label for="amount">Expense Amount</label>
+                            <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter expense amount">
                         </div>
 
+                        {{-- Description --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Expense Description</label>
-                            <input type="textarea" name="description" class="form-control" id="simpleFormEmail" placeholder="Enter expense description">
+                            <label for="description">Expense Description</label>
+                            <input type="textarea" name="description" class="form-control" id="description" placeholder="Enter expense description">
                         </div>
 
+                        {{-- Recipent --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Expense Recipent Nmae</label>
-                            <input type="text" name="recipient_name" class="form-control" id="simpleFormEmail" placeholder="Enter expense recipient name">
+                            <label for="recipient_name">Expense Recipent Nmae</label>
+                            <input type="text" name="recipient_name" class="form-control" id="recipient_name" placeholder="Enter expense recipient name">
                         </div>
 
+                        {{-- Name --}}
                         <div class="form-group">
                             <label>Select Expense Given Name</label>
                             <select name="user_id" class="form-control select2 ">

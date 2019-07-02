@@ -26,9 +26,11 @@
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.expensehead.store') }}">
                         @csrf
+
+                        {{-- name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Expense Heads Name</label>
-                            <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter expensehead name">
+                            <label for="name">Expense Heads Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter expensehead name">
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.expensehead.index') }}">BACK</a>

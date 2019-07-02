@@ -53,6 +53,7 @@
                                     <label>Select Roles</label>
                                     <select name="roles[]" class="form-control select2 " multiple>
                                         @foreach ($roles as $role)
+                                        
                                             <option value="{{ $role->id }}"> 
                                                 {{ $role->name }}
                                             </option>

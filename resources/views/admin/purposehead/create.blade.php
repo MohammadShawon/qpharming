@@ -3,7 +3,7 @@
 ?>
 @extends('template.app')
 
-@section('title', 'Create - Purpose Heads')
+@section('title', 'Create - PurposeHead')
 
 @push('css')
    <!--select2-->
@@ -21,14 +21,16 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Create Purpose Heads</header>
+                    <header>Create Purpose - Heads</header>
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.purposehead.store') }}">
                         @csrf
+
+                        {{-- Purpose Head Name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Purpose Heads Name</label>
-                            <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter purposehead name">
+                            <label for="name">Purpose Heads Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter PurposeHead name">
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.purposehead.index') }}">BACK</a>

@@ -30,7 +30,7 @@ class CollectionStoreRequest extends FormRequest
             'bank_name'         => 'nullable',
             'given_by'          => 'nullable',
             'remarks'           => 'nullable',
-            'reference'         => 'required',
+            'reference'         => 'nullable',
             'collection_date'   => 'required',
         ];
     }

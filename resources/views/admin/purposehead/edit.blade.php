@@ -21,15 +21,17 @@
         <div class="col-md-6 col-sm-6">
             <div class="card card-box ">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
-                    <header>Update Purpose Head</header>
+                    <header>Update Purpose - Head</header>
                 </div>
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.purposehead.update', $purposehead->id) }}">
                         @csrf
                         @method('PATCH')
+
+                        {{-- Purpose Head  name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Purspose Head Name</label>
-                            <input type="text" name="name" class="form-control" id="simpleFormEmail" placeholder="Enter branch name" value="{{ $purposehead->name}}">
+                            <label for="name">Purspose Head Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter branch name" value="{{ $purposehead->name}}">
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.purposehead.index') }}">BACK</a>
