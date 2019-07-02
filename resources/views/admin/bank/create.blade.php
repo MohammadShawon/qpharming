@@ -24,25 +24,32 @@
                 <div class="card-body " id="bar-parent">
                     <form method="post" action="{{ route('admin.bank.store') }}">
                         @csrf
+
+                        {{-- Bank Name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Bank Name</label>
-                            <input type="text" name="bank_name" class="form-control" id="simpleFormEmail" 
+                            <label for="bank_name">Bank Name</label>
+                            <input type="text" name="bank_name" class="form-control" id="bank_name" 
                             placeholder="Enter Bank Name" value="{{ old('bank_name') }}">
                         </div>
+
+                        {{-- Account Name --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Account Name</label>
-                            <input type="text" name="account_name" class="form-control" id="simpleFormEmail" placeholder="Enter Account Name"
+                            <label for="account_name">Account Name</label>
+                            <input type="text" name="account_name" class="form-control" id="account_name" placeholder="Enter Account Name"
                             value="{{ old('account_name') }}">
-                        </div><div class="form-group">
-                            <label for="simpleFormEmail">Account Number</label>
-                            <input type="text" name="account_number" class="form-control" id="simpleFormEmail" 
-                            placeholder="Enter Account Number"
+                        </div>
+
+                        {{-- Account Number --}}
+                        <div class="form-group">
+                            <label for="account_number">Account Number</label>
+                            <input type="text" name="account_number" class="form-control" id="account_number" placeholder="Enter Account Number"
                             value="{{ old('account_number') }}">
                         </div>
+
+                        {{-- Openning Balance --}}
                         <div class="form-group">
-                            <label for="simpleFormEmail">Opening Balance</label>
-                            <input type="text" name="opening_balance" class="form-control" id="simpleFormEmail" 
-                            placeholder="Enter Opening Balance"
+                            <label for="opening_balance">Opening Balance</label>
+                            <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter Opening Balance"
                             value="{{ old('opening_balance') }}">
                         </div>
                         

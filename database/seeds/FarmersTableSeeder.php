@@ -21,7 +21,6 @@ class FarmersTableSeeder extends Seeder
                 'name'           => $faker->name,
                 'phone1'         => $faker->phoneNumber,
                 'phone2'         => $faker->phoneNumber,
-                'email'          => $faker->email,
                 'address'        => $faker->address,
                 'opening_balance'=> rand(500, 1000),
                 'starting_date'  => new DateTime,

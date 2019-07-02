@@ -58,24 +58,24 @@
 
                                 {{-- Bank --}}
                                 <div class="form-group bank">
-                                        <label for="bank_name">Bank name</label>
-                                        <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ old('bank_name') }}">
-                                    </div> 
+                                    <label for="bank_name">Bank name</label>
+                                    <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ old('bank_name') }}">
+                                </div> 
 
                                
 
-                                {{-- Collect Type --}}
+                                {{-- Purpose Head --}}
                                 <div class="form-group">
-                                    <label for="collect_type">Collect Type</label>
+                                    <label for="collect_type">Purpose Head</label>
                                     <select name="collect_type" class="form-control  select2 " id="collect_type">
+                                        <option value="egg">Egg Sell</option>
+                                        <option value="hen">Hen Sell</option>
                                         <option value="farmer">Farmer</option>
-                                        <option value="company">Company</option>
-                                        <option value="others">Others</option>
                                     </select>
     
                                 </div>
                                 
-                                {{-- PurposeHead --}}
+                                {{-- PurposeHead
                                 <div class="form-group">
                                     <label>Select PurposeHead</label>
                                     <select name="purposehead_id" class="form-control  select2 " >
@@ -85,7 +85,7 @@
                                     </select>
                                 </div>
 
-                                {{-- Company --}}
+                                {{-- Company 
                                 <div class="form-group company">
                                     <label>Select Company</label>
                                     <select name="company_id" class="form-control  select2 " >
@@ -107,7 +107,7 @@
                                     </select>
                                 </div>
                                 
-                                {{-- Staff --}}
+                                {{-- Staff 
                                 <div class="form-group staff">
                                     <label>Select Staff</label>
                                     <select name="user_id" class="form-control  select2 " >
@@ -116,9 +116,9 @@
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                 
-                            </div>
+                            </div> 
                         
                             <div class="col-md-6 col-sm-6">
 

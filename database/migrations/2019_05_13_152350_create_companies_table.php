@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('slug');
-            $table->string('representative_name');
+            $table->string('representative_name')->nullable();
             $table->string('phone1')->unique();
             $table->string('phone2')->nullable();
             $table->string('email')->nullable();

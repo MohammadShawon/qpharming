@@ -19,7 +19,7 @@ class CreateFarmersTable extends Migration
             $table->string('name');
             $table->string('phone1')->unique();
             $table->string('phone2')->nullable();
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->decimal('opening_balance', 15, 2)->default(0);
             $table->dateTime('starting_date');
             $table->dateTime('ending_date')->nullable();

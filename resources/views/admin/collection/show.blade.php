@@ -36,27 +36,24 @@
                                 <p class="text-muted">{{ $collection->bank->bank_name }}</p>
                             </div>
 
-                            <div class="col-md-3 col-6"> <strong>PurposeHead</strong>
-                                <br>
-                                <p class="text-muted">{{ $collection->purposehead->name }}</p>
-                            </div>
+                            
 
-                            @if (is_null($collection->farmer_id))
-                                <div class="col-md-3 col-6"> <strong>Company</strong>
-                                    <br>
-                                    <p class="text-muted">
-                                        
-                                        {{ $collection->company->name }}
-                                    
-                                    </p>
-                                </div>
-                            @endif
-                            @if (is_null($collection->company_id))
-                                <div class="col-md-3 col-6 b-r"> <strong>Farmer</strong>
+                            @if ($collection->collect_type == 'farmer')
+                                <div class="col-md-3 col-6"> <strong>Famer</strong>
                                     <br>
                                     <p class="text-muted">
                                         
                                         {{ $collection->farmer->name }}
+                                    
+                                    </p>
+                                </div>
+                            @endif
+                            @if (is_null($collection->farmer_id))
+                                <div class="col-md-3 col-6 b-r"> <strong>Hen / Egg</strong>
+                                    <br>
+                                    <p class="text-muted">
+                                        
+                                        {{ ucwords($collection->collect_type) }}
                                     
                                     </p>
                                 </div>
@@ -67,14 +64,17 @@
                                 <p class="text-muted">{{ $collection->collection_amount }}</p>
                             </div>
 
-                        </div>
-                        <hr>
-                        <div class="row">
-                            
+
                             <div class="col-md-3 col-6 b-r"> <strong>Collection Type</strong>
                                 <br>
                                 <p class="text-muted">{{ $collection->collection_type }}</p>
                             </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            
+                           
                             <div class="col-md-3 col-6 b-r"> <strong>Bank Name</strong>
                                 <br>
                                 <p class="text-muted">{{ $collection->bank_name }}</p>

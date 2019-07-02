@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('subcategory_id')->unsigned()->index();
             $table->string('sku')->unique();
             $table->string('product_name');
-            $table->string('barcode')->unique();
+            $table->string('barcode')->unique()->nullable();
             $table->integer('base_unit_id')->unsigned();
             $table->text('description')->nullable();
             $table->string('size');

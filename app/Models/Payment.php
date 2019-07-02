@@ -35,4 +35,9 @@ class Payment extends Model
     public function farmer(){
         return $this->belongsTo(Farmer::class);
     }
+
+    
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

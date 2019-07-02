@@ -25,8 +25,8 @@ class CollectionController extends Controller
     public function index()
     {
         /* Collection List */
-        $data['collections'] = Collection::latest()->get(['id','company_id','farmer_id','collection_amount','collection_type','given_by','collection_date','collect_type','reference']);
-        return view('admin.collection.index', $data);
+        $collections = Collection::latest()->get();
+        return view('admin.collection.index', compact('collections'));
     }
 
     /**
@@ -58,10 +58,7 @@ class CollectionController extends Controller
         /* Insert Collection */
         $collection = Collection::create([
             'bank_id'           =>      $request->bank_id,
-            'purposehead_id'    =>      $request->purposehead_id,
-            'company_id'        =>      $request->company_id,
             'farmer_id'         =>      $request->farmer_id,
-            'user_id'           =>      $request->user_id,   
             'collection_amount' =>      $request->collection_amount,
             'collection_type'   =>      $request->collection_type,
             'collect_type'      =>      $request->collect_type,
@@ -103,9 +100,7 @@ class CollectionController extends Controller
     {
         /* Collection Edit form */
         $data['banks']          = Bank::get(['id','bank_name']);
-        $data['purposeheads']   = PurposeHead::get(['id','name']);
         $data['farmers']        = Farmer::get(['id','name']);
-        $data['companies']      = Company::get(['id','name']);
         
         return view('admin.collection.edit', $data, compact('collection'));
     }
@@ -122,13 +117,13 @@ class CollectionController extends Controller
         /* Insert Collection */
         $collectionUpdate = $collection->update([
             'bank_id'           =>      $request->bank_id,
-            'purposehead_id'    =>      $request->purposehead_id,
-            'company_id'        =>      $request->company_id,
             'farmer_id'         =>      $request->farmer_id,
             'collection_amount' =>      $request->collection_amount,
             'collection_type'   =>      $request->collection_type,
+            'collect_type'      =>      $request->collect_type,
             'bank_name'         =>      $request->bank_name,
             'given_by'          =>      $request->given_by,
+            'reference'         =>      $request->reference,
             'remarks'           =>      $request->remarks,
             'collection_date'   =>      Carbon::parse($request->collection_date)->format('Y-m-d H:i'),
         ]);

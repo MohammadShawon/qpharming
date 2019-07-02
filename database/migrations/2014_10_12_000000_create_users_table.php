@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('branch_id')->unsigned()->index();
             $table->string('name');
             $table->string('username')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->string('phone1');
             $table->string('phone2')->nullable();

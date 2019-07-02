@@ -17,8 +17,8 @@ class CreateExpensesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('expensehead_id')->unsigned()->index();
             $table->decimal('amount', 15, 2)->default(0);
-            $table->text('description');
-            $table->string('recipient_name');
+            $table->text('description')->nullable();
+            $table->string('recipient_name')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
             

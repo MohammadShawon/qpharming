@@ -26,9 +26,9 @@ class PayentUpdateRequest extends FormRequest
         return [
             'payment_amount' => 'required|numeric',
             'payment_type' => 'required',
-            'bank_name' => 'required',
-            'received_by' => 'required',
-            'remarks' => 'required',
+            'bank_name' => 'nullable',
+            'received_by' => 'nullable',
+            'remarks' => 'nullable',
             'payment_date' => 'required',
         ];
     }
