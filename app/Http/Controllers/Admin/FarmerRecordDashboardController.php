@@ -11,4 +11,9 @@ class FarmerRecordDashboardController extends Controller
     {
     	return view('admin.farmerrecord.dashboard');
     }
+
+    public function index2()
+    {
+    	return view('admin.farmerrecord.dashboard2');
+    }
 }
