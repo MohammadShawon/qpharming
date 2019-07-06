@@ -62,9 +62,9 @@
                             
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
-                    {!! $dataTable->table() !!}
-                    </table>
+                    
+                    {!! $dataTable->table(['class' => 'table table-striped table-bordered table-hover table-checkable order-column','style' => 'width: 100%','id' => 'example4']) !!}
+                    
                 </div>
             </div>
         </div>

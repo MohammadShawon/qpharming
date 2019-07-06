@@ -62,9 +62,9 @@
                             
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
-                       {!! $dataTable->table() !!}
-                    </table>
+                    
+                       {!! $dataTable->table(['class' => 'table table-striped table-bordered table-hover table-checkable order-column table-responsive','style' => 'width: 100%','id' => 'example4' ]) !!}
+                    
                 </div>
             </div>
         </div>
@@ -77,6 +77,8 @@
     <script src="{{ asset('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
+    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+    
 
     <!-- sweet aleart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
