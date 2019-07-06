@@ -46,7 +46,7 @@
                     </div>
             <div class="card card-topline-red">
                 <div class="card-head" style="text-align: center;">
-                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>
+{{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -63,76 +63,7 @@
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
-                        <thead>
-                            <tr>
-                                
-                                <th> Serial </th>
-                                <th> Name </th>
-                                <th> Branch </th>
-                                <th> Phone </th>
-                                <th> Opening Balance </th>
-                                <th> Status </th>
-                                <th> Action </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach ($farmers as $key=>$farmer)
-                                <tr class="odd gradeX">
-                                    <td> {{ $key+1 }} </td>
-                                    <td>
-                                        {{ $farmer->name }}
-                                    </td>
-                                    <td>{{ $farmer->branch->name }}</td>
-                                    <td>{{ $farmer->phone1 }}</td>
-                                    <td>{{ $farmer->opening_balance }}</td>
-                                    <td>
-                                        <div>
-                                            <p class="{{ $farmer->status == 'active' ? "text-success" : "text-danger" }}">
-                                                @if($farmer->status == 'active')
-                                                        <b>Active</b>
-                                                @endif
-                                                @if($farmer->status == 'inactive')
-                                                        <b>Inactive</b>
-                                                @endif
-                                                @if($farmer->status == 'disabled')
-                                                        <b>Disabled</b>
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </td>
-                                    {{-- <td>{{ Carbon::parse($farmer->starting_date)->toDayDateTimeString() }}</td>
-                                    <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
-                                    <td>
-                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">visibility</i></a>
-
-                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.farmer.edit', $farmer->id) }}"><i class="material-icons">edit</i></a>
-                                        
-                                        <button type="submit" class="waves-effect btn deepPink-bgcolor"
-                                        onclick="deleteFarmer({{$farmer->id}})">
-                                        <i class="material-icons">delete</i>
-                                        </button>
-    
-                                        <form id="delete-form-{{$farmer->id}}" action="{{ route('admin.farmer.destroy', $farmer->id) }}" method="post" style="display:none;">
-                                            @csrf
-                                            @method("DELETE")
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                
-                                <th> Serial </th>
-                                <th> Name </th>
-                                <th> Branch </th>
-                                <th> Phone </th>
-                                <th> Opening Balance </th>
-                                <th> Status </th>
-                                <th> Action </th>
-                            </tr>
-                        </tfoot>
+                       {!! $dataTable->table() !!}
                     </table>
                 </div>
             </div>
@@ -141,53 +72,10 @@
 @endsection
 
 @push('js')
-    <!-- data tables -->
-    <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
-    <script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>
-
-    <!-- sweet aleart -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
-    <script type="text/javascript">
-    
-    function deleteFarmer(id) {
-
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false,
-            })
-
-            swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-            }).then((result) => {
-            if (result.value) {
-                event.preventDefault();
-                document.getElementById("delete-form-"+id).submit();
-            } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your farmer name is safe :)',
-                'error'
-                )
-            }
-        })
-
-    }
-    
-    </script>
+    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css') }}">
+    <script src="{{ asset('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
+    {!! $dataTable->scripts() !!}
 @endpush
-
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Yajra\DataTables\DataTables;
+use App\DataTables\Farmers\FarmersDatatable;
 use App\Models\Farmer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,15 +22,16 @@ class FarmerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param FarmersDatatable $dataTable
+     * @return void
      */
-    public function index()
+    public function index(FarmersDatatable $dataTable)
     {
         /* show all the farmers */
         if (auth()->user()->can('view_farmer')) {
-            
-            $farmers = Farmer::with('branch')->latest()->get();
-            return view('admin.farmer.index', compact('farmers'));
+            return $dataTable->render('admin.farmer.index');
+//            $farmers = Farmer::with('branch')->latest()->get();
+//            return view('admin.farmer.index', compact('farmers'));
         }
         abort(403);
     }
