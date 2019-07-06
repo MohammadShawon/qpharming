@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Http\Requests\SubCategory\SubCategoryStoreRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\SubCategory\SubCategoryUpdateRequest;
+use App\DataTables\Subcategory\SubcategoryDatatables;
+use Yajra\DataTables\DataTables;
 
 class SubCategoryController extends Controller
 {
@@ -17,13 +19,15 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SubcategoryDatatables $dataTable)
     {
+       
+        
         /* List of Sub-Category */
         if (auth()->user()->can('view_sub-category')) {
-                
-            $data['subcategories'] = SubCategory::latest()->get(['id','name','created_at']);
-            return view('admin.subcategory.index', $data);
+           return  $dataTable->render('admin.subcategory.index');
+            // $data['subcategories'] = SubCategory::latest()->get(['id','name','created_at']);
+            // return view('admin.subcategory.index', $data);
         }
         abort(403);
     }
@@ -111,7 +115,7 @@ class SubCategoryController extends Controller
     public function update(SubCategoryUpdateRequest $request, SubCategory $subCategory)
     {
         if (auth()->user()->can('edit_sub-category')) {
-                
+            
             /* update sub-category */
             $resultSubCategory = $subCategory->update([
                 

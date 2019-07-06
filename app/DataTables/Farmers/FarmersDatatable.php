@@ -38,7 +38,7 @@ class FarmersDatatable extends DataTable
      */
     public function query(Farmer $model)
     {
-        return $model->newQuery()->select('id', 'branch_id','name','phone1','phone2','email','address','opening_balance','starting_date','ending_date','status', 'created_at', 'updated_at');
+        return $model->newQuery()->select('id', 'branch_id','name','phone1','phone2','address','opening_balance','starting_date','ending_date','status', 'created_at', 'updated_at');
     }
 
     /**
@@ -64,7 +64,6 @@ class FarmersDatatable extends DataTable
     protected function getColumns(): array
     {
         return [
-
 
             [
                 'data' => 'branch_id',
@@ -99,8 +98,7 @@ class FarmersDatatable extends DataTable
                 'name'  => 'Status',
                 'title' => 'Status',
             ],
-
-
+            
         ];
     }
 

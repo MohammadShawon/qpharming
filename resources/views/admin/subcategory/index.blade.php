@@ -46,7 +46,7 @@
                 </div>
             <div class="card card-topline-red">
                 <div class="card-head" style="text-align: center;">
-                    <header>SUB-CATEGORY</header><span class="btn btn-primary ml-1"> {{ $subcategories->count() }} </span>
+                    {{-- <header>SUB-CATEGORY</header><span class="btn btn-primary ml-1"> {{ $subcategories->count() }} </span> --}}
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -63,44 +63,7 @@
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
-                        <thead>
-                            <tr>
-                                <th> Serial </th>
-                                <th> Name </th>
-                                <th> Created </th>
-                                <th> Actions </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($subcategories as $key=>$subcategory)
-                                <tr class="odd gradeX">
-                                    <td> {{ $key+1 }} </td>
-                                    <td>{{ $subcategory->name }}</td>
-                                    <td>{{ $subcategory->created_at->toDayDateTimeString() }}</td>
-                                    <td>
-                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.sub-category.edit', $subcategory->id) }}"><i class="material-icons">edit</i></a>
-                                        
-                                        <button type="submit" class="waves-effect btn deepPink-bgcolor"
-                                        onclick="deleteSubCategory({{$subcategory->id}})">
-                                        <i class="material-icons">delete</i>
-                                        </button>
-    
-                                        <form id="delete-form-{{$subcategory->id}}" action="{{ route('admin.sub-category.destroy', $subcategory->id) }}" method="post" style="display:none;">
-                                            @csrf
-                                            @method("DELETE")
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th> Serial </th>
-                                <th> Name </th>
-                                <th> Created </th>
-                                <th> Actions </th>
-                            </tr>
-                        </tfoot>
+                    {!! $dataTable->table() !!}
                     </table>
                 </div>
             </div>
@@ -109,11 +72,13 @@
 @endsection
 
 @push('js')
-    <!-- data tables -->
-    <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
-    <script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>
 
+    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css') }}">
+    <script src="{{ asset('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
+    {!! $dataTable->scripts() !!}
+    
     <!-- sweet aleart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
