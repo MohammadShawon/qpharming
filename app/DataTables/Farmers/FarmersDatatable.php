@@ -24,8 +24,11 @@ class FarmersDatatable extends DataTable
                 return $farmer->branch->name;
             })
             ->addColumn('action',function ($data){
-                return "<a class='waves-effect btn btn-success' data-value='$data->id' href='{{ route('admin.farmer.show', $data->id) }}'><i class='material-icons'>visibility</i></a> 
-                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='{{ route('admin.farmer.edit', $data->id) }}'><i class='material-icons'>edit</i></a>
+
+                $showUrl = route('admin.farmer.show', $data->id);
+                $editUrl = route('admin.farmer.edit', $data->id);
+                return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
                         <button class='waves-effect btn deepPink-bgcolor' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
             })
             ->setRowClass('gradeX');

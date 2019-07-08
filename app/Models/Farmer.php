@@ -17,4 +17,18 @@ class Farmer extends Model
     public function sales(){
         return $this->hasMany(Sale::class);
     }
+    
+    public function farmerinvoices(){
+        return $this->hasMany(FarmerInvoice::class);
+    }
+    
+    public function farmerbatches(){
+        return $this->hasMany(FarmerBatch::class);
+    }
+    
+    public function farmerrecords(){
+        return $this->hasMany(FarmerBatch::class);
+    }
+
+
 }
