@@ -44,7 +44,7 @@
                                 <div class="card-body" id="line-parent">
                                     <div class="panel-group accordion" id="accordion3">
                                           <div class="panel panel-default">
-                                              <div class="panel-heading panel-heading-gray">
+                                              <div class="panel-heading panel-heading-gray active">
                                                   <h4 class="panel-title">
                                                       <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1">
                                                           Batch Name : July 2019 <span aria-hidden="true" class="icon-arrow-right "></span>
@@ -53,7 +53,7 @@
                                                       </a>
                                                   </h4>
                                               </div>
-                                              <div id="collapse_3_1" class="panel-collapse collapse">
+                                              <div id="collapse_3_1" class="panel-collapse in">
                                                 <br>
                                                 <div>
                                                     <ol class="breadcrumb page-breadcrumb">
