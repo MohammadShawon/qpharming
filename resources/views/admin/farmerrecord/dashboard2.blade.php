@@ -53,114 +53,134 @@ use Carbon\Carbon;
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapse_3_1" class="panel-collapse collapse">
-                            <br>
-                            <div>
-                                <ol class="breadcrumb page-breadcrumb">
-                                    <div>
-                                        <li><span class="parent-item"> Project No</span> : 
-                                            <b>J1906 </b>
-                                            <span class="parent-item"> Chicken Amount</span> : 
-                                            <b>120</b>
-                                            <span class="parent-item"> Supervisor</span> : 
-                                            <b>Md. Nurullah</b>
-                                        </li>
-                                    </div>
-                                </ol>
-                            </div>
-                            <div class="panel-body table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th></th>
-                                            <th>
-                                                Age
-                                                <p class="text-success"><b>18</b></p>
-                                            </th>
-                                            <th>
-                                                Died
-                                                <p class="text-success"><b>7</b></p>
-                                            </th>
-                                            <th>
-                                                Feed Eaten - kg
-                                                <p class="text-success"><b>56 kg</b></p>
-                                            </th>
-                                            <th>
-                                                Feed Eaten - Sack
-                                                <p class="text-success"><b>5 Sack</b></p>
-                                            </th>
-                                            <th>
-                                                Feed left
-                                                <p class="text-success"><b>4.5 Sack</b></p>
-                                            </th>
-                                            <th>
-                                                Wieght
-                                                <p class="text-success"><b>450gm</b></p>
-                                            </th>
-                                            <th>Sickness</th>
-                                            <th>Comments</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-center">
-                                            <td><input type='checkbox' name='record'></td>
-                                            <td>1</td>
-                                            <td>5</td>
-                                            <td>20 kg</td>
-                                            <td>0.01 Sack</td>
-                                            <td>20.01 Sack</td>
-                                            <td>100gm</td>
-                                            <td style="max-width: 150px;">Well</td>
-                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td><input type='checkbox' name='record'></td>
-                                            <td>2</td>
-                                            <td>5</td>
-                                            <td>20 kg</td>
-                                            <td>0.01 Sack</td>
-                                            <td>20.01 Sack</td>
-                                            <td>100gm</td>
-                                            <td style="max-width: 150px;">Well</td>
-                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td><input type='checkbox' name='record'></td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>20 kg</td>
-                                            <td>0.01 Sack</td>
-                                            <td>20.01 Sack</td>
-                                            <td>100gm</td>
-                                            <td style="max-width: 150px;">Well</td>
-                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td><input type='checkbox' name='record'></td>
-                                            <td>4</td>
-                                            <td>5</td>
-                                            <td>20 kg</td>
-                                            <td>0.01 Sack</td>
-                                            <td>20.01 Sack</td>
-                                            <td>100gm</td>
-                                            <td style="max-width: 150px;">Well</td>
-                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger delete-row">
-                                    Delete
-                                </button>
-                                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                                    Add Record
-                                </button>
-                                
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="card-head">
+                                    <header>DAILY RECORDS</header>
+                                </div>
+                                <div class="card-body" id="line-parent">
+                                    <div class="panel-group accordion" id="accordion3">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading panel-heading-gray active">
+                                                  <h4 class="panel-title">
+                                                      <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_1">
+                                                          Batch Name : July 2019 <span aria-hidden="true" class="icon-arrow-right "></span>
+                                                          Batch ID : J1906 <span aria-hidden="true" class="icon-arrow-right "></span>
+                                                          Status : <span class="label label-sm label-primary">Running</span>
+                                                      </a>
+                                                  </h4>
+                                              </div>
+                                              <div id="collapse_3_1" class="panel-collapse in">
+                                                <br>
+                                                <div>
+                                                    <ol class="breadcrumb page-breadcrumb">
+                                                        <div>
+                                                        <li><span class="parent-item"> Project No</span> : 
+                                                            <b>J1906 </b>
+                                                            <span class="parent-item"> Chicken Amount</span> : 
+                                                            <b>120</b>
+                                                            <span class="parent-item"> Supervisor</span> : 
+                                                            <b>Md. Nurullah</b>
+                                                        </li>
+                                                    </div>
+                                                </ol>
+                                                </div>
+                                                  <div class="panel-body table-responsive">
+                                                     <table class="table table-bordered table-hover">
+                                                    <thead class="text-center">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>
+                                                            Age
+                                                            <p class="text-success"><b>18</b></p>
+                                                            </th>
+                                                            <th>
+                                                            Died
+                                                            <p class="text-success"><b>7</b></p>
+                                                            </th>
+                                                            <th>
+                                                            Feed Eaten - kg
+                                                            <p class="text-success"><b>56 kg</b></p>
+                                                            </th>
+                                                            <th>
+                                                            Feed Eaten - Sack
+                                                            <p class="text-success"><b>5 Sack</b></p>
+                                                            </th>
+                                                            <th>
+                                                            Feed left
+                                                            <p class="text-success"><b>4.5 Sack</b></p>
+                                                            </th>
+                                                            <th>
+                                                            Wieght
+                                                            <p class="text-success"><b>450gm</b></p>
+                                                            </th>
+                                                            <th>Sickness</th>
+                                                            <th>Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-center">
+                                                            <td><input type='checkbox' name='record'></td>
+                                                            <td>1</td>
+                                                            <td>5</td>
+                                                            <td>20 kg</td>
+                                                            <td>0.01 Sack</td>
+                                                            <td>20.01 Sack</td>
+                                                            <td>100gm</td>
+                                                            <td style="max-width: 150px;">Well</td>
+                                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td><input type='checkbox' name='record'></td>
+                                                            <td>2</td>
+                                                            <td>5</td>
+                                                            <td>20 kg</td>
+                                                            <td>0.01 Sack</td>
+                                                            <td>20.01 Sack</td>
+                                                            <td>100gm</td>
+                                                            <td style="max-width: 150px;">Well</td>
+                                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td><input type='checkbox' name='record'></td>
+                                                            <td>3</td>
+                                                            <td>5</td>
+                                                            <td>20 kg</td>
+                                                            <td>0.01 Sack</td>
+                                                            <td>20.01 Sack</td>
+                                                            <td>100gm</td>
+                                                            <td style="max-width: 150px;">Well</td>
+                                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td><input type='checkbox' name='record'></td>
+                                                            <td>4</td>
+                                                            <td>5</td>
+                                                            <td>20 kg</td>
+                                                            <td>0.01 Sack</td>
+                                                            <td>20.01 Sack</td>
+                                                            <td>100gm</td>
+                                                            <td style="max-width: 150px;">Well</td>
+                                                            <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger delete-row">
+                                          Delete
+                                        </button>
+                                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
+                                          Add Record
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Input Record</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
