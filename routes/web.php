@@ -47,9 +47,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('bank', 'BankController');
     Route::resource('payment', 'PaymentController');
     Route::resource('collection', 'CollectionController');
-    Route::resource('farmer-records', 'FarmerRecordsController');
+    // Route::resource('farmer-records', 'FarmerRecordsController');
 
-
+     Route::post('farmer/records/{id}', 'FarmerRecordController@store')->name('daily-record');
     // Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
     // Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
 

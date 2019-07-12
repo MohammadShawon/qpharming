@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\FarmerRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FarmerRecordsController extends Controller
+class FarmerRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class FarmerRecordsController extends Controller
      */
     public function index()
     {
-        return view('admin.farmerrecord.index');
+        //
     }
 
     /**
@@ -22,10 +23,9 @@ class FarmerRecordsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request)
     {
-        return view('admin.farmerrecord.create');
-        
+        return $request->all();
     }
 
     /**
@@ -36,16 +36,16 @@ class FarmerRecordsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\FarmerRecord  $farmerRecord
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(FarmerRecord $farmerRecord)
     {
         //
     }
@@ -53,10 +53,10 @@ class FarmerRecordsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\FarmerRecord  $farmerRecord
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FarmerRecord $farmerRecord)
     {
         //
     }
@@ -65,10 +65,10 @@ class FarmerRecordsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\FarmerRecord  $farmerRecord
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, FarmerRecord $farmerRecord)
     {
         //
     }
@@ -76,10 +76,10 @@ class FarmerRecordsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\FarmerRecord  $farmerRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FarmerRecord $farmerRecord)
     {
         //
     }
