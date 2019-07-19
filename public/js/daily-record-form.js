@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
-    
-    $("#save").click(function(e){
+    // Start the save button click event
+    $("#save").click(function(){
         const form = $("#daily-record-form");
 
         $.ajax(
@@ -25,5 +25,5 @@ $(document).ready(function(){
             
         );
 
-    });
+    }); // End the save button click event
 });

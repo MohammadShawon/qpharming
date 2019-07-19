@@ -70,6 +70,8 @@ class ProductController extends Controller
                 return redirect()->route('admin.product.index');
             }
             abort(404);
+        } else{
+            return redirect('login');
         }
     }
 
