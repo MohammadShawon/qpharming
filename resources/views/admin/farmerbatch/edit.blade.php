@@ -27,7 +27,7 @@
                     <header>Update Farmer Batch</header>
                 </div>
                 <div class="card-body" id="bar-parent">
-                <form method="post" action="">
+                    <form method="post" action="{{ url('farmer/'.$farmerBatch->farmer->id.'/batch/'.$farmerBatch->id) }}">
                         @method('PATCH')
                         @csrf
                         <div class="row">
@@ -36,7 +36,7 @@
                                 {{-- Name --}}
                                 <div class="form-group">
                                     <label for="name">Farmer Name</label>
-                                    <input type="text" value="{{$farmerBatch->farmer->name}}" class="form-control" id="name" placeholder="Enter farmer name"  }}">
+                                    <input type="text" value="{{$farmerBatch->farmer->name}}" class="form-control" id="name" readonly>
                                     <input type="hidden" name="farmer_id" value="{{$farmerBatch->farmer->id}}">
                                 </div>
 
@@ -70,7 +70,7 @@
                         </div>
                         
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ url('/farmer/'.$farmerBatch->farmer->id) }}">BACK</a>
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
+                        <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
                     </form>
                 </div>
             </div>

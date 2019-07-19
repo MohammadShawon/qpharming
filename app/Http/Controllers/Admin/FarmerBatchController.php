@@ -9,6 +9,7 @@ use App\Models\Farmer;
 use App\Http\Requests\FarmerBatch\FarmerBatchStoreRequest;
 use Illuminate\Support\Facades\Auth;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\FarmerBatch\FarmerBatchUpdateRequest;
 
 class FarmerBatchController extends Controller
 {
@@ -80,8 +81,6 @@ class FarmerBatchController extends Controller
     {
 
         $data['farmerBatch'] = FarmerBatch::all()->where('id', $batch_id)->first();
-
-       // dd( $data['farmerBatch']);
         return view('admin.farmerbatch.edit', $data);
     }
 
@@ -94,9 +93,24 @@ class FarmerBatchController extends Controller
      * @param  \App\Models\FarmerBatch  $farmerBatch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FarmerBatch $farmerBatch)
+    public function update(FarmerBatchUpdateRequest $request, $farmer_id, $batch_id)
     {
-        //
+        $farmerBatch = FarmerBatch::findOrFail($batch_id);
+        
+        $farmerBatchUpdate = $farmerBatch->update([
+            'farmer_id'        =>      $request->farmer_id,
+            'batch_name'       =>      $request->batch_name,
+            'batch_number'     =>      $request->batch_number,
+            'status'           =>      $request->status,
+            'user_id'          =>      Auth::user()->id,
+        ]);
+
+        /* Check farmerBatch Update  and Toastr */
+        if($farmerBatchUpdate){
+            Toastr::success('Farmer Batch Updated Successfully', 'Success');
+            return redirect('farmer/'.$request->farmer_id);
+        }
+        abort(404);
     }
 
     /**
@@ -105,8 +119,15 @@ class FarmerBatchController extends Controller
      * @param  \App\Models\FarmerBatch  $farmerBatch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FarmerBatch $farmerBatch)
+    public function destroy($batch_id)
     {
-        //
+        $farmerBatch = FarmerBatch::findOrFail($batch_id);
+        $farmerBatchDelete = $farmerBatch->delete();
+
+        if($farmerBatchDelete){
+            Toastr::success('Farmer Batch Deleted Successfully', 'Success');
+            return redirect()->back();
+        }
+        abort(404);
     }
 }

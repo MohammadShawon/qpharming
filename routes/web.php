@@ -56,10 +56,12 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('collection', 'CollectionController');
     // Route::resource('farmer-records', 'FarmerRecordsController');
 
+    /* Farmer Batch routes */
     Route::get('farmer/{id}/batch/create', 'FarmerBatchController@create');
-    Route::post('farmer/{id}/batch/create', 'FarmerBatchController@store');
-    Route::get('farmer/{id}/batch/edit/{batch_id}', 'FarmerBatchController@edit');
-    Route::post('farmer/{id}/batch/edit/{batch_id}', 'FarmerBatchController@update');
+    Route::post('farmer/{id}/batch', 'FarmerBatchController@store');
+    Route::get('farmer/{id}/batch/{batch_id}/edit', 'FarmerBatchController@edit');
+    Route::patch('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@update');
+    Route::delete('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@destroy');
    
     
     

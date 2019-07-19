@@ -117,7 +117,7 @@ use Carbon\Carbon;
             </div>
             <div class="card-body" id="line-parent">
                 <div class="panel-group accordion" id="accordion3">
-                    @foreach ($farmerBatches as $farmerBatch)
+                    @foreach ($farmer->farmerbatches as $farmerBatch)
                         <div class="panel panel-default">
                             <div class="panel-heading panel-heading-gray active">
                                 <h4 class="panel-title">
@@ -127,8 +127,13 @@ use Carbon\Carbon;
                                         Status : <span class="label label-sm label-success">{{ $farmerBatch->status }}</span>
                                     </a>
                                     <span class="pull-right">
-                                        <a class="text-primary" href="{{ url('/farmer/'.$farmer->id.'/batch/edit/'.$farmerBatch->id) }}">Edit</a> | 
-                                        <a class="text-danger" href="#">Delete</a>
+                                        <a class="text-primary" href="{{ url('/farmer/'.$farmer->id.'/batch/'.$farmerBatch->id.'/edit') }}">Edit</a> | 
+                                        <a class="text-danger" onclick="deleteFarmerBatch({{$farmerBatch->id}})" href="#">Delete</a>
+
+                                        <form id="delete-form-{{$farmerBatch->id}}" action="{{ url('/farmer/'.$farmer->id.'/batch/'.$farmerBatch->id) }}" method="post" style="display:none;">
+                                            @csrf
+                                            @method("DELETE")
+                                        </form>
                                     </span>
                                     
                                 </h4>
@@ -282,45 +287,48 @@ use Carbon\Carbon;
     <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
     <script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>
     
-    <!-- sweet aleart -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    
-    <script type="text/javascript">
-        
-        function deleteCategory(id) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false,
-            })
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "Related \'Sub-Category\' will also be deleted!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    event.preventDefault();
-                    document.getElementById("delete-form-"+id).submit();
-                } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'Your Category name is safe :)',
-                    'error'
-                    )
-                }
-            })
-        }
-        
-    </script>
+     <!-- sweet aleart -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+     <script type="text/javascript">
+     
+     function deleteFarmerBatch(id) {
+ 
+         const swalWithBootstrapButtons = Swal.mixin({
+             customClass: {
+                 confirmButton: 'btn btn-success',
+                 cancelButton: 'btn btn-danger'
+             },
+             buttonsStyling: false,
+             })
+ 
+             swalWithBootstrapButtons.fire({
+             title: 'Are you sure?',
+             text: "You won't be able to revert this!",
+             type: 'warning',
+             showCancelButton: true,
+             confirmButtonText: 'Yes, delete it!',
+             cancelButtonText: 'No, cancel!',
+             reverseButtons: true
+             }).then((result) => {
+             if (result.value) {
+                 event.preventDefault();
+                 document.getElementById("delete-form-"+id).submit();
+             } else if (
+                 // Read more about handling dismissals
+                 result.dismiss === Swal.DismissReason.cancel
+             ) {
+                 swalWithBootstrapButtons.fire(
+                 'Cancelled',
+                 'Your Farmer Batch is safe :)',
+                 'error'
+                 )
+             }
+         })
+ 
+     }
+     
+     </script>
     
     <script type="text/javascript">
         $(document).ready(function(){
