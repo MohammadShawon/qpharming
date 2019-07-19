@@ -182,7 +182,9 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Yajra\DataTables\EditorServiceProvider::class,
-        Yajra\DataTables\HtmlServiceProvider::class
+        Yajra\DataTables\HtmlServiceProvider::class,
+//        HTML Form
+        Collective\Html\HtmlServiceProvider::class,
 
 
     ],
@@ -235,6 +237,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -38,6 +38,13 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('expensehead', 'ExpenseheadCotroller');
     Route::resource('expense', 'ExpenseCotroller');
     Route::resource('farmer', 'FarmerController');
+    /*
+     * Customer Resource
+     * */
+    Route::resource('customer','CustomerController');
+    /*
+     * Company Resource
+     * */
     Route::resource('company', 'CompanyController');
     Route::resource('user', 'UserController');
     Route::resource('product', 'ProductController');

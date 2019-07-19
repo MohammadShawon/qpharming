@@ -12,6 +12,7 @@ return [
     'category'		=> 'বিভাগ',
     'sub-category'	=> 'সাব বিভাগ',
     'farmer'	    => 'খামারী',
+    'customer'      => ' কাস্টমার',
 ];
 
 

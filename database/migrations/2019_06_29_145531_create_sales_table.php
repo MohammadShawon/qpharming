@@ -16,7 +16,8 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->bigInteger('farmer_id')->unsigned()->index();
+            $table->bigInteger('customer_id')->unsigned()->index();
+            $table->bigInteger('branch_id')->unsigned()->index();
             $table->string('sale_no')->unique();
             $table->date('sale_date');
             $table->date('due_date')->nullable();
@@ -30,7 +31,8 @@ class CreateSalesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            $table->foreign('farmer_id')->references('id')->on('farmers')->onDelete('restrict');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('restrict');
         });
 
 
