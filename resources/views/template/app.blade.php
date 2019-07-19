@@ -7,6 +7,8 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="description" content="CRM, Accounting" />
     <meta name="author" content="Qbytesoft" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- google font -->
@@ -17,7 +19,8 @@
     <link href="{{ asset('admin/fonts/font-awesome/css/font-awesome.min.css') }} " rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('admin/fonts/material-design-icons/material-icon.css') }} " rel="stylesheet" type="text/css" />
 	<!--bootstrap -->
-	<link href="{{ asset('admin/assets/plugins/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet" type="text/css" />
+	<link href="{{ asset('admin/assets/plugins/bootstrap/css/bootstrap.css') }} " rel="stylesheet" type="text/css" />
+
 	<link href="{{ asset('admin/assets/plugins/summernote/summernote.css') }} " rel="stylesheet">
     <!-- Material Design Lite CSS -->
 	<link rel="stylesheet" href="{{ asset('admin/assets/plugins/material/material.min.css') }} ">
@@ -47,6 +50,8 @@
     <!--  quicklink css -->
     <link href="{{ asset('admin/assets/quicklink/style.css') }} " rel="stylesheet" type="text/css" />
 
+
+
     
     
     @stack('css')
@@ -55,61 +60,63 @@
 
  <!-- END HEAD -->
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white white-sidebar-color logo-green header-green">
+
     {{-- START PAGE LOADER --}}
-    <div id="preloader">
-        <div class="canvas">
-            <img src="{{ asset('admin/assets/img/qbytsoft_logo.png') }}"  class="loader-logo">
-            {{-- <img src="{{ asset('admin/assets/img/Preloader_fan.gif') }}"  class="loader-logo"> --}}
-            <div class="spinner"></div>   
-        </div>
-    </div>
-{{-- END PAGE LOADER --}}
-    <div class="page-wrapper">
-        <!-- start header -->
-        @include('template.partials.topbar')
-        @include('template.partials.quicklink')
-        <!-- end header -->
-
-
-        <!-- start page container -->
-        <div class="page-container">
-
-            <!-- start sidebar menu -->
- 			@include('template.partials.sidebar')
-            <!-- end sidebar menu -->
-
-            <!-- start page content -->
-            <div class="page-content-wrapper">
-                <div class="page-content">
-                    @yield('content')
-                </div>
+        <div id="preloader">
+            <div class="canvas">
+                <img src="{{ asset('admin/assets/img/qbytsoft_logo.png') }}"  class="loader-logo">
+                {{-- <img src="{{ asset('admin/assets/img/Preloader_fan.gif') }}"  class="loader-logo"> --}}
+                <div class="spinner"></div>
             </div>
-            <!-- end page content -->
-
         </div>
-        <!-- end page container -->
+    {{-- END PAGE LOADER --}}
+        <div class="page-wrapper">
+            <!-- start header -->
+            @include('template.partials.topbar')
+            @include('template.partials.quicklink')
+            <!-- end header -->
+
+
+            <!-- start page container -->
+            <div class="page-container">
+
+                <!-- start sidebar menu -->
+                @include('template.partials.sidebar')
+                <!-- end sidebar menu -->
+
+                <!-- start page content -->
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        @yield('content')
+
+                    </div>
+                </div>
+                <!-- end page content -->
+
+            </div>
+            <!-- end page container -->
 
 
 
-        <!-- start footer -->
-        @include('template.partials.footer')
-        <!-- end footer -->
+            <!-- start footer -->
+            @include('template.partials.footer')
+            <!-- end footer -->
+        </div>
 
-
-    </div>
  <!-- start js include path -->
- 
 
- <script src="{{ asset('admin/assets/plugins/jquery/jquery.min.js') }} " ></script>
+
+ <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.4.1.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
+
  <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }} "></script>
- <!-- bootstrap -->
- <script src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.min.js') }} " ></script>
+
  <script src="{{ asset('admin/assets/plugins/sparkline/jquery.sparkline.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/pages/sparkline/sparkline-data.js') }} " ></script>
 
-
+    <!-- bootstrap -->
+    <script type="application/javascript" src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.js') }} " ></script>
 
 
  <!-- Common js-->
@@ -121,9 +128,9 @@
  <!-- animation -->
  <script src="{{ asset('admin/assets/js/pages/ui/animations.js') }} " ></script>
  <!-- chart js -->
- <script src="{{ asset('admin/assets/plugins/chart-js/Chart.bundle.js') }} " ></script>
- <script src="{{ asset('admin/assets/plugins/chart-js/utils.js') }} " ></script>
- <script src="{{ asset('admin/assets/js/pages/chart/chartjs/home-data.js')}} " ></script>
+{{-- <script src="{{ asset('admin/assets/plugins/chart-js/Chart.bundle.js') }} " ></script>--}}
+{{-- <script src="{{ asset('admin/assets/plugins/chart-js/utils.js') }} " ></script>--}}
+{{-- <script src="{{ asset('admin/assets/js/pages/chart/chartjs/home-data.js')}} " ></script>--}}
  <!-- summernote -->
  <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>

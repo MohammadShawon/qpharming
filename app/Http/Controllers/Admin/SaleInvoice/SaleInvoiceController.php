@@ -14,7 +14,7 @@ class SaleInvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return 'sales';
     }
 
     /**
