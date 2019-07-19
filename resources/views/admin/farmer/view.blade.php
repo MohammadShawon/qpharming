@@ -162,28 +162,28 @@ use Carbon\Carbon;
                                         <thead class="text-center">
                                             <tr>
                                                 <th>
-                                                    <p class="text-dark"><b>Age</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Age</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Died</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Died</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Feed Eaten - kg</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Feed Eaten - kg</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Feed Eaten - Sack</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Feed Eaten - Sack</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Feed left</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Feed left</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Wieght</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Wieght</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Sickness</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Sickness</b></p>
                                                 </th>
                                                 <th>
-                                                    <p class="text-dark"><b>Comments</b></p>
+                                                    <p style="font-size:17px; color:#A52A2A;"><b>Comments</b></p>
                                                 </th>
                                             </tr>
                                         </thead>
