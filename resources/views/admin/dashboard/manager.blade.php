@@ -13,7 +13,7 @@
             <div class="card-body ">
                 <div class="row">
                     <ul class="docListWindow small-slimscroll-style">
-                        @foreach ($usersBranch as $user)
+                        {{-- @foreach ($usersBranch as $user)
                         <li>
                                 <div class="prog-avatar">
                                     <img src="assets/img/user/user1.jpg" alt="" width="40" height="40">
@@ -30,7 +30,7 @@
                                 </div>
                             </li>
                         @endforeach
-                        
+                         --}}
                         
                     </ul>
                         <div class="full-width text-center p-t-10" >
