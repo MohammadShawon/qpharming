@@ -59,4 +59,87 @@
 
     <!-- sweet aleart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            //region delete
+            $(document).on("click","button.delete",function (e) {
+                var id = $(this).data('value');
+
+                var _token = '{{ csrf_token() }}';
+
+
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                    })
+
+                    swalWithBootstrapButtons.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, cancel!',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            event.preventDefault();
+                            // id.submit();
+                            $.ajax({
+                                url: "customer/" + id,
+                                type: "POST",
+                                data: { id: id,_method:'delete',_token: _token },
+                                success: function () {
+                                    // toastr.success('Success messages');
+                                    location.reload();
+                                    // toastr.success("Successfully deleted");
+
+                                },
+                                error: function (msg) {
+                                    console.log(msg);
+                                }
+                            });
+                        } else if (
+                            // Read more about handling dismissals
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled',
+                                'Your SubCategory name is safe :)',
+                                'error'
+                            )
+                        }
+                    })
+
+
+                // var yes = confirm("Are you confirm you want to delete!");
+                //
+                // if(yes)
+                // {
+                //     $.ajax({
+                //         url: "customer/" + id,
+                //         type: "POST",
+                //         data: { id: id,_method:'delete',_token: _token },
+                //         success: function () {
+                //             // toastr.success('Success messages');
+                //             // location.reload();
+                //             toastr.success("Successfully deleted");
+                //
+                //         },
+                //         error: function (msg) {
+                //             console.log(msg);
+                //         }
+                //     });
+                // }
+
+            });
+
+        });
+
+    </script>
 @endpush

@@ -134,8 +134,19 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        //
+        try{
+            if (auth()->user()->can('delete_customer'))
+            {
+                $customer->delete();
+                Toastr::success('Deleted Successfully','success');
+                return redirect()->route('admin.customer.index');
+            }
+        }catch (\Illuminate\Database\QueryException $e)
+        {
+            Toastr::success('Can Not be Deleted! This Customer has an Invoice.');
+            return redirect()->route('admin.customer.index');
+        }
     }
 }
