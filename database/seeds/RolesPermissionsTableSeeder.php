@@ -56,6 +56,10 @@ class RolesPermissionsTableSeeder extends Seeder
     		['role_id' => 1, 'permission_id' => 42],
     		['role_id' => 1, 'permission_id' => 43],
             ['role_id' => 1, 'permission_id' => 44],
+            ['role_id' => 1, 'permission_id' => 45],
+            ['role_id' => 1, 'permission_id' => 46],
+            ['role_id' => 1, 'permission_id' => 47],
+            ['role_id' => 1, 'permission_id' => 48],
             ['role_id' => 2, 'permission_id' => 1],
             ['role_id' => 2, 'permission_id' => 2],
             ['role_id' => 2, 'permission_id' => 3],
@@ -100,10 +104,14 @@ class RolesPermissionsTableSeeder extends Seeder
             ['role_id' => 2, 'permission_id' => 42],
             ['role_id' => 2, 'permission_id' => 43],
             ['role_id' => 2, 'permission_id' => 44],
+            ['role_id' => 2, 'permission_id' => 45],
+            ['role_id' => 2, 'permission_id' => 46],
+            ['role_id' => 2, 'permission_id' => 47],
+            ['role_id' => 2, 'permission_id' => 48],
             ['role_id' => 3, 'permission_id' => 21],
             ['role_id' => 3, 'permission_id' => 22],
             ['role_id' => 3, 'permission_id' => 23],
-            ['role_id' => 3, 'permission_id' => 24]
+            ['role_id' => 3, 'permission_id' => 24],
     	];
 
     	foreach ($roles_permissions as $roles_permission) {

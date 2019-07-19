@@ -14,6 +14,7 @@ return [
     'category'		=> 'Category',
     'sub-category'	=> 'Sub-Category',
     'farmer'    	=> 'Farmer',
+    'customer'      => 'Customer',
 ];
 
 
