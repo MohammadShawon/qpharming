@@ -16,6 +16,7 @@ use App\Http\Requests\Farmer\FarmerUpdateRequest;
 
 use Notification;
 use App\Notifications\FarmerCreateNotification;
+use App\Models\FarmerBatch;
 
 class FarmerController extends Controller
 {
@@ -103,7 +104,9 @@ class FarmerController extends Controller
     {
         /* View a Single Farmer Informations */
         if (auth()->user()->can('view_farmer')) {
-            return view('admin.farmer.view', compact('farmer'));
+
+            $farmerBatches = FarmerBatch::findOrFail($farmer->id)->get();
+            return view('admin.farmer.view', compact('farmer','farmerBatches'));
         }
     }
 

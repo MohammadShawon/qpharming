@@ -22,7 +22,7 @@ class CreateFarmerBatchesTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             
 
-            $table->integer('batch_number')->unique();
+            $table->string('batch_number')->unique();
             $table->string('batch_name')->unique();
             $table->enum('status',['active', 'inactive', 'disabled']);
 
