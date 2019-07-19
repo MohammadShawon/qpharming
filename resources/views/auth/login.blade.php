@@ -25,7 +25,8 @@
 </div>
 <!-- Login Form-->
 <div class="login-form text-center">
-    <div class="toggle"><i class="fa fa-user-plus"></i>
+    <div class="toggle">
+{{--        <i class="fa fa-user-plus"></i>--}}
     </div>
     <div class="form formLogin">
         <h2>Login to your account</h2>
