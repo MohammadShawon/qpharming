@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->integer('base_unit_id')->unsigned();
             $table->text('description')->nullable();
             $table->string('size');
+            $table->decimal('cost_price',20,2);
+            $table->decimal('selling_price',20,2);
             $table->decimal('quantity',20,2);
             $table->timestamps();
 

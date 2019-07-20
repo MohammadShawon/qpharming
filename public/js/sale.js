@@ -1,34 +1,35 @@
 (function(){
-    var app = angular.module('smgpos', [ ]);
+    var app = angular.module('qfarming', [ ]);
 
     app.controller("SearchItemCtrl", [ '$scope', '$http', function($scope, $http) {
         $scope.items = [ ];
-        $http.get('api/item').success(function(data) {
+        $http.get('/api/item').success(function(data) {
             $scope.items = data;
+            console.log(data);
         });
-        $scope.customers = [ ];
-        $http.get('api/customer').success(function(data) {
-            $scope.customers = data;
-        });
-        $scope.currentDue = [ ];
-        $scope.customerDue = function (id) {
-            $http.get('api/currentDue/' + id).success(function(data) {
-                $scope.currentDue = data;
-            });
-        };
+        // $scope.customers = [ ];
+        // $http.get('api/customer').success(function(data) {
+        //     $scope.customers = data;
+        // });
+        // $scope.currentDue = [ ];
+        // $scope.customerDue = function (id) {
+        //     $http.get('api/currentDue/' + id).success(function(data) {
+        //         $scope.currentDue = data;
+        //     });
+        // };
 
         $scope.message = [ ];
         $scope.saletemp = [ ];
         $scope.newsaletemp = { };
-        $http.get('api/saletemp').success(function(data, status, headers, config) {
+        $http.get('/api/saletemp').success(function(data, status, headers, config) {
             $scope.saletemp = data;
         });
         $scope.addSaleTemp = function(item, newsaletemp) {
-            $http.post('api/saletemp', { item_id: item.id, cost_price: item.cost_price, selling_price: item.selling_price,discount:item.discount, quantity: item.quantity }).
+            $http.post('/api/saletemp', { item_id: item.id, cost_price: item.cost_price, selling_price: item.selling_price,discount:item.discount, quantity: item.quantity }).
             success(function(data, status, headers, config) {
                 $scope.message.push(data);
                 $scope.saletemp.push(data);
-                $http.get('api/saletemp').success(function(data) {
+                $http.get('/api/saletemp').success(function(data) {
                     $scope.saletemp = data;
                 });
             });
@@ -58,7 +59,7 @@
 
         //specific word search
         $scope.filterData = function (obj) {
-            return anyNameStartsWith(obj.item_name, $scope.searchKeyword);
+            return anyNameStartsWith(obj.product_name, $scope.searchKeyword);
         };
 
         function anyNameStartsWith (fullname, search) {

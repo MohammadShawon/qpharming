@@ -1,14 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Admin\SaleInvoice;
+namespace App\Http\Controllers\Admin\Api;
 
-use App\Models\Customer;
-use App\Models\Sale;
+use App\Models\SaleTempItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use \Auth;
 
-class SaleInvoiceController extends Controller
+class SaleTempController extends Controller
 {
+    /**
+     * SaleTempController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,7 @@ class SaleInvoiceController extends Controller
      */
     public function index()
     {
-        return view('admin.saleinvoice.index');
+        return response()->json(SaleTempItem::where('user_id',Auth::user()->id)->with('product')->get());
     }
 
     /**
@@ -26,9 +34,7 @@ class SaleInvoiceController extends Controller
      */
     public function create()
     {
-        $data['customers'] = Customer::pluck('id','name');
-        $data['sale'] = Sale::orderBy('id','DESC')->first();
-        return view('admin.saleinvoice.create',$data);
+        //
     }
 
     /**

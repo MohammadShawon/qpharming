@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'subcategory_id','product_name','sku','barcode','base_unit_id','description','size','quantity'
+        'subcategory_id','product_name','sku','barcode','base_unit_id','description','size','cost_price','selling_price','quantity'
     ];
 
     public function unit(){

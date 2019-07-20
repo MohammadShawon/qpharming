@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html ng-app="qfarming" lang="{{ app()->getLocale() }}">
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
@@ -150,7 +150,7 @@
  {{-- PAGE LOADER JS SCRIPT END --}}
 
 <!-- toastr js -->
- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+ <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
  {!! Toastr::message() !!}
 
  <script>

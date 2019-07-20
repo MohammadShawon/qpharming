@@ -26,7 +26,17 @@
 
 Auth::routes();
 
+/*
+ *  API Resource
+ * */
+    Route::get('api/item','Admin\Api\ProductController@index');
+    Route::get('api/saletemp','Admin\Api\SaleTempController@index');
+    Route::post('api/saletemp','Admin\Api\SaleTempController@store');
 
+
+/*
+ * Routes Through Roles
+ * */
 Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
     
 
@@ -81,6 +91,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * Sales
      * */
     Route::resource('sales','SaleInvoice\SaleInvoiceController');
+
 
     /*
      * Purchase
