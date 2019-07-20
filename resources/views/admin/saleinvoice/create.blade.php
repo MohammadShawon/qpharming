@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         {{--          Row 3          --}}
-                        <div class="row" ng-controller="SearchItemCtrl">
+                        <div class="row p-t-20" ng-controller="SearchItemCtrl">
                             <!-- Product Search  -->
                             <div class="col-xs-12 col-3">
                                 <div class="form-group">
@@ -131,7 +131,32 @@
                                 </div>
                             </div>
 
+
                             <!-- Sale Items table -->
+
+                            <div class="col-9">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            {{--<th>{{trans('sale.product_id')}}</th>--}}
+                                            <th>Product name</th>
+                                            <th>Size</th>
+                                            <th>Selling Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        <tr ng-repeat="newsaletemp in saletemp">
+                                            {{--<td>@{{newsaletemp.product_id}}</td>--}}
+                                            <td>@{{newsaletemp.product.product_name}}</td>
+                                            <td>@{{ newsaletemp.product.size }}</td>
+                                            <td><input type="text" style="text-align:center" autocomplete="off" name="selling_price" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.selling_price" size="8"></td>
+                                            <td><input type="text" style="text-align:center" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.quantity" size="2"></td>
+                                            <td>@{{newsaletemp.selling_price * newsaletemp.quantity | currency:'Tk'}}</td>
+                                            <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeSaleTemp(newsaletemp.id)"><span class="fa fa-remove" aria-hidden="true"></span></button></td>
+                                        </tr>
+                                    </table>
+                            </div>
                         </div>
                     {!! Form::close() !!}
                 </div>

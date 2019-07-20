@@ -29,6 +29,8 @@ class ProductStoreRequest extends FormRequest
             'barcode'      => 'required|numeric|unique:products',
             'unit_id'      => 'required',
             'size'         => 'required',
+            'cost_price'   => 'required',
+            'selling_price'=> 'required',
             'quantity'     => 'required|numeric',
         ];
     }

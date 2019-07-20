@@ -34,7 +34,7 @@
                                 {{-- Product Name --}}
                                 <div class="form-group">
                                     <label for="product_name">Name</label>
-                                    <input type="text" name="product_name" class="form-control" id="product_name" placeholder="Enter Products's name" value="{{ old('product_name') }}">
+                                    <input type="text" name="product_name" class="form-control" id="product_name" placeholder="Enter Products's name" value="{{ old('product_name') }}" autocomplete="off">
                                 </div>
 
                                 {{-- Sub-Category --}}
@@ -58,11 +58,6 @@
                                     <label for="barcode">Generate Barcode</label>
                                     <input id="barcode" type="text" name="barcode" class="form-control" id="simpleFormEmail" placeholder="Generate Barcode" >
                                 </div>
-                            </div>
-
-                        
-                            <div class="col-md-6 col-sm-6">
-
                                 {{-- Base Unit ID --}}
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Base Unit ID</label>
@@ -73,16 +68,34 @@
                                     </select>
                                 </div>
 
+                            </div>
+
+                        
+                            <div class="col-md-6 col-sm-6">
+
+
+
                                 {{-- Size --}}
                                 <div class="form-group">
                                     <label for="size">Size</label>
-                                    <input type="text" name="size" class="form-control" id="size" placeholder="Enter Size of the product" value="{{ old('size') }}">
+                                    <input type="text" name="size" class="form-control" id="size" placeholder="Enter Size of the product" value="{{ old('size') }}" autocomplete="off">
+                                </div>
+
+                                {{-- Cost Price --}}
+                                <div class="form-group">
+                                    <label for="cost_price">Cost Price</label>
+                                    <input type="text" name="cost_price" class="form-control" id="cost_price" placeholder="Enter TP of the product" value="{{ old('cost_price') }}" autocomplete="off">
+                                </div>
+                                {{-- Selling Price --}}
+                                <div class="form-group">
+                                    <label for="selling_price">Selling Price</label>
+                                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder="Enter MRP of the product" value="{{ old('selling_price') }}" autocomplete="off">
                                 </div>
 
                                 {{-- Quantity --}}
                                 <div class="form-group">
                                     <label for="quantity">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity of the product" value="{{ old('quantity') }}">
+                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity of the product" value="@if(old('quantity')){{  old('quantity')  }}@else {{ 0 }}@endif">
                                 </div>
 
                                 {{-- Description --}}

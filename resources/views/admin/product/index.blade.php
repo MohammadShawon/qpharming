@@ -70,6 +70,8 @@
                                 <th> Category </th>
                                 <th> Sub Category </th>
                                 <th> Size </th>
+                                <th> Cost Price </th>
+                                <th> Selling Price </th>
                                 <th> Quantity </th>
                                 <th> Action </th>
                             </tr>
@@ -83,6 +85,8 @@
                                     <td>{{ $product->subcategory->category->name }}</td>
                                     <td>{{ $product->subcategory->name }}</td>
                                     <td>{{ $product->size }}</td>
+                                    <td>{{ $product->cost_price }}</td>
+                                    <td>{{ $product->selling_price }}</td>
                                     <td>{{ $product->quantity }}</td>
                                     
                                     <td>

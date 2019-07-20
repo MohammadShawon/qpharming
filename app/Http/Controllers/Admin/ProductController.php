@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Inventory;
 use App\Models\Product;
+use App\Models\ProductPrice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SubCategory;
@@ -10,6 +13,7 @@ use App\Http\Requests\Product\ProductStoreRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Models\Unit;
+use \DB;
 
 class ProductController extends Controller
 {
@@ -52,20 +56,77 @@ class ProductController extends Controller
     public function store(ProductStoreRequest $request)
     {
         /* Product Store */
-        if(auth()->user()->can('create_user')){
-            
-            $product = Product::create([
-                'subcategory_id' => $request->sub_category,
-                'product_name'   => $request->product_name,
-                'sku'            => $request->sku,
-                'barcode'        => $request->barcode,
-                'base_unit_id'   => $request->unit_id,
-                'description'    => $request->description,
-                'size'           => $request->size,
-                'quantity'       => $request->quantity,
-            ]);
+        if(auth()->user()->can('create_product')){
+            DB::beginTransaction();
+            try{
+                $product = Product::create([
+                    'subcategory_id' => $request->sub_category,
+                    'product_name'   => $request->product_name,
+                    'sku'            => $request->sku,
+                    'barcode'        => $request->barcode,
+                    'base_unit_id'   => $request->unit_id,
+                    'description'    => $request->description,
+                    'size'           => $request->size,
+                    'cost_price'     => $request->cost_price,
+                    'selling_price'     => $request->selling_price,
+                    'quantity'       => $request->quantity,
+                ]);
+            }catch (\Exception $e)
+            {
+                DB::rollback();
+                Toastr::success('Something Went Wrong 1', 'Error');
+                return redirect()->route('admin.product.create');
+            }
+
+            /*
+             * Process Batch No
+             * */
+
+            try{
+                $batch = ProductPrice::create([
+                    'product_id'       =>      $product->id,
+                    'batch_no'         =>      date('Y'). '-'.random_int(1,50000),
+                    'quantity'         =>      $request->quantity,
+                    'cost_price'       =>      $request->cost_price,
+                    'selling_price'    =>      $request->selling_price,
+                    'mfg_date'         =>      Carbon::now('+6'),
+                    'exp_date'         =>      Carbon::now('+6'),
+
+                ]);
+            }catch (\Exception $e)
+            {
+                DB::rollback();
+                Toastr::success('Something Went Wrong 2', 'Error');
+                return redirect()->route('admin.product.create');
+            }
+
+            /*
+             * Inventories Process
+             * */
+
+            try
+            {
+                $inventories = Inventory::create([
+                    'product_id'    => $product->id,
+                    'user_id'       => auth()->user()->id,
+                    'batch_no'      => $batch->batch_no,
+                    'unit_id'       => $request->unit_id,
+                    'in_out_qty'    => $request->quantity,
+                    'created_at'    => Carbon::now('+6.30'),
+                    'updated_at'    => Carbon::now('+6.30'),
+                ]);
+            }catch (\Exception $e)
+            {
+                DB::rollback();
+                Toastr::success('Something Went Wrong 3', 'Error');
+                return redirect()->route('admin.product.create');
+            }
+
+            DB::commit();
+
             /* Check Product store and toastr message */
-            if($product){
+            if($product && $batch && $inventories){
+
                 Toastr::success('Product Successfully Added', 'Success');
                 return redirect()->route('admin.product.index');
             }
@@ -127,6 +188,8 @@ class ProductController extends Controller
                 'base_unit_id'   => $request->unit_id,
                 'description'    => $request->description,
                 'size'           => $request->size,
+                'cost_price'     => $request->cost_price,
+                'selling_price'     => $request->selling_price,
                 'quantity'       => $request->quantity,
             ]);
             /* Check Product Update and toastr message */

@@ -28,4 +28,6 @@ class Product extends Model
     public function purchaseitems(){
         return $this->belongsTo(PurchaseItem::class);
     }
+
+
 }
