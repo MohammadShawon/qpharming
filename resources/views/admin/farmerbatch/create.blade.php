@@ -27,7 +27,7 @@
                     <header>Create Farmer Batch</header>
                 </div>
                 <div class="card-body" id="bar-parent">
-                    <form method="post" action="{{ url('/farmer/'.$farmer->id.'/batch/create') }}">
+                    <form method="post" action="{{ url('/farmer/'.$farmer->id.'/batch') }}">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
@@ -35,7 +35,7 @@
                                 {{-- Name --}}
                                 <div class="form-group">
                                     <label for="name">Farmer Name</label>
-                                    <input type="text" value="{{$farmer->name}}" class="form-control" id="name" placeholder="Enter farmer name" value="{{ old('name') }}">
+                                    <input type="text" value="{{$farmer->name}}" class="form-control" id="name" placeholder="Enter farmer name" value="{{ old('name') }}" readonly>
                                     <input type="hidden" name="farmer_id" value="{{$farmer->id}}">
                                 </div>
 
