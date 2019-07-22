@@ -56,7 +56,7 @@ class FarmersDatatable extends DataTable
                     ->addIndex()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '15%'])
                     ->parameters($this->getBuilderParameters())
                     ->scrollX(true);
     }
