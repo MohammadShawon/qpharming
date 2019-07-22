@@ -72,6 +72,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('farmer/{id}/batch/{batch_id}/edit', 'FarmerBatchController@edit');
     Route::patch('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@update');
     Route::delete('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@destroy');
+
+    Route::get('farmer/profile', function (){ return view('admin.farmer.view2'); });
    
     
     
@@ -126,6 +128,7 @@ Route::get('dashboard', 'Admin\DashboardController@index');
 Route::get('401', function (){ return view('errors.401'); });
 Route::get('403', function (){ return view('errors.403'); });
 Route::get('404', function (){ return view('errors.404'); });
+Route::get('500', function (){ return view('errors.500'); });
 Route::get('500', function (){ return view('errors.500'); });
 
 /*For checking errors page  END*/
