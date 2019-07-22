@@ -8,6 +8,7 @@
 @push('css')
     <!-- data tables -->
     <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">
 @endpush
 
 @section('content')
@@ -43,41 +44,32 @@
                                 <i class="fa fa-file-excel-o"></i> Export to Excel </a>
                             </li>
                         </ul>
+                </div>
+                <div class="card card-box">
+                    <div class="card-head" style="text-align: center;">
+    {{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
+                        <header>All Farmer Lists</header>
+
                     </div>
-            <div class="card card-topline-red">
-                <div class="card-head" style="text-align: center;">
-{{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
-                    <div class="tools">
-                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-                        <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-                        <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                    <div class="card-body">
+
+                           {!! $dataTable->table(['class' => 'display','style' => 'width: 100%','id' => 'dataTable' ]) !!}
+
                     </div>
                 </div>
-                <div class="card-body ">
-                    <div class="row p-b-20">
-                        <div class="col-md-6 col-sm-6 col-6">
-                            
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-6">
-                            
-                        </div>
-                    </div>
-                    
-                       {!! $dataTable->table(['class' => 'table table-striped table-bordered table-hover table-checkable order-column table-responsive','style' => 'width: 100%','id' => 'example4' ]) !!}
-                    
-                </div>
-            </div>
         </div>
     </div>
 @endsection
 
 @push('js')
-    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css') }}">
-    <script src="{{ asset('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js') }}"></script>
+{{--    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>--}}
+    <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}" ></script>
+<script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+<script src="{{ asset('admin/assets/js/buttons/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
-    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+
+
     
 
     <!-- sweet aleart -->

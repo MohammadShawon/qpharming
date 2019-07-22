@@ -41,7 +41,7 @@
     <link href="{{ asset('admin/assets/css/responsive.css') }} " rel="stylesheet" type="text/css" />
 
     <!-- toastr js -->
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}">
 
     {{-- PAGE LOADER CSS --}}
 
@@ -132,8 +132,8 @@
 {{-- <script src="{{ asset('admin/assets/plugins/chart-js/utils.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/js/pages/chart/chartjs/home-data.js')}} " ></script>--}}
  <!-- summernote -->
- <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>
- <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>
+{{-- <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>--}}
+{{-- <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>--}}
 <!--  quicklink js -->
 <script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>
 

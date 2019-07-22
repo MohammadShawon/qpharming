@@ -5,6 +5,7 @@
 @push('css')
     <!-- data tables -->
     <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">
 @endpush
 
 @section('content')
@@ -39,7 +40,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            {!! $dataTable->table(['class' => 'table table-striped table-bordered table-hover table-checkable order-column table-responsive','style' => 'width: 100%','id' => 'example4' ]) !!}
+                            {!! $dataTable->table(['class' => 'display','style' => 'width: 100%','id' => 'dataTable' ]) !!}
                         </div>
                     </div>
 
@@ -50,15 +51,15 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css') }}">
-    <script src="{{ asset('https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}" ></script>
+    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+    <script src="{{ asset('admin/assets/js/buttons/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
-    <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+
 
     <!-- sweet aleart -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="{{ asset('admin/assets/js/sweetalert.min.js') }}"></script>
 
 
     <script type="text/javascript">
@@ -110,7 +111,7 @@
                         ) {
                             swalWithBootstrapButtons.fire(
                                 'Cancelled',
-                                'Your SubCategory name is safe :)',
+                                'Your Customer name is safe :)',
                                 'error'
                             )
                         }

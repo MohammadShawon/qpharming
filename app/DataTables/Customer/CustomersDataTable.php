@@ -50,6 +50,7 @@ class CustomersDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->scrollX(true)
                     ->addAction(['width' => '80px'])
                     ->parameters($this->getBuilderParameters());
     }
