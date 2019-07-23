@@ -300,9 +300,4 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item {{ Request::is('farmer*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.farmer.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person_outline</i>
-                        <span class="title">@lang('dashboard.farmer')</span> 
-                    </a>
-                </li>
             </ul>
