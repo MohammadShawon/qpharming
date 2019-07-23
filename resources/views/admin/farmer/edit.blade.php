@@ -67,7 +67,7 @@
                                 {{-- Balance --}}
                                 <div class="form-group">
                                     <label for="opening_balance">Opening Balance</label>
-                                    <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter farmer opening balance" value="{{ $farmer->opening_balance }}">
+                                    <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter farmer opening balance" value="{{ $farmer->opening_balance }}" onkeyup="this.value=this.value.replace(/^\.|[^\d\.]/g,'')">
                                 </div>
 
                                 {{-- <div class="form-group">

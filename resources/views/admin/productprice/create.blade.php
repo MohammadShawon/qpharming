@@ -58,7 +58,7 @@
                                 {{-- Cost --}}
                                 <div class="form-group">
                                     <label for="cost">Cost Price</label>
-                                    <input type="text" name="cost" class="form-control" id="cost" placeholder="Enter Cost Price" value="{{ old('cost') }}">
+                                    <input type="text" name="cost" class="form-control" id="cost" placeholder="Enter Cost Price" value="{{ old('cost') }}" onkeyup="this.value=this.value.replace(/^\.|[^\d\.]/g,'')">
                                 </div>
                             </div>
 
@@ -68,7 +68,7 @@
                                 {{-- Sell --}}
                                 <div class="form-group">
                                     <label for="sell">Sell Price</label>
-                                    <input type="text" name="sell" class="form-control" id="sell" placeholder="Enter Selling price" value="{{ old('sell') }}">
+                                    <input type="text" name="sell" class="form-control" id="sell" placeholder="Enter Selling price" value="{{ old('sell') }}" onkeyup="this.value=this.value.replace(/^\.|[^\d\.]/g,'')">
                                 </div>
                                 
                                 {{-- M.F.G   date --}}
