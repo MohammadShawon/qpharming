@@ -17,6 +17,8 @@ use App\Http\Requests\Farmer\FarmerUpdateRequest;
 use Notification;
 use App\Notifications\FarmerCreateNotification;
 use App\Models\FarmerBatch;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class FarmerController extends Controller
 {
@@ -27,7 +29,7 @@ class FarmerController extends Controller
      * @return void
      */
     public function index(FarmersDatatable $dataTable)
-    {
+    { 
         /* show all the farmers */
         if (auth()->user()->can('view_farmer')) {
             return $dataTable->render('admin.farmer.index');
@@ -61,6 +63,28 @@ class FarmerController extends Controller
     public function store(FarmerStoreRequest $request)
     {
         if (auth()->user()->can('create_farmer')) {
+
+            // Upload Image to The Public/farmer Folder
+
+            $image = $request->file('image');
+            $slug  = str_slug($request->name);
+
+            if(isset($image)){
+                //make unique name for image
+                $currentDate = Carbon::now()->toDateString();
+                $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+                //check farmer directory
+                if(!Storage::disk('public')->exists('farmer')){
+                    Storage::disk('public')->makeDirectory('farmer');
+                }
+                //resize image for category and upload
+                $farmer = Image::make($image)->resize(720, 550)->stream();
+                //now save the image
+                Storage::disk('public')->put('farmer/'.$imageName,$farmer);
+            }
+            else{
+                $imageName = 'default.png';
+            }
                 
             /* Insert farmer */
             $farmer = Farmer::create([
@@ -69,6 +93,7 @@ class FarmerController extends Controller
                 'phone1'           =>      $request->phone1,
                 'phone2'           =>      $request->phone2,
                 'address'          =>      $request->address,
+                'image'            =>      $imageName,
                 'opening_balance'  =>      $request->opening_balance,
                 'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'      =>      Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
@@ -137,6 +162,33 @@ class FarmerController extends Controller
     public function update(FarmerUpdateRequest $request, Farmer $farmer)
     {
        if (auth()->user()->can('edit_farmer')) {
+
+            /* Update Image */
+
+            $image = $request->file('image');
+            $slug  = str_slug($request->name);
+
+            if(isset($image)){
+                //make unique name for image
+                $currentDate = Carbon::now()->toDateString();
+                $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+                //check category directory
+                if(!Storage::disk('public')->exists('farmer')){
+                    Storage::disk('public')->makeDirectory('farmer');
+                }
+                //Delete old Image
+                if(Storage::disk('public')->exists('farmer/'.$farmer->image)){
+                   Storage::disk('public')->delete('farmer/'.$farmer->image);
+                }
+                //resize image for category and upload
+                $farmerImage = Image::make($image)->resize(720, 550)->stream();
+                //now save the image
+                Storage::disk('public')->put('farmer/'.$imageName,$farmerImage);
+    
+            }
+            else{
+                $imageName = $farmer->image;
+            }
                
             /* update farmer */
             $resultFarmer = $farmer->update([
@@ -144,6 +196,7 @@ class FarmerController extends Controller
                 'name'             =>      $request->name,
                 'phone1'           =>      $request->phone1,
                 'phone2'           =>      $request->phone2,
+                'image'            =>      $imageName,
                 'address'          =>      $request->address,
                 'opening_balance'  =>      $request->opening_balance,
                 'starting_date'    =>      Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
@@ -177,11 +230,17 @@ class FarmerController extends Controller
     public function destroy(Farmer $farmer)
     {
        if (auth()->user()->can('delete_farmer')) {
-               
-                $farmer->delete();
-                Toastr::success('farmer Deleted Successfully', 'Success');
-                return redirect()->route('admin.farmer.index');
-           }
+            
+            $farmer->delete();
+
+            /* Delete Image */
+            if(Storage::disk('public')->exists('farmer/'.$farmer->image)){
+                Storage::disk('public')->delete('farmer/'.$farmer->image);
+            }
+
+            Toastr::success('farmer Deleted Successfully', 'Success');
+            return redirect()->route('admin.farmer.index');
+        }
        abort(403);
     }
 }

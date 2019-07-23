@@ -27,7 +27,7 @@
                     <header>Create Farmer</header>
                 </div>
                 <div class="card-body" id="bar-parent">
-                    <form method="post" action="{{ route('admin.farmer.store') }}">
+                    <form method="post" action="{{ route('admin.farmer.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
@@ -64,10 +64,11 @@
                         
                             <div class="col-md-6 col-sm-6">
 
-                                {{-- <div class="form-group">
-                                    <label for="simpleFormEmail">Email</label>
-                                    <input type="email" name="email" class="form-control" id="simpleFormEmail" placeholder="Enter farmer email" value="{{ old('email') }}">
-                                </div> --}}
+                                {{-- Image --}}
+                                <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input type="file" name="image" class="form-control" id="image" value="{{ old('image') }}">
+                                </div>
 
                                 {{-- Address --}}
                                 <div class="form-group">

@@ -38,7 +38,6 @@ Auth::routes();
  * Routes Through Roles
  * */
 Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
-    
 
     Route::resource('area', 'AreaController');
     Route::resource('category', 'CategoryController');
@@ -81,6 +80,11 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     
 
 
+    Route::get('info/branch', 'BranchInfoController@index');
+    Route::get('particular-branch/{branch_id}/farmers', 'BranchFarmerController@farmerList');
+
+    
+
      // Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
     // Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
 
@@ -89,7 +93,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('markallasread', 'NotificationsController@markallasread');
 
     
-    Route::get('info/branch', 'BranchInfoController@index');
+    
+    
 
     /*
      * Sales

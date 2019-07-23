@@ -56,7 +56,7 @@
                                                 </p> 
                                             </div>
                                         <div class="profile-userbuttons">
-                                            <a href="#" class="btn btn-circle deepPink-bgcolor btn-sm">View</a>
+                                        <a href="{{ url('particular-branch/'.$branch->id.'/farmers') }}" style="padding: 10px 90px;" class="btn btn-circle deepPink-bgcolor btn-lg">View</a>
                                         </div>
                                     </div>
                                 </div>

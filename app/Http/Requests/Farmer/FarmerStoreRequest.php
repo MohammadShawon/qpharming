@@ -25,6 +25,7 @@ class FarmerStoreRequest extends FormRequest
     {
         return [
             'name'           => 'required',
+            'image'          => 'image',
             'phone1'         => 'required|unique:farmers',
             'address'        => 'nullable',
             'opening_balance'=> 'required|numeric',

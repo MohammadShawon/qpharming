@@ -26,6 +26,7 @@ class FarmerUpdateRequest extends FormRequest
     {
         return [
             'name'           => 'required',
+            'image'          => 'image',
             'phone1'         => 'required',
             'address'        => 'nullable',
             'opening_balance'=> 'required|numeric',

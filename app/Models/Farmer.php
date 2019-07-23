@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Farmer extends Model
 {
     protected $fillable = [
-        'branch_id','name','phone1','phone2','email','address','opening_balance','starting_date','ending_date','status'
+        'branch_id','name','phone1','phone2','email','image','address','opening_balance','starting_date','ending_date','status'
     ];
 
     public function branch(){

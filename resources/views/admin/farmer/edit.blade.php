@@ -27,7 +27,7 @@
                     <header>Update Farmer</header>
                 </div>
                 <div class="card-body " id="bar-parent">
-                    <form method="post" action="{{ route('admin.farmer.update', $farmer->id) }}">
+                    <form method="post" action="{{ route('admin.farmer.update', $farmer->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="row">
@@ -77,6 +77,12 @@
                             </div>
 
                             <div class="col-md-6 col-sm-6">
+
+                                 {{-- Image --}}
+                                 <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input type="file" name="image" class="form-control" id="image">
+                                </div>
 
                                 {{-- Address --}}
                                 <div class="form-group">
