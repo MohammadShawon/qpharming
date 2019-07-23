@@ -81,8 +81,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     
 
 
-     // Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
-    // Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
+     Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
+    Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
 
 
     Route::get('notifications', 'NotificationsController@allNotification');

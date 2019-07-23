@@ -18,7 +18,8 @@ use Carbon\Carbon;
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block">Daily Report</button>
+        <a href="{{ url('/farmer/'.$farmer->id.'/batch/create') }}" class="btn btn-primary btn-lg btn-block">Add New Branch</a>
+        <a class="btn btn-danger btn-lg btn-block">Something New</a>
     </div>
     <div class="col-md-6 justify-content-center">
         <div class="row justify-content-center">
@@ -52,7 +53,7 @@ use Carbon\Carbon;
             <div class="card-body no-padding height-9">
                 
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name"> <span class="badge bg-danger">Round 2</span> </div>
+                    <div class="profile-usertitle-name"><span class="btn btn-circle btn-success">Round 2</span></div>
                 </div>
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
@@ -64,7 +65,8 @@ use Carbon\Carbon;
                 </ul>
             </div>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block">Report Summary</button>
+                <a class="btn btn-primary btn-lg btn-block">Add Today Report</a>
+                <a class="btn btn-danger btn-lg btn-block">View Daily Report</a>
     </div>
     <div class="col-md-12">
         <div class="card">

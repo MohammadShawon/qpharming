@@ -46,28 +46,3 @@
                             <span class="title">@lang('dashboard.customer')</span>
                         </a>
                     </li>
-                
-                
-
-                {{-- <li class="nav-item {{ Request::is('user*')||Request::is('role*')||Request::is('permission*') ? 'active' : '' }}">
-                    <a href="#" class="nav-link nav-toggle">
-                         <i class="material-icons">group</i>
-                         <span class="title">Branches</span>
-                         <span class="arrow"></span>
-                     </a>
-                        <ul class="sub-menu">
-                            @foreach($branches as $branch)
-                            <li class="nav-item {{ Request::is('branch*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.user.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
-                                <span class="title">{{ $branch->name }}</span> 
-                            </a>
-                        </li>
-                        @endforeach
-                     </ul>
-                </li> --}}
-                    <li class="nav-item {{ Request::is('farmer*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.farmer.index') }}" class="nav-link nav-toggle"> <i class="material-icons">person_outline</i>
-                        <span class="title">@lang('dashboard.farmer')</span> 
-                    </a>
-                </li>
-            </ul>
