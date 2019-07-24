@@ -76,8 +76,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
    
     Route::post('farmer/records/{id}', 'FarmerRecordController@store')->name('daily-record');
     
-    Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
-    Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
+//    Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
+//    Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
 
 
 

@@ -23,9 +23,13 @@ class FarmersDatatable extends DataTable
             {
                 return $farmer->branch->name;
             })
+            ->editColumn('status',function ($status){
+                return $this->getStatus($status);
+            })
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
             })
+            ->rawColumns(['status','action'])
             ->setRowClass('gradeX');
     }
 
@@ -41,6 +45,24 @@ class FarmersDatatable extends DataTable
     }
 
     /**
+     * @param $status
+     * @return string
+     */
+    protected function getStatus($status):string
+    {
+        if ($status->status === 'active'){
+            return "<span class='btn btn-circle btn-success'> Active </span>";
+        }
+        elseif ($status->status === 'inactive'){
+            return "<span class='btn btn-circle btn-danger'> InActive </span>";
+        }else
+        {
+            return "<span class='btn btn-circle btn-danger disabled'> Disabled </span>";
+        }
+
+    }
+
+    /**
      * @param $data
      * @return string
      */
@@ -48,9 +70,9 @@ class FarmersDatatable extends DataTable
     {
         $showUrl = route('admin.farmer.show', $data->id);
         $editUrl = route('admin.farmer.edit', $data->id);
-        return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
-                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
-                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+        return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i>Details</a> 
+                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i>Update</a>
+                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i>Delete</button>";
     }
 
     /**
@@ -64,7 +86,7 @@ class FarmersDatatable extends DataTable
                     ->addIndex()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '15%'])
+                    ->addAction(['width' => '30%'])
                     ->paging(true)
                     ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
                     ->parameters($this->getBuilderParameters())
@@ -101,7 +123,8 @@ class FarmersDatatable extends DataTable
             [
                 'data'  => 'phone2',
                 'name'  => 'phone2',
-                'title' => 'Alt. Number'
+                'title' => 'Alt. Number',
+                'visible' => false
             ],
             [
                 'data'  => 'opening_balance',
@@ -110,7 +133,7 @@ class FarmersDatatable extends DataTable
             ],
             [
                 'data'  => 'status',
-                'name'  => 'Status',
+                'name'  => 'status',
                 'title' => 'Status',
             ],
             

@@ -23,11 +23,22 @@ class SubcategoryDatatables extends DataTable
             })
             ->addColumn('action', function($data)
             {
-            return "
-            <a class='waves-effect  btn btn-primary edit' data-value='$data->id' href='/sub-category/$data->id/edit'>Update</a>
-            <a class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' >Delete</a>";
+            return $this->getActionColumn($data);
             })
             ->addIndexColumn();
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    protected function getActionColumn($data): string
+    {
+        $showUrl = route('admin.sub-category.show', $data->id);
+        $editUrl = route('admin.sub-category.edit', $data->id);
+        return " 
+                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i>Update</a>
+                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i>Delete</button>";
     }
 
     /**
@@ -38,7 +49,7 @@ class SubcategoryDatatables extends DataTable
      */
     public function query(SubCategory $model)
     {
-        return $model->newQuery()->select('id', 'category_id','name', 'created_at',);
+        return $model->newQuery()->select('id', 'category_id','name', 'created_at');
     }
 
     /**
@@ -51,7 +62,10 @@ class SubcategoryDatatables extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '20%'])
+                    ->paging(true)
+                    ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
+                    ->scrollX(true)
                     ->parameters($this->getBuilderParameters());
     }
 
