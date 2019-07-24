@@ -5,8 +5,9 @@ return [
      * Default table attributes when generating the table.
      */
     'table' => [
-        'class' => 'table',
-        'id'    => 'dataTableBuilder',
+        'class' => 'display',
+        'id'    => 'dataTable',
+        'style' => 'width: 100%'
     ],
 
     /*
@@ -24,4 +25,5 @@ return [
      * Html builder script template for DataTables Editor integration.
      */
     'editor' => 'datatables::editor',
+
 ];

@@ -115,11 +115,11 @@ class ProductPriceController extends Controller
      */
     public function update(ProductPriceUpdateRequest $request, ProductPrice $productPrice)
     {
-        
+        dd($productPrice);
         /* Update Product - Price */
         if (auth()->user()->can('delete_product-price')) {
                 
-            $updateProductPrice = productPrice::update([
+            $updateProductPrice = $productPrice->update([
                 'product_id'       =>      $request->product_id,
                 'batch_no'         =>      $request->batch,
                 'quantity'         =>      $request->quantity,

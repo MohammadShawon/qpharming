@@ -57,7 +57,9 @@ return [
      * Default html builder parameters.
      */
     'parameters' => [
-        'dom'     => 'Bfrtip',
+        'paging' => true,
+        'searching' => true,
+        'dom'     => 'Blfrtip',
         'order'   => [[0, 'desc']],
         'buttons' => [
             'create',
@@ -65,5 +67,6 @@ return [
             'print',
             
         ],
+
     ],
 ];

@@ -40,7 +40,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            {!! $dataTable->table(['class' => 'display','style' => 'width: 100%','id' => 'dataTable' ]) !!}
+                            {!! $dataTable->table() !!}
                         </div>
                     </div>
 
@@ -53,6 +53,7 @@
 @push('js')
     <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}" ></script>
     <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
+
     <script src="{{ asset('admin/assets/js/buttons/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}

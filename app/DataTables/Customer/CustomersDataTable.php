@@ -17,14 +17,8 @@ class CustomersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addIndexColumn()
             ->addColumn('action',function ($data){
-
-                $showUrl = route('admin.customer.show', $data->id);
-                $editUrl = route('admin.customer.edit', $data->id);
-                return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
-                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
-                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+                return $this->getActionColumn($data);
             })
             ->setRowClass('gradeX');
     }
@@ -41,6 +35,19 @@ class CustomersDataTable extends DataTable
     }
 
     /**
+     * @param $data
+     * @return string
+     */
+    protected function getActionColumn($data): string
+    {
+        $showUrl = route('admin.customer.show', $data->id);
+        $editUrl = route('admin.customer.edit', $data->id);
+        return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
+                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+    }
+
+    /**
      * Optional method if you want to use html builder.
      *
      * @return \Yajra\DataTables\Html\Builder
@@ -48,11 +55,14 @@ class CustomersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
+                    ->addIndex()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->scrollX(true)
                     ->addAction(['width' => '15%'])
-                    ->parameters($this->getBuilderParameters());
+                    ->paging(true)
+                    ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
+                    ->parameters($this->getBuilderParameters())
+                    ->scrollX(true);
     }
 
     /**
@@ -63,6 +73,13 @@ class CustomersDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
+            [
+                'data'    => 'id',
+                'name'    => 'id',
+                'title'   => 'ID No.',
+                'visible' => false
+            ],
+
             [
                 'data' => 'name',
                 'name' => 'name',

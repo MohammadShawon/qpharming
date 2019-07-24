@@ -24,12 +24,7 @@ class FarmersDatatable extends DataTable
                 return $farmer->branch->name;
             })
             ->addColumn('action',function ($data){
-
-                $showUrl = route('admin.farmer.show', $data->id);
-                $editUrl = route('admin.farmer.edit', $data->id);
-                return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
-                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
-                        <button class='waves-effect btn deepPink-bgcolor' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+                return $this->getActionColumn($data);
             })
             ->setRowClass('gradeX');
     }
@@ -46,6 +41,19 @@ class FarmersDatatable extends DataTable
     }
 
     /**
+     * @param $data
+     * @return string
+     */
+    protected function getActionColumn($data): string
+    {
+        $showUrl = route('admin.customer.show', $data->id);
+        $editUrl = route('admin.customer.edit', $data->id);
+        return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
+                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+    }
+
+    /**
      * Optional method if you want to use html builder.
      *
      * @return \Yajra\DataTables\Html\Builder
@@ -57,6 +65,8 @@ class FarmersDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction(['width' => '15%'])
+                    ->paging(true)
+                    ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
                     ->parameters($this->getBuilderParameters())
                     ->scrollX(true);
     }
@@ -122,10 +132,10 @@ class FarmersDatatable extends DataTable
     /**
      * @return array
      */
-    protected function getBuilderParameters()
+    protected function getBuilderParameters():array
     {
         return[
-            'dom'     => 'Bfrtip',
+            'dom'     => 'Blfrtip',
             'order'   => [[0, 'desc']],
             'buttons' => [
                 'create',
