@@ -14,11 +14,11 @@ use Carbon\Carbon;
             <div class="card-body no-padding height-9">
                 
                 <div class="profile-userpic">
-                    <img src="{{ asset('admin/assets/img/farmer.jpg') }}" class="img-responsive" alt="">
+                    <img src="{{ asset('storage/farmer/')."/".$farmer->image }}" class="img-responsive" alt="">
                 </div>
             </div>
         </div>
-        <a href="{{ url('/farmer/'.$farmer->id.'/batch/create') }}" class="btn btn-primary btn-lg btn-block">Add New Branch</a>
+        <a href="{{ url('/farmer/'.$farmer->id.'/batch/create') }}" class="btn btn-primary btn-lg btn-block">Create Batch</a>
         <a class="btn btn-danger btn-lg btn-block">Something New</a>
     </div>
     <div class="col-md-6 justify-content-center">
@@ -65,8 +65,8 @@ use Carbon\Carbon;
                 </ul>
             </div>
         </div>
-                <a class="btn btn-primary btn-lg btn-block">Add Today Report</a>
-                <a class="btn btn-danger btn-lg btn-block">View Daily Report</a>
+                <a class="btn btn-primary btn-lg btn-block">Daily Summary</a>
+                <a class="btn btn-danger btn-lg btn-block">Report Summary</a>
     </div>
     <div class="col-md-12">
         <div class="card">

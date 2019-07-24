@@ -46,8 +46,8 @@ class FarmersDatatable extends DataTable
      */
     protected function getActionColumn($data): string
     {
-        $showUrl = route('admin.customer.show', $data->id);
-        $editUrl = route('admin.customer.edit', $data->id);
+        $showUrl = route('admin.farmer.show', $data->id);
+        $editUrl = route('admin.farmer.edit', $data->id);
         return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
                         <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
                         <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
