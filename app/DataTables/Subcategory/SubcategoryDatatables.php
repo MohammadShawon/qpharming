@@ -116,7 +116,7 @@ class SubcategoryDatatables extends DataTable
      */
     protected function filename()
     {
-        return 'Subcategory/SubcategoryDatatables_' . date('YmdHis');
+        return 'SubcategoryDatatables_' . date('YmdHis');
     }
 
     protected function getBuilderParameters()

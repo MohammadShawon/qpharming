@@ -163,7 +163,7 @@ class FarmersDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Farmers/Farmers_' . date('YmdHis');
+        return 'Farmers_' . date('YmdHis');
     }
 
     /**

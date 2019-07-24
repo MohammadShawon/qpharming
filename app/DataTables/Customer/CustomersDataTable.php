@@ -121,6 +121,6 @@ class CustomersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Customer/Customer_' . date('YmdHis');
+        return 'Customer_' . date('YmdHis');
     }
 }
