@@ -23,7 +23,7 @@ return [
          * With Model: App\Post
          * Export filename: posts_timestamp
          */
-        'model' => '',
+        'model' => 'Models',
     ],
 
     /*
@@ -38,6 +38,7 @@ return [
      * Excel package: maatwebsite/excel
      */
     'pdf_generator' => 'snappy',
+    'excel_generator' => 'excel',
 
     /*
      * Snappy PDF options.
@@ -53,18 +54,19 @@ return [
         'orientation' => 'landscape',
     ],
 
+
     /*
      * Default html builder parameters.
      */
     'parameters' => [
-        'paging' => true,
-        'searching' => true,
         'dom'     => 'Blfrtip',
         'order'   => [[0, 'desc']],
         'buttons' => [
             'create',
-            'export',
-            'print',
+            'excel',
+            'csv',
+            'pdf',
+            'print'
             
         ],
 

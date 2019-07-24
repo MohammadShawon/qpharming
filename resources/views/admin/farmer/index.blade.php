@@ -8,7 +8,7 @@
 @push('css')
     <!-- data tables -->
     <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">--}}
 @endpush
 
 @section('content')
@@ -45,7 +45,7 @@
                             </li>
                         </ul>
                 </div>
-                <div class="card card-box">
+                <div class="card card-topline-red">
                     <div class="card-head" style="text-align: center;">
     {{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
                         <header>All Farmer Lists</header>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-body">
 
-                           {!! $dataTable->table(['class' => 'display','style' => 'width: 100%','id' => 'dataTable' ]) !!}
+                           {!! $dataTable->table() !!}
 
                     </div>
                 </div>
@@ -62,15 +62,20 @@
 @endsection
 
 @push('js')
-{{--    <script src="{{ asset('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js') }}"></script>--}}
+
     <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}" ></script>
 <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
 <script src="{{ asset('admin/assets/js/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
 
 
-    
+{{--    <script>--}}
+{{--        $('#dataTable').DataTable({--}}
+{{--            dom: 'Blfrtip',--}}
+{{--        })--}}
+{{--    </script>--}}
 
     <!-- sweet aleart -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

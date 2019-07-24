@@ -62,7 +62,12 @@ class SubcategoryDatatables extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '20%'])
+                    ->addAction([
+                        'width' => '20%',
+                        'printable' => false,
+                        'exportable' => false,
+                        'searchable' => false
+                    ])
                     ->paging(true)
                     ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
                     ->scrollX(true)

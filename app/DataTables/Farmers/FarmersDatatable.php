@@ -6,6 +6,7 @@ use App\Models\Farmer;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html;
 use Yajra\DataTables\DataTables;
+use \DB;
 
 class FarmersDatatable extends DataTable
 {
@@ -86,7 +87,13 @@ class FarmersDatatable extends DataTable
                     ->addIndex()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '30%'])
+                    ->processing(true)
+                    ->addAction([
+                        'width' => '30%',
+                        'printable' => false,
+                        'exportable' => false,
+                        'searchable' => false
+                    ])
                     ->paging(true)
                     ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
                     ->parameters($this->getBuilderParameters())
@@ -129,13 +136,20 @@ class FarmersDatatable extends DataTable
             [
                 'data'  => 'opening_balance',
                 'name'  => 'opening_balance',
-                'title' => 'Open Balance',
+                'title' => 'Opening Balance',
+
             ],
             [
                 'data'  => 'status',
                 'name'  => 'status',
                 'title' => 'Status',
+                'printable' => false,
+                'exportable' => false,
             ],
+
+
+
+
             
         ];
     }
@@ -162,9 +176,13 @@ class FarmersDatatable extends DataTable
             'order'   => [[0, 'desc']],
             'buttons' => [
                 'create',
-                'export',
-                'print',
+                'excel',
+                'csv',
+                'pdf',
+                'print'
+
             ],
+
         ];
     }
 }

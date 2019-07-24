@@ -5,7 +5,7 @@
 @push('css')
     <!-- data tables -->
     <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('admin/assets/css/buttons.dataTables.min.css') }}">--}}
 @endpush
 
 @section('content')

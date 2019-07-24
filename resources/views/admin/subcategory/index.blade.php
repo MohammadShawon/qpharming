@@ -34,7 +34,6 @@
                     </header>
                 </div>
                 <div class="card-body ">
-
                     
                     {!! $dataTable->table() !!}
                     
