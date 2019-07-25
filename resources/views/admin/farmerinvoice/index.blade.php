@@ -3,11 +3,12 @@
 ?>
 @extends('template.app')
 
-@section('title', 'User')
+@section('title', 'Invoice')
 
 @push('css')
     <!-- data tables -->
     <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
+
 @endpush
 
 @section('content')
@@ -18,34 +19,15 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="btn-group">
-                <a href="{{ route('admin.user.create') }}" id="addRow1" class="btn btn-primary" style="font-size:14px; padding: 6px 12px;" >
-                    Add New User <i style="color:white;" class="fa fa-plus"></i>
-                </a>
-                
-            </div>
-            <div class="btn-group pull-right">
-                <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                    <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="fa fa-print"></i> Print </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                        <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                    </li>
-                </ul>
-            </div>
+                <div class="btn-group">
+                    <a href="{{ route('admin.farmerinvoice.create') }}" id="addRow1" class="btn btn-primary" style="font-size:14px; padding: 6px 12px;" >
+                        Add New Invoice <i style="color:white;" class="fa fa-plus"></i>
+                    </a>
+                    
+                </div>
             <div class="card card-topline-red">
                 <div class="card-head" style="text-align: center;">
-                    <header>USER/EMPLOYEE</header><span class="btn btn-primary ml-1"> {{ $users->count() }} </span>
+                    <header>Invoice </header> <span class="btn btn-primary ml-1"> 5 </span>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -64,56 +46,40 @@
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
                         <thead>
                             <tr>
-                                <th> Serial </th>
+                                
+                                <th> Serila </th>
                                 <th> Name </th>
-                                <th> Branch </th>
-                                <th> Roles </th>
-                                <th> Phone </th>
-                                <th> Action </th>
+                                <th> Created </th>
+                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $key=>$user)
-                            @foreach ($user->roles as $userRoles)
-                            @if(!Auth::user()->hasRole('superadmin'))
-                                 @continue($userRoles->name == 'superadmin')
-                            @endif
-                                
+
                                 <tr class="odd gradeX">
-                                    <td> {{ $key+1 }} </td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->branch->name }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
-                                        <span class="btn" style="background-color: #3fcc7e; color:#fff; padding: 1px;"> {{ $userRoles->name }} </span>  
-                                    </td>
-                                    <td>{{ $user->phone1 }}</td>
-                                    <td>
-                                        <a  class="waves-effect btn btn-success" href="{{ route('admin.user.show', $user) }}"><i class="material-icons">visibility</i></a>
-                                        
-                                        <a  class="waves-effect btn btn-primary" href="{{ route('admin.user.edit', $user) }}"><i class="material-icons">edit</i></a>
+                                        <a  class="waves-effect btn btn-primary" href="#"><i class="material-icons">edit</i></a>
                                         
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
-                                        onclick="deleteUser({{$user->id}})">
+                                        onclick="deleteCategory">
                                         <i class="material-icons">delete</i>
                                         </button>
     
-                                        <form id="delete-form-{{$user->id}}" action="{{ route('admin.user.destroy', $user->id) }}" method="post" style="display:none;">
+                                        <form id="" action="" method="post" style="display:none;">
                                             @csrf
                                             @method("DELETE")
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
-                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th> Serial </th>
+                                <th> Serila </th>
                                 <th> Name </th>
-                                <th> Branch </th>
-                                <th> Roles </th>
-                                <th> Phone </th>
-                                <th> Action </th>
+                                <th> Created </th>
+                                <th> Actions </th>
                             </tr>
                         </tfoot>
                     </table>
@@ -134,7 +100,7 @@
 
     <script type="text/javascript">
     
-    function deleteUser(id) {
+    function deleteCategory(id) {
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -146,7 +112,7 @@
 
             swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "Related \'Sub-Category\' will also be deleted!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
@@ -162,7 +128,7 @@
             ) {
                 swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your User name is safe :)',
+                'Your Category name is safe :)',
                 'error'
                 )
             }

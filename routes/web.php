@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +49,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('expensehead', 'ExpenseheadCotroller');
     Route::resource('expense', 'ExpenseCotroller');
     Route::resource('farmer', 'FarmerController');
+    Route::resource('farmerinvoice', 'FarmerInvoiceController');
     /*
      * Customer Resource
      * */

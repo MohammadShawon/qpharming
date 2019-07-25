@@ -22,7 +22,7 @@
                 <div class="row">
                     @foreach ($branches as $branch)
                         <div class="col-md-4">
-                            <div class="card card-box" style="box-shadow: 5px 10px 8px #888888;">
+                            <div class="card card-box">
                                 <div class="card-body no-padding ">
                                     <div class="doctor-profile" style="padding: 35px 0px;">
                                             <img src="{{ asset('admin/assets/img/dp.jpg') }}" class="doctor-pic" alt=""> 
