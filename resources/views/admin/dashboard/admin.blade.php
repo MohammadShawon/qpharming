@@ -199,7 +199,7 @@
 
                         </ul>
                            <div class="full-width text-center p-t-10" >
-                                <a href="#" class="btn purple btn-outline btn-circle margin-0">View All</a>
+                                <a href="{{ route('admin.user.index') }}" class="btn purple btn-outline btn-circle margin-0">View All</a>
                             </div>
                        </div>
                     </div>

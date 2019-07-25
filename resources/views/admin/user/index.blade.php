@@ -45,7 +45,7 @@
             </div>
             <div class="card card-topline-red">
                 <div class="card-head" style="text-align: center;">
-                    <header>USER</header><span class="btn btn-primary ml-1"> {{ $users->count() }} </span>
+                    <header>USER/EMPLOYEE</header><span class="btn btn-primary ml-1"> {{ $users->count() }} </span>
                     <div class="tools">
                         <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                         <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -74,15 +74,17 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $key=>$user)
+                            @foreach ($user->roles as $userRoles)
+                            @if(!Auth::user()->hasRole('superadmin'))
+                                 @continue($userRoles->name == 'superadmin')
+                            @endif
                                 
                                 <tr class="odd gradeX">
                                     <td> {{ $key+1 }} </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->branch->name }}</td>
                                     <td>
-                                        @foreach ($user->roles as $userRoles)
-                                            <span class="btn" style="background-color: #3fcc7e; color:#fff; padding: 1px;"> {{ $userRoles->name }} </span>  
-                                        @endforeach
+                                        <span class="btn" style="background-color: #3fcc7e; color:#fff; padding: 1px;"> {{ $userRoles->name }} </span>  
                                     </td>
                                     <td>{{ $user->phone1 }}</td>
                                     <td>
@@ -101,6 +103,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                            @endforeach
                             @endforeach
                         </tbody>
                         <tfoot>
