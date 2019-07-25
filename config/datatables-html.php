@@ -7,7 +7,8 @@ return [
     'table' => [
         'class' => 'display',
         'id'    => 'dataTable',
-        'style' => 'width: 100%'
+        'style' => 'width: 100%',
+        'data-upgraded' => ',MaterialDataTable',
     ],
 
     /*

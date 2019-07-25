@@ -26,29 +26,12 @@
                     </a>
                     
                 </div>
-                <div class="btn-group pull-right">
-                        <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                            </li>
-                        </ul>
-                </div>
-                <div class="card card-topline-red">
+
+                <div class="card card-box">
                     <div class="card-head" style="text-align: center;">
-    {{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
-                        <header>All Farmer Lists</header>
+                        <header>
+                            All Farmer Lists ( {{ DB::table('farmers')->count() }} )
+                        </header>
 
                     </div>
                     <div class="card-body">
