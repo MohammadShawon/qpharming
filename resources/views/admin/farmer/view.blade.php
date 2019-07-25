@@ -53,14 +53,17 @@ use Carbon\Carbon;
             <div class="card-body no-padding height-9">
                 
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name"><span class="btn btn-circle btn-success">Round 2</span></div>
+                    <div class="profile-usertitle-name"><span class="btn btn-circle btn-success">Round {{ $farmer->farmerbatches->count() }}</span></div>
                 </div>
                 <ul class="list-group list-group-unbordered">
+                    @php
+                    $latestBatch = DB::table('farmer_batches')->first();
+                @endphp
                     <li class="list-group-item">
-                        <b>Opening Date</b> <a class="pull-right">20 July, 19</a>
+                        <b>Opening Date</b> <a class="pull-right">{{ date('M d, y', strtotime($latestBatch->created_at)) }}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Running Date</b> <a class="pull-right">20 July, 19</a>
+                        <b>Running Date</b> <a class="pull-right">{{ date('M d, y') }}</a>
                     </li>
                 </ul>
             </div>
@@ -111,6 +114,186 @@ use Carbon\Carbon;
     </div>
 </div>
 </div>
+<div class="row">
+            
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header class="panel-heading panel-heading-blue text-center">
+                       <strong> Age</strong>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>18 Days</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header class="panel-heading panel-heading-blue text-center">
+                        <strong>Total Died</strong>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>18</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header class="panel-heading panel-heading-blue text-center">
+                        <b>Total Feed</b>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>120 kg</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header class="panel-heading panel-heading-blue text-center">
+                        <strong>Total Feed</strong>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>2.2 Sack</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header  class="panel-heading panel-heading-blue text-center">
+                        <strong>Feed Left</strong>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>4.3 Sack</b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="panel">
+                    <header class="panel-heading panel-heading-blue text-center">
+                        <strong>Weigh Per Pics</strong>
+                    </header>
+                    <div class="panel-body text-center">
+                        <b>400 gm</b> (Now)
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-head text-center">
+                        <header style="padding: 25px 0;">DAILY RECORDS</header>
+                    </div>
+                    <div class="card-body" id="line-parent">
+                        <div class="panel-group accordion" id="accordion3">
+                            @foreach ($farmer->farmerbatches as $farmerBatch)
+                                <div class="panel panel-default" >
+                                    <div class="panel-heading panel-heading-gray active">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#{{$farmerBatch->batch_number}}">
+
+                                                {{-- Batch Name, Batch Number , Batch Status --}}
+
+                                                Batch Name :  <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ $farmerBatch->batch_name }}</span> <span aria-hidden="true" class="icon-arrow-right "></span>
+                                                Batch Number : <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ $farmerBatch->batch_number }}</span> <span aria-hidden="true" class="icon-arrow-right "></span>
+
+                                                Status : <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ ($farmerBatch->status == 'active') ? 'Running' : 'Closed' }}</span>
+
+
+                                               
+                                            </a>
+                                            <span class="pull-right">
+                                                <a class="text-primary" href="{{ url('/farmer/'.$farmer->id.'/batch/'.$farmerBatch->id.'/edit') }}">Edit</a> | 
+                                                <a class="text-danger" onclick="deleteFarmerBatch({{$farmerBatch->id}})" href="#">Delete</a>
+
+                                                <form id="delete-form-{{$farmerBatch->id}}" action="{{ url('/farmer/'.$farmer->id.'/batch/'.$farmerBatch->id) }}" method="post" style="display:none;">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                </form>
+                                            </span>
+                                            
+                                        </h4>
+                                    </div>
+                                    <div id="{{$farmerBatch->batch_number}}" class="panel-collapse {{ $farmerBatch->status == 'active' ? 'in': 'collapse' }}">
+                                        <br>
+                                        <div class="row justify-content-center">
+                                            <div class="col-sm-6">
+
+                                                {{-- Add Todays Record Button --}}
+                                                <a data-toggle="modal" data-target="#farmerRecordForm" class="btn btn-info btn-lg m-b-10">Add Todays Record</a>
+
+                                                {{--View FUll Record Button --}}
+                                                <a href="" class="btn btn-primary btn-lg m-b-10">View Full Record</a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead class="text-center">
+                                                    <tr>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Age</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Died</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Feed Eaten - kg</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Feed Eaten - Sack</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Feed left</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Wieght</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Sickness</b></p>
+                                                        </th>
+                                                        <th>
+                                                            <p style="font-size:17px; color:#A52A2A;"><b>Comments</b></p>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-center">
+                                                        <td>1</td>
+                                                        <td>5</td>
+                                                        <td>20 kg</td>
+                                                        <td>0.01 Sack</td>
+                                                        <td>20.01 Sack</td>
+                                                        <td>100gm</td>
+                                                        <td style="max-width: 150px;">Well</td>
+                                                        <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @include('admin.modals.farmers.daily-record')
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            {{-- <div class="panel panel-default">
+                                <div class="panel-heading panel-heading-gray">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_3">
+                                            Batch Name : May 2019 <span aria-hidden="true" class="icon-arrow-right "></span>
+                                            Batch ID : M1904 <span aria-hidden="true" class="icon-arrow-right "></span>
+                                            Status : <span class="label label-sm label-danger">Completed</span>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse_3_3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>....</p>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 @csrf
 {{--
