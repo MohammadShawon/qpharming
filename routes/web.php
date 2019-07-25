@@ -94,12 +94,6 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('notifications', 'NotificationsController@allNotification');
     Route::get('markallasread', 'NotificationsController@markallasread');
 
-    // employee list view
-    Route::get('employee', function() {
-        $users = User::with('branch','roles')->latest()->get();
-        return view('admin.user.index', compact('users'));
-    });
-
 
 
     /*
