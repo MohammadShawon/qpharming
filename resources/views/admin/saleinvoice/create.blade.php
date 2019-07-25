@@ -94,7 +94,7 @@
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <label for="payment_type">Payment Type</label>
-                                    <select name="payment_type" id="payment_type" class="form-control">
+                                    <select name="payment_type" id="payment_type" class="form-control select2">
                                         <option value="cash">Cash</option>
                                         <option value="bank">Bank</option>
                                         <option value="bkash">Bkash | Rocket</option>

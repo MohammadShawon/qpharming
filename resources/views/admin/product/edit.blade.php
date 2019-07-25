@@ -26,7 +26,7 @@
                     <header>Update Product</header>
                 </div>
                 <div class="card-body" id="bar-parent">
-                    <form method="post" action="{{ route('admin.product.update', $product->id) }}">
+                    <form method="post" action="{{ route('admin.product.update', $product) }}">
                         @csrf
                         @method('PATCH')
                         <div class="row">
@@ -61,16 +61,17 @@
                                     <label for="barcode">Generate Barcode</label>
                                     <input id="barcode" type="text" name="barcode" class="form-control" id="simpleFormEmail" value="{{ $product->barcode }}" >
                                 </div>
-                                {{-- Base unit ID --}}
-                                <div class="form-group">
-                                    <label for="unit_id">Base Unit ID</label>
-                                    <input type="text" name="unit_id" class="form-control" id="unit_id" value="{{ $product->base_unit_id }}">
-                                </div>
+
                             </div>
 
                         
                             <div class="col-md-6 col-sm-6">
 
+                                {{-- Base unit ID --}}
+                                <div class="form-group">
+                                    <label for="unit_id">Base Unit ID</label>
+                                    <input type="text" name="unit_id" class="form-control" id="unit_id" value="{{ $product->base_unit_id }}">
+                                </div>
 
 
                                 {{-- Size --}}
@@ -78,22 +79,7 @@
                                     <label for="size">Size</label>
                                     <input type="text" name="size" class="form-control" id="size" placeholder="Enter alternativee phone number" value="{{ $product->size }}">
                                 </div>
-                                {{-- Cost Price --}}
-                                <div class="form-group">
-                                    <label for="cost_price">Cost Price</label>
-                                    <input type="text" name="cost_price" class="form-control" id="cost_price" placeholder="Enter TP of the product" value="{{ $product->cost_price }}" autocomplete="off">
-                                </div>
-                                {{-- Selling Price --}}
-                                <div class="form-group">
-                                    <label for="selling_price">Selling Price</label>
-                                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder="Enter MRP of the product" value="{{ $product->selling_price }}" autocomplete="off">
-                                </div>
 
-                                {{-- Quantity --}}
-                                <div class="form-group">
-                                    <label for="quantity">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="quantity" value="{{ $product->quantity }}">
-                                </div>
 
                                 {{-- Description --}}
                                 <div class="form-group">

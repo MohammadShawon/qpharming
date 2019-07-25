@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Product\ProductsDataTable;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -22,12 +23,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProductsDataTable $dataTable)
     {
+
         /* Product List */
         if(auth()->user()->can('view_product')){
-            $products = Product::latest()->get();
-            return view('admin.product.index', compact('products'));
+//            $products = Product::latest()->get();
+//            return view('admin.product.index', compact('products'));
+            return $dataTable->render('admin.product.index');
         }
         abort(403);
     }
@@ -67,9 +70,9 @@ class ProductController extends Controller
                     'base_unit_id'   => $request->unit_id,
                     'description'    => $request->description,
                     'size'           => $request->size,
-                    'cost_price'     => $request->cost_price,
-                    'selling_price'     => $request->selling_price,
-                    'quantity'       => $request->quantity,
+//                    'cost_price'     => $request->cost_price,
+//                    'selling_price'     => $request->selling_price,
+//                    'quantity'       => $request->quantity,
                 ]);
             }catch (\Exception $e)
             {
@@ -83,7 +86,7 @@ class ProductController extends Controller
              * */
 
             try{
-                $batch = ProductPrice::create([
+                $batch = new ProductPrice([
                     'product_id'       =>      $product->id,
                     'batch_no'         =>      date('Y'). '-'.random_int(1,50000),
                     'quantity'         =>      $request->quantity,
@@ -93,6 +96,7 @@ class ProductController extends Controller
                     'exp_date'         =>      Carbon::now('+6'),
 
                 ]);
+                $product->productprices()->save($batch);
             }catch (\Exception $e)
             {
                 DB::rollback();

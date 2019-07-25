@@ -9,11 +9,11 @@ class Product extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-        'subcategory_id','product_name','sku','barcode','base_unit_id','description','size','cost_price','selling_price','quantity'
+        'subcategory_id','product_name','sku','barcode','base_unit_id','description','size'
     ];
 
     public function unit(){
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Unit::class,'base_unit_id','id');
     }
     
     public function category(){
@@ -27,8 +27,24 @@ class Product extends Model implements Auditable
         return $this->belongsTo(SaleItem::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function purchaseitems(){
         return $this->belongsTo(PurchaseItem::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productprices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
+    public function getRouteKeyName():string
+    {
+        return 'product_name';
     }
 
 

@@ -29,9 +29,9 @@ class ProductUpdateRequest extends FormRequest
             'barcode'      => 'required|numeric',
             'unit_id'      => 'required',
             'size'         => 'required',
-            'cost_price'    => 'required',
-            'selling_price' => 'required',
-            'quantity'     => 'required|numeric',
+//            'cost_price'    => 'required',
+//            'selling_price' => 'required',
+//            'quantity'     => 'required|numeric',
         ];
     }
 }
