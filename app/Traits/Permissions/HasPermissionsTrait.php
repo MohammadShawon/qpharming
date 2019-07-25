@@ -5,7 +5,6 @@ use App\Models\{Role,Permission};
 
 trait HasPermissionsTrait
 {
-   
 
     /**
      * @param mixed ...$roles

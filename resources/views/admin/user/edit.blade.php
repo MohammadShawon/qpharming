@@ -27,7 +27,7 @@
                     <header>Update User</header>
                 </div>
                 <div class="card-body" id="bar-parent">
-                    <form method="post" action="{{ route('admin.user.update', $user->id) }}">
+                    <form method="post" action="{{ route('admin.user.update', $user) }}">
                         @csrf
                         @method('PATCH')
                         <div class="row">
@@ -51,15 +51,16 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 {{-- Role --}}
                                 <div class="form-group">
                                     <label>Select Role</label>
                                     <select name="roles[]" class="form-control select2 " multiple>
                                         @foreach ($roles as $role)
+
                                             <option value="{{ $role->id }}"
                                                 @foreach ($user->roles as $userRoles)
-                                                    {{ $role->id == $userRoles->id ? 'selected':'' }}
+                                                    {{ $role->id === $userRoles->id ? 'selected':'' }}
                                                 @endforeach
                                                 >
                                                 {{ $role->name }}

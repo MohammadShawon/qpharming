@@ -52,4 +52,9 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(Purchase::class);
     }
 
+    public function getRouteKeyName():string
+    {
+        return 'username';
+    }
+
 }

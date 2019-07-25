@@ -101,11 +101,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
+
         /* Single User Details */
         if(auth()->user()->can('view_user')){
-            $user = User::findOrFail($id);
+            $user = User::findOrFail($user->id);
             return view('admin.user.show', compact('user'));
         }
         abort(403);
@@ -117,13 +118,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         /* User EDIT form */
         if(auth()->user()->can('edit_user')){
             $data['branches'] = Branch::get(['id','name']);
             $data['roles'] = Role::where('id', '!=', 1)->get(['id','name']);
-            $user = User::findOrFail($id);
+            $user = User::findOrFail($user->id);
             return view('admin.user.edit', $data,  compact('user'));
         }
         abort(403);
@@ -136,11 +137,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
         /* UPDATE USER */
         if(auth()->user()->can('edit_user')){
-            $user = User::findOrFail($id);
+            $user = User::findOrFail($user->id);
+
+            if (!auth()->user()->hasRole('superadmin') && $user->hasRole('superadmin'))
+            {
+                Toastr::success('You Can Not Change the SuperAdmin' , 'Success');
+                return redirect()->to('user');
+            }
             /* update user with password */
             if(!empty($request->password)){
                 $user->update([
