@@ -57,13 +57,27 @@ use Carbon\Carbon;
                 </div>
                 <ul class="list-group list-group-unbordered">
                     @php
-                    $latestBatch = DB::table('farmer_batches')->first();
-                @endphp
+                        $latestBatch = DB::table('farmer_batches')->first();
+                        $startDate = \Carbon\Carbon::parse($latestBatch->created_at);
+                        $endDate = \Carbon\Carbon::now();
+
+                    @endphp
                     <li class="list-group-item">
-                        <b>Opening Date</b> <a class="pull-right">{{ date('M d, y', strtotime($latestBatch->created_at)) }}</a>
+                        Opening Date <a class="pull-right">
+                            <b>
+                                {{ $latestBatch !== null ? date('M d, y', strtotime($latestBatch->created_at)) : 'No Batch' }}
+                                </b>
+                        </a>
                     </li>
                     <li class="list-group-item">
-                        <b>Running Date</b> <a class="pull-right">{{ date('M d, y') }}</a>
+                        <b>Running Day</b> <a class="pull-right">
+                            <span class="label label-rouded label-danger">
+                                <b>
+                                    {{ ($startDate->diffInDays($endDate) !== 0 ?$startDate->diffInDays($endDate) : 1) }}
+                                </b>
+                            </span>
+
+                        </a>
                     </li>
                 </ul>
             </div>

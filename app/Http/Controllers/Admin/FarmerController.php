@@ -130,7 +130,7 @@ class FarmerController extends Controller
         /* View a Single Farmer Informations */
         if (auth()->user()->can('view_farmer')) {
 
-            //$farmerBatches = FarmerBatch::find($farmer->id)->get();
+//            $farmerBatches = FarmerBatch::find($farmer->id)->get();
             
             return view('admin.farmer.view', compact('farmer'));
         }
