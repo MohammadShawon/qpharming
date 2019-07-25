@@ -69,9 +69,9 @@ class BranchFarmersDatatables extends DataTable
     {
         $showUrl = route('admin.farmer.show', $data->id);
         $editUrl = route('admin.farmer.edit', $data->id);
-        return "<a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i>Details</a> 
-                        <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i>Update</a>
-                        <button class='waves-effect btn deepPink-bgcolor delete' data-value='$data->id' ><i class='material-icons'>delete</i>Delete</button>";
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+                        <a class='btn blue btn-outline btn-circle' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
+                        <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
     }
     /**
      * Optional method if you want to use html builder.
@@ -85,7 +85,7 @@ class BranchFarmersDatatables extends DataTable
                     ->minifiedAjax()
                     ->processing(true)
                     ->addAction([
-                        'width' => '30%',
+                        'width' => '15%',
                         'printable' => false,
                         'exportable' => false,
                         'searchable' => false
