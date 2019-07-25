@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class SubCategory extends Model
+class SubCategory extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
     protected $fillable = [
         'name', 'slug', 'category_id'
     ];

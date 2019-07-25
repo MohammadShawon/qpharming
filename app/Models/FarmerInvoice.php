@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class FarmerInvoice extends Model
+class FarmerInvoice extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
     public function farmerbatch(){
         return $this->belongsTo(FarmerBatch::class, 'batch_number');
     }

@@ -188,6 +188,9 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
 
+//      Auditing Service Provider
+        OwenIt\Auditing\AuditingServiceProvider::class,
+
 
     ],
 
