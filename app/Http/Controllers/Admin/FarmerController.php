@@ -29,7 +29,7 @@ class FarmerController extends Controller
      * @return void
      */
     public function index(FarmersDatatable $dataTable)
-    { 
+    {
         /* show all the farmers */
         if (auth()->user()->can('view_farmer')) {
             return $dataTable->render('admin.farmer.index');
@@ -229,18 +229,25 @@ class FarmerController extends Controller
      */
     public function destroy(Farmer $farmer)
     {
-       if (auth()->user()->can('delete_farmer')) {
-            
-            $farmer->delete();
+        try{
+            if (auth()->user()->can('delete_farmer')) {
 
-            /* Delete Image */
-            if(Storage::disk('public')->exists('farmer/'.$farmer->image)){
-                Storage::disk('public')->delete('farmer/'.$farmer->image);
+                $farmer->delete();
+
+                /* Delete Image */
+                if(Storage::disk('public')->exists('farmer/'.$farmer->image)){
+                    Storage::disk('public')->delete('farmer/'.$farmer->image);
+                }
+
+                Toastr::success('farmer Deleted Successfully', 'Success');
+                return redirect()->back();
             }
-
-            Toastr::success('farmer Deleted Successfully', 'Success');
-            return redirect()->route('admin.farmer.index');
+        }catch (\Illuminate\Database\QueryException $e)
+        {
+            Toastr::success('Can Not be Deleted! This Farmer has Data.');
+            return redirect()->back();
         }
+
        abort(403);
     }
 }

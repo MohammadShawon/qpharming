@@ -92,9 +92,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('notifications', 'NotificationsController@allNotification');
     Route::get('markallasread', 'NotificationsController@markallasread');
 
-    
-    
-    
+
 
     /*
      * Sales
