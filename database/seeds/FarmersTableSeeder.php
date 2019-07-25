@@ -15,7 +15,7 @@ class FarmersTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 10) as $farmer) { 
+        foreach (range(1, 100) as $farmer) {
             Farmer::create([
                 'branch_id'      => rand(1, 5),
                 'name'           => $faker->name,

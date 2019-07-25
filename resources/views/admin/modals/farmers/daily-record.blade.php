@@ -1,9 +1,9 @@
 <!-- Modal -->
 <div class="modal fade" id="farmerRecordForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Input Record</h5>
+            <div class="modal-header bg-green">
+              <h4 class="modal-title header-indigo text-center">Daily Record Form [ Name - {{ $farmer->name }} ]</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

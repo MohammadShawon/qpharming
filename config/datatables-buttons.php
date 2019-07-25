@@ -69,6 +69,9 @@ return [
             'print'
             
         ],
+        'modifier' => [
+            'page' => 'current'
+        ]
 
     ],
 ];

@@ -26,29 +26,12 @@
                     </a>
                     
                 </div>
-                <div class="btn-group pull-right">
-                        <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                            <i class="fa fa-angle-down"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-print"></i> Print </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
-                            </li>
-                        </ul>
-                </div>
-                <div class="card card-topline-red">
+
+                <div class="card card-box">
                     <div class="card-head" style="text-align: center;">
-    {{--                    <header>FARMER</header> <span class="btn btn-primary ml-1"> {{ $farmers->count() }} </span>--}}
-                        <header>All Farmer Lists</header>
+                        <header>
+                            All Farmer Lists ( {{ DB::table('farmers')->count() }} )
+                        </header>
 
                     </div>
                     <div class="card-body">
@@ -70,54 +53,71 @@
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
 
-
-{{--    <script>--}}
-{{--        $('#dataTable').DataTable({--}}
-{{--            dom: 'Blfrtip',--}}
-{{--        })--}}
-{{--    </script>--}}
-
     <!-- sweet aleart -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="{{ asset('admin/assets/js/sweetalert.min.js') }}"></script>
 
     <script type="text/javascript">
-    
-    function deleteFarmer(id) {
+        $(function () {
+            //region delete
+            $(document).on("click","button.delete",function (e) {
+                var id = $(this).data('value');
 
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false,
-            })
+                var _token = '{{ csrf_token() }}';
+                var url = "{{route('admin.farmer.destroy',':id')}}";
+                url = url.replace(':id', id);
 
-            swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-            }).then((result) => {
-            if (result.value) {
-                event.preventDefault();
-                document.getElementById("delete-form-"+id).submit();
-            } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your SubCategory name is safe :)',
-                'error'
-                )
-            }
-        })
 
-    }
-    
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        event.preventDefault();
+                        // id.submit();
+                        $.ajax({
+                            url:url ,
+                            type: "POST",
+                            data: { id: id,_method:'delete',_token: _token },
+                            success: function () {
+                                // toastr.success('Success messages');
+                                location.reload();
+                                // toastr.success("Successfully deleted");
+
+                            },
+                            error: function (msg) {
+                                console.log(msg);
+                            }
+                        });
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'Your Farmer name is safe :)',
+                            'error'
+                        )
+                    }
+                })
+
+
+            });
+
+        });
+
     </script>
 @endpush
 
