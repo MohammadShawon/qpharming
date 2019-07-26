@@ -5,6 +5,9 @@ use Carbon\Carbon;
 @section('title', 'Update - Company')
 @push('css')
 <link href="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }} " rel="stylesheet" media="screen">
+<!--select2-->
+<link href="{{ asset('admin/assets/plugins/select2/css/select2.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/assets/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @section('content')
 <div class="page-bar">
@@ -19,7 +22,7 @@ use Carbon\Carbon;
             <header>Update Company</header>
         </div>
         <div class="card-body " id="bar-parent">
-            <form method="post" action="{{ route('admin.company.update', $company->id) }}">
+            <form method="post" action="{{ route('admin.company.update', $company) }}">
                 @csrf
                 @method('PATCH')
                 <div class="row">
@@ -93,17 +96,33 @@ use Carbon\Carbon;
                             </div>
                         </div>
                         
-                        {{-- Status --}}
-                        <div class="form-group">
-                            <label >Status</label>
-                                <select class="form-control" name="status">
-                                @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)    
-                                    <option value="{{$key}}" 
-                                        {{ $company->status == $key ? "selected" : "" }}>
-                                        {{ $value }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="type">Business Type</label>
+                                    <select name="type" id="type" class="form-control select2">
+                                        @foreach(['medicine' => 'Medicine', 'feed' => 'Feed', 'chick' => 'Chick','other' => 'Other'] AS $key => $value)
+                                            <option value="{{ $key }}" {{ $company->type === $key ? "selected" : "" }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                {{-- Status --}}
+                                <div class="form-group">
+                                    <label >Status</label>
+                                    <select class="form-control" name="status">
+                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)
+                                            <option value="{{$key}}"
+                                                {{ $company->status == $key ? "selected" : "" }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,4 +138,7 @@ use Carbon\Carbon;
 <!-- data time -->
 <script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"  charset="UTF-8"></script>
 <script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker-init.js') }}"  charset="UTF-8"></script>
+<!--select2-->
+<script src="{{ asset('admin/assets/plugins/select2/js/select2.js') }}" ></script>
+<script src="{{ asset('admin/assets/js/pages/select2/select2-init.js') }}" ></script>
 @endpush

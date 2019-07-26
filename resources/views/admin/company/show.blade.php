@@ -37,22 +37,22 @@
                             </div>
                             <div class="col-md-3 col-6 b-r"> <strong>Representative Name</strong>
                                 <br>
-                                <p class="text-muted">{{ $company->representative_name }}</p>
+                                <p class="text-muted">{{ $company->representative_name ?? 'N/A' }}</p>
                             </div>
                             <div class="col-md-3 col-6 b-r"> <strong>Phone</strong>
                                 <br>
-                                <p class="text-muted">{{ $company->phone1 }}</p>
+                                <p class="text-muted">{{ $company->phone1 ?? 'N/A' }}</p>
                             </div>
                             <div class="col-md-3 col-6"> <strong>Alternative Phone</strong>
                                 <br>
-                                <p class="text-muted">{{ $company->phone2 }}</p>
+                                <p class="text-muted">{{ $company->phone2 ?? 'N/A' }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-3 col-6 b-r"> <strong>Email</strong>
                                 <br>
-                                <p class="text-muted">{{ $company->email }}</p>
+                                <p class="text-muted">{{ $company->email ?? 'N/A'}}</p>
                             </div>
                             <div class="col-md-3 col-6 b-r"> <strong>Opening Balance</strong>
                                 <br>

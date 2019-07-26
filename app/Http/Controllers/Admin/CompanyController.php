@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Company\CompaniesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\CompanyStoreRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
@@ -15,15 +16,17 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param CompaniesDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompaniesDataTable $dataTable)
     {
         /* Company List */
         if (auth()->user()->can('view_company')) {
                 
-            $data['companies'] = Company::latest()->get(['id','name','phone1','representative_name','status','created_at']);
-            return view('admin.company.index', $data);
+//            $data['companies'] = Company::latest()->get(['id','name','phone1','representative_name','status','created_at']);
+//            return view('admin.company.index', $data);
+            return $dataTable->render('admin.company.index');
             
         }
         abort(403);
@@ -64,7 +67,8 @@ class CompanyController extends Controller
             'address'               => ($request->address != null ? $request->address : null),
             'opening_balance'       => ($request->opening_balance != null?$request->opening_balance:0),
             'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
-            'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
+            'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i'),
+                'type'              => $request->type,
             ]);
 
             /* cheack and showing toastr message */
@@ -83,24 +87,25 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Company $company)
     {
         /* Company Details */
-        $company = Company::findOrFail($id);
+        $company = Company::findOrFail($company->id);
+
         return view('admin.company.show', compact('company'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Company $company
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Company $company)
     {
         if (auth()->user()->can('edit_company')) {
                 
-            $company = Company::findOrFail($id);
+            $company = Company::findOrFail($company->id);
             return view('admin.company.edit', compact('company'));
         }
         abort(403);
@@ -109,16 +114,16 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param CompanyUpdateRequest $request
+     * @param Company $company
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanyUpdateRequest $request, $id)
+    public function update(CompanyUpdateRequest $request, Company $company)
     {
         /* Update Company */
         if (auth()->user()->can('edit_company')) {
                 
-            $company = Company::findOrFail($id);
+            $company = Company::findOrFail($company->id);
             $Resultcompany = $company->update([
                 'name'                  => $request->company,
                 'slug'                  => str_slug($request->company),
@@ -129,6 +134,7 @@ class CompanyController extends Controller
                 'address'               => $request->address,
                 'opening_balance'       => $request->opening_balance,
                 'status'                => $request->status,
+                'type'                  => $request->type,
                 'starting_date'         => Carbon::parse($request->starting_date)->format('Y-m-d H:i'),
                 'ending_date'           => Carbon::parse($request->ending_date)->format('Y-m-d H:i')
             ]);

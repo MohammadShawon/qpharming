@@ -7,6 +7,9 @@ use Carbon\Carbon;
 
 @push('css')
 <link href="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }} " rel="stylesheet" media="screen">
+<!--select2-->
+<link href="{{ asset('admin/assets/plugins/select2/css/select2.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('admin/assets/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
 @section('content')
@@ -71,19 +74,37 @@ use Carbon\Carbon;
                             {{-- Balance --}}
                             <div class="form-group">
                                 <label for="opening_balance">Opening Balance</label>
-                                <input type="text" name="opening_balance" class="form-control" id="opening_balance" placeholder="Enter Opening Balance" onkeyup="this.value=this.value.replace(/^\.|[^\d\.]/g,'')">
+                                <input type="text" name="opening_balance" value="0" class="form-control" id="opening_balance" placeholder="Enter Opening Balance" onkeyup="this.value=this.value.replace(/^\.|[^\d\.]/g,'')">
                             </div>
                             
-                            {{-- Date --}}
-                            <div class="form-group">
-                                <label class="">Starting Date</label>
-                                <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                    <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::now()->toDayDateTimeString() }}">
-                                    <span class="input-group-addon ml-2">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="type">Business Type</label>
+                                        <select name="type" id="type" class="form-control select2">
+                                            <option value="medicine">Medicine</option>
+                                            <option value="feed">Feed</option>
+                                            <option value="chick">Chick</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    {{-- Date --}}
+                                    <div class="form-group">
+                                        <label class="">Starting Date</label>
+                                        <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
+                                            <input class="form-control" size="16" type="text" name="starting_date" value="{{ Carbon::now()->toDayDateTimeString() }}">
+                                            <span class="input-group-addon ml-2">
                                         <span class="fa fa-calendar"></span>
                                     </span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input1" value="" />
+                                    </div>
                                 </div>
-                                <input type="hidden" id="dtp_input1" value="" />
+
                             </div>
                             
                             
@@ -114,4 +135,7 @@ use Carbon\Carbon;
 <!-- data time -->
 <script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"  charset="UTF-8"></script>
 <script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker-init.js') }}"  charset="UTF-8"></script>
+<!--select2-->
+<script src="{{ asset('admin/assets/plugins/select2/js/select2.js') }}" ></script>
+<script src="{{ asset('admin/assets/js/pages/select2/select2-init.js') }}" ></script>
 @endpush

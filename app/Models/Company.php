@@ -17,6 +17,7 @@ class Company extends Model implements Auditable
         'email',
         'address',
         'status',
+        'type',
         'opening_balance',
         'starting_date',
         'ending_date',
@@ -29,5 +30,10 @@ class Company extends Model implements Auditable
     
     public function purchases(){
         return $this->hasMany(Purchase::class);
+    }
+
+    public function getRouteKeyName():string
+    {
+        return 'slug';
     }
 }

@@ -29,6 +29,7 @@ class CompanyUpdateRequest extends FormRequest
             'email'                 => 'nullable',
             'address'               => 'nullable',
             'representative_name'   => 'nullable',
+            'type'                  =>  'required',
             'opening_balance'       => 'required|numeric'
         ];
     }
