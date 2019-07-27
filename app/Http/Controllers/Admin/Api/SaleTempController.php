@@ -7,6 +7,7 @@ use App\Models\SaleTempItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use \Auth;
 
 class SaleTempController extends Controller
@@ -47,6 +48,11 @@ class SaleTempController extends Controller
      */
     public function store(Request $request)
     {
+        if(SaleTempItem::where('product_id','=',$request->input('item_id'))->exists())
+        {
+            $msg = Toastr::success('Already Added an Item','success');
+            return response()->json($msg);
+        }
         $batch = ProductPrice::where('product_id',$request->item_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
         if (!empty($batch))
         {
@@ -55,13 +61,13 @@ class SaleTempController extends Controller
                 'user_id'       => auth()->user()->id,
                 'product_id'    => $request->item_id,
                 'batch_no'      =>  $batch->batch_no,
-                'cost_price'    => $request->cost_price,
-                'selling_price' => $request->selling_price,
+                'cost_price'    => $batch->cost_price,
+                'selling_price' => $batch->selling_price,
                 'discount'      => 0,
                 'unit_id'       => $request->unit_id,
                 'quantity'      => 1,
-                'total_cost'    => $request->cost_price,
-                'total_selling' => $request->selling_price,
+                'total_cost'    => $batch->cost_price,
+                'total_selling' => $batch->selling_price,
                 'created_at'    => Carbon::now('+6.30'),
                 'updated_at'    => Carbon::now('+6.30'),
 

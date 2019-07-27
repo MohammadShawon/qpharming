@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Models\Product;
+use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller
 {
@@ -17,6 +19,15 @@ class ProductController extends Controller
     }
 
     public function index(){
-        return response()->json(Product::get());
+        /*
+         *  Eager Loading with Prices where Quantity is
+         *  greater than zero
+         * */
+        $products = Product::with(['productprices' => static function($query){
+            $query->where('quantity','>',0)->orderBy('created_at','asc')->first();
+        }])->get();
+
+
+        return response()->json($products);
     }
 }

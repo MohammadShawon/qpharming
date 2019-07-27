@@ -25,7 +25,7 @@
             $scope.saletemp = data;
         });
         $scope.addSaleTemp = function(item, newsaletemp) {
-            $http.post('/api/saletemp', { item_id: item.id, cost_price: item.cost_price, selling_price: item.selling_price,unit_id:item.base_unit_id, quantity: item.quantity }).
+            $http.post('/api/saletemp', { item_id: item.id, unit_id:item.base_unit_id }).
             success(function(data, status, headers, config) {
                 $scope.message.push(data);
                 $scope.saletemp.push(data);

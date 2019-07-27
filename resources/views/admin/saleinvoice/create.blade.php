@@ -143,6 +143,7 @@
                                             <th>Size</th>
                                             <th>Selling Price</th>
                                             <th>Quantity</th>
+                                            <th>Discount</th>
                                             <th>Total</th>
                                             <th>&nbsp;</th>
                                         </tr>
@@ -152,7 +153,8 @@
                                             <td>@{{ newsaletemp.product.size }}</td>
                                             <td><input type="text" style="text-align:center" autocomplete="off" name="selling_price" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.selling_price" size="8"></td>
                                             <td><input type="text" style="text-align:center" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.quantity" size="2"></td>
-                                            <td>@{{newsaletemp.selling_price * newsaletemp.quantity | currency:'Tk'}}</td>
+                                            <td><input type="text" style="text-align:center" autocomplete="off" name="discount" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.discount" size="2"></td>
+                                            <td>@{{  (newsaletemp.selling_price * newsaletemp.quantity) - newsaletemp.discount | currency:'Tk'}}</td>
                                             <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeSaleTemp(newsaletemp.id)"><span class="fa fa-remove" aria-hidden="true"></span></button></td>
                                         </tr>
                                     </table>
