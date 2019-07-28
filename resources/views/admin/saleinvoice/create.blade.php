@@ -31,20 +31,20 @@
                     {!! Form::open(['route' => 'admin.sales.store','method' => 'POST']) !!}
                         {{--          Form ROw 1          --}}
                         <div class="row">
-                            <div class="col-12 col-md-3 col-sm-6">
+                            <div class="col-12 col-md-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="invoice_id">Invoice No.</label>
                                     <input type="text" class="form-control" value="@if ($sale) {{ $sale->id + 1 }} @else {{ 1 }} @endif" readonly>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3 col-sm-6">
+                            <div class="col-12 col-md-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="user_id">Employee Name</label>
                                     <input type="text" id="user_id" class="form-control" value="{{ Auth::user()->name }}" readonly>
                                     <input type="hidden" name="user_d" value="{{ Auth::user()->id }}">
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 col-md-3">
+                            <div class="col-12 col-sm-4 col-md-2">
                                 <div class="form-group">
                                     <label for="branch_id">Branch Name</label>
                                     <input type="text" id="branch_id" class="form-control" value="{{ Auth::user()->branch->name }}" readonly>
@@ -56,10 +56,19 @@
 
                                     <label for="customer_id">Select Customer</label>
                                     <select id="customer_id" name="customer_id" class="form-control  select2 " >
+                                        <option value="">Select Customer</option>
                                         @foreach ($customers as $customer=> $value)
                                             <option value="{{ $value }}">{{ $customer }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3">
+                                <div class="form-group">
+
+                                    <label for="phone">Customer Phone</label>
+                                    <input type="tel" name="phone"  id="phone" class="form-control">
+
                                 </div>
                             </div>
 

@@ -22,12 +22,12 @@ class ProductPriceController extends Controller
     {
         /* All Product list */
         if (auth()->user()->can('view_product-price')) {
-                
+
             $productPrices = ProductPrice::latest()->get();
             return view('admin.productprice.index', compact('productPrices'));
         }
         abort(403);
-        
+
     }
 
     /**
@@ -40,10 +40,10 @@ class ProductPriceController extends Controller
         /* Product Create form */
         if (auth()->user()->can('create_product-price')) {
             $data['products'] = Product::get(['id','product_name']);
-            return view('admin.productprice.create', $data);    
+            return view('admin.productprice.create', $data);
         }
         abort(403);
-        
+
     }
 
     /**
@@ -72,10 +72,10 @@ class ProductPriceController extends Controller
                 return redirect()->route('admin.product-price.index');
             }
             abort(404);
-            
+
         }
         abort(403);
-        
+
     }
 
     /**
@@ -99,11 +99,11 @@ class ProductPriceController extends Controller
     {
         /* Product- price EDIT form */
         if (auth()->user()->can('edit_product-price')) {
-                
+
             $data['products'] = Product::get(['id','product_name']);
             return view('admin.productprice.edit', $data, compact('productPrice'));
         }
-        abort(403); 
+        abort(403);
     }
 
     /**
@@ -115,10 +115,10 @@ class ProductPriceController extends Controller
      */
     public function update(ProductPriceUpdateRequest $request, ProductPrice $productPrice)
     {
-        dd($productPrice);
+//        dd($productPrice);
         /* Update Product - Price */
         if (auth()->user()->can('delete_product-price')) {
-                
+
             $updateProductPrice = $productPrice->update([
                 'product_id'       =>      $request->product_id,
                 'batch_no'         =>      $request->batch,
@@ -135,7 +135,7 @@ class ProductPriceController extends Controller
             }
             abort(404);
         }
-        abort(403); 
+        abort(403);
     }
 
     /**
@@ -148,13 +148,13 @@ class ProductPriceController extends Controller
     {
         /* Product-Price Delete */
         if (auth()->user()->can('delete_product')) {
-                
+
             $deleteProductPrice = $productPrice->delete();
             if($deleteProductPrice){
                 Toastr::success('Product-Price Deleted Successfully', 'Success');
                 return redirect()->route('admin.product-price.index');
             }
         }
-        abort(403); 
+        abort(403);
     }
 }

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use \Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class SaleTempController extends Controller
 {
@@ -109,7 +111,28 @@ class SaleTempController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $saleTemp = SaleTempItem::find($id);
+        $totalQuantity = ProductPrice::where('product_id',$saleTemp->product_id)->sum('quantity');
+
+        if ($request->input('quantity') <= $totalQuantity)
+        {
+
+            $saleTemp->selling_price = $request->input('selling_price');
+            $saleTemp->discount = $request->input('discount');
+            $saleTemp->quantity = $request->input('quantity');
+            $saleTemp->total_cost = $saleTemp->cost_price * $request->input('quantity');
+            $saleTemp->total_selling = $request->input('selling_price') * $request->input('quantity');
+            $saleTemp->save();
+            return response()->json($saleTemp);
+
+        }
+        SaleTempItem::destroy($id);
+        $msg = '';
+        return $msg;
+
+//        dd($saleTemp);
+
+
     }
 
     /**
@@ -120,6 +143,6 @@ class SaleTempController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SaleTempItem::destroy($id);
     }
 }

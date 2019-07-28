@@ -36,15 +36,25 @@
         }
         $scope.updateSaleTemp = function(newsaletemp) {
 
-            $http.put('/api/saletemp/' + newsaletemp.id, {selling_price: newsaletemp.selling_price,discount:newsaletemp.discount, quantity: newsaletemp.quantity, total_cost: newsaletemp.item.cost_price * newsaletemp.quantity, total_selling: newsaletemp.selling_price * newsaletemp.quantity - newsaletemp.quantity * newsaletemp.discount }).
+            $http.put('/api/saletemp/' + newsaletemp.id, {selling_price: newsaletemp.selling_price,discount:newsaletemp.discount, quantity: newsaletemp.quantity, total_selling: newsaletemp.selling_price * newsaletemp.quantity - newsaletemp.quantity * newsaletemp.discount }).
             success(function(data, status, headers, config) {
                 // location.reload();
+                //Quantity exceed reload
+                if (data === '')
+                {
+                    $http.get('/api/saletemp').success(function(data) {
+                        $scope.saletemp = data;
+                    });
+                }
+                console.log(data);
+                //or this
+
             });
         }
         $scope.removeSaleTemp = function(id) {
-            $http.delete('api/saletemp/' + id).
+            $http.delete('/api/saletemp/' + id).
             success(function(data, status, headers, config) {
-                $http.get('api/saletemp').success(function(data) {
+                $http.get('/api/saletemp').success(function(data) {
                     $scope.saletemp = data;
                 });
             });

@@ -28,4 +28,5 @@ class SaleTempItem extends Model implements Auditable
     {
         return $this->belongsTo(Product::class);
     }
+
 }

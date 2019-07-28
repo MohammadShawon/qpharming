@@ -23,7 +23,7 @@
 // Route::group(['as'=>'admin.', 'prefix' => 'manager', 'namespace'=>'Admin','middleware' => 'role:manager'], function () {
 
 //     Route::resource('area', 'AreaController');
-    
+
 // });
 
 Auth::routes();
@@ -34,6 +34,8 @@ Auth::routes();
     Route::get('api/item','Admin\Api\ProductController@index');
     Route::get('api/saletemp','Admin\Api\SaleTempController@index');
     Route::post('api/saletemp','Admin\Api\SaleTempController@store');
+    Route::put('api/saletemp/{id}','Admin\Api\SaleTempController@update');
+    Route::delete('api/saletemp/{id}','Admin\Api\SaleTempController@destroy');
 
 
 /*
@@ -76,9 +78,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::delete('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@destroy');
 
     Route::get('farmer/profile', function (){ return view('admin.farmer.view2'); });
-   
+
     Route::post('farmer/records/{id}', 'FarmerRecordController@store')->name('daily-record');
-    
+
 //    Route::get('farmer-record-dashboard', 'FarmerRecordDashboardController@index');
 //    Route::get('farmer-record-dashboard2', 'FarmerRecordDashboardController@index2');
 
@@ -107,7 +109,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * Purchase
      * */
     Route::resource('purchases','PurchaseInvoice\PurchaseInvoiceController');
-    
+
 });
 
 /* Super Admin route start */
@@ -116,7 +118,7 @@ Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');
-   
+
 });
 
 /* Super Admin route end */
