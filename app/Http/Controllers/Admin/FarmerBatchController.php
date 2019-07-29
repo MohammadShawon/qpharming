@@ -13,6 +13,8 @@ use App\Http\Requests\FarmerBatch\FarmerBatchUpdateRequest;
 
 class FarmerBatchController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +50,7 @@ class FarmerBatchController extends Controller
             'farmer_id'        =>      $request->farmer_id,
             'batch_name'       =>      $request->batch_name,
             'batch_number'     =>      $request->batch_number,
+            'chicks_quantity'  =>      $request->chicks_quantity,
             'status'           =>      $request->status,
             'user_id'          =>      Auth::user()->id,
         ]);
@@ -84,7 +87,7 @@ class FarmerBatchController extends Controller
         return view('admin.farmerbatch.edit', $data);
     }
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -96,11 +99,12 @@ class FarmerBatchController extends Controller
     public function update(FarmerBatchUpdateRequest $request, $farmer_id, $batch_id)
     {
         $farmerBatch = FarmerBatch::findOrFail($batch_id);
-        
+
         $farmerBatchUpdate = $farmerBatch->update([
             'farmer_id'        =>      $request->farmer_id,
             'batch_name'       =>      $request->batch_name,
             'batch_number'     =>      $request->batch_number,
+            'chicks_quantity'  =>      $request->chicks_quantity,
             'status'           =>      $request->status,
             'user_id'          =>      Auth::user()->id,
         ]);

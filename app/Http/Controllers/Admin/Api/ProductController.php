@@ -24,7 +24,7 @@ class ProductController extends Controller
          *  greater than zero
          * */
         $products = Product::with(['productprices' => static function($query){
-            $query->where('quantity','>',0)->orderBy('created_at','asc')->first();
+            $query->where('quantity','>',0)->orderBy('created_at','asc')->get();
         }])->get();
 
 

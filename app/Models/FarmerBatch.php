@@ -8,7 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 class FarmerBatch extends Model implements Auditable
 {
 	use \OwenIt\Auditing\Auditable;
-    protected $fillable = ['farmer_id','user_id','batch_name','batch_number','status'];
+    protected $fillable = ['farmer_id','user_id','batch_name','batch_number','chicks_quantity','status'];
 
     public function farmer(){
         return $this->belongsTo(Farmer::class);
@@ -17,6 +17,6 @@ class FarmerBatch extends Model implements Auditable
     public function user(){
         return $this->belongsTo(User::class);
     }
-    
-    
+
+
 }

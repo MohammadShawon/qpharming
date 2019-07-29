@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="branch_id">Branch Name</label>
                                     <input type="text" id="branch_id" class="form-control" value="{{ Auth::user()->branch->name }}" readonly>
-                                    <input type="hidden" name="user_d" value="{{ Auth::user()->branch->id }}">
+                                    <input type="hidden" name="branch_id" value="{{ Auth::user()->branch->id }}">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-3">
@@ -56,8 +56,9 @@
 
                                     <label for="customer_id">Select Customer</label>
                                     <select id="customer_id" name="customer_id" class="form-control  select2 " >
-                                        <option value="">Select Customer</option>
+                                        <option value="0">Select Customer</option>
                                         @foreach ($customers as $customer=> $value)
+
                                             <option value="{{ $value }}">{{ $customer }}</option>
                                         @endforeach
                                     </select>
@@ -132,7 +133,7 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:10">
 
-                                            <td>@{{item.product_name}}</td>
+                                            <td width="80%">@{{item.product_name}}</td>
                                             <td ><button class="btn btn-primary btn-xs" type="button" ng-click="addSaleTemp(item, newsaletemp)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true">&#x2705;</span></button></td>
 
                                         </tr>
@@ -144,6 +145,7 @@
                             <!-- Sale Items table -->
 
                             <div class="col-9">
+                                <!-- product list Table -->
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <tr>
@@ -160,13 +162,97 @@
                                             {{--<td>@{{newsaletemp.product_id}}</td>--}}
                                             <td>@{{newsaletemp.product.product_name}}</td>
                                             <td>@{{ newsaletemp.product.size }}</td>
-                                            <td><input type="text" style="text-align:center" autocomplete="off" name="selling_price" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.selling_price" size="8"></td>
-                                            <td><input type="text" style="text-align:center" autocomplete="off" name="quantity" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.quantity" size="2"></td>
-                                            <td><input type="text" style="text-align:center" autocomplete="off" name="discount" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.discount" size="2"></td>
+                                            <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.selling_price" size="8"></td>
+                                            <td width="15%"><input type="number" style="text-align:center;width: 100%" autocomplete="off" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.quantity"></td>
+                                            <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateSaleTemp(newsaletemp)" ng-model="newsaletemp.discount" size="2"></td>
                                             <td>@{{  (newsaletemp.selling_price * newsaletemp.quantity) - newsaletemp.discount | currency:'Tk'}}</td>
                                             <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeSaleTemp(newsaletemp.id)"><span class="fa fa-remove" aria-hidden="true"></span></button></td>
                                         </tr>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3">
+                                                </td>
+                                                <td class="text-center">
+                                                   <b>
+                                                       TQ: @{{ sumQuantity(saletemp) }}
+                                                   </b>
+
+                                                </td>
+                                                <td>
+                                                    <b>
+                                                        TD: @{{ sumDiscount(saletemp) }}
+                                                    </b>
+
+                                                </td>
+                                                <td>
+                                                    <b>
+                                                        TA: @{{ sum(saletemp) | number:2 }}
+                                                    </b>
+                                                    <input type="hidden" name="sub_total" value="@{{ sum(saletemp) }}">
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="invoiceDiscount">Discount</label>
+                                                    <input type="text" ng-model="invoiceDiscount" ng-init="invoiceDiscount=0" autocomplete="off" class="form-control" id="invoiceDiscount" name="invoiceDiscount">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="payment">Paid Amount</label>
+                                                    <input type="text" ng-model="payment" id="payment" ng-init="payment=0" class="form-control" name="payment">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="totalInvoiceAmount">Total Invoice Amount</label>
+                                                    <input type="text" value="@{{ sum(saletemp) - invoiceDiscount | number:2 }}" class="form-control" name="grand_total" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="remarks">Remarks</label>
+                                                    <input type="text" name="remarks" class="form-control" id="remarks">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="amountDue">Amount Due</label>
+                                                    <input type="text" id="amountDue" class="form-control" value="@{{ (sum(saletemp) - discount) - payment }}" readonly style="font-size: 18px;font-weight: bold; text-align: center">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    {!! Form::submit('Complete Sale',['class' => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-success btn-block form-control','style' => 'margin-left:10px;margin-top:30px;']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     {!! Form::close() !!}

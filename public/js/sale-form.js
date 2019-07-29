@@ -12,4 +12,6 @@ $(document).ready(function(){
             $(".bank").show('slow');
         }
     });
+
+
 });

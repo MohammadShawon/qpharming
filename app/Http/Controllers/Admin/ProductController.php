@@ -76,6 +76,7 @@ class ProductController extends Controller
                 ]);
             }catch (\Exception $e)
             {
+
                 DB::rollback();
                 Toastr::success('Something Went Wrong 1', 'Error');
                 return redirect()->route('admin.product.create');

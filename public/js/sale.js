@@ -66,6 +66,21 @@
             });
             return total;
         }
+        $scope.sumQuantity = function(list) {
+            var totalQuantity=0;
+            angular.forEach(list , function(newsaletemp){
+                totalQuantity+= parseFloat(newsaletemp.quantity);
+            });
+            return totalQuantity;
+        }
+
+        $scope.sumDiscount = function(list) {
+            var totalDiscount=0;
+            angular.forEach(list , function(newsaletemp){
+                totalDiscount+= parseFloat(newsaletemp.discount);
+            });
+            return totalDiscount;
+        }
 
         //specific word search
         $scope.filterData = function (obj) {

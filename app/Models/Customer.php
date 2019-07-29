@@ -9,7 +9,6 @@ class Customer extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-        'id',
         'name',
         'phone',
         'address',

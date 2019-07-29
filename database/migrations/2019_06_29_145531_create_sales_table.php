@@ -22,7 +22,7 @@ class CreateSalesTable extends Migration
             $table->date('sale_date');
             $table->date('due_date')->nullable();
             $table->string('payment_type');
-            $table->string('bank');
+            $table->string('bank')->nullable();
             $table->decimal('sub_total',15,2);
             $table->decimal('discount',15,2);
             $table->decimal('grand_total',19,2);

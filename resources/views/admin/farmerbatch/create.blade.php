@@ -17,7 +17,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row justify-content-center">
@@ -39,7 +39,7 @@
                                     <input type="hidden" name="farmer_id" value="{{$farmer->id}}">
                                 </div>
 
-                               
+
 
                                 {{-- Batch Name --}}
                                 <div class="form-group">
@@ -52,12 +52,17 @@
                                     <label for="batch_number">Batch Number</label>
                                     <input type="text" name="batch_number" value="{{ date("F").'-'}}" class="form-control" id="batch_number" >
                                 </div>
+                                {{-- Chicks Quantity --}}
+                                <div class="form-group">
+                                    <label for="chicks">Chicks Quantity</label>
+                                    <input type="text" name="chicks_quantity" value="0" class="form-control" id="chicks" >
+                                </div>
 
                                 {{-- Batch Status --}}
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Status</label>
                                      <select class="form-control" name="status">
-                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)    
+                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)
                                         <option value="{{$key}}" {{ $farmer->status == $key ? "selected" : "" }}>{{ $value }}</option>
                                         @endforeach
                                     </select>
@@ -65,9 +70,9 @@
 
 
                             </div>
-                            
+
                         </div>
-                        
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ url('/farmer/'.$farmer->id) }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                     </form>
