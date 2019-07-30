@@ -26,6 +26,7 @@ class ProductController extends Controller
     public function index(ProductsDataTable $dataTable)
     {
 
+
         /* Product List */
         if(auth()->user()->can('view_product')){
 //            $products = Product::latest()->get();
@@ -91,6 +92,7 @@ class ProductController extends Controller
                     'product_id'       =>      $product->id,
                     'batch_no'         =>      date('Y'). '-'.random_int(1,50000),
                     'quantity'         =>      $request->quantity,
+                    'sold'             =>      0,
                     'cost_price'       =>      $request->cost_price,
                     'selling_price'    =>      $request->selling_price,
                     'mfg_date'         =>      Carbon::now('+6'),
@@ -114,7 +116,7 @@ class ProductController extends Controller
                 $inventories = Inventory::create([
                     'product_id'    => $product->id,
                     'user_id'       => auth()->user()->id,
-                    'batch_no'      => $batch->batch_no,
+//                    'batch_no'      => $batch->batch_no,
                     'unit_id'       => $request->unit_id,
                     'in_out_qty'    => $request->quantity,
                     'created_at'    => Carbon::now('+6.30'),

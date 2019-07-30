@@ -17,7 +17,8 @@ class CreateProductPricesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned()->index();
             $table->string('batch_no')->unique();
-            $table->decimal('quantity',20,2);
+            $table->decimal('quantity',8,2);
+            $table->decimal('sold',8,2);
             $table->decimal('cost_price',20,2);
             $table->decimal('selling_price',20,2);
             $table->dateTime('mfg_date');

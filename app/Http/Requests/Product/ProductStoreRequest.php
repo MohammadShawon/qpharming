@@ -11,10 +11,10 @@ class ProductStoreRequest extends FormRequest
      *
      * @return bool
      */
-    // public function authorize()
-    // {
-    //     return false;
-    // }
+     public function authorize():bool
+     {
+         return true;
+     }
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,7 +26,7 @@ class ProductStoreRequest extends FormRequest
         return [
             'product_name' => 'required',
             'sku'          => 'required|unique:products',
-            'barcode'      => 'required|numeric|unique:products',
+            'barcode'      => 'nullable|numeric|unique:products',
             'unit_id'      => 'required',
             'size'         => 'required',
             'cost_price'   => 'required',

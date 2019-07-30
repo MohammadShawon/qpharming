@@ -3,8 +3,10 @@
 namespace App\DataTables\Product;
 
 use App\Models\Product;
+use App\Models\ProductPrice;
 use App\User;
 use Yajra\DataTables\Services\DataTable;
+use \DB;
 
 class ProductsDataTable extends DataTable
 {
@@ -18,6 +20,10 @@ class ProductsDataTable extends DataTable
     {
         return datatables($query)
             ->addIndexColumn()
+            ->addColumn('quantity',static function ($data){
+                $quantity = ProductPrice::select(DB::raw('sum(quantity - sold) as current_quantity'))->where('product_id',$data->id)->first();
+                return $quantity->current_quantity;
+            })
             ->editColumn('subcategory_id',function ($data){
                 return $data->subcategory->category->name . '->' . $data->subcategory->name;
             })
@@ -28,7 +34,7 @@ class ProductsDataTable extends DataTable
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
             })
-            ->rawColumns(['action','intro'])
+            ->rawColumns(['action','intro','quantity'])
             ->setRowClass('gradeX');
     }
 
@@ -111,15 +117,21 @@ class ProductsDataTable extends DataTable
                 'visible' => true,
                 'orderable' => true
             ],
-
             [
-                'data' => 'barcode',
-                'name' => 'barcode',
-                'title' => 'Barcode No',
-                'searchable' => true,
-                'visible' => true,
-                'orderable' => true
+                'data'        => 'quantity',
+                'name'        => 'quantity',
+                'title'       => 'Stock',
+
             ],
+
+//            [
+//                'data' => 'barcode',
+//                'name' => 'barcode',
+//                'title' => 'Barcode No',
+//                'searchable' => true,
+//                'visible' => true,
+//                'orderable' => true
+//            ],
             [
                 'data' => 'base_unit_id',
                 'name' => 'base_unit_id',
