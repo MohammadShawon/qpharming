@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\PurchaseInvoice;
 
+use App\Models\Company,App\Models\Purchase;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,19 @@ class PurchaseInvoiceController extends Controller
      */
     public function index()
     {
-        //
+        /*
+         * First Check the user Permission
+         * @return create form
+         * */
+        if (auth()->user()->can('view_purchase'))
+        {
+            return view('admin.purchaseinvocie.index');
+        }
+        /*
+         * If Not Permission Assigned
+         * */
+        Toastr::error('You Do Not Have Permission!','error');
+        return redirect('/');
     }
 
     /**
@@ -24,7 +38,21 @@ class PurchaseInvoiceController extends Controller
      */
     public function create()
     {
-        //
+        /*
+         * First Check the user Permission
+         * @return create form
+         * */
+        if (auth()->user()->can('create_purchase'))
+        {
+            $data['companies'] = Company::where('status','active')->pluck('id','name');
+            $data['purchase'] = Purchase::orderBy('id','DESC')->first();
+            return view('admin.purchaseinvocie.create',$data);
+        }
+        /*
+         * If Not Permission Assigned
+         * */
+        Toastr::error('You Do Not Have Permission!','error');
+        return redirect('/');
     }
 
     /**

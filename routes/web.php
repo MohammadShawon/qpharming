@@ -26,7 +26,10 @@
 
 // });
 
-Auth::routes();
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+    Auth::routes();
 
 /*
  *  API Resource
@@ -36,6 +39,13 @@ Auth::routes();
     Route::post('api/saletemp','Admin\Api\SaleTempController@store');
     Route::put('api/saletemp/{id}','Admin\Api\SaleTempController@update');
     Route::delete('api/saletemp/{id}','Admin\Api\SaleTempController@destroy');
+
+    Route::get('api/allitem','Admin\Api\ProductController@allItem');
+    Route::get('api/receivingtemp','Admin\Api\PurchaseTempController@index');
+    Route::post('api/receivingtemp','Admin\Api\PurchaseTempController@store');
+    Route::put('api/receivingtemp/{id}','Admin\Api\PurchaseTempController@update');
+    Route::delete('api/receivingtemp/{id}','Admin\Api\PurchaseTempController@destroy');
+
 
 
 /*

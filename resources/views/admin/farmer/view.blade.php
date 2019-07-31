@@ -8,6 +8,13 @@ use Carbon\Carbon;
 <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
 @endpush
 @section('content')
+    <div class="row">
+        <div class="col-12">
+            <h2 class="font-weight-bolder font-weight-bolder text-center"><b>
+                    {{ env('COMPANY_NAME','QBYTESOFT') }} <span class="label label-rouded label-danger">{{ auth()->user()->branch->name }}</span></b>
+            </h2>
+        </div>
+    </div>
 <div class="row justify-content-center">
     <div class="col-md-3 justify-content-center">
         <div class="card">
@@ -17,7 +24,7 @@ use Carbon\Carbon;
                 </header>
             </div>
             <div class="card-body no-padding height-9">
-                
+
                 <div class="profile-userpic">
                     <img src="{{ asset('storage/farmer/')."/".$farmer->image }}" class="img-responsive" alt="">
                 </div>
@@ -40,12 +47,10 @@ use Carbon\Carbon;
 
     </div>
     <div class="col-md-6 justify-content-center">
-        <div class="row justify-content-center">
-            <h1 class="font-weight-bolder"><b>Forazi Agro Ltd.</b></h1>
-        </div>
+
         <div class="card">
             <div class="card-body no-padding height-9">
-                
+
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> Farmer Profile </div>
                 </div>
@@ -55,6 +60,9 @@ use Carbon\Carbon;
                     </li>
                     <li class="list-group-item">
                         <b>Name</b> <a class="pull-right">{{ $farmer->name }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Phone</b> <a class="pull-right">{{ $farmer->phone1??$farmer->phone2 }}</a>
                     </li>
                     <li class="list-group-item">
                         <b>Address</b> <a class="pull-right">{{ $farmer->address}}</a>
@@ -69,7 +77,7 @@ use Carbon\Carbon;
     <div class="col-md-3 justify-content-center">
         <div class="card">
             <div class="card-body no-padding height-9">
-                
+
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
                         Round - {{ $farmer->farmerbatches->count() }}
@@ -77,7 +85,7 @@ use Carbon\Carbon;
                 </div>
                 <ul class="list-group list-group-unbordered">
                     @php
-                        $latestBatch = DB::table('farmer_batches')->first();
+                        $latestBatch = DB::table('farmer_batches')->where('status','active')->orderBy('id','desc')->first();
                         if (!empty($latestBatch))
                         {
                             $startDate = \Carbon\Carbon::parse($latestBatch->created_at);
@@ -91,20 +99,50 @@ use Carbon\Carbon;
                                 </b>
                         </a>
                     </li>
-                    @if(!empty($latestBatch))
-                        <li class="list-group-item">
-                            Running Day <a class="pull-right p-r-20 mdl-color-text--red-900">
+
+                    <li class="list-group-item">
+                        Running Day
+                        @if(!empty($latestBatch))
+                            <a class="pull-right p-r-20 mdl-color-text--red-900">
+
+                                    <b>
+                                        {{ ($startDate->diffInDays($endDate) !== 0 ?$startDate->diffInDays($endDate) + 1 : 1) }}
+                                    </b>
+                            </a>
+                        @endif
+                    </li>
+                    <li class="list-group-item">
+                        Current Chicks
+                        @if(!empty($latestBatch))
+                            <a class="pull-right p-r-20 mdl-color-text--red-900">
+
                                 <b>
-                                    {{ ($startDate->diffInDays($endDate) !== 0 ?$startDate->diffInDays($endDate) : 1) }}
+                                    {{ $latestBatch->chicks_quantity }}
                                 </b>
                             </a>
-                        </li>
-                    @endif
+                        @endif
+                    </li>
+
+
                 </ul>
             </div>
         </div>
-                <a class="btn blue btn-outline m-b-10 btn-lg btn-block">Daily Reports</a>
-                <a class="btn red btn-outline btn-lg btn-block">Report Summary</a>
+        {{--Quick Link Right--}}
+        <div class="card">
+            <div class="card-head">
+                <header>
+                    Quick Links
+                </header>
+            </div>
+            <div class="card-body">
+
+                <div class="">
+                    <a class="btn blue btn-outline m-b-10 btn-lg btn-block">Daily Reports</a>
+                    <a class="btn red btn-outline btn-lg btn-block">Report Summary</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

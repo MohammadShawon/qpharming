@@ -28,6 +28,14 @@
                     <header>Crete Sale Invoice</header>
                 </div>
                 <div class="card-body" id="bar-parent">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="text-center">
+                                {{ env('COMPANY_NAME','QBYTESOFT') }}
+                                <span class="label label-rouded label-danger">{{ auth()->user()->branch->name }}</span>
+                            </h3>
+                        </div>
+                    </div>
                     {!! Form::open(['route' => 'admin.sales.store','method' => 'POST']) !!}
                         {{--          Form ROw 1          --}}
                         <div class="row">
