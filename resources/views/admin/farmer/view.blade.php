@@ -80,7 +80,7 @@ use Carbon\Carbon;
 
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        Round - {{ $farmer->farmerbatches->count() }}
+                        Round - {{ $farmer->farmerbatches->where('status','active')->count() }}
                     </div>
                 </div>
                 <ul class="list-group list-group-unbordered">

@@ -8,6 +8,20 @@ use OwenIt\Auditing\Contracts\Auditable;
 class PurchaseItem extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
+
+    protected $fillable = [
+        'purchase_id',
+        'product_id',
+        'batch_no',
+        'cost_price',
+        'discount',
+        'unit_id',
+        'quantity',
+        'total_cost',
+        'created_at',
+        'updated_at',
+    ];
+
     public function purchase(){
         return $this->belongsTo(Purchase::class);
     }

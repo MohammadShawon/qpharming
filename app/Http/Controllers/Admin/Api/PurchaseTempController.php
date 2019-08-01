@@ -113,7 +113,16 @@ class PurchaseTempController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $purchaseTemp = PurchasetempItem::find($id);
+        $purchaseTemp->cost_price = $request->input('cost_price');
+        $purchaseTemp->quantity = $request->input('quantity');
+        $purchaseTemp->discount = $request->input('discount');
+        $purchaseTemp->total_cost = $request->input('cost_price') * $request->input('quantity');
+        $purchaseTemp->updated_at = Carbon::now('+6');
+        $purchaseTemp->save();
+
+        return response()->json($purchaseTemp);
     }
 
     /**
@@ -124,6 +133,6 @@ class PurchaseTempController extends Controller
      */
     public function destroy($id)
     {
-        //
+        PurchasetempItem::destroy($id);
     }
 }

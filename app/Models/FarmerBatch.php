@@ -18,5 +18,15 @@ class FarmerBatch extends Model implements Auditable
         return $this->belongsTo(User::class);
     }
 
+    public function scopeActive($query)
+    {
+        $active = $query->where('status','active')->first();
+        if (!empty($active->status))
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 }

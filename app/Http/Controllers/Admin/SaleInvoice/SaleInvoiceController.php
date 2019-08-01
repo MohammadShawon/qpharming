@@ -197,10 +197,10 @@ class SaleInvoiceController extends Controller
         return redirect()->to('/');
     }
 
-    /*
+    /**
      * Get Sale No with Prefix 00
-     * */
-
+     * @return int
+     */
     protected function getSaleNo()
     {
 
@@ -213,8 +213,6 @@ class SaleInvoiceController extends Controller
         }else{
             return 1;
         }
-
-
 
 
     }

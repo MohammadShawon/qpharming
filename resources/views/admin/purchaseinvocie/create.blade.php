@@ -55,8 +55,8 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="form-group">
 
-                                <label for="customer_id">Company Name</label>
-                                <select id="customer_id" name="customer_id" class="form-control  select2 " >
+                                <label for="company_id">Company Name</label>
+                                <select id="company_id" name="company_id" class="form-control  select2 " >
                                     <option value="0">Select Company</option>
                                     @foreach ($companies as $company=> $value)
 
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <label class="">Bill Date</label>
                                 <div class="input-group date form_datetime" data-date="{{ Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                    <input class="form-control" size="16" type="text" name="sale_date" value="{{ Carbon\Carbon::now()->toDayDateTimeString() }}">
+                                    <input class="form-control" size="16" type="text" name="purchase_date" value="{{ Carbon\Carbon::now()->toDayDateTimeString() }}">
                                     <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                     </span>
