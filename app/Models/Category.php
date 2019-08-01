@@ -12,7 +12,12 @@ class Category extends Model implements Auditable
         'name', 'slug'
     ];
 
-    public function subcategories() {
+    public function subcategory() {
         return $this->hasMany(SubCategory::class);
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class,SubCategory::class,'category_id','subcategory_id','id','id');
     }
 }

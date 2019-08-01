@@ -13,25 +13,25 @@
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="analysis-box m-b-0 bg-b-purple">
-                <h3 class="text-white box-title">Branch <span class="pull-right"><i class="fa fa-caret-up"></i> {{ $branches->count() }}</span></h3>
+                <h3 class="text-white box-title"><a href="{{ route('admin.branch.index') }}">Branch</a> <span class="pull-right"><i class="fa fa-caret-up"></i> {{ $branches->count() }}</span></h3>
                 {{-- <div id="sparkline7"><canvas style="display: inline-block; width: 267px; height: 70px; vertical-align: top;"></canvas></div> --}}
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="analysis-box m-b-0 bg-b-danger">
-                <h3 class="text-white box-title">Employee <span class="pull-right"><i class="fa fa-caret-up"></i> {{ $users->count() }}</span></h3>
+                <h3 class="text-white box-title"><a href="{{ route('admin.user.index') }}">Employee</a> <span class="pull-right"><i class="fa fa-caret-up"></i> {{ $users->count() }}</span></h3>
                 {{-- <div id="sparkline12"><canvas style="display: inline-block; width: 367px; height: 70px; vertical-align: top;"></canvas></div> --}}
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="analysis-box m-b-0 bg-b-cyan">
-                <h3 class="text-white box-title">Farmer <span class="pull-right"><i class="fa fa-caret-up"></i> 765</span></h3>
+                <h3 class="text-white box-title"><a href="{{ route('admin.farmer.index') }}">Farmer</a> <span class="pull-right"><i class="fa fa-caret-up"></i> {{ DB::table('farmers')->count() }}</span></h3>
                 {{-- <div id="sparkline9"><canvas style="display: inline-block; width: 267px; height: 70px; vertical-align: top;"></canvas></div> --}}
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
             <div class="analysis-box m-b-0 bg-b-blue">
-                <h3 class="text-white box-title">Chiken <span class="pull-right"><i class="fa fa-caret-up"></i> 570323</span></h3>
+                <h3 class="text-white box-title"><a href="{{ route('admin.product.index') }}">Product</a><span class="pull-right"><i class="fa fa-caret-up"></i> {{ DB::table('products')->count() }}</span></h3>
                 {{-- <div id="sparkline16" class="text-center"><canvas style="display: inline-block; width: 215px; height: 70px; vertical-align: top;"></canvas></div> --}}
             </div>
         </div>
@@ -40,7 +40,7 @@
          <div class="col-sm-12">
             <div class="card-box">
                 <div class="card-head">
-                    <header>This Month Cost</header>
+                    <header>Stock Values</header>
                 </div>
                 <div class="card-body ">
                 <div class="state-overview">
@@ -49,8 +49,8 @@
                                       <div class="info-box bg-blue">
                                         <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
                                         <div class="info-box-content">
-                                          <span class="info-box-text">Chick Cost</span>
-                                          <span class="info-box-number">25,560৳</span>
+                                          <span class="info-box-text">Chick Amount</span>
+                                          <span class="info-box-number">{{ $chicks->products->count() ?? 0 }} Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 45%"></div>
                                           </div>
@@ -67,8 +67,8 @@
                                       <div class="info-box bg-orange">
                                         <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
                                         <div class="info-box-content">
-                                          <span class="info-box-text">Feed Cost</span>
-                                          <span class="info-box-number">15,560৳</span>
+                                          <span class="info-box-text">Feed Amount</span>
+                                          <span class="info-box-number">{{ $feeds->products->count()??0 }} Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 40%"></div>
                                           </div>
@@ -85,8 +85,8 @@
                                       <div class="info-box bg-purple">
                                         <span class="info-box-icon push-bottom"><i class="material-icons">content_cut</i></span>
                                         <div class="info-box-content">
-                                          <span class="info-box-text">Medicin Cost</span>
-                                          <span class="info-box-number">5,560৳</span>
+                                          <span class="info-box-text">Medicine Amount</span>
+                                          <span class="info-box-number">{{ $medicines->products->count() ?? 0 }} Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 85%"></div>
                                           </div>
@@ -103,8 +103,8 @@
                                       <div class="info-box bg-success">
                                         <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
                                         <div class="info-box-content">
-                                          <span class="info-box-text">Total Cost</span>
-                                          <span class="info-box-number">31,560৳</span><span>$</span>
+                                          <span class="info-box-text">Total Stock</span>
+                                          <span class="info-box-number">{{ DB::table('products')->count() }} Pcs</span><span></span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 50%"></div>
                                           </div>
@@ -124,7 +124,7 @@
          </div>
     </div>
 
-        
+
     <div class="row">
         <div class="col-md-4">
                            <div class="card card-box">
@@ -148,13 +148,13 @@
                             }else{
                                $eventTextColor = 'text-primary';
                             }
-                            
+
                           @endphp
                           <li>
                             <b>{{ $audit->user->name }} <span class="{{$eventTextColor}}">{{ $audit->event }}</span></b>
                              {{ $sparateAuditableType[1] }}
                                <code class="pull-right" style="font-size: 12px"> {{ str_replace(['minutes', 'minute', 'second', 'seconds'], ['mins', 'min', 'sec', 'secs'], $audit->created_at->diffForHumans()) }}</code>
-                             
+
                           </li>
                           @endforeach
                         </ul>
@@ -209,5 +209,5 @@
     </div>
     </div>
 
-      
+
 @endsection

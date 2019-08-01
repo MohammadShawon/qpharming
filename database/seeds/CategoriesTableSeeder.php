@@ -12,9 +12,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Chicks', 'Foods', 'Medicines'];
+        $categories = ['Chicks', 'Feeds', 'Medicines'];
 
-        foreach ($categories as $category) { 
+        foreach ($categories as $category) {
             Category::create([
                 'name' => $category,
                 'slug' => str_slug($category),
