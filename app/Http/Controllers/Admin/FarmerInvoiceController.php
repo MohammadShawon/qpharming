@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Bank;
 use App\Models\Farmer;
 use App\Models\FarmerInvoice;
+use App\Models\Payment;
+use App\Models\PurposeHead;
 use App\Models\Sale;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +34,40 @@ class FarmerInvoiceController extends Controller
     {
         $data['farmer'] = Farmer::find($id);
         $data['invoice'] = FarmerInvoice::orderBy('id','DESC')->first();
+        $data['banks']          = Bank::get(['id','bank_name']);
+        $data['purposeheads']   = PurposeHead::get(['id','name']);
         return view('admin.farmerinvoice.create',$data);
+    }
+
+
+    public function payment(Request $request,$id)
+    {
+
+        $payment = Payment::create([
+            'bank_id'        =>      1,
+            'purposehead_id' =>      $request->input('purposehead_id'),
+            'company_id'     =>      null,
+            'farmer_id'      =>      $id,
+            'user_id'        =>      null,
+            'payee_type'     =>      'farmer',
+            'payment_amount' =>      $request->input('payment_amount'),
+            'payment_type'   =>      'cash',
+            'bank_name'      =>      null,
+            'reference'      =>      $request->input('reference'),
+            'received_by'    =>      $request->input('received_by'),
+            'remarks'        =>      'Advance Payment',
+            'payment_date'   =>      Carbon::parse($request->input('payment_date'))->format('Y-m-d H:i'),
+        ]);
+        /* Check Payment insertion  and Toastr */
+        if($payment){
+            Toastr::success('Farmer Payment Successfully', 'Success');
+            return redirect()->to('farmer/'.$id.'/invoice');
+        }
+
+        Toastr::error('Farmer Payment Successfully', 'Error');
+        return redirect()->to('farmer/'.$id.'/invoice');
+
+
     }
 
     /**

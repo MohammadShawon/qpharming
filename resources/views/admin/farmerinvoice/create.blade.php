@@ -23,6 +23,82 @@
 
     <div class="row">
         <div class="col-12">
+            <div class="text-center">
+                <div class="btn-group btn-group-solid">
+                    <button type="button" class="btn btn-lg btn-success" id="invoice_button">Invoice</button>
+                    <button type="button" class="btn  btn-lg btn-warning" id="payment_button">Payment</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 payment">
+            <div class="card card-box">
+                <div class="card-head text-black" style="background-color:#3FCC7E;">
+                    <header>Farmer Payment</header>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {!! Form::open(['route' => ['admin.payment.advance','id' => $farmer->id],'method' => 'POST']) !!}
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+
+                                {{--  Purpose Head  --}}
+                                <div class="form-group">
+                                    <label for="purpose_head">Select PurposeHead</label>
+                                    <select name="purposehead_id" id="purpose_head" class="form-control select2" >
+                                        @foreach ($purposeheads as $purposehead)
+                                            <option value="{{ $purposehead->id }}">{{ $purposehead->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- Amount --}}
+                                <div class="form-group">
+                                    <label for="payment_amount">Payment Amount</label>
+                                    <input type="text" name="payment_amount" class="form-control" id="payment_amount" value="{{ old('payment_amount') }}" autocomplete="off">
+                                </div>
+                                {{-- Reference --}}
+
+                                <div class="form-group">
+                                    <label for="reference">Reference / Bill / Receipt No</label>
+                                    <input type="text" name="reference" class="form-control" id="reference" value="{{ old('reference') }}" autocomplete="off">
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-6 col-12">
+
+
+                                <div class="form-group">
+                                    <label for="simpleFormEmail">Receivd By</label>
+                                    <input type="text" name="received_by" class="form-control" id="simpleFormEmail" value="{{ old('received_by') }}">
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="">Payment Date</label>
+                                    <div class="input-group date form_datetime" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ \Carbon\Carbon::now()->format('d M Y h:i a') }}">
+                                        <span class="input-group-addon ml-2">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                    <input type="hidden" id="dtp_input1" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {!! Form::submit('Complete',['class' => 'btn btn-success pull-right']) !!}
+                            </div>
+                        </div>
+
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 invoice">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
                     <header>Farmer Invoice</header>
@@ -244,5 +320,19 @@
 
     <!-- Form Control Script -->
     <script src="{{ asset('js/sale-form.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".payment").hide();
+            $("#payment_button").click(function () {
+                $(".payment").show('fast');
+                $(".invoice").hide('fast');
+            });
+
+            $("#invoice_button").click(function () {
+                $(".payment").hide('fast');
+                $(".invoice").show('fast');
+            })
+        })
+    </script>
 
 @endpush

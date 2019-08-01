@@ -16,7 +16,7 @@ class PurposeHeadsTableSeeder extends Seeder
         $purposes = [
             [
                 'id'            => 1,
-                'name'          =>  'Transport',
+                'name'          =>  'Advance Payment',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],
@@ -34,7 +34,7 @@ class PurposeHeadsTableSeeder extends Seeder
             ],
             [
                 'id'            => 4,
-                'name'          =>  'Bike Fuel',
+                'name'          =>  'Farmer Payment',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],
