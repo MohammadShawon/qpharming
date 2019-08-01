@@ -61,7 +61,9 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('expensehead', 'ExpenseheadCotroller');
     Route::resource('expense', 'ExpenseCotroller');
     Route::resource('farmer', 'FarmerController');
-    Route::resource('farmerinvoice', 'FarmerInvoiceController');
+    Route::get('farmer/{id}/invoice','FarmerInvoiceController@create');
+    Route::post('farmer/{id}/invoice','FarmerInvoiceController@store');
+//    Route::resource('farmerinvoice', 'FarmerInvoiceController');
     /*
      * Customer Resource
      * */

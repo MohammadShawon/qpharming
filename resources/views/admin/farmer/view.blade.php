@@ -40,7 +40,7 @@ use Carbon\Carbon;
 
                 <div class="">
                     <a href="{{ url('/farmer/'.$farmer->id.'/batch/create') }}" class="btn btn-success btn-lg btn-block">Create Batch</a>
-                    <a href="{{ route('admin.farmerinvoice.index') }}" class="btn btn-primary btn-lg btn-block">Farmer Invoice</a>
+                    <a href="{{ url('/farmer/'.$farmer->id.'/invoice') }}" class="btn btn-primary btn-lg btn-block">Farmer Invoice</a>
                 </div>
             </div>
         </div>

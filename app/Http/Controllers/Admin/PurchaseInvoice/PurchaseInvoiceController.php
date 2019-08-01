@@ -200,16 +200,16 @@ class PurchaseInvoiceController extends Controller
 
     /*
      * Get Purchase Invoice Number with prefix 00
-     * @return int
+     * @return string
      * */
 
-    protected function getPurchaseNo():int
+    protected function getPurchaseNo()
     {
         $purchaseId = Purchase::orderBy('id','desc')->first();
         if ($purchaseId)
         {
             $id = $purchaseId->id +1;
-            return (int)sprintf('%1$03d',$id);
+            return sprintf('%1$03d',$id);
         }
         return sprintf('%1$03d',1);
 

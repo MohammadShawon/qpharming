@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Farmer;
+use App\Models\FarmerInvoice;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,9 +25,31 @@ class FarmerInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('admin.farmerinvoice.create');
+        $data['farmer'] = Farmer::find($id);
+        $data['invoice'] = FarmerInvoice::orderBy('id','DESC')->first();
+        return view('admin.farmerinvoice.create',$data);
+    }
+
+    /**
+     * Get Sale No with Prefix 00
+     * @return int
+     */
+    protected function getInvoiceNo()
+    {
+
+
+        $invoiceId = FarmerInvoice::orderBy('id','DESC')->first();
+        if ($invoiceId)
+        {
+            $id = $invoiceId->id +1;
+            return sprintf('%1$03d',$id);
+        }else{
+            return sprintf('%1$03d',1);
+        }
+
+
     }
 
     /**
