@@ -85,7 +85,7 @@ use Carbon\Carbon;
                 </div>
                 <ul class="list-group list-group-unbordered">
                     @php
-                        $latestBatch = DB::table('farmer_batches')->where('status','active')->orderBy('id','desc')->first();
+                        $latestBatch = DB::table('farmer_batches')->where('farmer_id',$farmer->id)->where('status','active')->orderBy('id','desc')->first();
                         if (!empty($latestBatch))
                         {
                             $startDate = \Carbon\Carbon::parse($latestBatch->created_at);
