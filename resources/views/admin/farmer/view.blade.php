@@ -70,7 +70,7 @@ use Carbon\Carbon;
                     <li class="list-group-item">
                         <b>Total Cost</b>
                         <a class="pull-right">
-                            {{ $farmerInvoices->sum('total_amount') ?? 0 }}
+                            {{ $farmerInvoices->sum('total_amount') + $farmer->opening_balance ?? 0 }}
                         </a>
                     </li>
                 </ul>

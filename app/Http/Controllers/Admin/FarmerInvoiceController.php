@@ -115,7 +115,7 @@ class FarmerInvoiceController extends Controller
                     'batch_number'      => $request->input('batch_number'),
                     'date'              => Carbon::parse($request->input('sale_date'))->format('Y-m-d H:i'),
                     'invoice_number'    => 'Farmer-'.$this->getInvoiceNo(),
-                    'total_amount'      => $request->input('grand_total'),
+                    'total_amount'      => (int) $request->input('grand_total'),
                     'status'            => 1,
                     'remarks'           => $request->input('remarks'),
                     'created_at'        => Carbon::now('+6'),
