@@ -221,9 +221,14 @@ use Carbon\Carbon;
         <div class="panel tab-border card-box">
             <header class="panel-heading panel-heading-gray custom-tab ">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a href="#stock" data-toggle="tab" class="active">Medicine & Feed</a>
+                    <li class="nav-item">
+                        <a href="#stock" data-toggle="tab" class="active">Medicine & Feed</a>
                     </li>
-                    <li class="nav-item"><a href="#batch" data-toggle="tab">Batch Details</a>
+                    <li class="nav-item">
+                        <a href="#batch" data-toggle="tab">Batch Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#payments" data-toggle="tab">Payments Details</a>
                     </li>
 
                 </ul>
@@ -235,6 +240,7 @@ use Carbon\Carbon;
                             <div class="card">
                                 <div class="card-body " style="">
                                     <div class="table-scrollable">
+                                        @if(!$farmerInvoices->isEmpty())
                                         <table class="table">
                                             <thead>
                                             <tr>
@@ -247,9 +253,11 @@ use Carbon\Carbon;
                                             </thead>
                                             <?php
                                                 $i =1;
+                                                $totalQuantity = 0;
+                                                $totalCost = 0;
                                             ?>
                                             <tbody>
-                                                @if(!$farmerInvoices->isEmpty())
+
                                                     @foreach($farmerInvoices as $farmerInvoice)
                                                         @foreach($farmerInvoice->farmerinvoiceitems as $farmerInvoiceItem)
                                                             <tr>
@@ -259,12 +267,30 @@ use Carbon\Carbon;
                                                                 <td>{{ $farmerInvoiceItem->quantity }}</td>
                                                                 <td>{{ $farmerInvoiceItem->total_selling }}</td>
                                                             </tr>
+                                                            <?php
+                                                                $totalQuantity += $farmerInvoiceItem->quantity;
+                                                                $totalCost += $farmerInvoiceItem->total_selling;
+                                                            ?>
                                                         @endforeach
                                                     @endforeach
-                                                @endif
-
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <b>Total Summary</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                            {{ $totalQuantity ?? 0 }}
+                                                        </b>
+                                                    </td>
+                                                    <td>
+                                                        <b>{{ number_format($totalCost,2,'.',',') ?? 0 }}</b>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -369,6 +395,60 @@ use Carbon\Carbon;
                                             @endforeach
 
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="payments">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body " style="">
+                                    <div class="table-scrollable">
+                                        @if(!$payments->isEmpty())
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Date</th>
+                                                <th>Bank Name</th>
+                                                <th>Type</th>
+                                                <th>Amount</th>
+                                                <th>Remarks</th>
+                                            </tr>
+                                            </thead>
+                                            <?php
+                                                $serial =1;
+                                            ?>
+                                            <tbody>
+
+                                                @foreach($payments as $payment)
+                                                    <tr>
+                                                        <td>{{ $serial++ }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d-M-Y') }}</td>
+                                                        <td>{{ $payment->bank->bank_name }}</td>
+                                                        <td>
+                                                            {{ $payment->payment_type }}
+                                                        </td>
+                                                        <td>{{ $payment->payment_amount }}</td>
+                                                        <td>{{ $payment->remarks ?? 'N/A' }}</td>
+                                                    </tr>
+                                                @endforeach
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <b>Total Paid Amount</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>{{ number_format($payments->sum('payment_amount'),2,'.',',') }}</b>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

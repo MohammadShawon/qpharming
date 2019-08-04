@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\FarmerInvoice;
+use App\Models\Payment;
 use Yajra\DataTables\DataTables;
 use App\DataTables\Farmers\FarmersDatatable;
 use App\Models\Farmer;
@@ -131,7 +132,7 @@ class FarmerController extends Controller
         /* View a Single Farmer Informations */
         if (auth()->user()->can('view_farmer')) {
             $data['farmerInvoices'] = FarmerInvoice::where('farmer_id',$farmer->id)->with('farmerinvoiceitems')->get();
-//            dd($data['farmerInvoices']);
+            $data['payments'] = Payment::where('farmer_id',$farmer->id)->get();
             return view('admin.farmer.view',$data,compact('farmer'));
         }
     }

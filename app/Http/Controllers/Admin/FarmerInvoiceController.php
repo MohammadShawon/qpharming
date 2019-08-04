@@ -191,7 +191,7 @@ class FarmerInvoiceController extends Controller
 
             DB::commit();
 
-            SaleTempItem::where('user-id',auth()->user()->id)->delete();
+            SaleTempItem::where('user_id',auth()->user()->id)->delete();
 
             Toastr::success('Farmer Invoice Complete','Success');
 

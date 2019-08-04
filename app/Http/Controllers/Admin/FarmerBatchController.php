@@ -52,7 +52,7 @@ class FarmerBatchController extends Controller
     public function store(FarmerBatchStoreRequest $request)
     {
 
-        if (FarmerBatch::active())
+        if (FarmerBatch::where('farmer_id',$request->input('farmer_id'))->active())
         {
             Toastr::error('Farmer has one active Batch!', 'Error');
             return redirect('farmer/'.$request->farmer_id);
