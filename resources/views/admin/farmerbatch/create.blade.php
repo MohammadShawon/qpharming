@@ -58,15 +58,35 @@
                                     <input type="text" name="chicks_quantity" value="0" class="form-control" id="chicks" >
                                 </div>
 
-                                {{-- Batch Status --}}
-                                <div class="form-group">
-                                    <label for="simpleFormEmail">Status</label>
-                                     <select class="form-control" name="status">
-                                        @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)
-                                        <option value="{{$key}}" {{ $farmer->status == $key ? "selected" : "" }}>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{-- Batch Status --}}
+                                        <div class="form-group">
+                                            <label for="simpleFormEmail">Status</label>
+                                            <select class="form-control" name="status">
+                                                @foreach(["active" => "Active", "inactive" => "Inactive", "disabled" => "Disabled"] AS $key => $value)
+                                                    <option value="{{$key}}" {{ $farmer->status == $key ? "selected" : "" }}>{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="">Batch Date</label>
+                                            <div class="input-group date form_datetime" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
+                                                <input class="form-control" size="16" type="text" name="batch_date" value="{{ \Carbon\Carbon::now()->toDayDateTimeString() }}">
+                                                <span class="input-group-addon ml-2">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <input type="hidden" id="dtp_input1" value="" />
+                                        </div>
+                                    </div>
+
                                 </div>
+
+
 
 
                             </div>

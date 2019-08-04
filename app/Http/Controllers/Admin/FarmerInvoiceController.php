@@ -195,7 +195,7 @@ class FarmerInvoiceController extends Controller
 
             Toastr::success('Farmer Invoice Complete','Success');
 
-            return redirect()->route('admin.farmer.show');
+            return redirect()->route('admin.farmer.show',$request->input('farmer_id'));
         }
     }
 

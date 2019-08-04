@@ -52,6 +52,7 @@ class FarmerBatchController extends Controller
     public function store(FarmerBatchStoreRequest $request)
     {
 
+
         if (FarmerBatch::where('farmer_id',$request->input('farmer_id'))->active())
         {
             Toastr::error('Farmer has one active Batch!', 'Error');
@@ -90,6 +91,7 @@ class FarmerBatchController extends Controller
                     'chicks_quantity'  =>      $request->chicks_quantity,
                     'status'           =>      $request->status,
                     'user_id'          =>      Auth::user()->id,
+                    'created_at'       =>      Carbon::parse($request->input('batch_date'))->format('Y-m-d H:i:s'),
                 ]);
             }catch (\Exception $e)
             {

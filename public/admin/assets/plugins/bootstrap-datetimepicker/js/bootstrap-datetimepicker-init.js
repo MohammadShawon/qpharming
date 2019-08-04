@@ -5,7 +5,8 @@
 			todayHighlight: 1,
 			startView: 2,
 			forceParse: 0,
-		    showMeridian: 1
+		    showMeridian: 1,
+            startDate: '+0y'
 		});
 		$('.form_date').datetimepicker({
 		    weekStart: 1,
@@ -39,4 +40,3 @@
 			      format: 'DD/MM/YYYY'
 			    });
 			  });
-		

@@ -24,7 +24,7 @@ class FarmerBatchStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'batch_name'           => 'required|unique:farmer_batches,batch_name',
+            'batch_name'           => 'required',
             'batch_number'         => 'required|unique:farmer_batches,batch_number',
             'status'               => 'required',
         ];
