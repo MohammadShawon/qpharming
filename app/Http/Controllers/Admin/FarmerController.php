@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\FarmerInvoice;
 use Yajra\DataTables\DataTables;
 use App\DataTables\Farmers\FarmersDatatable;
 use App\Models\Farmer;
@@ -47,7 +48,7 @@ class FarmerController extends Controller
     public function create()
     {
        if (auth()->user()->can('create_farmer')) {
-               
+
             $data['branches'] = Branch::get(['id','name']);
             return view('admin.farmer.create', $data);
         }
@@ -85,7 +86,7 @@ class FarmerController extends Controller
             else{
                 $imageName = 'default.png';
             }
-                
+
             /* Insert farmer */
             $farmer = Farmer::create([
                 'branch_id'        =>      $request->branch,
@@ -129,8 +130,9 @@ class FarmerController extends Controller
     {
         /* View a Single Farmer Informations */
         if (auth()->user()->can('view_farmer')) {
-
-            return view('admin.farmer.view', compact('farmer'));
+            $data['farmerInvoices'] = FarmerInvoice::where('farmer_id',$farmer->id)->with('farmerinvoiceitems')->get();
+//            dd($data['farmerInvoices']);
+            return view('admin.farmer.view',$data,compact('farmer'));
         }
     }
 
@@ -143,7 +145,7 @@ class FarmerController extends Controller
     public function edit(Farmer $farmer)
     {
         if (auth()->user()->can('edit_farmer')) {
-                
+
             $data['branches'] = Branch::get(['id','name']);
             return view('admin.farmer.edit', $data, compact('farmer'));
         }
@@ -182,12 +184,12 @@ class FarmerController extends Controller
                 $farmerImage = Image::make($image)->resize(720, 550)->stream();
                 //now save the image
                 Storage::disk('public')->put('farmer/'.$imageName,$farmerImage);
-    
+
             }
             else{
                 $imageName = $farmer->image;
             }
-               
+
             /* update farmer */
             $resultFarmer = $farmer->update([
                 'branch_id'        =>      $request->branch,
@@ -203,11 +205,11 @@ class FarmerController extends Controller
             ]);
 
             // $user = User::first();
-  
+
             //     $details = [
             //         'farmer_name' => $request->name
             //     ];
-          
+
             //     Notification::send($user, new FarmerCreateNotification($details));
             /* Check famer insertion  and Toastr */
             if($resultFarmer){

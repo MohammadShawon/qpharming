@@ -68,7 +68,10 @@ use Carbon\Carbon;
                         <b>Address</b> <a class="pull-right">{{ $farmer->address}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Total Cost</b> <a class="pull-right">25,000</a>
+                        <b>Total Cost</b>
+                        <a class="pull-right">
+                            {{ $farmerInvoices->sum('total_amount') ?? 0 }}
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -242,28 +245,24 @@ use Carbon\Carbon;
                                                 <th>Cost</th>
                                             </tr>
                                             </thead>
+                                            <?php
+                                                $i =1;
+                                            ?>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>22 July, 19</td>
-                                                <td>Name of Feed or Medicine</td>
-                                                <td>2</td>
-                                                <td>450</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>23 July, 19</td>
-                                                <td>Name of Feed or Medicine</td>
-                                                <td>12</td>
-                                                <td>8000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>24 July, 19</td>
-                                                <td>Name of Feed or Medicine</td>
-                                                <td>4</td>
-                                                <td>750</td>
-                                            </tr>
+                                                @if(!$farmerInvoices->isEmpty())
+                                                    @foreach($farmerInvoices as $farmerInvoice)
+                                                        @foreach($farmerInvoice->farmerinvoiceitems as $farmerInvoiceItem)
+                                                            <tr>
+                                                                <td>{{ $i++ }}</td>
+                                                                <td>{{ $farmerInvoice->date }}</td>
+                                                                <td>{{ $farmerInvoiceItem->product->product_name }}</td>
+                                                                <td>{{ $farmerInvoiceItem->quantity }}</td>
+                                                                <td>{{ $farmerInvoiceItem->total_selling }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endif
+
                                             </tbody>
                                         </table>
                                     </div>

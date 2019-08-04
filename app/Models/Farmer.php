@@ -19,17 +19,17 @@ class Farmer extends Model implements Auditable
     public function sales(){
         return $this->hasMany(Sale::class);
     }
-    
-    public function farmerinvoices(){
+
+    public function farmerinvoice(){
         return $this->hasMany(FarmerInvoice::class);
     }
-    
+
     public function farmerbatches(){
         return $this->hasMany(FarmerBatch::class);
     }
-    
+
     public function farmerrecords(){
-        return $this->hasMany(FarmerBatch::class);
+        return $this->hasMany(FarmerBatch::class,'farmer_id','id');
     }
 
 

@@ -93,7 +93,7 @@ class PurchaseInvoiceController extends Controller
                     'bank'              => $request->input('bank'),
                     'sub_total'         => $request->input('sub_total'),
                     'discount'          => $request->input('invoiceDiscount'),
-                    'grand_total'       => $request->input('grand_total'),
+                    'grand_total'       => (int) $request->input('grand_total'),
                     'status'            => 1,
                     'remarks'           => $request->input('remarks'),
                     'created_at'        => Carbon::now('+6'),
@@ -192,6 +192,7 @@ class PurchaseInvoiceController extends Controller
 
             DB::commit();
 
+            PurchasetempItem::where('user_id',auth()->user()->id)->delete();
             Toastr::success('Purchase Done!','Success');
             return redirect()->route('admin.purchases.index');
 

@@ -15,14 +15,14 @@ class Product extends Model implements Auditable
     public function unit(){
         return $this->belongsTo(Unit::class,'base_unit_id','id');
     }
-    
+
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function subcategory(){
         return $this->belongsTo(SubCategory::class);
     }
-    
+
     public function saleitems(){
         return $this->belongsTo(SaleItem::class);
     }
@@ -46,6 +46,11 @@ class Product extends Model implements Auditable
     {
         return 'product_name';
     }
+
+//    public function farmerinvoiceitem()
+//    {
+//        return $this->belongsTo(FarmerInvoiceItem::class,'product_id','id');
+//    }
 
 
 }

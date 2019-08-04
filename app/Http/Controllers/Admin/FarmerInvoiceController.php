@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Bank;
 use App\Models\Farmer;
 use App\Models\FarmerInvoice;
+use App\Models\FarmerInvoiceItem;
+use App\Models\Inventory;
 use App\Models\Payment;
+use App\Models\ProductPrice;
 use App\Models\PurposeHead;
-use App\Models\Sale;
+use App\Models\SaleTempItem;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use \DB;
 
 class FarmerInvoiceController extends Controller
 {
@@ -98,7 +102,99 @@ class FarmerInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+        if (auth()->user()->can('create_sale'))
+        {
+            DB::beginTransaction();
+
+            try
+            {
+                $invoice = FarmerInvoice::create([
+                    'farmer_id'         => $request->input('farmer_id'),
+                    'user_id'           => auth()->user()->id,
+                    'batch_number'      => $request->input('batch_number'),
+                    'date'              => Carbon::parse($request->input('sale_date'))->format('Y-m-d H:i'),
+                    'invoice_number'    => 'Farmer-'.$this->getInvoiceNo(),
+                    'total_amount'      => $request->input('grand_total'),
+                    'status'            => 1,
+                    'remarks'           => $request->input('remarks'),
+                    'created_at'        => Carbon::now('+6'),
+                    'updated_at'        => Carbon::now('+6'),
+                ]);
+            }catch (\Exception $e)
+            {
+                dd($e);
+                DB::rollback();
+                Toastr::error('Error Found in Farmer Invoice','Error');
+                return redirect()->back();
+            }
+
+            /*
+             * Process Products
+             * */
+
+            try
+            {
+                $saleProducts =SaleTempItem::where('user_id',auth()->user()->id)->get();
+
+                if (!$saleProducts->isEmpty())
+                {
+                    /*
+                     * Each Sale Products creates
+                     * */
+                    foreach ($saleProducts as $saleProduct)
+                    {
+                        $invoiceItems = FarmerInvoiceItem::create([
+                            'farmerinvoice_id'      => $invoice->id,
+                            'product_id'            => $saleProduct->product_id,
+                            'unit_id'               => $saleProduct->unit_id,
+                            'batch_number'          => $request->input('batch_number'),
+                            'cost_price'            => $saleProduct->cost_price,
+                            'selling_price'         => $saleProduct->selling_price,
+                            'quantity'              => $saleProduct->quantity,
+                            'total_cost'            => $saleProduct->total_cost,
+                            'total_selling'         => $saleProduct->total_selling,
+                            'created_at'            => Carbon::now('+6'),
+                            'updated_at'            => Carbon::now('+6'),
+                        ]);
+
+                        /*
+                         * Process Inventory
+                         * */
+
+                        $product = ProductPrice::where('product_id',$saleProduct->product_id)->where('batch_no',$saleProduct->batch_no)->first();
+
+                        if ($saleProduct->quantity <= $product->quantity)
+                        {
+                            $product->sold = $saleProduct->quantity;
+                            $product->save();
+
+                            $inventory = Inventory::create([
+                                'product_id'        => $saleProduct->id,
+                                'user_id'           => auth()->user()->id,
+                                'unit_id'           => $saleProduct->unit_id,
+                                'in_out_qty'        => -$saleProduct->quantity,
+                                'created_at'        => Carbon::now('+6'),
+                                'updated_at'        => Carbon::now('+6'),
+                            ]);
+                        }
+                    }
+
+                }
+            }catch (\Exception $e)
+            {
+                dd($e);
+                DB::rollback();
+                Toastr::error('Error in Invoice Product!','Error');
+                return  redirect()->back();
+            }
+
+            DB::commit();
+
+            Toastr::success('Farmer Invoice Complete','Success');
+
+            return redirect()->route('admin.farmer.show');
+        }
     }
 
     /**

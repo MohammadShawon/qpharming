@@ -18,7 +18,7 @@ class CreateFarmerInvoiceItemsTable extends Migration
             $table->bigInteger('farmerinvoice_id')->unsigned()->index();
             $table->bigInteger('product_id')->unsigned()->index();
             $table->bigInteger('unit_id')->unsigned()->index();
-            $table->integer('batch_number')->unsigned()->index();
+            $table->string('batch_number')->index();
             $table->decimal('cost_price', 15,2)->default(0);
             $table->decimal('selling_price', 15,2)->default(0);
             $table->decimal('quantity');

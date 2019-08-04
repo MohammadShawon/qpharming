@@ -130,10 +130,11 @@
                         </div>
                         <div class="col-12 col-sm-4 col-md-2">
                             <div class="form-group">
-                                <label for="branch_id">Branch Name</label>
-                                <input type="text" id="branch_id" class="form-control" value="{{ Auth::user()->branch->name }}" readonly>
-                                <input type="hidden" name="branch_id" value="{{ Auth::user()->branch->id }}">
+                                <label for="batch_number">Batch name</label>
+                                <input type="text" id="batch_number" class="form-control" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_name }}" readonly>
+                                <input type="hidden" name="batch_number" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_number }}">
                             </div>
+
                         </div>
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="form-group">
@@ -254,7 +255,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="payment">Paid Amount</label>
-                                                <input type="text" ng-model="payment" id="payment" ng-init="payment=0" class="form-control" name="payment">
+                                                <input type="text" ng-model="payment" id="payment" ng-init="payment=0" class="form-control" name="payment" readonly>
                                             </div>
                                         </div>
                                     </div>

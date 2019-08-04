@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\FarmerBatch;
+use App\Models\Inventory;
+use App\Models\Product;
+use App\Models\ProductPrice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Farmer;
@@ -10,6 +15,7 @@ use App\Http\Requests\FarmerBatch\FarmerBatchStoreRequest;
 use Illuminate\Support\Facades\Auth;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\FarmerBatch\FarmerBatchUpdateRequest;
+use \DB;
 
 class FarmerBatchController extends Controller
 {
@@ -52,18 +58,76 @@ class FarmerBatchController extends Controller
             return redirect('farmer/'.$request->farmer_id);
         }
 
-        /* FarmerBatch Create */
-        $farmerBatch = FarmerBatch::create([
-            'farmer_id'        =>      $request->farmer_id,
-            'batch_name'       =>      $request->batch_name,
-            'batch_number'     =>      $request->batch_number,
-            'chicks_quantity'  =>      $request->chicks_quantity,
-            'status'           =>      $request->status,
-            'user_id'          =>      Auth::user()->id,
-        ]);
+            $chicks = Category::where('name','Chicks')->with('products')->first();
+            if ($chicks->products->isEmpty())
+            {
+                Toastr::error('Please Add Chicks to the Product List!', 'Error');
+                return redirect('farmer/'.$request->farmer_id);
+            }
+            $chicksQuantity = 0;
+            $chicksBatch = [];
+            foreach ($chicks->products as $product)
+            {
+
+                $chicksQuantity = ProductPrice::where('product_id',$product->id)->sum('quantity');
+                $chicksBatch = ProductPrice::where('product_id',$product->id)->where('quantity','>',0)->first();
+
+            }
+            if ($chicksQuantity === 0)
+            {
+                Toastr::error('Do Not Have Chick Stock!', 'Error');
+                return redirect('farmer/'.$request->farmer_id);
+            }
+
+            DB::beginTransaction();
+
+            try{
+                /* FarmerBatch Create */
+                $farmerBatch = FarmerBatch::create([
+                    'farmer_id'        =>      $request->farmer_id,
+                    'batch_name'       =>      $request->batch_name,
+                    'batch_number'     =>      $request->batch_number,
+                    'chicks_quantity'  =>      $request->chicks_quantity,
+                    'status'           =>      $request->status,
+                    'user_id'          =>      Auth::user()->id,
+                ]);
+            }catch (\Exception $e)
+            {
+                dd($e);
+                DB::rollback();
+                Toastr::error('Farmer Batch Error','Error');
+                return redirect()->back();
+            }
+
+            try
+            {
+                /*
+                 * Product Batch update
+                 * */
+                $chicksBatch->sold = $request->chicks_quantity;
+                $chicksBatch->save();
+
+                $inventory = Inventory::create([
+                    'product_id'        => $chicksBatch->product_id,
+                    'user_id'           => auth()->user()->id,
+                    'unit_id'           => 1,
+                    'in_out_qty'        => - $request->chicks_quantity,
+                    'created_at'        => Carbon::now('+6'),
+                    'updated_at'        => Carbon::now('+6'),
+                ]);
+            }catch (\Exception $e)
+            {
+                dd($e);
+                DB::rollback();
+                Toastr::error('Inventory Error','Error');
+                return redirect()->back();
+            }
+
+
+            DB::commit();
 
          /* Check farmerBatch insertion  and Toastr */
-         if($farmerBatch){
+         if($farmerBatch && $inventory){
             Toastr::success('Farmer Batch Inserted Successfully', 'Success');
             return redirect('farmer/'.$request->farmer_id);
         }
