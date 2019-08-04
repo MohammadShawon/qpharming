@@ -20,11 +20,11 @@ class CreateFarmerInvoicesTable extends Migration
             $table->foreign('farmer_id')->references('id')->on('farmers')->onDelete('cascade');
 
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->integer('batch_number');
+            $table->string('batch_number');
 
             $table->dateTime('date');
-            $table->integer('invoice_number');
-            
+            $table->string('invoice_number');
+
             $table->decimal('total_amount');
             $table->enum('status',['active', 'inactive', 'disabled']);
             $table->text('remarks')->nullable();

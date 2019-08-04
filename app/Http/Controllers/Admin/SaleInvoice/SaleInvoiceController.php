@@ -56,9 +56,9 @@ class SaleInvoiceController extends Controller
         if (auth()->user()->can('create_sale'))
         {
             /*
-        * Check Customer
-        * @return sales
-        * */
+            * Check Customer
+            * @return sales
+            * */
             if (empty($request->input('customer_id')) && empty($request->input('phone')))
             {
 
