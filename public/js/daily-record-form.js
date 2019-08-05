@@ -11,18 +11,18 @@ $(document).ready(function(){
                 dataType: 'application/json',
                 data:form.serialize(),
                 success:function(data){
-                    if(data.status == 200)
+                    if(data.status === 200)
                     {
                         console.log(data);
                         $("#farmerRecordForm").modal('hide');
                     }
                     else{
-
+                        console.log(data);
                     }
                 }
-                
+
             },
-            
+
         );
 
     }); // End the save button click event

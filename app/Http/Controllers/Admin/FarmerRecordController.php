@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\FarmerBatch;
 use App\Models\FarmerRecord;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
+use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,7 +40,31 @@ class FarmerRecordController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->all());
+        $batch = FarmerBatch::where('farmer_id',$request->input('farmer_id'))->where('status','active')->first();
+        $startDate = \Carbon\Carbon::parse($batch->created_at);
+        $endDate = \Carbon\Carbon::now();
+
+        $record = FarmerRecord::create([
+            'user_id'               => auth()->user()->id,
+            'batch_number'          => $batch->batch_number,
+            'date'                  => Carbon::parse($request->input('date'))->format('Y-m-d H:i'),
+            'age'                   => $startDate->diffInDays($endDate) + 1,
+            'child_death'           => $request->input('died'),
+            'feed_eaten_kg'         => $request->input('feed'),
+            'feed_eaten_sack'       => null,
+            'feed_left'             => null,
+            'weight'                => $request->input('weight'),
+            'symptoms'              => $request->input('symptoms'),
+            'remarks'               => $request->input('comment'),
+            'created_at'            => Carbon::now('+6'),
+            'updated_at'            => Carbon::now('+6'),
+        ]);
+
+        if ($record)
+        {
+            Toastr::success('Farmer Records Success!','Success');
+            return response()->json('success');
+        }
     }
 
     /**

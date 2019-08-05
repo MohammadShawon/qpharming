@@ -16,15 +16,15 @@ class CreateFarmerRecordsTable extends Migration
         Schema::create('farmer_records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->integer('batch_number');
+            $table->string('batch_number');
             $table->dateTime('date');
             $table->integer('age');
             $table->integer('child_death');
             $table->decimal('feed_eaten_kg');
-            $table->decimal('feed_eaten_sack');
-            $table->decimal('feed_left');
+            $table->decimal('feed_eaten_sack')->nullable();
+            $table->decimal('feed_left')->nullable();
             $table->decimal('weight');
-            $table->text('symtoms')->nullable();
+            $table->text('symptoms')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
         });

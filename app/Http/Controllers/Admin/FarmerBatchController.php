@@ -92,6 +92,7 @@ class FarmerBatchController extends Controller
                     'status'           =>      $request->status,
                     'user_id'          =>      Auth::user()->id,
                     'created_at'       =>      Carbon::parse($request->input('batch_date'))->format('Y-m-d H:i:s'),
+                    'chicks_batch_no'   =>      $chicksBatch->batch_no
                 ]);
             }catch (\Exception $e)
             {

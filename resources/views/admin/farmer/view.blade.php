@@ -70,7 +70,7 @@ use Carbon\Carbon;
                     <li class="list-group-item">
                         <b>Total Cost</b>
                         <a class="pull-right">
-                            {{ $farmerInvoices->sum('total_amount') + $farmer->opening_balance ?? 0 }}
+                            {{ \App\Helpers\Farmers::totalCost($farmer->id) }}
                         </a>
                     </li>
                 </ul>
@@ -469,24 +469,16 @@ use Carbon\Carbon;
     @include('admin.modals.farmers.daily-record')
 
 @csrf
-{{--
-<div class="row justify-content-center">
-<div class="col-sm-6">
-<br><br>
-<a href="{{ route('admin.farmer-records.create') }}" class="btn btn-danger btn-lg m-b-10">
-    Add Todays Record
-</a>
-<a href="{{ route('admin.farmer-records.index') }}" class="btn btn-success btn-lg m-b-10">
-    View Full Record
-</a>
-</div>
-</div> --}}
+
 @endsection
 @push('js')
 <!-- data tables -->
 <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
-<script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>
+<!-- data time -->
+<script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"  charset="UTF-8"></script>
+<script src="{{ asset('admin/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker-init.js') }}"  charset="UTF-8"></script>
+{{--<script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>--}}
 <!-- sweet aleart -->
 <script src="{{ asset('admin/assets/js/sweetalert.min.js') }}"></script>
 <script type="text/javascript">
@@ -523,30 +515,31 @@ use Carbon\Carbon;
     })
     }
 </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-    $(".add-row").click(function(){
-    var age = $("#age").val();
-    var died = $("#died").val();
-    var feed_kg = $("#feed_kg").val();
-    var feed_sack = $("#feed_sack").val();
-    var feed_left = $("#feed_left").val();
-    var weight = $("#weight").val();
-    var sickness = $("#sickness").val();
-    var comment = $("#comment").val();
-    var markup = "<tr class='text-center'><td><input type='checkbox' name='record'></td><td>" + age+ "</td><td>" + died+ "</td><td>" + feed_kg+ "</td><td>" + feed_sack+ "</td><td>" + feed_left + "</td><td>" + weight+ "</td><td style='max-width: 150px;'>" + sickness+ "</td><td style='max-width: 250px;'>" + comment+ "</td></tr>";
-    $("table tbody").append(markup);
-    });
-    // Find and remove selected table rows
-    $(".delete-row").click(function(){
-    $("table tbody").find('input[name="record"]').each(function(){
-    if($(this).is(":checked")){
-    $(this).parents("tr").remove();
-    }
-    });
-    });
-    });
-</script>
+{{--<script type="text/javascript">--}}
+{{--    $(document).ready(function(){--}}
+{{--    $(".add-row").click(function(){--}}
+{{--    var age = $("#age").val();--}}
+{{--    var died = $("#died").val();--}}
+{{--    var feed_kg = $("#feed_kg").val();--}}
+{{--    var feed_sack = $("#feed_sack").val();--}}
+{{--    var feed_left = $("#feed_left").val();--}}
+{{--    var weight = $("#weight").val();--}}
+{{--    var sickness = $("#sickness").val();--}}
+{{--    var comment = $("#comment").val();--}}
+{{--    var markup = "<tr class='text-center'><td><input type='checkbox' name='record'></td><td>" + age+ "</td><td>" + died+ "</td><td>" + feed_kg+ "</td><td>" + feed_sack+ "</td><td>" + feed_left + "</td><td>" + weight+ "</td><td style='max-width: 150px;'>" + sickness+ "</td><td style='max-width: 250px;'>" + comment+ "</td></tr>";--}}
+{{--    $("table tbody").append(markup);--}}
+{{--    });--}}
+{{--    // Find and remove selected table rows--}}
+{{--    $(".delete-row").click(function(){--}}
+{{--    $("table tbody").find('input[name="record"]').each(function(){--}}
+{{--    if($(this).is(":checked")){--}}
+{{--    $(this).parents("tr").remove();--}}
+{{--    }--}}
+{{--    });--}}
+{{--    });--}}
+{{--    });--}}
+{{--</script>--}}
 {{-- Record Form Js --}}
 <script src="{{ asset('js/daily-record-form.js') }}"></script>
+
 @endpush

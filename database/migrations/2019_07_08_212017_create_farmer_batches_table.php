@@ -25,6 +25,7 @@ class CreateFarmerBatchesTable extends Migration
             $table->string('batch_number')->unique();
             $table->string('batch_name');
             $table->decimal('chicks_quantity',10,2);
+            $table->string('chicks_batch_no');
             $table->enum('status',['active', 'inactive', 'disabled']);
 
             $table->timestamps();

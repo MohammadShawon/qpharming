@@ -6,7 +6,7 @@
 			startView: 2,
 			forceParse: 0,
 		    showMeridian: 1,
-            startDate: '+0y'
+            startDate: '-1y'
 		});
 		$('.form_date').datetimepicker({
 		    weekStart: 1,
