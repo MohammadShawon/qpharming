@@ -140,7 +140,7 @@ use Carbon\Carbon;
             <div class="card-body">
 
                 <div class="">
-                    <a class="btn blue btn-outline m-b-10 btn-lg btn-block">Daily Reports</a>
+                    <a class="btn blue btn-outline m-b-10 btn-lg btn-block" id="daily-reports-button">Daily Reports</a>
                     <a class="btn red btn-outline btn-lg btn-block">Report Summary</a>
                 </div>
             </div>
@@ -150,69 +150,76 @@ use Carbon\Carbon;
 
 </div>
 
-<div class="row">
+    <div class="row" id="daily-reports">
 
-    <div class="col-sm-2">
-        <div class="panel">
-            <header class="panel-heading panel-heading-blue text-center">
-                <strong> Age</strong>
-            </header>
-            <div class="panel-body text-center">
-                <b>18 Days</b>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue text-center">
+                    <strong> Age</strong>
+                </header>
+                <div class="panel-body text-center">
+                    @if(!empty($latestBatch))
+
+                            <b>
+                                {{ ($startDate->diffInDays($endDate) !== 0 ?$startDate->diffInDays($endDate) + 1 : 1) }}
+                            </b>
+
+                    @endif
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue text-center">
+                    <strong>Total Died</strong>
+                </header>
+                <div class="panel-body text-center">
+                    <b>0</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue text-center">
+                    <b>Total Feed</b>
+                </header>
+                <div class="panel-body text-center">
+                    <b>0</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue text-center">
+                    <strong>Total Feed</strong>
+                </header>
+                <div class="panel-body text-center">
+                    <b>0 Sack</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header  class="panel-heading panel-heading-blue text-center">
+                    <strong>Feed Left</strong>
+                </header>
+                <div class="panel-body text-center">
+                    <b>0 Sack</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue text-center">
+                    <strong>Weigh Per Pics</strong>
+                </header>
+                <div class="panel-body text-center">
+                    <b>0 gm</b> (Now)
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-2">
-        <div class="panel">
-            <header class="panel-heading panel-heading-blue text-center">
-                <strong>Total Died</strong>
-            </header>
-            <div class="panel-body text-center">
-                <b>18</b>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="panel">
-            <header class="panel-heading panel-heading-blue text-center">
-                <b>Total Feed</b>
-            </header>
-            <div class="panel-body text-center">
-                <b>120 kg</b>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="panel">
-            <header class="panel-heading panel-heading-blue text-center">
-                <strong>Total Feed</strong>
-            </header>
-            <div class="panel-body text-center">
-                <b>2.2 Sack</b>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="panel">
-            <header  class="panel-heading panel-heading-blue text-center">
-                <strong>Feed Left</strong>
-            </header>
-            <div class="panel-body text-center">
-                <b>4.3 Sack</b>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="panel">
-            <header class="panel-heading panel-heading-blue text-center">
-                <strong>Weigh Per Pics</strong>
-            </header>
-            <div class="panel-body text-center">
-                <b>400 gm</b> (Now)
-            </div>
-        </div>
-    </div>
-</div>
     <!--
     ---Batch & Stock Report Accordations
     -->
@@ -515,31 +522,15 @@ use Carbon\Carbon;
     })
     }
 </script>
-{{--<script type="text/javascript">--}}
-{{--    $(document).ready(function(){--}}
-{{--    $(".add-row").click(function(){--}}
-{{--    var age = $("#age").val();--}}
-{{--    var died = $("#died").val();--}}
-{{--    var feed_kg = $("#feed_kg").val();--}}
-{{--    var feed_sack = $("#feed_sack").val();--}}
-{{--    var feed_left = $("#feed_left").val();--}}
-{{--    var weight = $("#weight").val();--}}
-{{--    var sickness = $("#sickness").val();--}}
-{{--    var comment = $("#comment").val();--}}
-{{--    var markup = "<tr class='text-center'><td><input type='checkbox' name='record'></td><td>" + age+ "</td><td>" + died+ "</td><td>" + feed_kg+ "</td><td>" + feed_sack+ "</td><td>" + feed_left + "</td><td>" + weight+ "</td><td style='max-width: 150px;'>" + sickness+ "</td><td style='max-width: 250px;'>" + comment+ "</td></tr>";--}}
-{{--    $("table tbody").append(markup);--}}
-{{--    });--}}
-{{--    // Find and remove selected table rows--}}
-{{--    $(".delete-row").click(function(){--}}
-{{--    $("table tbody").find('input[name="record"]').each(function(){--}}
-{{--    if($(this).is(":checked")){--}}
-{{--    $(this).parents("tr").remove();--}}
-{{--    }--}}
-{{--    });--}}
-{{--    });--}}
-{{--    });--}}
-{{--</script>--}}
-{{-- Record Form Js --}}
+
 <script src="{{ asset('js/daily-record-form.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $("#daily-reports").hide();
+        $("#daily-reports-button").click(function () {
+            $("#daily-reports").toggle('slow');
+        });
+    })
+</script>
 
 @endpush
