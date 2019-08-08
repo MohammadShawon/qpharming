@@ -122,6 +122,10 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * Purchase
      * */
     Route::resource('purchases','PurchaseInvoice\PurchaseInvoiceController');
+    /*
+     * All Transactions
+     * */
+    Route::get('transactions','Transaction\TransactionController@index')->name('transaction.all');
 
 });
 

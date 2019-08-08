@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Bank\BanksDataTable;
+use App\Helpers\Payments;
 use App\Models\Bank;
+use App\Models\Collection;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bank\BankStoreRequest;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Bank\BankUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class BankController extends Controller
 {
@@ -48,7 +53,7 @@ class BankController extends Controller
             'account_name'     => $request->account_name,
             'account_number'   => $request->account_number,
             'opening_balance'  => ($request->opening_balance != null?$request->opening_balance:0),
-            
+
         ]);
         /*  check bank and toast message */
         if($bank)
@@ -65,9 +70,12 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function show(Bank $bank)
+    public function show(BanksDataTable $dataTable,Bank $bank)
     {
-        //
+        $data['payments'] = Payment::where('bank_id',$bank->id)->get();
+        $data['collections'] = Collection::where('bank_id',$bank->id)->get();
+        return $dataTable->with(['bank_id' => $bank->id])->render('admin.bank.show',$data,compact('bank'));
+
     }
 
     /**
@@ -92,7 +100,7 @@ class BankController extends Controller
     public function update(BankUpdateRequest $request, Bank $bank)
     {
         /* Bank UPDATE */
-        
+
         $bank = $bank->update([
             'bank_name'        => $request->bank_name,
             'account_name'     => $request->account_name,

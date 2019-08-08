@@ -14,7 +14,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
                     <a href="{{ route('admin.bank.create') }}" id="addRow1" class="btn btn-primary" style="font-size:14px; padding: 6px 12px;" >
                         Add New Bank <i style="color:white;" class="fa fa-plus"></i>
                     </a>
-                    
+
                 </div>
                 <div class="btn-group pull-right">
                         <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -56,10 +56,10 @@
                 <div class="card-body ">
                     <div class="row p-b-20">
                         <div class="col-md-6 col-sm-6 col-6">
-                            
+
                         </div>
                         <div class="col-md-6 col-sm-6 col-6">
-                            
+
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
@@ -71,7 +71,7 @@
                                 <th> Account No </th>
                                 <th> Opening Balance </th>
                                 <th> Created at </th>
-                                <th> Actions </th>
+                                <th style="width: 20%"> Actions </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,13 +85,14 @@
                                     <td>{{ $bank->opening_balance }}</td>
                                     <td>{{ $bank->created_at->toDayDateTimeString() }}</td>
                                     <td>
+                                        <a  class="waves-effect  btn btn-primary" href="{{ route('admin.bank.show', $bank->id) }}"><i class="material-icons">visibility</i></a>
                                         <a  class="waves-effect  btn btn-primary" href="{{ route('admin.bank.edit', $bank->id) }}"><i class="material-icons">edit</i></a>
-                                        
+
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
                                         onclick="deleteBank({{$bank->id}})">
                                         <i class="material-icons">delete</i>
                                         </button>
-    
+
                                         <form id="delete-form-{{$bank->id}}" action="{{ route('admin.bank.destroy', $bank->id) }}" method="post" style="display:none;">
                                             @csrf
                                             @method("DELETE")
@@ -128,7 +129,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
     <script type="text/javascript">
-    
+
     function deleteBank(id) {
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -164,7 +165,7 @@
         })
 
     }
-    
+
     </script>
 @endpush
 
