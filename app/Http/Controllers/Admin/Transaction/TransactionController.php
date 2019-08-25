@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Transaction;
 use App\DataTables\Bank\TransactionsDataTable;
 use App\Models\Bank;
 use App\Models\Collection;
+use App\Models\Expense;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,8 @@ class TransactionController extends Controller
         $data['payments'] = Payment::all();
         $data['collections'] = Collection::all();
         $data['bank']       = Bank::all();
+        $data['expenses']       = Expense::all();
+//        dd($dataTable->query());
         return $dataTable->render('admin.bank.transactions',$data);
     }
 

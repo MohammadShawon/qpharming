@@ -3,6 +3,7 @@
 namespace App\DataTables\Bank;
 
 use App\Models\Company;
+use App\Models\ExpenseHead;
 use App\Models\Farmer;
 use App\Models\PurposeHead;
 use App\Models\User;
@@ -23,8 +24,14 @@ class TransactionsDataTable extends DataTable
         return datatables($query)
             ->editColumn('Heads',static function ($data)
             {
+                if ($data->Origin === 'Expense')
+                {
+                    return !empty($data->Heads) ? ExpenseHead::find($data->Heads)->name : 'N/A';
+                }else
+                {
+                    return !empty($data->Heads) ? PurposeHead::find($data->Heads)->name : 'N/A';
+                }
 
-                return !empty($data->Heads) ? PurposeHead::find($data->Heads)->name : 'N/A';
 
             })
             ->editColumn('Company',static function ($data){
@@ -59,9 +66,13 @@ class TransactionsDataTable extends DataTable
         $payment = DB::table('payments')
             ->select('payments.purposehead_id as Heads','payments.company_id as Company','payments.farmer_id','payments.user_id as Employee','payments.payee_type as Category','payments.payment_amount as Amount','payments.payment_type as Type','payments.bank_name','payments.reference','payments.received_by as Recipient','payments.remarks','payments.payment_date as Date',DB::raw("'Payments' as Origin"));
 
+        $expense = DB::table('expenses')
+            ->select('expenses.expensehead_id as Heads',DB::raw("'' as Company"),DB::raw("''"),DB::raw("'' as Employee"),DB::raw("'' as Category"),'expenses.amount as Amount',DB::raw("'' as Type"),DB::raw("''"),DB::raw("''"),'expenses.recipient_name as Recipient','expenses.description as remarks','expenses.created_at as Date',DB::raw("'Expense' as Origin"));
+
         $collection =DB::table('collections')
             ->select(DB::raw("'' as Heads"),DB::raw("'' as Company"),'collections.farmer_id',DB::raw("'' as Employee"),'collections.collect_type as Category','collections.collection_amount as Amount','collections.collection_type as Type','collections.bank_name','collections.reference','collections.given_by as Recipient','collections.remarks','collections.collection_date as Date',DB::raw("'Collection' as Origin"))
             ->unionAll($payment)
+            ->unionAll($expense)
             ->orderBy('Date','desc');
         return $collection->get();
     }

@@ -27,11 +27,11 @@ use Carbon\Carbon;
                 <div class="card-body ">
                     <div class="row p-b-20">
                         <div class="col-xl-4 col-md-6 col-12">
-                            <div class="info-box bg-orange">
+                            <div class="info-box bg-success">
                                 <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Payments</span>
-                                    <span class="info-box-number"> <b>{{ number_format($payments->sum('payment_amount'),2,'.',',') }} Tk</b></span>
+                                    <span class="info-box-text">Opening Balance</span>
+                                    <span class="info-box-number"> <b>{{ number_format($bank->sum('opening_balance'),2,'.',',') }} Tk</b></span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -55,13 +55,39 @@ use Carbon\Carbon;
                                 <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Current Balance</span>
-                                    <span class="info-box-number"> <b> {{ number_format(($collections->sum('collection_amount') + $bank->sum('opening_balance')) - $payments->sum('payment_amount'),2,'.',',') }} Tk</b></span>
+                                    <span class="info-box-number"> <b> {{ number_format(($collections->sum('collection_amount') + $bank->sum('opening_balance')) - ($payments->sum('payment_amount') + $expenses->sum('amount')),2,'.',',')  }} Tk</b></span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
                             <!-- /.info-box -->
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 col-12">
+                            <div class="info-box bg-orange">
+                                <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Payments</span>
+                                    <span class="info-box-number"> <b>{{ number_format($payments->sum('payment_amount'),2,'.',',') }} Tk</b></span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-12">
+                            <div class="info-box bg-orange">
+                                <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Expense</span>
+                                    <span class="info-box-number"> <b>{{ number_format($expenses->sum('amount'),2,'.',',') }} Tk</b></span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </div>
+
                     <div class="row">
                         {!! $dataTable->table() !!}
                     </div>
