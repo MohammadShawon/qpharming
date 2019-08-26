@@ -161,20 +161,40 @@ class SaleInvoiceController extends Controller
                                  * */
 
                                 $product = ProductPrice::where('product_id',$saleProduct->product_id)->where('batch_no',$saleProduct->batch_no)->first();
-                                if ($saleProduct->quantity > $product->quantity)
+                                if ($saleProduct->quantity > ($product->quantity - $product->sold))
                                 {
+                                    $productAllBatch = DB::table('product_prices')->selectRaw('id,product_id,batch_no,quantity,sold,sum(quantity - sold) stock')->whereRaw('quantity - sold > 0')->where('product_id',$saleProduct->product_id)->groupBy('batch_no')->orderBy('created_at')->get();
+                                    $updateQuantity = 0;
+                                    $totalUpdate = 0;
+                                    foreach ($productAllBatch as $value)
+                                    {
+                                        $updateQuantity += $value->stock;
 
-                                }
+                                            if ($updateQuantity < ($saleProduct->quantity - $totalUpdate))
+                                            {
+                                                $singleBatch = ProductPrice::find($value->id);
+                                                $singleBatch->update(array('sold' => $value->sold + $value->stock));
+                                                $totalUpdate += $value->stock;
+                                            }
+
+                                        }
+                                        if (($saleProduct->quantity - $totalUpdate) !== 0)
+                                        {
+                                            $singleBatch = ProductPrice::find($value->id);
+                                            $singleBatch->update(array('sold' => $value->sold + ($saleProduct->quantity - $totalUpdate)));
+
+                                        }
+                                    }
                                 else
                                 {
-
+                                    dd($product);
                                 }
 
                             }
                         }
                     }catch (\Exception $e)
                     {
-//                        dd($e->getMessage());
+                        dd($e->getMessage());
                         DB::rollback();
                         Toastr::error('ProductItem Error','error');
                         return redirect()->route('admin.sales.create');

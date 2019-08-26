@@ -55,7 +55,8 @@ class SaleTempController extends Controller
             $msg = Toastr::success('Already Added an Item','success');
             return response()->json($msg);
         }
-        $batch = ProductPrice::where('product_id',$request->item_id)->where('quantity','>',0)->orderBy('created_at','ASC')->first();
+        $batch = ProductPrice::where('product_id',$request->item_id)->whereRaw('quantity - sold > 0')->orderBy('created_at','ASC')->first();
+
         if (!empty($batch))
         {
 
@@ -112,7 +113,7 @@ class SaleTempController extends Controller
     public function update(Request $request, $id)
     {
         $saleTemp = SaleTempItem::find($id);
-        $totalQuantity = ProductPrice::where('product_id',$saleTemp->product_id)->sum('quantity');
+        $totalQuantity = ProductPrice::where('product_id',$saleTemp->product_id)->sum('quantity') - ProductPrice::where('product_id',$saleTemp->product_id)->sum('sold');
 
         if ($request->input('quantity') <= $totalQuantity)
         {

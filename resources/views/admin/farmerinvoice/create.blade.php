@@ -131,8 +131,8 @@
                         <div class="col-12 col-sm-4 col-md-2">
                             <div class="form-group">
                                 <label for="batch_number">Batch name</label>
-                                <input type="text" id="batch_number" class="form-control" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_name }}" readonly>
-                                <input type="hidden" name="batch_number" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_number }}">
+                                <input type="text" id="batch_number" class="form-control" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_name ?? 'N/A' }}" readonly>
+                                <input type="hidden" name="batch_number" value="{{ $farmer->farmerbatches->where('status','active')->first()->batch_number ?? 'N/A' }}">
                             </div>
 
                         </div>
