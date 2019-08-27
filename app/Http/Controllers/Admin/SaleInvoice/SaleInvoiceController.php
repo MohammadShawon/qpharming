@@ -170,7 +170,7 @@ class SaleInvoiceController extends Controller
                                     {
                                         $updateQuantity += $value->stock;
 
-                                        if ($updateQuantity < ($saleProduct->quantity - $totalUpdate))
+                                        if ($updateQuantity <= ($saleProduct->quantity - $totalUpdate))
                                             {
                                                 $singleBatch = ProductPrice::find($value->id);
                                                 $singleBatch->update(array('sold' => $value->sold + $value->stock));
