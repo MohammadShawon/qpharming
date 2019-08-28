@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Admin\Records;
 
+use App\DataTables\Stocks\ChicksDataTable;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ChicksRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param ChicksDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ChicksDataTable $dataTable)
     {
-        return view('admin.stocks.chicks');
+
+//        dd($chicks);
+        return $dataTable->render('admin.stocks.chicks');
     }
 
     /**

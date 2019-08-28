@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Transaction;
 
+use App\DataTables\Bank\BanksDataTable;
 use App\DataTables\Bank\TransactionsDataTable;
 use App\Models\Bank;
 use App\Models\Collection;
@@ -15,6 +16,7 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param TransactionsDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
     public function index(TransactionsDataTable $dataTable)

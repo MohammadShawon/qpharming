@@ -108,7 +108,19 @@ class FarmersDatatable extends DataTable
     protected function getColumns(): array
     {
         return [
+            [
+                'defaultContent' => '',
+                'data'           => 'DT_RowIndex',
+                'name'           => 'DT_RowIndex',
+                'title'          => 'S No',
+                'render'         => null,
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => true,
+                'width'     => '6%',
 
+            ],
             [
                 'data' => 'branch_id',
                 'name' => 'branch_id',
@@ -150,7 +162,7 @@ class FarmersDatatable extends DataTable
 
 
 
-            
+
         ];
     }
 

@@ -17,6 +17,7 @@ class CustomersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+            ->addIndexColumn()
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
             })
@@ -79,12 +80,28 @@ class CustomersDataTable extends DataTable
     {
         return [
             [
+                'defaultContent' => '',
+                'data'           => 'DT_RowIndex',
+                'name'           => 'DT_RowIndex',
+                'title'          => 'S. No',
+                'render'         => null,
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => true,
+                'width'     => '8%',
+
+            ],
+            [
                 'data'    => 'id',
                 'name'    => 'id',
                 'title'   => 'ID No.',
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => false,
                 'visible' => false
             ],
-
             [
                 'data' => 'name',
                 'name' => 'name',

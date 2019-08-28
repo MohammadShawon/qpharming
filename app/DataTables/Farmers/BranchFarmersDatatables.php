@@ -85,7 +85,7 @@ class BranchFarmersDatatables extends DataTable
                     ->minifiedAjax()
                     ->processing(true)
                     ->addAction([
-                        'width' => '15%',
+                        'width' => '16%',
                         'printable' => false,
                         'exportable' => false,
                         'searchable' => false
@@ -104,7 +104,19 @@ class BranchFarmersDatatables extends DataTable
     protected function getColumns():array
     {
         return [
+                [
+                    'defaultContent' => '',
+                    'data'           => 'DT_RowIndex',
+                    'name'           => 'DT_RowIndex',
+                    'title'          => 'S. No',
+                    'render'         => null,
+                    'orderable'      => false,
+                    'searchable'     => false,
+                    'exportable'     => false,
+                    'printable'      => true,
+                    'width'     => '8%',
 
+                ],
                 [
                     'data'  => 'name',
                     'name'  => 'name',

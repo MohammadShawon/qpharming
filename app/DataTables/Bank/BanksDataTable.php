@@ -94,6 +94,19 @@ class BanksDataTable extends DataTable
     {
         return [
             [
+                'defaultContent' => '',
+                'data'           => 'DT_RowIndex',
+                'name'           => 'DT_RowIndex',
+                'title'          => 'S. No',
+                'render'         => null,
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => true,
+                'width'     => '8%',
+
+            ],
+            [
                 'data'  => 'Date',
                 'name'  => 'Date',
                 'title' => 'Date',

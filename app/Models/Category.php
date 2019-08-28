@@ -18,6 +18,6 @@ class Category extends Model implements Auditable
 
     public function products()
     {
-        return $this->hasManyThrough(Product::class,SubCategory::class,'category_id','subcategory_id','id','id');
+        return $this->hasManyThrough(Product::class,SubCategory::class,'category_id','subcategory_id','id');
     }
 }
