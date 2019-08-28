@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers\Admin\Records;
 
+use App\DataTables\Stocks\FeedDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use \DB;
 
 class FeedRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param FeedDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FeedDataTable $dataTable)
     {
-        return view('admin.stocks.feed');
+        $data['feeds'] = DB::table('product_prices')
+            ->join('products','product_prices.product_id','=','products.id')
+            ->join('sub_categories','products.subcategory_id','=','sub_categories.id')
+            ->join('categories','sub_categories.category_id','=','categories.id')
+            ->selectRaw('product_prices.product_id,sum(product_prices.quantity) quantity,sum(product_prices.sold) sold,sum(product_prices.quantity - product_prices.sold) stock')
+            ->where('categories.name','=','Feeds')
+            ->groupBy('product_prices.product_id')
+            ->get();
+        return $dataTable->render('admin.stocks.feed',$data);
     }
 
     /**

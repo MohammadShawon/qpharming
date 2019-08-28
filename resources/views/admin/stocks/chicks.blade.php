@@ -15,6 +15,49 @@
     </div>
     <div class="row">
         <div class="col-12">
+            <div class="card-box">
+                <div class="row p-b-20">
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="info-box bg-success">
+                            <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Stock</span>
+                                <span class="info-box-number"> <b>{{ $chicks->sum('quantity') }}</b></span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="info-box bg-purple">
+                            <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Sold</span>
+                                <span class="info-box-number"> <b> {{ $chicks->sum('sold') }}</b></span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 col-12">
+                        <div class="info-box bg-b-black">
+                            <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Current Stock</span>
+                                <span class="info-box-number"> <b> {{ $chicks->sum('stock') }}</b></span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="card card-topline-red">
                 <div class="card-head" style="text-align: center;">
                     <header>
