@@ -164,13 +164,55 @@ class FarmerInvoiceController extends Controller
 
                         $product = ProductPrice::where('product_id',$saleProduct->product_id)->where('batch_no',$saleProduct->batch_no)->first();
 
-                        if ($saleProduct->quantity <= $product->quantity)
+                        if ($saleProduct->quantity > ($product->quantity - $product->sold))
                         {
-                            $product->sold = $saleProduct->quantity;
+                            $productAllBatch = DB::table('product_prices')->selectRaw('id,product_id,batch_no,quantity,sold,sum(quantity - sold) stock')->whereRaw('quantity - sold > 0')->where('product_id',$saleProduct->product_id)->groupBy('batch_no')->orderBy('created_at')->get();
+                            $updateQuantity = 0;
+                            $totalUpdate = 0;
+                            foreach ($productAllBatch as $value)
+                            {
+                                $updateQuantity += $value->stock;
+
+                                if ($updateQuantity <= ($saleProduct->quantity - $totalUpdate))
+                                {
+                                    $singleBatch = ProductPrice::find($value->id);
+                                    $singleBatch->update(array('sold' => $value->sold + $value->stock));
+                                    $totalUpdate += $value->stock;
+
+                                }
+
+
+                            }
+
+                            if (($saleProduct->quantity - $totalUpdate) !== 0)
+                            {
+                                $singleBatch = ProductPrice::where('product_id',$saleProduct->product_id)->whereRaw('quantity - sold > 0')->first();
+                                $singleBatch->update(array('sold' => $value->sold + ($saleProduct->quantity - $totalUpdate)));
+
+                            }
+
+                            /*
+                             * Track Inventory
+                             * */
+
+                            $inventory = Inventory::create([
+                                'product_id'        => $saleProduct->product_id,
+                                'user_id'           => auth()->user()->id,
+                                'unit_id'           => $saleProduct->unit_id,
+                                'in_out_qty'        => -$saleProduct->quantity,
+                                'created_at'        => Carbon::now('+6'),
+                                'updated_at'        => Carbon::now('+6'),
+                            ]);
+
+
+                        }
+                        else
+                        {
+                            $product->sold += $saleProduct->quantity;
                             $product->save();
 
                             $inventory = Inventory::create([
-                                'product_id'        => $saleProduct->id,
+                                'product_id'        => $saleProduct->product_id,
                                 'user_id'           => auth()->user()->id,
                                 'unit_id'           => $saleProduct->unit_id,
                                 'in_out_qty'        => -$saleProduct->quantity,
