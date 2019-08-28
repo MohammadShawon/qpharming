@@ -2,59 +2,31 @@
     <div class="sidemenu-container navbar-collapse collapse fixed-menu">
         <div id="remove-scroll">
 
-            {{-- Sidebar for superadmin --}}
+                    {{-- Sidebar for superadmin --}}
 
-            @php
-                if (auth()->user()->hasRole('superadmin'))
-                    {
-            @endphp
-                        @include('template.partials.rolewisesidebar.superadmin')
-            @php
-                    }
-            @endphp
+            @if (auth()->user()->hasRole('superadmin'))
+                @include('template.partials.rolewisesidebar.superadmin')
+            @endif
+                    {{-- Sidebar for admin --}}
 
-                        {{-- Sidebar for admin --}}
+            @if (auth()->user()->hasRole('admin'))
+                @include('template.partials.rolewisesidebar.admin')
+            @endif
+                    {{-- Sidebar for manager --}}
 
-            @php
-                if (auth()->user()->hasRole('admin'))
-                    {
-            @endphp
-                        @include('template.partials.rolewisesidebar.admin')
-            @php
-                    }
-            @endphp
-                        {{-- Sidebar for manager --}}
-
-            @php
-                if (auth()->user()->hasRole('manager'))
-                    {
-            @endphp
-                        @include('template.partials.rolewisesidebar.manager')
-            @php
-                    }
-            @endphp
+            @if (auth()->user()->hasRole('manager'))
+                @include('template.partials.rolewisesidebar.manager')
+            @endif
                         {{-- Sidebar for emoployee --}}
 
-            @php
-                if (auth()->user()->hasRole('employee'))
-                    {
-            @endphp
-                        @include('template.partials.rolewisesidebar.employee')
-            @php
-                    }
-            @endphp
+            @if (auth()->user()->hasRole('employee'))
+                @include('template.partials.rolewisesidebar.employee')
+            @endif
                         {{-- Sidebar for user --}}
 
-            @php
-                if (auth()->user()->hasRole('user'))
-                    {
-            @endphp
-                        @include('template.partials.rolewisesidebar.user')
-            @php
-                    }
-            @endphp
-
-            
+            @if (auth()->user()->hasRole('user'))
+                @include('template.partials.rolewisesidebar.user')
+            @endif
 
         </div>
     </div>

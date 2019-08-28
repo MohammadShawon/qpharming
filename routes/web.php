@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\Route;
 
 
 /*
- * Routes Through Roles
+ * Routes Thr   ough Roles
  * */
 Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
 
@@ -127,6 +127,19 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * */
     Route::get('transactions','Transaction\TransactionController@index')->name('transaction.all');
 
+    /*
+     * Stock Records Route
+     * */
+    Route::get('chicks/records','Records\ChicksRecordController@index')->name('chicks.records');
+    Route::get('feed/records','Records\FeedRecordController@index')->name('feed.records');
+    Route::get('medicine/records','Records\MedicineRecordController@index')->name('medicine.records');
+
+    /*
+     * All Reports Route
+     * */
+    Route::get('daily/reports','Reports\DailyReportController@index')->name('daily.reports');
+    Route::get('weekly/reports','Reports\WeeklyReportController@index')->name('weekly.reports');
+    Route::get('monthly/reports','Reports\MonthlyReportController@index')->name('monthly.reports');
 });
 
 /* Super Admin route start */

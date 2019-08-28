@@ -175,7 +175,7 @@
 
                 {{--Records Area--}}
 
-                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicin*')||Request::is('farmer*')||Request::is('company*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicine*')||Request::is('farmer*')||Request::is('company*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">library_books</i>
                          <span class="title">Records</span>
@@ -193,9 +193,9 @@
                                 <span class="title">Feed</span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('medicin*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('medicine*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
-                                <span class="title">Medicin</span>
+                                <span class="title">Medicine</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('farmer*') ? 'active' : '' }}">
@@ -210,7 +210,7 @@
                         </li>
                      </ul>
                 </li>
-                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicin*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicine*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">insert_chart</i>
                          <span class="title">Stocks</span>
@@ -218,7 +218,7 @@
                      </a>
                      <ul class="sub-menu">
                         <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
+                            <a href="{{ route('admin.chicks.records') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span>
                             </a>
                         </li>
@@ -230,7 +230,7 @@
                         </li>
                         <li class="nav-item {{ Request::is('medicin*') ? 'active' : '' }}">
                             <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
-                                <span class="title">Medicin</span>
+                                <span class="title">Medicine</span>
                             </a>
                         </li>
                      </ul>
@@ -288,18 +288,18 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item {{ Request::is('daily*') ? 'active' : '' }}">
-                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">person</i>
+                                <a href="{{ route('admin.daily.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">person</i>
                                     <span class="title">Daily</span>
                                 </a>
                             </li>
 
                             <li class="nav-item {{ Request::is('weekly*') ? 'active' : '' }}">
-                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <a href="{{ route('admin.weekly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Weekly</span>
                                 </a>
                             </li>
                             <li class="nav-item {{ Request::is('monthly*') ? 'active' : '' }}">
-                                <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                                <a href="{{ route('admin.monthly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Monthly</span>
                                 </a>
                             </li>
