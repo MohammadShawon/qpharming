@@ -34,10 +34,10 @@ class   DashboardController extends Controller
             return view('admin.dashboard.admin',$data, compact('branches','users', 'audits'));
         }elseif (auth()->user()->hasRole('manager'))
         {
-            return view('admin.dashboard.manager', compact('branches','users', 'audits'));
+            return view('admin.dashboard.manager',$data, compact('branches','users', 'audits'));
         }
         else{
-            return view('admin.dashboard.admin', compact('branches','users', 'audits'));
+            return view('admin.dashboard.admin', $data,compact('branches','users', 'audits'));
         }
 
     }
