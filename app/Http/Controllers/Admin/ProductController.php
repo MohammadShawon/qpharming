@@ -71,9 +71,9 @@ class ProductController extends Controller
                     'base_unit_id'   => $request->unit_id,
                     'description'    => $request->description,
                     'size'           => $request->size,
-//                    'cost_price'     => $request->cost_price,
-//                    'selling_price'     => $request->selling_price,
-//                    'quantity'       => $request->quantity,
+//                  'cost_price'      => $request->cost_price,
+//                   'selling_price'  => $request->selling_price,
+//                   'quantity'       => $request->quantity,
                 ]);
             }catch (\Exception $e)
             {
@@ -90,6 +90,7 @@ class ProductController extends Controller
             try{
                 $batch = new ProductPrice([
                     'product_id'       =>      $product->id,
+                    'branch_id'       =>      auth()->user()->branch_id,
                     'batch_no'         =>      date('Y'). '-'.random_int(1,50000),
                     'quantity'         =>      $request->quantity,
                     'sold'             =>      0,
@@ -116,6 +117,7 @@ class ProductController extends Controller
                 $inventories = Inventory::create([
                     'product_id'    => $product->id,
                     'user_id'       => auth()->user()->id,
+                    'branch_id'     => auth()->user()->branch_id,
 //                    'batch_no'      => $batch->batch_no,
                     'unit_id'       => $request->unit_id,
                     'in_out_qty'    => $request->quantity,
@@ -196,7 +198,7 @@ class ProductController extends Controller
                 'description'    => $request->description,
                 'size'           => $request->size,
                 'cost_price'     => $request->cost_price,
-                'selling_price'     => $request->selling_price,
+                'selling_price'  => $request->selling_price,
                 'quantity'       => $request->quantity,
             ]);
             /* Check Product Update and toastr message */

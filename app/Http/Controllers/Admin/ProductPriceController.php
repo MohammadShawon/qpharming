@@ -121,6 +121,7 @@ class ProductPriceController extends Controller
 
             $updateProductPrice = $productPrice->update([
                 'product_id'       =>      $request->product_id,
+                'branch_id'       =>      auth()->user()->branch_id,
                 'batch_no'         =>      $request->batch,
                 'quantity'         =>      $request->quantity,
                 'cost_price'       =>      $request->cost,

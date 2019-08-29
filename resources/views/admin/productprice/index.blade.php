@@ -13,7 +13,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row">
@@ -22,7 +22,7 @@
                 <a href="{{ route('admin.product-price.create') }}" id="addRow1" class="btn btn-primary" style="font-size:14px; padding: 6px 12px;" >
                     Add New Product - Price <i style="color:white;" class="fa fa-plus"></i>
                 </a>
-                
+
             </div>
             <div class="btn-group pull-right">
                     <button class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -55,10 +55,10 @@
                 <div class="card-body ">
                     <div class="row p-b-20">
                         <div class="col-md-6 col-sm-6 col-6">
-                            
+
                         </div>
                         <div class="col-md-6 col-sm-6 col-6">
-                            
+
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="example4">
@@ -70,8 +70,8 @@
                                 <th> Quantity </th>
                                 <th> Cost </th>
                                 <th> Sell </th>
-                                <th> Mfg Date </th>
-                                <th> Exp Date </th>
+                                <th> Branch </th>
+{{--                                <th> Exp Date </th>--}}
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -84,18 +84,19 @@
                                     <td>{{ $productPrice->quantity }}</td>
                                     <td>{{ $productPrice->cost_price }}</td>
                                     <td>{{ $productPrice->selling_price }}</td>
-                                    <td>{{ Carbon::parse($productPrice->mfg_date)->toDayDateTimeString() }}</td>
-                                    <td>{{ Carbon::parse($productPrice->exp_date)->toDayDateTimeString() }}</td>
+                                    <td>{{ $productPrice->branch->name }}</td>
+{{--                                    <td>{{ Carbon::parse($productPrice->mfg_date)->toDayDateTimeString() }}</td>--}}
+{{--                                    <td>{{ Carbon::parse($productPrice->exp_date)->toDayDateTimeString() }}</td>--}}
                                     <td>
                                         {{-- <a  class="waves-effect btn btn-success" href="{{ route('admin.farmer.show', $farmer->id) }}"><i class="material-icons">description</i></a> --}}
 
                                         <a  class="waves-effect btn btn-primary" href="{{ route('admin.product-price.edit', $productPrice->id) }}"><i class="material-icons">edit</i></a>
-                                        
+
                                         <button type="submit" class="waves-effect btn deepPink-bgcolor"
                                         onclick="deleteProductPrice({{$productPrice->id}})">
                                         <i class="material-icons">delete</i>
                                         </button>
-    
+
                                         <form id="delete-form-{{$productPrice->id}}" action="{{ route('admin.product-price.destroy', $productPrice->id) }}" method="post" style="display:none;">
                                             @csrf
                                             @method("DELETE")
@@ -112,8 +113,9 @@
                                 <th> Quantity </th>
                                 <th> Cost </th>
                                 <th> Sell </th>
-                                <th> Mfg Date </th>
-                                <th> Exp Date </th>
+                                <th> Branch </th>
+{{--                                <th> Mfg Date </th>--}}
+{{--                                <th> Exp Date </th>--}}
                                 <th> Action </th>
                             </tr>
                         </tfoot>
@@ -131,10 +133,10 @@
     <script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>
 
     <!-- sweet aleart -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="{{ asset('admin/assets/js/sweetalert.min.js') }}"></script>
 
     <script type="text/javascript">
-    
+
     function deleteProductPrice(id) {
 
         const swalWithBootstrapButtons = Swal.mixin({
@@ -170,7 +172,7 @@
         })
 
     }
-    
+
     </script>
 @endpush
 

@@ -16,6 +16,7 @@ class CreateProductPricesTable extends Migration
         Schema::create('product_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned()->index();
+            $table->bigInteger('branch_id')->unsigned()->index();
             $table->string('batch_no')->unique();
             $table->decimal('quantity',8,2);
             $table->decimal('sold',8,2);
@@ -26,6 +27,7 @@ class CreateProductPricesTable extends Migration
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

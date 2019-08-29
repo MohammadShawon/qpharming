@@ -11,6 +11,7 @@ class Inventory extends Model implements Auditable
     protected $fillable = [
         'product_id',
         'user_id',
+        'branch_id',
 //        'batch_no',
         'unit_id',
         'in_out_qty',

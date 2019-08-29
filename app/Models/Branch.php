@@ -23,5 +23,10 @@ class Branch extends Model implements Auditable
     public function users() {
         return $this->hasMany(User::class);
     }
-    
+
+    public function productprice()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+
 }

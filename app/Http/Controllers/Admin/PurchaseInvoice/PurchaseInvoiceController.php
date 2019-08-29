@@ -152,6 +152,7 @@ class PurchaseInvoiceController extends Controller
                          * */
                         $inventory = Inventory::create([
                             'product_id'    => $purchaseProduct->product_id,
+                            'branch_id'     => auth()->user()->id,
                             'user_id'       => auth()->user()->id,
                             'unit_id'       => $purchaseProduct->unit_id,
                             'in_out_qty'    => +$purchaseProduct->quantity,

@@ -197,6 +197,7 @@ class FarmerInvoiceController extends Controller
 
                             $inventory = Inventory::create([
                                 'product_id'        => $saleProduct->product_id,
+                                'branch_id'         => auth()->user()->id,
                                 'user_id'           => auth()->user()->id,
                                 'unit_id'           => $saleProduct->unit_id,
                                 'in_out_qty'        => -$saleProduct->quantity,
@@ -213,6 +214,7 @@ class FarmerInvoiceController extends Controller
 
                             $inventory = Inventory::create([
                                 'product_id'        => $saleProduct->product_id,
+                                'branch_id'         => auth()->user()->id,
                                 'user_id'           => auth()->user()->id,
                                 'unit_id'           => $saleProduct->unit_id,
                                 'in_out_qty'        => -$saleProduct->quantity,

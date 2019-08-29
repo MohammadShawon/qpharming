@@ -23,6 +23,7 @@ class MedicineRecordController extends Controller
             ->join('categories','sub_categories.category_id','=','categories.id')
             ->selectRaw('product_prices.product_id,sum(product_prices.quantity) quantity,sum(product_prices.sold) sold,sum(product_prices.quantity - product_prices.sold) stock')
             ->where('categories.name','=','Medicines')
+            ->where('product_prices.branch_id',auth()->user()->branch_id)
             ->groupBy('product_prices.product_id')
             ->get();
         return $dataTable->render('admin.stocks.medicine',$data);

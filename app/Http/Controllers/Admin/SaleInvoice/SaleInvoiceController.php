@@ -320,6 +320,7 @@ class SaleInvoiceController extends Controller
                         $inventory = Inventory::create([
                             'product_id'        => $saleProduct->product_id,
                             'user_id'           => auth()->user()->id,
+                            'branch_id'           => auth()->user()->id,
                             'unit_id'           => $saleProduct->unit_id,
                             'in_out_qty'        => -$saleProduct->quantity,
                             'created_at'        => Carbon::now('+6'),
@@ -336,6 +337,7 @@ class SaleInvoiceController extends Controller
                         $inventory = Inventory::create([
                             'product_id'        => $saleProduct->product_id,
                             'user_id'           => auth()->user()->id,
+                            'branch_id'           => auth()->user()->id,
                             'unit_id'           => $saleProduct->unit_id,
                             'in_out_qty'        => -$saleProduct->quantity,
                             'created_at'        => Carbon::now('+6'),
