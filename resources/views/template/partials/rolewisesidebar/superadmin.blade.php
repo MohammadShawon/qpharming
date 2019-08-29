@@ -183,28 +183,28 @@
                      </a>
                      <ul class="sub-menu">
                         <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
+                            <a href="{{ route('admin.chicks.records') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span>
                             </a>
                         </li>
 
                         <li class="nav-item {{ Request::is('feed*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
+                            <a href="{{ route('admin.feed.records') }}" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('medicine*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
+                            <a href="{{ route('admin.medicine.records') }}" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicine</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('farmer*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.farmer.records') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Farmer</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('company*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
+                            <a href="{{ route('admin.company.records') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                 <span class="title">Company</span>
                             </a>
                         </li>
@@ -218,18 +218,18 @@
                      </a>
                      <ul class="sub-menu">
                         <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.chicks.records') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
+                            <a href="{{ route('admin.chicks.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span>
                             </a>
                         </li>
 
                         <li class="nav-item {{ Request::is('feed*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
+                            <a href="{{ route('admin.feed.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::is('medicin*') ? 'active' : '' }}">
-                            <a href="#" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
+                            <a href="{{ route('admin.medicine.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicine</span>
                             </a>
                         </li>

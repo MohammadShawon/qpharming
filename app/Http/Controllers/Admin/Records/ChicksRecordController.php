@@ -30,7 +30,7 @@ class ChicksRecordController extends Controller
             ->groupBy('product_prices.product_id')
             ->get();
 //        dd($data['chicks']);
-        return $dataTable->render('admin.stocks.chicks',$data);
+        return $dataTable->render('admin.records.chicks',$data);
     }
 
     /**

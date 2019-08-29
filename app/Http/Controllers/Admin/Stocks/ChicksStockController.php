@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Records;
+namespace App\Http\Controllers\Admin\Stocks;
 
-use App\DataTables\Stocks\FeedDataTable;
+use App\DataTables\Stocks\ChicksDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \DB;
 
-class FeedRecordController extends Controller
+class ChicksStockController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param FeedDataTable $dataTable
+     * @param ChicksDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index(FeedDataTable $dataTable)
+    public function index(ChicksDataTable $dataTable)
     {
-        $data['feeds'] = DB::table('product_prices')
+        $data['chicks'] = DB::table('product_prices')
             ->join('products','product_prices.product_id','=','products.id')
             ->join('sub_categories','products.subcategory_id','=','sub_categories.id')
             ->join('categories','sub_categories.category_id','=','categories.id')
             ->selectRaw('product_prices.product_id,sum(product_prices.quantity) quantity,sum(product_prices.sold) sold,sum(product_prices.quantity - product_prices.sold) stock')
-            ->where('categories.name','=','Feeds')
-            ->where('product_prices.branch_id',auth()->user()->branch_id)
+            ->where('categories.name','=','Chicks')
             ->groupBy('product_prices.product_id')
             ->get();
-        return $dataTable->render('admin.records.feed',$data);
+//        dd($data['chicks']);
+        return $dataTable->render('admin.stocks.chicks',$data);
     }
 
     /**

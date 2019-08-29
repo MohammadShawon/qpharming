@@ -1,32 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Records;
+namespace App\Http\Controllers\Admin\Stocks;
 
-use App\DataTables\Stocks\FeedDataTable;
+use App\DataTables\Stocks\MedicineDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use \DB;
+use Illuminate\Support\Facades\DB;
 
-class FeedRecordController extends Controller
+class MedicineStockController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param FeedDataTable $dataTable
+     * @param MedicineDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index(FeedDataTable $dataTable)
+    public function index(MedicineDataTable $dataTable)
     {
-        $data['feeds'] = DB::table('product_prices')
+        $data['medicines'] = DB::table('product_prices')
             ->join('products','product_prices.product_id','=','products.id')
             ->join('sub_categories','products.subcategory_id','=','sub_categories.id')
             ->join('categories','sub_categories.category_id','=','categories.id')
             ->selectRaw('product_prices.product_id,sum(product_prices.quantity) quantity,sum(product_prices.sold) sold,sum(product_prices.quantity - product_prices.sold) stock')
-            ->where('categories.name','=','Feeds')
-            ->where('product_prices.branch_id',auth()->user()->branch_id)
+            ->where('categories.name','=','Medicines')
             ->groupBy('product_prices.product_id')
             ->get();
-        return $dataTable->render('admin.records.feed',$data);
+        return $dataTable->render('admin.stocks.medicine',$data);
     }
 
     /**

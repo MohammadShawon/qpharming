@@ -128,11 +128,19 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('transactions','Transaction\TransactionController@index')->name('transaction.all');
 
     /*
-     * Stock Records Route
+     * Stocks Route
+     * */
+    Route::get('chicks/stocks','Stocks\ChicksStockController@index')->name('chicks.stocks');
+    Route::get('feed/stocks','Stocks\FeedStockController@index')->name('feed.stocks');
+    Route::get('medicine/stocks','Stocks\MedicineStockController@index')->name('medicine.stocks');
+    /*
+     * Ledger Records Route
      * */
     Route::get('chicks/records','Records\ChicksRecordController@index')->name('chicks.records');
     Route::get('feed/records','Records\FeedRecordController@index')->name('feed.records');
     Route::get('medicine/records','Records\MedicineRecordController@index')->name('medicine.records');
+    Route::get('records/farmer','Records\FarmerRecordController@index')->name('farmer.records');
+    Route::get('records/company','Records\CompanyRecordController@index')->name('company.records');
 
     /*
      * All Reports Route

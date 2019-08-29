@@ -26,7 +26,7 @@ class MedicineRecordController extends Controller
             ->where('product_prices.branch_id',auth()->user()->branch_id)
             ->groupBy('product_prices.product_id')
             ->get();
-        return $dataTable->render('admin.stocks.medicine',$data);
+        return $dataTable->render('admin.records.medicine',$data);
     }
 
     /**
