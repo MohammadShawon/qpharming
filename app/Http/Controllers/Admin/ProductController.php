@@ -71,6 +71,8 @@ class ProductController extends Controller
                     'base_unit_id'   => $request->unit_id,
                     'description'    => $request->description,
                     'size'           => $request->size,
+                    'created_at'     => Carbon::now('+6'),
+                    'updated_at'     => Carbon::now('+6')
 //                  'cost_price'      => $request->cost_price,
 //                   'selling_price'  => $request->selling_price,
 //                   'quantity'       => $request->quantity,
@@ -98,6 +100,8 @@ class ProductController extends Controller
                     'selling_price'    =>      $request->selling_price,
                     'mfg_date'         =>      Carbon::now('+6'),
                     'exp_date'         =>      Carbon::now('+6'),
+                    'created_at'       =>       Carbon::now('+6'),
+                    'updated_at'        =>      Carbon::now('+6'),
 
                 ]);
                 $product->productprices()->save($batch);

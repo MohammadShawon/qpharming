@@ -1,10 +1,10 @@
-
 @extends('template.app')
 @section('title', 'Sale Invoice')
 
 @push('css')
-    {!! Html::script('js/angular.min.js', array('type' => 'text/javascript')) !!}
-    {!! Html::script('js/sale.js', array('type' => 'text/javascript')) !!}
+
+    <!-- data tables -->
+    <link href="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}} " rel="stylesheet" type="text/css"/>
 
 @endpush
 
@@ -23,8 +23,15 @@
                 </a>
 
             </div>
-            <div class="card card-box">
-
+            <div class="card card-topline-red">
+                <div class="card-head" style="text-align: center;">
+                    <header>
+                        Invoices List - ({{ \DB::table('sales')->count() + \DB::table('farmer_invoices')->count() }})
+                    </header>
+                </div>
+                <div class="card-body">
+                    {!! $dataTable->table() !!}
+                </div>
             </div>
         </div>
     </div>

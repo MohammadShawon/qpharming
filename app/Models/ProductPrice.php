@@ -18,7 +18,9 @@ class ProductPrice extends Model implements Auditable
         'cost_price',
         'selling_price',
         'mfg_date',
-        'exp_date'
+        'exp_date',
+        'created_at',
+        'updated_at'
     ];
     public function product(){
         return $this->belongsTo(Product::class);

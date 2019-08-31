@@ -19,11 +19,11 @@ class CreateProductPricesTable extends Migration
             $table->bigInteger('branch_id')->unsigned()->index();
             $table->string('batch_no')->unique();
             $table->decimal('quantity',8,2);
-            $table->decimal('sold',8,2);
+            $table->decimal('sold',8,2)->default(0);
             $table->decimal('cost_price',20,2);
             $table->decimal('selling_price',20,2);
-            $table->dateTime('mfg_date');
-            $table->dateTime('exp_date');
+            $table->dateTime('mfg_date')->nullable();
+            $table->dateTime('exp_date')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

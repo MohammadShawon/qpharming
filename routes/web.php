@@ -49,7 +49,7 @@ use Illuminate\Support\Facades\Route;
 
 
 /*
- * Routes Thr   ough Roles
+ * Routes Through Roles
  * */
 Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:superadmin|admin|manager|employee,create']], function () {
 
@@ -82,6 +82,10 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::resource('payment', 'PaymentController');
     Route::resource('collection', 'CollectionController');
     // Route::resource('farmer-records', 'FarmerRecordsController');
+    /*
+     * Import Product
+     * */
+    Route::post('import/product','Import\ProductImportController@import')->name('product.import');
 
     /* Farmer Batch routes */
     Route::get('farmer/{id}/batch/create', 'FarmerBatchController@create');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\SaleInvoice;
 
+use App\DataTables\Invoices\SaleDataTable;
 use App\Models\Customer;
 use App\Models\Inventory;
 use App\Models\ProductPrice;
@@ -21,11 +22,13 @@ class SaleInvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param SaleDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SaleDataTable $dataTable)
     {
-        return view('admin.saleinvoice.index');
+
+        return $dataTable->render('admin.saleinvoice.index');
     }
 
     /**
