@@ -136,6 +136,17 @@ class FarmerInvoiceController extends Controller
             try
             {
                 $saleProducts =SaleTempItem::where('user_id',auth()->user()->id)->get();
+                /*
+                 * Check the empty product
+                 * @return farmer invoice
+                 * */
+                if ($saleProducts->isEmpty())
+                {
+                    DB::rollback();
+                    Toastr::error('No Product Selected!','error');
+
+                    return redirect()->route('admin.farmer.show',$request->input('farmer_id'));
+                }
 
                 if (!$saleProducts->isEmpty())
                 {

@@ -76,6 +76,18 @@ class SaleInvoiceController extends Controller
              * */
             if (empty($request->input('phone')))
             {
+                $saleProducts =SaleTempItem::where('user_id',auth()->user()->id)->get();
+                /*
+                     * Check the empty product
+                     * @return farmer invoice
+                     * */
+                if ($saleProducts->isEmpty())
+                {
+                    DB::rollback();
+                    Toastr::error('No Product Selected!','error');
+
+                    return redirect()->route('admin.sales.create');
+                }
 
 //                Complete the Sale
                 $this->completeSale($request,$request->input('customer_id'));
@@ -111,6 +123,18 @@ class SaleInvoiceController extends Controller
 
                 if ($customer)
                 {
+                    $saleProducts =SaleTempItem::where('user_id',auth()->user()->id)->get();
+                    /*
+                         * Check the empty product
+                         * @return farmer invoice
+                         * */
+                    if ($saleProducts->isEmpty())
+                    {
+                        DB::rollback();
+                        Toastr::error('No Product Selected!','error');
+
+                        return redirect()->route('admin.sales.create');
+                    }
 //                    Complete The Sale
                     $this->completeSale($request,$customer->id);
 //                    Delete the temporary sale items
@@ -259,6 +283,17 @@ class SaleInvoiceController extends Controller
         try
         {
             $saleProducts =SaleTempItem::where('user_id',auth()->user()->id)->get();
+            /*
+                 * Check the empty product
+                 * @return farmer invoice
+                 * */
+            if ($saleProducts->isEmpty())
+            {
+                DB::rollback();
+                Toastr::error('No Product Selected!','error');
+
+                return redirect()->route('admin.sales.create');
+            }
 
             if (!$saleProducts->isEmpty())
             {
