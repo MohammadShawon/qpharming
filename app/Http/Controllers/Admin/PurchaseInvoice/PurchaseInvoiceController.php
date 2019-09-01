@@ -113,6 +113,16 @@ class PurchaseInvoiceController extends Controller
             try
             {
                 $purchaseProducts = PurchasetempItem::where('user_id',auth()->user()->id)->get();
+                /*
+                         * Check the empty product
+                         * @return farmer invoice
+                         * */
+                if ($purchaseProducts->isEmpty())
+                {
+                    DB::rollback();
+                    Toastr::error('No Product Selected!','error');
+                    return redirect()->route('admin.purchases.create');
+                }
                 if (!$purchaseProducts->isEmpty())
                 {
                     foreach ($purchaseProducts as $purchaseProduct)
@@ -138,6 +148,7 @@ class PurchaseInvoiceController extends Controller
                          * */
                         $batch = ProductPrice::create([
                             'product_id'        => $purchaseProduct->product_id,
+                            'branch_id'         => auth()->user()->branch_id,
                             'batch_no'          => date('Y'). '-'.random_int(1,50000),
                             'quantity'          => $purchaseProduct->quantity,
                             'sold'              => 0,

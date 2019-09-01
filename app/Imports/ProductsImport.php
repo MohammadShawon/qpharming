@@ -31,9 +31,8 @@ class ProductsImport implements ToModel, WithHeadingRow,WithBatchInserts
             'created_at'        => Carbon::now('+6'),
             'updated_at'        => Carbon::now('+6'),
         ]);
-        if ($row['stock'])
-        {
-            return  new ProductPrice([
+
+             $productPrice = new ProductPrice([
                 'product_id'    => $product->id,
                 'branch_id'     =>auth()->user()->branch_id,
                 'batch_no'      => date('Y'). '-'.random_int(1,50000),
@@ -46,9 +45,9 @@ class ProductsImport implements ToModel, WithHeadingRow,WithBatchInserts
                 'created_at'    => Carbon::now('+6'),
                 'updated_at'    => Carbon::now('+6'),
             ]);
-        }
 
-        return $product;
+
+        return $productPrice;
     }
 
     /**

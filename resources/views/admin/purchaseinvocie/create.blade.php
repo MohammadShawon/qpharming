@@ -56,7 +56,7 @@
                             <div class="form-group">
 
                                 <label for="company_id">Company Name</label>
-                                <select id="company_id" name="company_id" class="form-control  select2 " >
+                                <select id="company_id" name="company_id" class="form-control  select2 " required>
                                     <option value="0">Select Company</option>
                                     @foreach ($companies as $company=> $value)
 
