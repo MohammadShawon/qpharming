@@ -21,6 +21,7 @@ class CreateInventoriesTable extends Migration
 //            $table->string('batch_no');
             $table->bigInteger('unit_id')->unsigned();
             $table->decimal('in_out_qty',15,2);
+            $table->string('remarks')->index();
             $table->timestamps();
 
         });

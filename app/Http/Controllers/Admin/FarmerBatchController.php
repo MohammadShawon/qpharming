@@ -116,6 +116,7 @@ class FarmerBatchController extends Controller
                     'branch_id'         => auth()->user()->branch_id,
                     'unit_id'           => 1,
                     'in_out_qty'        => - $request->chicks_quantity,
+                    'remarks'           => 'Batch-'.$farmerBatch->batch_number,
                     'created_at'        => Carbon::now('+6'),
                     'updated_at'        => Carbon::now('+6'),
                 ]);

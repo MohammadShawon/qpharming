@@ -363,6 +363,7 @@ class SaleInvoiceController extends Controller
                             'branch_id'           => auth()->user()->id,
                             'unit_id'           => $saleProduct->unit_id,
                             'in_out_qty'        => -$saleProduct->quantity,
+                            'remarks'           => 'Sale-'.$saleInvoice->sale_no,
                             'created_at'        => Carbon::now('+6'),
                             'updated_at'        => Carbon::now('+6'),
                         ]);
@@ -380,6 +381,7 @@ class SaleInvoiceController extends Controller
                             'branch_id'           => auth()->user()->id,
                             'unit_id'           => $saleProduct->unit_id,
                             'in_out_qty'        => -$saleProduct->quantity,
+                            'remarks'           => 'Sale-'.$saleInvoice->sale_no,
                             'created_at'        => Carbon::now('+6'),
                             'updated_at'        => Carbon::now('+6'),
                         ]);

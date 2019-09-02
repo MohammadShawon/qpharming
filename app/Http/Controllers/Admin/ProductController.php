@@ -125,6 +125,7 @@ class ProductController extends Controller
 //                    'batch_no'      => $batch->batch_no,
                     'unit_id'       => $request->unit_id,
                     'in_out_qty'    => $request->quantity,
+                    'remarks'       => 'OpeningStock',
                     'created_at'    => Carbon::now('+6.30'),
                     'updated_at'    => Carbon::now('+6.30'),
                 ]);

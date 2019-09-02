@@ -15,6 +15,7 @@ class Inventory extends Model implements Auditable
 //        'batch_no',
         'unit_id',
         'in_out_qty',
+        'remarks',
         'created_at',
         'updated_at',
     ];

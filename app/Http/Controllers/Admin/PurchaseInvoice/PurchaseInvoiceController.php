@@ -172,6 +172,7 @@ class PurchaseInvoiceController extends Controller
                             'user_id'       => auth()->user()->id,
                             'unit_id'       => $purchaseProduct->unit_id,
                             'in_out_qty'    => +$purchaseProduct->quantity,
+                            'remarks'       => 'Purchase-'.$purchase->purchase_no,
                             'created_at'    => Carbon::now('+6'),
                             'updated_at'    => Carbon::now('+6'),
                         ]);
@@ -180,7 +181,7 @@ class PurchaseInvoiceController extends Controller
                 }
             }catch (\Exception $e)
             {
-                dd($e);
+//                dd($e);
                 DB::rollback();
                 Toastr::error('Purchase Item Error!','Error');
                 return redirect()->route('admin.purchases.create');

@@ -32,7 +32,7 @@
         $scope.removeReceivingTemp = function(id) {
             $http.delete('/api/receivingtemp/' + id).
             success(function(data, status, headers, config) {
-                $http.get('api/receivingtemp').success(function(data) {
+                $http.get('/api/receivingtemp').success(function(data) {
                     $scope.receivingtemp = data;
                 });
             });

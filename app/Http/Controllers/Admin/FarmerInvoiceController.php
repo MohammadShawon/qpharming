@@ -212,6 +212,7 @@ class FarmerInvoiceController extends Controller
                                 'user_id'           => auth()->user()->id,
                                 'unit_id'           => $saleProduct->unit_id,
                                 'in_out_qty'        => -$saleProduct->quantity,
+                                'remarks'           => 'FarmerInv-'.$invoice->invoice_number,
                                 'created_at'        => Carbon::now('+6'),
                                 'updated_at'        => Carbon::now('+6'),
                             ]);
@@ -229,6 +230,7 @@ class FarmerInvoiceController extends Controller
                                 'user_id'           => auth()->user()->id,
                                 'unit_id'           => $saleProduct->unit_id,
                                 'in_out_qty'        => -$saleProduct->quantity,
+                                'remarks'           => 'FarmerInv-'.$invoice->invoice_number,
                                 'created_at'        => Carbon::now('+6'),
                                 'updated_at'        => Carbon::now('+6'),
                             ]);
