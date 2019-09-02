@@ -28,6 +28,19 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'company' => [
+        'name'  => env('COMPANY_NAME','Qbytesoft'),
+        'logo'  => env('logo','admin/assets/img/qbytsoft_logo.png')
+    ],
+    'address' => [
+        'house' => env('HOUSE_ADDRESS','House - #06'),
+        'road'  => env('ROAD_ADDRESS','Road - 12/A'),
+        'sector' => env('SECTOR_ADDRESS','Sector 10'),
+        'area'  =>  env('AREA_ADDRESS' ,'Uttara'),
+        'city'  => env('CITY_ADDRESS','Dhaka'),
+        'post'  => env('POST_ADDRESS','1230'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

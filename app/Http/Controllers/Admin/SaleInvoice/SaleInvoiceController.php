@@ -185,7 +185,7 @@ class SaleInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.saleinvoice.show');
     }
 
     /**

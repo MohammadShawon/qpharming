@@ -50,12 +50,12 @@
                                         <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
                                         <div class="info-box-content">
                                           <span class="info-box-text">Chick Amount</span>
-                                          <span class="info-box-number">{{ $chicks->products->count() ?? 0 }} Pcs</span>
+                                          <span class="info-box-number">{{ App\Helpers\Helpers::totalChicksQuantity() }} Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 45%"></div>
                                           </div>
                                           <span class="progress-description">
-                                                45% Increase
+                                                {{ $chicks->products->count() ?? 0 }} Items
                                               </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -68,12 +68,12 @@
                                         <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
                                         <div class="info-box-content">
                                           <span class="info-box-text">Feed Amount</span>
-                                          <span class="info-box-number">{{ $feeds->products->count()??0 }} Pcs</span>
+                                          <span class="info-box-number"> {{ App\Helpers\Helpers::totalFeedQuantity() }}Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 40%"></div>
                                           </div>
                                           <span class="progress-description">
-                                                40% Increase
+                                                {{ $feeds->products->count()??0 }} Items
                                               </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -86,12 +86,12 @@
                                         <span class="info-box-icon push-bottom"><i class="material-icons">content_cut</i></span>
                                         <div class="info-box-content">
                                           <span class="info-box-text">Medicine Amount</span>
-                                          <span class="info-box-number">{{ $medicines->products->count() ?? 0 }} Pcs</span>
+                                          <span class="info-box-number">{{ App\Helpers\Helpers::totalMedicineQuantity()  }} Pcs</span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 85%"></div>
                                           </div>
                                           <span class="progress-description">
-                                                85% Increase
+                                                {{ $medicines->products->count() ?? 0 }} Items
                                               </span>
                                         </div>
                                         <!-- /.info-box-content -->
@@ -104,12 +104,12 @@
                                         <span class="info-box-icon push-bottom"><i class="material-icons">monetization_on</i></span>
                                         <div class="info-box-content">
                                           <span class="info-box-text">Total Stock</span>
-                                          <span class="info-box-number">{{ DB::table('products')->count() }} Pcs</span><span></span>
+                                          <span class="info-box-number"> {{ App\Helpers\Helpers::totalStock() }}Pcs</span><span></span>
                                           <div class="progress">
                                             <div class="progress-bar" style="width: 50%"></div>
                                           </div>
                                           <span class="progress-description">
-                                                50% Increase
+                                                {{ DB::table('products')->count() }} Items
                                               </span>
                                         </div>
                                         <!-- /.info-box-content -->
