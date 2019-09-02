@@ -2,8 +2,10 @@
 
 namespace App\DataTables\Invoices;
 
+use App\Models\Purchase;
 use App\User;
 use Yajra\DataTables\Services\DataTable;
+use function foo\func;
 
 class PurchaseDataTable extends DataTable
 {
@@ -16,7 +18,32 @@ class PurchaseDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', 'invoices/purchasedatatable.action');
+            ->addIndexColumn()
+            ->editColumn('company_id',static function($data){
+                return $data->company->name;
+            })
+            ->editColumn('grand_total',static function($data){
+                return "<b>{$data->grand_total}</b>";
+            })
+            ->editColumn('payment_type',static function($data){
+                return "<span class='label label-sm label-success'>$data->payment_type</span>";
+            })
+            ->addColumn('action',function ($data){
+                return $this->getActionColumn($data);
+            })
+            ->rawColumns(['grand_total','action','payment_type'])
+            ->setRowClass('gradeX');
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    protected function getActionColumn($data): string
+    {
+        $showUrl = route('admin.purchases.show', $data->id);
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+                        <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
     }
 
     /**
@@ -25,9 +52,9 @@ class PurchaseDataTable extends DataTable
      * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Purchase $model)
     {
-        return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        return $model->newQuery()->select('id', 'user_id','company_id','purchase_no','purchase_date','payment_type','sub_total','discount','grand_total','status','remarks', 'created_at', 'updated_at')->orderBy('purchase_date','desc');
     }
 
     /**
@@ -40,7 +67,15 @@ class PurchaseDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction([
+                        'width' => '12%',
+                        'printable' => false,
+                        'exportable' => false,
+                        'searchable' => false
+                    ])
+                    ->paging(true)
+                    ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
+                    ->scrollX(true)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -52,10 +87,109 @@ class PurchaseDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'add your columns',
-            'created_at',
-            'updated_at'
+            [
+                'defaultContent' => '',
+                'data'           => 'DT_RowIndex',
+                'name'           => 'DT_RowIndex',
+                'title'          => 'S. No',
+                'render'         => null,
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => true,
+                'width'     => '8%',
+
+            ],
+            [
+                'data'    => 'id',
+                'name'    => 'id',
+                'title'   => 'ID No.',
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => false,
+                'visible' => false
+            ],
+            [
+                'data'    => 'purchase_date',
+                'name'    => 'purchase_date',
+                'title'   => 'Date',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'purchase_no',
+                'name'    => 'purchase_no',
+                'title'   => 'Inv-No.',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'company_id',
+                'name'    => 'company_id',
+                'title'   => 'Company',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'payment_type',
+                'name'    => 'payment_type',
+                'title'   => 'Paid Type',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'sub_total',
+                'name'    => 'sub_total',
+                'title'   => 'Sub Total',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'discount',
+                'name'    => 'discount',
+                'title'   => 'Discount',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'grand_total',
+                'name'    => 'grand_total',
+                'title'   => 'Grand Total',
+                'orderable'      => true,
+                'searchable'     => true,
+                'exportable'     => true,
+                'printable'      => true,
+                'visible' => true
+            ],
+            [
+                'data'    => 'user_id',
+                'name'    => 'user_id',
+                'title'   => 'ID No.',
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => false,
+                'visible' => false
+            ],
         ];
     }
 
@@ -66,6 +200,6 @@ class PurchaseDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Invoices/Purchase_' . date('YmdHis');
+        return 'InvoicesPurchase_' . date('YmdHis');
     }
 }

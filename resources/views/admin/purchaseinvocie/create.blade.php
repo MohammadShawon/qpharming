@@ -171,7 +171,7 @@
                                             <b>
                                                 TA: @{{ sum(receivingtemp) | number:2 }}
                                             </b>
-                                            <input type="hidden" name="sub_total" value="@{{ sum(newreceivingtemp) }}">
+                                            <input type="hidden" name="sub_total" value="@{{ sum(receivingtemp) }}">
                                         </td>
                                         <td></td>
                                     </tr>
@@ -201,8 +201,8 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="totalInvoiceAmount">Total Invoice Amount</label>
-                                                <input type="text" value="@{{ sum(receivingtemp) - invoiceDiscount | number:2 }}" class="form-control" name="grand_total" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
-
+                                                <input type="text" value="@{{ sum(receivingtemp) - invoiceDiscount | number:2 }}" class="form-control" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
+                                                <input type="hidden" name="grand_total" value="@{{ sum(receivingtemp) - invoiceDiscount }}">
                                             </div>
                                         </div>
                                     </div>

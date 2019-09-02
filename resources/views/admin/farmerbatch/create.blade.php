@@ -74,8 +74,8 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label class="">Batch Date</label>
-                                            <div class="input-group date form_datetime" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                                <input class="form-control" size="16" type="text" name="batch_date" value="{{ \Carbon\Carbon::now()->toDayDateTimeString() }}">
+                                            <div class="input-group date form_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                                <input class="form-control" size="16" type="text" name="batch_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
                                                 <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\PurchaseInvoice;
 
+use App\DataTables\Invoices\PurchaseDataTable;
 use App\Http\Requests\Purchase\PurchaseInvoiceStoreRequest;
 use App\Models\Company,App\Models\Purchase;
 use App\Models\Inventory;
@@ -20,9 +21,10 @@ class PurchaseInvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param PurchaseDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PurchaseDataTable $dataTable)
     {
         /*
          * First Check the user Permission
@@ -30,7 +32,10 @@ class PurchaseInvoiceController extends Controller
          * */
         if (auth()->user()->can('view_purchase'))
         {
-            return view('admin.purchaseinvocie.index');
+            $data['invoices'] = Purchase::all();
+            $data['invoicePayments'] = PurchasePayment::all();
+//            dd($data['invoicePayments']);
+            return $dataTable->render('admin.purchaseinvocie.index',$data);
         }
         /*
          * If Not Permission Assigned
@@ -93,7 +98,7 @@ class PurchaseInvoiceController extends Controller
                     'bank'              => $request->input('bank'),
                     'sub_total'         => $request->input('sub_total'),
                     'discount'          => $request->input('invoiceDiscount'),
-                    'grand_total'       => (int) $request->input('grand_total'),
+                    'grand_total'       => $request->input('grand_total'),
                     'status'            => 1,
                     'remarks'           => $request->input('remarks'),
                     'created_at'        => Carbon::now('+6'),

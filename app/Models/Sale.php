@@ -31,7 +31,7 @@ class Sale extends Model implements Auditable
         return $this->belongsTo(User::class);
     }
     public function customer(){
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class,'customer_id');
     }
 
     public function saleitems(){

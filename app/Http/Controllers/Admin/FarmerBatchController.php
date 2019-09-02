@@ -113,6 +113,7 @@ class FarmerBatchController extends Controller
                 $inventory = Inventory::create([
                     'product_id'        => $chicksBatch->product_id,
                     'user_id'           => auth()->user()->id,
+                    'branch_id'         => auth()->user()->branch_id,
                     'unit_id'           => 1,
                     'in_out_qty'        => - $request->chicks_quantity,
                     'created_at'        => Carbon::now('+6'),

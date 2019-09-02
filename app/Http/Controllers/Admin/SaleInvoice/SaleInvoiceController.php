@@ -27,8 +27,10 @@ class SaleInvoiceController extends Controller
      */
     public function index(SaleDataTable $dataTable)
     {
-
-        return $dataTable->render('admin.saleinvoice.index');
+        $data['invoices'] = $dataTable->query();
+        $data['invoicePayments'] = SalePayment::all();
+//        dd($data['invoices']->sum('discount'));
+        return $dataTable->render('admin.saleinvoice.index',$data);
     }
 
     /**
@@ -241,7 +243,7 @@ class SaleInvoiceController extends Controller
                 'bank'              => $request->input('bank'),
                 'sub_total'         => $request->input('sub_total'),
                 'discount'          => $request->input('invoiceDiscount'),
-                'grand_total'       => (int) $request->input('grand_total'),
+                'grand_total'       => $request->input('grand_total'),
                 'status'            => 1,
                 'remarks'           => $request->input('remarks'),
                 'created_at'        => Carbon::now('+6.00'),
