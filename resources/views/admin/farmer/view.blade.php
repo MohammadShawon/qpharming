@@ -253,9 +253,10 @@ use Carbon\Carbon;
                                             <tr>
                                                 <th>#</th>
                                                 <th>Date</th>
-                                                <th>Feed and Medicin</th>
+                                                <th>Feed and Medicine</th>
                                                 <th>Quantity</th>
                                                 <th>Cost</th>
+                                                <th>Memo No</th>
                                             </tr>
                                             </thead>
                                             <?php
@@ -273,6 +274,7 @@ use Carbon\Carbon;
                                                                 <td>{{ $farmerInvoiceItem->product->product_name }}</td>
                                                                 <td>{{ $farmerInvoiceItem->quantity }}</td>
                                                                 <td>{{ $farmerInvoiceItem->total_selling }}</td>
+                                                                <td>{{ $farmerInvoice->remarks }}</td>
                                                             </tr>
                                                             <?php
                                                                 $totalQuantity += $farmerInvoiceItem->quantity;

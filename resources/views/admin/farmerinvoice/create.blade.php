@@ -266,7 +266,8 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="totalInvoiceAmount">Total Invoice Amount</label>
-                                                <input type="text" value="@{{ sum(saletemp) - invoiceDiscount | number:2 }}" class="form-control" name="grand_total" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
+                                                <input type="text" value="@{{ sum(saletemp) - invoiceDiscount | number:2 }}" class="form-control" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
+                                                <input type="hidden" value="@{{ sum(saletemp) - invoiceDiscount }}" class="form-control" name="grand_total">
 
                                             </div>
                                         </div>
