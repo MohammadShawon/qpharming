@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \DB;
+use Illuminate\Support\Facades\Validator;
 
 class FarmerInvoiceController extends Controller
 {
@@ -46,7 +47,9 @@ class FarmerInvoiceController extends Controller
 
     public function payment(Request $request,$id)
     {
-
+        $request->validate([
+           'payment_amount'     => 'required',
+        ]);
         $payment = Payment::create([
             'bank_id'        =>      1,
             'purposehead_id' =>      $request->input('purposehead_id'),
@@ -65,11 +68,11 @@ class FarmerInvoiceController extends Controller
         /* Check Payment insertion  and Toastr */
         if($payment){
             Toastr::success('Farmer Payment Successfully', 'Success');
-            return redirect()->to('farmer/'.$id.'/invoice');
+            return redirect()->to('farmer/'.$id);
         }
 
         Toastr::error('Farmer Payment Successfully', 'Error');
-        return redirect()->to('farmer/'.$id.'/invoice');
+        return redirect()->to('farmer/'.$id);
 
 
     }
@@ -118,6 +121,7 @@ class FarmerInvoiceController extends Controller
                     'total_amount'      => (int) $request->input('grand_total'),
                     'status'            => 1,
                     'remarks'           => $request->input('remarks'),
+                    'receipt_no'           => $request->input('memo'),
                     'created_at'        => Carbon::now('+6'),
                     'updated_at'        => Carbon::now('+6'),
                 ]);

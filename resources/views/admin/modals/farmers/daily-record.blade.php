@@ -9,7 +9,7 @@
               </button>
             </div>
             <div class="modal-body">
-            <form method="POST" id="daily-record-form" action="{{ route('admin.daily-record', $farmer->id) }}">
+            <form method="post" id="daily-record-form" action="{{ route('admin.daily-record', $farmer->id) }}">
                   @csrf
                   <div class="row">
                       <input type="hidden" name="farmer_id" value="{{ $farmer->id }}">
@@ -24,8 +24,8 @@
                       <div class="col-4">
                           <div class="form-group">
                               <label class="">Date</label>
-                              <div class="input-group date form_datetime" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                  <input class="form-control" size="16" type="text" name="date" value="{{ \Carbon\Carbon::now()->format('d M Y h:i a') }}">
+                              <div class="input-group date form_date" data-date="{{ \Carbon\Carbon::now('Asia/Dhaka') }}" data-date-format="dd MM yyyy HH:ii" data-link-field="dtp_input1">
+                                  <input class="form-control" size="16" type="text" name="date" value="{{ \Carbon\Carbon::now('Asia/Dhaka')->format('d M Y H:i') }}">
                                   <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -36,13 +36,23 @@
                       <div class="col-lg-3 col-md-3 col-sm-3 col-3">
                           <div class="form-group">
                               <label for="died"> Died</label>
-                              <input type="number" name="died" class="form-control" id="died">
+                              <input type="number" name="died" value="0" class="form-control" id="died" required>
+                              @error('died')
+                              <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                              @enderror
                           </div>
                       </div>
                       <div class="col-lg-3 col-md-3 col-sm-3 col-3">
                           <div class="form-group">
                               <label for="feed_kg"> Feed - kg</label>
-                              <input type="number" name="feed" class="form-control" id="feed_kg">
+                              <input type="number" name="feed" class="form-control" id="feed_kg" required>
+                              @error('feed')
+                              <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                              @enderror
                           </div>
                       </div>
                       {{-- <div class="col-lg-3 col-md-3 col-sm-3 col-3">
@@ -59,7 +69,12 @@
                       <div class="col-lg-3 col-md-3 col-sm-3 col-3">
                           <div class="form-group">
                               <label for="weight"> Weight</label>
-                              <input type="number" name="weight" class="form-control" id="weight">
+                              <input type="number" name="weight" class="form-control" id="weight" required>
+                              @error('weight')
+                              <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                              @enderror
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-6 col-sm-6 col-3">
@@ -82,8 +97,10 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button type="button" class="btn btn-primary add-row" id="save">Save</button>
+{{--                <input type="submit" name="save" id="save" class="btn btn-primary" form="daily-record-form">--}}
+               <button type="button" class="btn btn-primary add-row" id="save" form="daily-record-form">Save</button>
             </div>
           </div>
         </div>
       </div>
+

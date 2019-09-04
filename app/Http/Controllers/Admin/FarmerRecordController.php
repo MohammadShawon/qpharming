@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\DailyRecord\DailyRecordRequest;
 use App\Models\FarmerBatch;
 use App\Models\FarmerRecord;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use DemeterChain\C;
+use http\Header;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,12 +37,13 @@ class FarmerRecordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param DailyRecordRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DailyRecordRequest $request)
     {
-        $batch = FarmerBatch::where('farmer_id',$request->input('farmer_id'))->where('status','active')->first();
+//        dd($request->all());
+        $batch = FarmerBatch::  where('farmer_id',$request->input('farmer_id'))->where('status','active')->first();
         $startDate = \Carbon\Carbon::parse($batch->created_at);
         $endDate = \Carbon\Carbon::now();
 
@@ -63,7 +66,9 @@ class FarmerRecordController extends Controller
         if ($record)
         {
             Toastr::success('Farmer Records Success!','Success');
-            return response()->json('success');
+            return response()->json([
+                'success' => true,
+            ],200);
         }
     }
 

@@ -257,6 +257,7 @@ use Carbon\Carbon;
                                                 <th>Quantity</th>
                                                 <th>Cost</th>
                                                 <th>Memo No</th>
+                                                <th>Remarks</th>
                                             </tr>
                                             </thead>
                                             <?php
@@ -270,10 +271,11 @@ use Carbon\Carbon;
                                                         @foreach($farmerInvoice->farmerinvoiceitems as $farmerInvoiceItem)
                                                             <tr>
                                                                 <td>{{ $i++ }}</td>
-                                                                <td>{{ $farmerInvoice->date }}</td>
+                                                                <td>{{ Carbon::parse($farmerInvoice->date)->format('d-M-Y') }}</td>
                                                                 <td>{{ $farmerInvoiceItem->product->product_name }}</td>
                                                                 <td>{{ $farmerInvoiceItem->quantity }}</td>
                                                                 <td>{{ $farmerInvoiceItem->total_selling }}</td>
+                                                                <td>{{ $farmerInvoice->receipt_no }}</td>
                                                                 <td>{{ $farmerInvoice->remarks }}</td>
                                                             </tr>
                                                             <?php
@@ -481,6 +483,7 @@ use Carbon\Carbon;
 
 @endsection
 @push('js')
+
 <!-- data tables -->
 <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>

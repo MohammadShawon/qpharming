@@ -28,6 +28,7 @@ class CreateFarmerInvoicesTable extends Migration
             $table->decimal('total_amount');
             $table->enum('status',['active', 'inactive', 'disabled']);
             $table->text('remarks')->nullable();
+            $table->text('receipt_no')->nullable();
 
 
             $table->timestamps();

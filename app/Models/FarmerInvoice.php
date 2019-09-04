@@ -17,6 +17,7 @@ class FarmerInvoice extends Model implements Auditable
         'total_amount',
         'status',
         'remarks',
+        'receipt_no',
         'created_at',
         'updated_at'
     ];

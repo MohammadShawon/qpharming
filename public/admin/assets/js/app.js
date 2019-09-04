@@ -17,7 +17,7 @@ var App = function() {
 
     var globalImgPath = 'img/';
 
-    var globalPluginsPath = 'global/plugins/';
+    var globalPluginsPath = 'assets/plugins/';
 
     var globalCssPath = 'css/';
 
@@ -37,7 +37,7 @@ var App = function() {
             $('html').addClass('ie'); // detect IE10 version
         }
     };
-    
+
     /*************** Change theme color *************/
     var handleColorSetting = function() {
 
@@ -46,7 +46,7 @@ var App = function() {
     	});
 
     };
-    
+
     /************* Handle theme layout ****************/
     var handleTheme = function() {
 
@@ -104,7 +104,7 @@ var App = function() {
             }
 
             if (lastSelectedLayout != layoutOption) {
-                //layout changed, run responsive handler: 
+                //layout changed, run responsive handler:
                 App.runResizeHandlers();
             }
             lastSelectedLayout = layoutOption;
@@ -140,7 +140,7 @@ var App = function() {
                 $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
             }
 
-            /************* footer ****************/ 
+            /************* footer ****************/
             if (footerOption === 'fixed') {
                 $("body").addClass("page-footer-fixed");
             } else {
@@ -154,7 +154,7 @@ var App = function() {
                 $(".page-sidebar-menu").removeClass("page-sidebar-menu-light");
             }
 
-            /********* sidebar menu ***********************/ 
+            /********* sidebar menu ***********************/
             if (sidebarMenuOption === 'hover') {
                 if (sidebarOption == 'fixed') {
                     $('.sidebar-menu-option', panel).val("accordion");
@@ -179,7 +179,7 @@ var App = function() {
                 });
             }
 
-            Layout.fixContentHeight(); // fix content height            
+            Layout.fixContentHeight(); // fix content height
             Layout.initFixedSidebar(); // reinitialize fixed sidebar
         };
 
@@ -230,6 +230,7 @@ var App = function() {
         $(document).on('click', '.panel .tools .fa-times', function() {
             $(this).parents(".panel").parent().remove();
         });
+
         $('.tooltips').tooltip();
 
         // clickable row for email
@@ -355,7 +356,7 @@ var App = function() {
                 }
                 resize = setTimeout(function() {
                     _runResizeHandlers();
-                }, 50); // wait 50ms until window resize finishes.                
+                }, 50); // wait 50ms until window resize finishes.
                 currheight = document.documentElement.clientHeight; // store last body client height
             });
         } else {
@@ -400,7 +401,7 @@ var App = function() {
     /************* Handles Bootstrap Dropdowns  ********************/
     var handleDropdowns = function() {
         /*
-          Hold dropdown on click  
+          Hold dropdown on click
         */
         $('body').on('click', '.dropdown-menu.hold-on-click', function(e) {
             e.stopPropagation();
@@ -529,7 +530,7 @@ var App = function() {
 
             chatUsersHeight = wrapper.height() - wrapper.find('.nav-tabs').outerHeight(true);
 
-            // chat user list 
+            // chat user list
             chatUsers.css("height", wrapper.height() + "px");
             chatUsers.css("overflow", "auto");
             chatUsers.attr("data-height", chatUsersHeight);
@@ -537,7 +538,7 @@ var App = function() {
             var chatMessages = wrapperChat.find('.chat-sidebar-chat-user-messages');
             var chatMessagesHeight = chatUsersHeight - wrapperChat.find('.chat-sidebar-chat-user-form').outerHeight(true);
             chatMessagesHeight -= wrapperChat.find(".page-quick-sidemenu").outerHeight(true);
-            // user chat messages 
+            // user chat messages
             chatMessages.attr("data-height", chatMessagesHeight);
             chatMessages.css("height", chatMessagesHeight);
             chatMessages.css("overflow-y", "auto");
@@ -636,7 +637,7 @@ var App = function() {
             wheelStep: 5
         });
     };
-    
+
     handleChatScrollbar = function() {
         var t = $(".chat-sidebar-chat"),
             i = function() {
@@ -657,7 +658,7 @@ var App = function() {
 
             settingsListHeight = wrapper.height() - 80 - wrapper.find('.nav-justified > .nav-tabs').outerHeight();
 
-            // alerts list 
+            // alerts list
             settingsList.attr("data-height", settingsListHeight);
             settingsList.css("height", wrapper.height() + "px");
             settingsList.css("overflow-y", "auto");
@@ -679,10 +680,10 @@ var App = function() {
             //Core handlers
             handleInit(); // initialize core variables
             handleTheme();
-            handleOnResize(); // set and handle responsive    
+            handleOnResize(); // set and handle responsive
             handleColorSetting();
-            
-            //UI Component handlers     
+
+            //UI Component handlers
             handleBootstrapSwitch(); // handle bootstrap switch plugin
             handleSelect2(); // handle custom Select2 dropdowns
             handleDropdowns(); // handle dropdowns
@@ -695,7 +696,7 @@ var App = function() {
             handleChatScrollbar();
 
             handleslimscroll_menu();
-            
+
             //Handle group element heights
             this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
 
@@ -837,6 +838,7 @@ var App = function() {
 }();
 
 jQuery(document).ready(function() {
+
     App.init(); // init core componets
     $(".chat-sidebar-chat-user-messages").animate({
         scrollTop: $(document).height()

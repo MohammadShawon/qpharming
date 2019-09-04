@@ -12,14 +12,15 @@
     <title>@yield('title')</title>
 
     <!-- google font -->
-   
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('admin/fonts/poppins-font.css') }}" rel="stylesheet" type="text/css" />
 	<!-- icons -->
     <link href="{{ asset('admin/assets/plugins/simple-line-icons/simple-line-icons.min.css') }} " rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/fonts/font-awesome/css/font-awesome.min.css') }} " rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('admin/fonts/material-design-icons/material-icon.css') }} " rel="stylesheet" type="text/css" />
 	<!--bootstrap -->
 	<link href="{{ asset('admin/assets/plugins/bootstrap/css/bootstrap.css') }} " rel="stylesheet" type="text/css" />
+
 
 	<link href="{{ asset('admin/assets/plugins/summernote/summernote.css') }} " rel="stylesheet">
     <!-- Material Design Lite CSS -->
@@ -30,12 +31,12 @@
 	<!-- inbox style -->
     <link href="{{ asset('admin/assets/css/pages/inbox.min.css') }} " rel="stylesheet" type="text/css" />
 	<!-- Theme Styles -->
-    
+
     <link href="{{ asset('admin/assets/css/plugins.min.css') }} " rel="stylesheet" type="text/css" />
-   
+
     <link href="{{ asset('admin/assets/css/theme-color.css') }} " rel="stylesheet" type="text/css" />
 	<!-- favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/img/favicon.ico') }} " /> 
+    <link rel="shortcut icon" href="{{ asset('admin/assets/img/favicon.ico') }} " />
 
     <link href="{{ asset('admin/assets/css/style.css') }} " rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/assets/css/responsive.css') }} " rel="stylesheet" type="text/css" />
@@ -48,12 +49,12 @@
     <link href="{{ asset('admin/assets/css/pageloader/preloader.css') }} " rel="stylesheet" type="text/css" />
 
     <!--  quicklink css -->
-    <link href="{{ asset('admin/assets/quicklink/style.css') }} " rel="stylesheet" type="text/css" />
+{{--    <link href="{{ asset('admin/assets/quicklink/style.css') }} " rel="stylesheet" type="text/css" />--}}
 
 
 
-    
-    
+
+
     @stack('css')
 
 </head>
@@ -73,7 +74,7 @@
         <div class="page-wrapper">
             <!-- start header -->
             @include('template.partials.topbar')
-            @include('template.partials.quicklink')
+{{--            @include('template.partials.quicklink')--}}
             <!-- end header -->
 
 
@@ -105,19 +106,24 @@
 
  <!-- start js include path -->
 
-
+    {{-- PAGE LOADER JS SCRIPT START --}}
+    <script src="{{ asset('admin/assets/js/pageloader/preloader.min.js') }}"></script>
+    <script>
+        $(window).on("load", function () {
+            $(".loader").fadeOut();
+            $("#preloader").delay(100).fadeOut("fast");
+        });
+    </script>
+    {{-- PAGE LOADER JS SCRIPT END --}}
  <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.4.1.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
 
  <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>
- <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }} "></script>
-
- <script src="{{ asset('admin/assets/plugins/sparkline/jquery.sparkline.min.js') }} " ></script>
- <script src="{{ asset('admin/assets/js/pages/sparkline/sparkline-data.js') }} " ></script>
-
+ <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }} "></script>
     <!-- bootstrap -->
-    <script type="application/javascript" src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.js') }} " ></script>
-
+    <script src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.bundle.js') }} " ></script>
+{{-- <script src="{{ asset('admin/assets/plugins/sparkline/jquery.sparkline.min.js') }} " ></script>--}}
+{{-- <script src="{{ asset('admin/assets/js/pages/sparkline/sparkline-data.js') }} " ></script>--}}
 
  <!-- Common js-->
  <script src="{{ asset('admin/assets/js/app.js') }} " ></script>
@@ -135,19 +141,11 @@
 {{-- <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>--}}
 <!--  quicklink js -->
-<script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>
+{{--<script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>--}}
 
  <!-- end js include path -->
 
- {{-- PAGE LOADER JS SCRIPT START --}}
-<script src="{{ asset('admin/assets/js/pageloader/preloader.min.js') }}"></script>
-        <script>
-            $(window).on("load", function () {
-            $(".loader").fadeOut();
-            $("#preloader").delay(100).fadeOut("fast");
-            });
-        </script>
- {{-- PAGE LOADER JS SCRIPT END --}}
+
 
 <!-- toastr js -->
  <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
@@ -164,11 +162,11 @@
         @endforeach
     @endif
 </script>
-<script>
-   $(".link-button").click(function () {
-  window.location.href = $(this).data('href');
-});
-</script>
+{{--<script>--}}
+{{--   $(".link-button").click(function () {--}}
+{{--  window.location.href = $(this).data('href');--}}
+{{--});--}}
+{{--</script>--}}
 
  @stack('js')
 

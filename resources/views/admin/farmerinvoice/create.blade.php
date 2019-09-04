@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
+        {{--Farmer Payment--}}
         <div class="col-12 payment">
             <div class="card card-box">
                 <div class="card-head text-black" style="background-color:#3FCC7E;">
@@ -53,7 +54,7 @@
                                 {{-- Amount --}}
                                 <div class="form-group">
                                     <label for="payment_amount">Payment Amount</label>
-                                    <input type="text" name="payment_amount" class="form-control" id="payment_amount" value="{{ old('payment_amount') }}" autocomplete="off">
+                                    <input type="text" name="payment_amount" class="form-control" id="payment_amount" value="{{ old('payment_amount') }}" autocomplete="off" required>
                                 </div>
                                 {{-- Reference --}}
 
@@ -69,7 +70,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Receivd By</label>
+                                    <label for="simpleFormEmail">Received By</label>
                                     <input type="text" name="received_by" class="form-control" id="simpleFormEmail" value="{{ old('received_by') }}">
                                 </div>
 
@@ -77,8 +78,8 @@
 
                                 <div class="form-group">
                                     <label class="">Payment Date</label>
-                                    <div class="input-group date form_datetime" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ \Carbon\Carbon::now()->format('d M Y h:i a') }}">
+                                    <div class="input-group date form_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -98,6 +99,8 @@
                 </div>
             </div>
         </div>
+
+        {{--Farmer Invoice--}}
         <div class="col-12 invoice">
             <div class="card card-box">
                 <div class="card-head text-white " style="background-color:#3FCC7E;">
@@ -113,7 +116,7 @@
                         </div>
                     </div>
                     {!! Form::open(['url' => '/farmer/'.$farmer->id.'/invoice','method' => 'POST']) !!}
-                    {{--          Form ROw 1          --}}
+                    {{--          Form Row 1          --}}
                     <div class="row">
                         <div class="col-12 col-md-2 col-sm-4">
                             <div class="form-group">
@@ -148,8 +151,8 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="form-group">
                                 <label class="">Bill Date</label>
-                                <div class="input-group date form_datetime" data-date="{{ Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                    <input class="form-control" size="16" type="text" name="sale_date" value="{{ Carbon\Carbon::now()->toDayDateTimeString() }}">
+                                <div class="input-group date form_date" data-date="{{ Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                    <input class="form-control" size="16" type="text" name="sale_date" value="{{ Carbon\Carbon::now()->format('d M Y') }}">
                                     <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -160,14 +163,21 @@
 
 
                     </div>
-
-                    {{--           Form Row 2             --}}
+                    {{--          Form ROw 2 --}}
+                    <div class="row">
+                        <div class="offset-9"></div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                {!! Form::label('memo','Memo No') !!}
+                                {!! Form::text('memo',old('memo'),['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    {{--           Form Row 3            --}}
                     <div class="row">
 
-
-
                     </div>
-                    {{--          Row 3          --}}
+                    {{--          Row 4          --}}
                     <div class="row p-t-20" ng-controller="SearchItemCtrl">
                         <!-- Product Search  -->
                         <div class="col-xs-12 col-3">
