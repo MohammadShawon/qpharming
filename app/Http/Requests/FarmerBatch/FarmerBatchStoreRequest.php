@@ -25,6 +25,7 @@ class FarmerBatchStoreRequest extends FormRequest
     {
         return [
             'batch_name'           => 'required',
+            'product_id'           =>  'required | exists:products,id',
             'batch_number'         => 'required|unique:farmer_batches,batch_number',
             'status'               => 'required',
         ];

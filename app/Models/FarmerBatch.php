@@ -8,7 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 class FarmerBatch extends Model implements Auditable
 {
 	use \OwenIt\Auditing\Auditable;
-    protected $fillable = ['farmer_id','user_id','batch_name','batch_number','chicks_quantity','status','created_at','chicks_batch_no'];
+    protected $fillable = ['farmer_id','user_id','product_id','batch_name','batch_number','chicks_quantity','status','created_at','chicks_batch_no'];
 
     public function farmer(){
         return $this->belongsTo(Farmer::class);
@@ -16,6 +16,11 @@ class FarmerBatch extends Model implements Auditable
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 
     public function scopeActive($query)

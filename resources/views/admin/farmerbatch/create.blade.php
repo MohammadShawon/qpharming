@@ -44,18 +44,33 @@
                                 {{-- Batch Name --}}
                                 <div class="form-group">
                                     <label for="batch_name">Batch Name</label>
-                                    <input type="text" name="batch_name" class="form-control" id="batch_name" placeholder="Enter Batch Name">
+                                    <input type="text" name="batch_name" class="form-control" id="batch_name" placeholder="Enter Batch Name" required>
                                 </div>
 
                                 {{-- Batch Number --}}
                                 <div class="form-group">
                                     <label for="batch_number">Batch Number</label>
-                                    <input type="text" name="batch_number" value="{{ date("F").'-'}}" class="form-control" id="batch_number" >
+                                    <input type="text" name="batch_number" value="{{ date("F").'-'}}" class="form-control" id="batch_number" required>
                                 </div>
-                                {{-- Chicks Quantity --}}
-                                <div class="form-group">
-                                    <label for="chicks">Chicks Quantity</label>
-                                    <input type="text" name="chicks_quantity" value="0" class="form-control" id="chicks" >
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{-- Chicks Quantity --}}
+                                        <div class="form-group">
+                                            <label for="product_id">Chicks Name</label>
+                                            <select name="product_id" id="product_id" class="form-control select2">
+                                                @foreach($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        {{-- Chicks Quantity --}}
+                                        <div class="form-group">
+                                            <label for="chicks">Chicks Quantity</label>
+                                            <input type="text" name="chicks_quantity" value="0" class="form-control" id="chicks" >
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">

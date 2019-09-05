@@ -313,7 +313,7 @@ class SaleInvoiceController extends Controller
                         'cost_price'    => $saleProduct->cost_price,
                         'selling_price' => $saleProduct->selling_price,
                         'discount'      => $saleProduct->discount,
-                        'unit_id'       =>$saleProduct->unit_id,
+                        'unit_id'       => $saleProduct->unit_id,
                         'quantity'      => $saleProduct->quantity,
                         'total_cost'    => $saleProduct->total_cost,
                         'total_selling' => $saleProduct->total_selling,
