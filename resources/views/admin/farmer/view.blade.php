@@ -327,7 +327,7 @@ use Carbon\Carbon;
                                                                 Batch Name :  <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ $farmerBatch->batch_name }}</span> <span aria-hidden="true" class="icon-arrow-right "></span>
                                                                 Batch Number : <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ $farmerBatch->batch_number }}</span> <span aria-hidden="true" class="icon-arrow-right "></span>
 
-                                                                Status : <span class="btn btn-{{($farmerBatch->status=='active')?'success':'danger' }}">{{ ($farmerBatch->status == 'active') ? 'Running' : 'Closed' }}</span>
+                                                                Status : <span class="btn btn-{{($farmerBatch->status === 'active')?'success':'danger' }}">{{ ($farmerBatch->status === 'active') ? 'Running' : 'Closed' }}</span>
 
 
 
@@ -346,16 +346,18 @@ use Carbon\Carbon;
                                                     </div>
                                                     <div id="{{$farmerBatch->batch_number}}" class="panel-collapse in collapse">
                                                         <br>
+
                                                         <div class="row justify-content-center">
                                                             <div class="col-sm-6">
-
+                                                                @if($farmerBatch->status === 'active')
                                                                 {{-- Add Todays Record Button --}}
                                                                 <a data-toggle="modal" data-target="#farmerRecordForm" class="btn btn-info btn-lg m-b-10">Add Todays Record</a>
-
+                                                                @endif
                                                                 {{--View FUll Record Button --}}
                                                                 <a href="" class="btn btn-primary btn-lg m-b-10">View Full Record</a>
                                                             </div>
                                                         </div>
+
                                                         <div class="panel-body table-responsive">
                                                             <table class="table table-bordered table-hover">
                                                                 <thead class="text-center">

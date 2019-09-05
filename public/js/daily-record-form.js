@@ -18,6 +18,10 @@ $(document).ready(function(){
                     }
 
                 },
+                error: function (data) {
+                    console.log(data.responseText);
+                    toastr.error(data.responseText,'error');
+                }
 
             },
 

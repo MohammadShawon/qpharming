@@ -106,24 +106,20 @@
 
  <!-- start js include path -->
 
-    {{-- PAGE LOADER JS SCRIPT START --}}
-    <script src="{{ asset('admin/assets/js/pageloader/preloader.min.js') }}"></script>
-    <script>
-        $(window).on("load", function () {
-            $(".loader").fadeOut();
-            $("#preloader").delay(100).fadeOut("fast");
-        });
-    </script>
+
     {{-- PAGE LOADER JS SCRIPT END --}}
  <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.4.1.min.js') }} " ></script>
+
  <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
 
  <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>
  <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }} "></script>
+
     <!-- bootstrap -->
     <script src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.bundle.js') }} " ></script>
 {{-- <script src="{{ asset('admin/assets/plugins/sparkline/jquery.sparkline.min.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/js/pages/sparkline/sparkline-data.js') }} " ></script>--}}
+    {{-- PAGE LOADER JS SCRIPT START --}}
 
  <!-- Common js-->
  <script src="{{ asset('admin/assets/js/app.js') }} " ></script>
@@ -150,7 +146,15 @@
 <!-- toastr js -->
  <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
  {!! Toastr::message() !!}
+    <script src="{{ asset('admin/assets/js/pageloader/preloader.min.js') }}"></script>
+    <script>
 
+        jQuery(window).on("load", function () {
+            'use strict';
+            $(".loader").fadeOut();
+            $("#preloader").delay(100).fadeOut("fast");
+        });
+    </script>
  <script>
     @if($errors->any())
         @foreach($errors->all() as $error)

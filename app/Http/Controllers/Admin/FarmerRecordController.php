@@ -43,33 +43,47 @@ class FarmerRecordController extends Controller
     public function store(DailyRecordRequest $request)
     {
 //        dd($request->all());
+
         $batch = FarmerBatch::  where('farmer_id',$request->input('farmer_id'))->where('status','active')->first();
-        $startDate = \Carbon\Carbon::parse($batch->created_at);
-        $endDate = \Carbon\Carbon::now();
-
-        $record = FarmerRecord::create([
-            'user_id'               => auth()->user()->id,
-            'batch_number'          => $batch->batch_number,
-            'date'                  => Carbon::parse($request->input('date'))->format('Y-m-d H:i'),
-            'age'                   => $startDate->diffInDays($endDate) + 1,
-            'child_death'           => $request->input('died'),
-            'feed_eaten_kg'         => $request->input('feed'),
-            'feed_eaten_sack'       => null,
-            'feed_left'             => null,
-            'weight'                => $request->input('weight'),
-            'symptoms'              => $request->input('symptoms'),
-            'remarks'               => $request->input('comment'),
-            'created_at'            => Carbon::now('+6'),
-            'updated_at'            => Carbon::now('+6'),
-        ]);
-
-        if ($record)
+        /*
+         * Exists Date
+         * */
+        $date = Carbon::parse($request->input('date'))->format('Y-m-d');
+        $existsDate = FarmerRecord::where('batch_number',$batch->batch_number)->where('date','like','%'.$date.'%')->first();
+        if (!$existsDate)
         {
-            Toastr::success('Farmer Records Success!','Success');
-            return response()->json([
-                'success' => true,
-            ],200);
+            $startDate = \Carbon\Carbon::parse($batch->created_at);
+            $endDate = Carbon::parse($request->input('date'))->format('Y-m-d H:i');
+
+            $record = FarmerRecord::create([
+                'user_id'               => auth()->user()->id,
+                'batch_number'          => $batch->batch_number,
+                'date'                  => Carbon::parse($request->input('date'))->format('Y-m-d H:i'),
+                'age'                   => $startDate->diffInDays($endDate) + 1,
+                'child_death'           => $request->input('died'),
+                'feed_eaten_kg'         => $request->input('feed'),
+                'feed_eaten_sack'       => null,
+                'feed_left'             => null,
+                'weight'                => $request->input('weight'),
+                'symptoms'              => $request->input('symptoms'),
+                'remarks'               => $request->input('comment'),
+                'created_at'            => Carbon::now('+6'),
+                'updated_at'            => Carbon::now('+6'),
+            ]);
+
+            if ($record)
+            {
+                Toastr::success('Farmer Records Success!','Success');
+                return response()->json([
+                    'success' => true,
+                ],200);
+            }
         }
+//        Toastr::error('Date Already Exists!','error');
+        return response()->json([
+            'responseText' => 'Date Already Exists!',
+        ],422);
+
     }
 
     /**
