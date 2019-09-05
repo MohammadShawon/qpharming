@@ -15,6 +15,7 @@ use Carbon\Carbon;
             </h2>
         </div>
     </div>
+    {{--Profile Quick Links--}}
 <div class="row justify-content-center">
     <div class="col-md-3 justify-content-center">
         <div class="card">
@@ -26,7 +27,7 @@ use Carbon\Carbon;
             <div class="card-body no-padding height-9">
 
                 <div class="profile-userpic">
-                    <img src="{{ asset('storage/farmer/')."/".$farmer->image }}" class="img-responsive" alt="">
+                    <img src="{{ asset('storage/farmer/').'/'.$farmer->image }}" class="img-responsive" alt="">
                 </div>
             </div>
         </div>
@@ -46,6 +47,7 @@ use Carbon\Carbon;
         </div>
 
     </div>
+    {{--Farmer Profile--}}
     <div class="col-md-6 justify-content-center">
 
         <div class="card">
@@ -77,6 +79,7 @@ use Carbon\Carbon;
             </div>
         </div>
     </div>
+    {{--Chicks Summary--}}
     <div class="col-md-3 justify-content-center">
         <div class="card">
             <div class="card-body no-padding height-9">
@@ -175,7 +178,7 @@ use Carbon\Carbon;
                     <strong>Total Died</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>0</b>
+                    <b>{{ App\Helpers\Farmers::totalDied($farmer->id) }}</b>
                 </div>
             </div>
         </div>
@@ -185,7 +188,7 @@ use Carbon\Carbon;
                     <b>Total Feed</b>
                 </header>
                 <div class="panel-body text-center">
-                    <b>0</b>
+                    <b>{{ App\Helpers\Farmers::totalFeed($farmer->id) }} Kg</b>
                 </div>
             </div>
         </div>
@@ -195,7 +198,7 @@ use Carbon\Carbon;
                     <strong>Total Feed</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>0 Sack</b>
+                    <b>{{ App\Helpers\Farmers::totalFeed($farmer->id) / 50 }} Sack</b>
                 </div>
             </div>
         </div>
@@ -205,17 +208,17 @@ use Carbon\Carbon;
                     <strong>Feed Left</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>0 Sack</b>
+                    <b>{{ App\Helpers\Farmers::totalFeedLeft($farmer->id)  }} Sack</b>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="panel">
                 <header class="panel-heading panel-heading-blue text-center">
-                    <strong>Weigh Per Pics</strong>
+                    <strong>Weigh Per Pcs</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>0 gm</b> (Now)
+                    <b>{{ App\Helpers\Farmers::totalWeight($farmer->id) }} Kg</b> (Now)
                 </div>
             </div>
         </div>
@@ -242,6 +245,7 @@ use Carbon\Carbon;
             </header>
             <div class="panel-body">
                 <div class="tab-content">
+                    {{-- Feed & Medicine --}}
                     <div class="tab-pane active" id="stock">
                         <div class="col-md-12">
                             <div class="card">
@@ -307,6 +311,8 @@ use Carbon\Carbon;
                             </div>
                         </div>
                     </div>
+
+                    {{--Batch Records--}}
                     <div class="tab-pane" id="batch">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
@@ -353,8 +359,9 @@ use Carbon\Carbon;
                                                                 {{-- Add Todays Record Button --}}
                                                                 <a data-toggle="modal" data-target="#farmerRecordForm" class="btn btn-info btn-lg m-b-10">Add Todays Record</a>
                                                                 @endif
+                                                                @if($farmerBatch->status === 'inactive')
                                                                 {{--View FUll Record Button --}}
-                                                                <a href="" class="btn btn-primary btn-lg m-b-10">View Full Record</a>
+                                                                <a href="" class="btn btn-primary btn-lg m-b-10">View Full Record</a>@endif
                                                             </div>
                                                         </div>
 
@@ -389,16 +396,18 @@ use Carbon\Carbon;
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr class="text-center">
-                                                                    <td>1</td>
-                                                                    <td>5</td>
-                                                                    <td>20 kg</td>
-                                                                    <td>0.01 Sack</td>
-                                                                    <td>20.01 Sack</td>
-                                                                    <td>100gm</td>
-                                                                    <td style="max-width: 150px;">Well</td>
-                                                                    <td style="max-width: 250px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad iure nesciunt eaque reprehenderit a.</td>
-                                                                </tr>
+                                                                    @foreach(\App\Helpers\Farmers::records($farmerBatch->batch_number) as $record)
+                                                                        <tr class="text-center">
+                                                                            <td>{{ $record->age }}</td>
+                                                                            <td>{{ $record->child_death }}</td>
+                                                                            <td>{{ $record->feed_eaten_kg }}</td>
+                                                                            <td>{{ $record->feed_eaten_sack }} Sack</td>
+                                                                            <td>{{ $record->feed_left }} Sack</td>
+                                                                            <td>{{ $record->weight }}</td>
+                                                                            <td style="max-width: 150px;">{{ $record->symtomp }}</td>
+                                                                            <td style="max-width: 250px;">{{ $record->remarks }}</td>
+                                                                        </tr>
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
 
@@ -413,6 +422,8 @@ use Carbon\Carbon;
                             </div>
                         </div>
                     </div>
+
+                    {{--Payments--}}
                     <div class="tab-pane" id="payments">
                         <div class="col-md-12">
                             <div class="card">

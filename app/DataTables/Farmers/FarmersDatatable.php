@@ -2,11 +2,13 @@
 
 namespace App\DataTables\Farmers;
 
+use App\Helpers\Farmers as FarmerCOst;
 use App\Models\Farmer;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html;
 use Yajra\DataTables\DataTables;
 use \DB;
+use function foo\func;
 
 class FarmersDatatable extends DataTable
 {
@@ -26,6 +28,15 @@ class FarmersDatatable extends DataTable
             })
             ->editColumn('status',function ($status){
                 return $this->getStatus($status);
+            })
+            ->addColumn('total_cost',function ($data){
+                return FarmerCOst::totalCost($data->id);
+            })
+            ->addColumn('current_chicks',static function($data){
+                return FarmerCOst::currentChicks($data->id);
+            })
+            ->addColumn('day',static function($data){
+                return FarmerCOst::runningDay($data->id);
             })
             ->addColumn('action',function ($data){
                 return $this->getActionColumn($data);
@@ -89,13 +100,13 @@ class FarmersDatatable extends DataTable
                     ->minifiedAjax()
                     ->processing(true)
                     ->addAction([
-                        'width' => '15%',
+                        'width' => '18%',
                         'printable' => false,
                         'exportable' => false,
                         'searchable' => false
                     ])
                     ->paging(true)
-                    ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])
+                    ->lengthMenu([[10,50, 100,500, -1], [10,50, 100,500, 'All']])
                     ->parameters($this->getBuilderParameters())
                     ->scrollX(true);
     }
@@ -149,6 +160,24 @@ class FarmersDatatable extends DataTable
                 'data'  => 'opening_balance',
                 'name'  => 'opening_balance',
                 'title' => 'Opening Balance',
+
+            ],
+            [
+                'data'  => 'total_cost',
+                'name'  => 'total_cost',
+                'title' => 'Cost',
+
+            ],
+            [
+                'data'  => 'current_chicks',
+                'name'  => 'current_chicks',
+                'title' => 'Chicks',
+
+            ],
+            [
+                'data'  => 'day',
+                'name'  => 'day',
+                'title' => 'Day',
 
             ],
             [
