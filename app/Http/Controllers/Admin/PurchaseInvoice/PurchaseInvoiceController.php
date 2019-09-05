@@ -242,7 +242,9 @@ class PurchaseInvoiceController extends Controller
      */
     public function show($id)
     {
-        return view('admin.purchaseinvocie.show');
+        $data['invoice'] = Purchase::with(['purchaseitems','purchasepayment'])->findOrFail($id);
+//        dd($data['invoice']);
+        return view('admin.purchaseinvocie.show',$data);
     }
 
     /**

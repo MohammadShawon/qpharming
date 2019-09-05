@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-12">
             <div class="white-box">
-                <h3><b>PURCHASE</b> <span class="pull-right">#345766</span></h3>
+                <h3><b>PURCAHSE</b> <span class="pull-right">#{{ $invoice->purchase_no }}</span></h3>
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
@@ -34,18 +34,18 @@
                         </div>
                         <div class="pull-right text-right">
                             <address>
-                                <p class="addr-font-h3">To,</p>
-                                <p class="font-bold addr-font-h4">Jayesh Patel</p>
-                                <p class="text-muted m-l-30">
-                                    207, Prem Sagar Appt., <br> Near Income Tax Office, <br>
-                                    Ashram Road, <br> Ahmedabad - 380057
-                                </p>
+                                <p class="addr-font-h3">From,</p>
+                                <p class="font-bold addr-font-h4">{{ $invoice->company->name }}</p>
+                                @if(!empty($invoice->company->address))
+                                    <p class="text-muted m-l-30">
+                                        {{ $invoice->company->address ?? 'N/A' }}
+                                    </p>
+                                @endif
                                 <p class="m-t-30">
-                                    <b>Invoice Date :</b> <i class="fa fa-calendar"></i> 14th
-                                    July 2017
+                                    <b>Invoice Date :</b> <i class="fa fa-calendar"></i> {{ \Carbon\Carbon::parse($invoice->purchase_date)->format('D-M-Y') }}
                                 </p>
                                 <p>
-                                    <b>Course  :</b> Engineering
+                                    <b>Phone  :</b> {{ $invoice->company->phone1 ?? $invoice->company->phone2 }}
                                 </p>
                             </address>
                         </div>
@@ -56,41 +56,39 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-right">Fees Type</th>
-                                    <th class="text-right">Frequency</th>
-                                    <th class="text-right">Date</th>
-                                    <th class="text-right">Invoice number</th>
+                                    <th class="text-right">Product Name</th>
+                                    <th class="text-right">Price</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Discount</th>
                                     <th class="text-right">Amount</th>
                                 </tr>
                                 </thead>
+                                @php
+                                    $i = 1;
+                                @endphp
                                 <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">Annual Fees</td>
-                                    <td class="text-right">Yearly</td>
-                                    <td class="text-right">2016-11-19</td>
-                                    <td class="text-right">#IN-345609865</td>
-                                    <td class="text-right">$100</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td class="text-right">Tuition Fees</td>
-                                    <td class="text-right">Monthly</td>
-                                    <td class="text-right">2016-11-19</td>
-                                    <td class="text-right">#IN-345604565</td>
-                                    <td class="text-right">$50</td>
-                                </tr>
+                                @foreach($invoice->purchaseitems as $item)
+
+                                    <tr>
+                                        <td class="text-center">{{ $i++ }}</td>
+                                        <td class="text-right">{{ $item->product->product_name }}</td>
+                                        <td class="text-right">{{ $item->cost_price }}</td>
+                                        <td class="text-right">{{ $item->quantity }}</td>
+                                        <td class="text-right">{{ $item->discount }}</td>
+                                        <td class="text-right">{{ $item->total_cost }}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="pull-right m-t-30 text-right">
-                            <p>Sub - Total amount: $150</p>
-                            <p>Discount : $10 </p>
-                            <p>Tax (10%) : $14 </p>
+                            <p>Sub - Total amount: {{ $invoice->sub_total }} BDT</p>
+                            <p>Discount : {{ $invoice->discount }} BDT </p>
+                            {{--                            <p>Tax (10%) : $14 </p>--}}
                             <hr>
-                            <h3><b>Total :</b> $164</h3> </div>
+                            <h3><b>Total :</b> {{ $invoice->grand_total }} BDT</h3> </div>
                         <div class="clearfix"></div>
                         <hr>
                         <div class="text-right">

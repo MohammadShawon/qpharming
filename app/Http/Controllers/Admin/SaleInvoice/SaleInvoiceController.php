@@ -185,7 +185,9 @@ class SaleInvoiceController extends Controller
      */
     public function show($id)
     {
-        return view('admin.saleinvoice.show');
+        $data['invoice'] = Sale::with('saleitems')->findOrFail($id);
+//        dd($data['invoice']);
+        return view('admin.saleinvoice.show',$data);
     }
 
     /**
@@ -252,8 +254,9 @@ class SaleInvoiceController extends Controller
 
         }catch (\Exception $e)
         {
-            dd($e);
+
             DB::rollback();
+            dd($e);
             Toastr::error('Error Message -'.$e->getMessage(),'error');
             return redirect()->route('admin.sales.create');
         }
@@ -273,8 +276,9 @@ class SaleInvoiceController extends Controller
             ]);
         }catch (\Exception $e)
         {
-            dd($e->getMessage());
+
             DB::rollback();
+//            dd($e->getMessage());
             Toastr::error('Invoice Payments Error','error');
             return redirect()->route('admin.sales.create');
         }

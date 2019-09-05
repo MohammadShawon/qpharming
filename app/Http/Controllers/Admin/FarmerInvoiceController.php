@@ -268,7 +268,8 @@ class FarmerInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['invoice'] = FarmerInvoice::with('farmerinvoiceitems')->findOrFail($id);
+        return view('admin.farmerinvoice.show',$data);
     }
 
     /**

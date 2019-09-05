@@ -25,14 +25,14 @@ class Product extends Model implements Auditable
     }
 
     public function saleitems(){
-        return $this->belongsTo(SaleItem::class);
+        return $this->hasMany(SaleItem::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function purchaseitems(){
-        return $this->belongsTo(PurchaseItem::class);
+        return $this->hasMany(PurchaseItem::class);
     }
 
     /**

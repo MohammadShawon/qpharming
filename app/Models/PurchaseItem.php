@@ -26,6 +26,6 @@ class PurchaseItem extends Model implements Auditable
         return $this->belongsTo(Purchase::class);
     }
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

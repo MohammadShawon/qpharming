@@ -27,7 +27,7 @@ class SaleItem extends Model implements Auditable
         return $this->belongsTo(Sale::class);
     }
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
     // public function unit(){

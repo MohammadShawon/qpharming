@@ -89,13 +89,13 @@ class FarmerBatchController extends Controller
             try{
                 /* FarmerBatch Create */
                 $farmerBatch = FarmerBatch::create([
-                    'farmer_id'        =>      $request->farmer_id,
+                    'farmer_id'        =>      $request->input('farmer_id'),
                     'product_id'       =>       $request->input('product_id'),
-                    'batch_name'       =>      $request->batch_name,
-                    'batch_number'     =>      $request->batch_number,
+                    'batch_name'       =>      $request->input('batch_name'),
+                    'batch_number'     =>      $request->input('batch_number'),
                     'chicks_quantity'  =>      $request->input('chicks_quantity'),
-                    'status'           =>      $request->status,
-                    'user_id'          =>      Auth::user()->id,
+                    'status'           =>      $request->input('status'),
+                    'user_id'          =>      auth()->user()->id,
                     'created_at'       =>      Carbon::parse($request->input('batch_date'))->format('Y-m-d H:i:s'),
                     'chicks_batch_no'   =>      $chicks->batch_no
                 ]);

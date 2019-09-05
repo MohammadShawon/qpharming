@@ -55,7 +55,9 @@ class SaleDataTable extends DataTable
     protected function getActionColumn($data): string
     {
         $showUrl = route('admin.sales.show', $data->id);
-        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+        $showFarmer = route('admin.farmerinvoice.show',$data->id);
+        $show = !empty($data->customer_id) ? $showUrl : $showFarmer;
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$show'><i class='material-icons'>visibility</i></a> 
                         <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
     }
 
