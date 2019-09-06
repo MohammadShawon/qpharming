@@ -24,7 +24,7 @@
                     </header>
                 </div>
                 <div class="card-body">
-                    {{--                    {!! $dataTable->table() !!}--}}
+                                        {!! $dataTable->table() !!}
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <script src="{{ asset('admin/assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js') }}" ></script>
     <script src="{{ asset('admin/assets/js/buttons/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
-{{--    {!! $dataTable->scripts() !!}--}}
+    {!! $dataTable->scripts() !!}
 
 
     <!-- sweet aleart -->

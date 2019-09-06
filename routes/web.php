@@ -146,6 +146,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('medicine/records','Records\MedicineRecordController@index')->name('medicine.records');
     Route::get('records/farmer','Records\FarmerRecordController@index')->name('farmer.records');
     Route::get('records/company','Records\CompanyRecordController@index')->name('company.records');
+    Route::get('records/company/{id}','Records\CompanyRecordController@show')->name('company.ledger');
 
     /*
      * All Reports Route
