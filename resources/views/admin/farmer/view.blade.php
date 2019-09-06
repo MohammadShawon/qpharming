@@ -26,7 +26,7 @@ use Carbon\Carbon;
             </div>
             <div class="card-body no-padding height-9">
 
-                <div class="profile-userpic">
+                <div class="patient-profile">
                     <img src="{{ asset('storage/farmer/').'/'.$farmer->image }}" class="img-responsive" alt="">
                 </div>
             </div>

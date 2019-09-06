@@ -23,8 +23,13 @@ class FeedDataTable extends DataTable
                 $stock = $batch->sum('quantity') - $batch->sum('sold');
                 return "<span style='border: #0cc745 2px solid;padding: 10px'><b>{$stock}</b></span>";
             })
+            ->addColumn('quantity',static function($data){
+                $batch = ProductPrice::where('product_id',$data->id)->get();
+                $stock = $batch->sum('quantity');
+                return "<span style='border: #0cc745 2px solid;padding: 10px'><b>{$stock}</b></span>";
+            })
             ->addColumn('action', 'stocks/chicksdatatable.action')
-            ->rawColumns(['stock']);
+            ->rawColumns(['stock','quantity']);
     }
 
     /**
@@ -110,6 +115,14 @@ class FeedDataTable extends DataTable
                 'data'  => 'stock',
                 'name'  => 'stock',
                 'title' => 'Stock',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
+            ],
+            [
+                'data'  => 'quantity',
+                'name'  => 'quantity',
+                'title' => 'Quantity',
                 'searchable' => true,
                 'visible' => true,
                 'orderable' => true,

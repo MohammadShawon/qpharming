@@ -144,40 +144,59 @@ class FarmersDatatable extends DataTable
                 'data'  => 'name',
                 'name'  => 'name',
                 'title' => 'Farmer Name',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
             ],
             [
                 'data'  => 'phone1',
                 'name'  => 'phone1',
-                'title' => 'Phone Number'
+                'title' => 'Phone Number',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
             ],
             [
                 'data'  => 'phone2',
                 'name'  => 'phone2',
                 'title' => 'Alt. Number',
-                'visible' => false
+                'visible' => false,
+
             ],
             [
                 'data'  => 'opening_balance',
                 'name'  => 'opening_balance',
                 'title' => 'Opening Balance',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
 
             ],
             [
                 'data'  => 'total_cost',
                 'name'  => 'total_cost',
                 'title' => 'Cost',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
 
             ],
             [
                 'data'  => 'current_chicks',
                 'name'  => 'current_chicks',
                 'title' => 'Chicks',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
 
             ],
             [
                 'data'  => 'day',
                 'name'  => 'day',
                 'title' => 'Day',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true,
 
             ],
             [
