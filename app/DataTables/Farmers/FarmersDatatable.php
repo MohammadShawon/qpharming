@@ -29,7 +29,7 @@ class FarmersDatatable extends DataTable
             ->editColumn('status',function ($status){
                 return $this->getStatus($status);
             })
-            ->addColumn('total_cost',function ($data){
+            ->addColumn('total_cost',static function ($data){
                 return FarmerCOst::totalCost($data->id);
             })
             ->addColumn('current_chicks',static function($data){
@@ -99,6 +99,7 @@ class FarmersDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->processing(true)
+                    ->ordering(true)
                     ->addAction([
                         'width' => '18%',
                         'printable' => false,
@@ -178,7 +179,7 @@ class FarmersDatatable extends DataTable
                 'title' => 'Cost',
                 'searchable' => true,
                 'visible' => true,
-                'orderable' => true,
+                'orderable' => false,
 
             ],
             [
@@ -187,7 +188,7 @@ class FarmersDatatable extends DataTable
                 'title' => 'Chicks',
                 'searchable' => true,
                 'visible' => true,
-                'orderable' => true,
+                'orderable' => false,
 
             ],
             [
@@ -196,7 +197,7 @@ class FarmersDatatable extends DataTable
                 'title' => 'Day',
                 'searchable' => true,
                 'visible' => true,
-                'orderable' => true,
+                'orderable' => false,
 
             ],
             [

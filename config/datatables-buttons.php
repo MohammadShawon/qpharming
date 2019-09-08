@@ -63,11 +63,11 @@ return [
         'order'   => [[0, 'desc']],
         'buttons' => [
             'create',
-            'excel',
-            'csv',
-            'pdf',
+            'postExcel',
+            'postCsv',
+            'postPdf',
             'print'
-            
+
         ],
         'modifier' => [
             'page' => 'current'

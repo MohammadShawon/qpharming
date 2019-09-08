@@ -56,7 +56,7 @@ class Farmers
         return ($chicks->chicks_quantity - $total_died);
     }
 
-    public static function runningDay(int $farmer_id):int
+    public static function runningDay(int $farmer_id):string
     {
         $latestBatch = DB::table('farmer_batches')->where('farmer_id',$farmer_id)->where('status','active')->orderBy('id','desc')->first();
         if (empty($latestBatch))
