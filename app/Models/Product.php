@@ -9,7 +9,7 @@ class Product extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-        'subcategory_id','product_name','sku','barcode','base_unit_id','description','size','created_at','updated_at'
+        'subcategory_id','company_id','product_name','sku','barcode','base_unit_id','description','size','created_at','updated_at'
     ];
 
     public function unit(){
@@ -18,6 +18,11 @@ class Product extends Model implements Auditable
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function subcategory(){

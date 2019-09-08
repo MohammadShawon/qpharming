@@ -9,14 +9,14 @@
    <!--select2-->
    <link href="{{ asset('admin/assets/plugins/select2/css/select2.css') }}" rel="stylesheet" type="text/css" />
    <link href="{{ asset('admin/assets/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-   
+
 
 @endpush
 
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -39,6 +39,16 @@
 
                                 {{-- Sub-Category --}}
                                 <div class="form-group">
+                                    <label>Select Company</label>
+                                    <select name="company_id" class="form-control  select2 " >
+                                        @foreach ($companies as $company)
+                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                {{-- Sub-Category --}}
+                                <div class="form-group">
                                     <label>Select SubCategory</label>
                                     <select name="sub_category" class="form-control  select2 " >
                                         @foreach ($subCategories as $subCategory)
@@ -50,7 +60,7 @@
                                 {{-- S.K.U --}}
                                 <div class="form-group">
                                     <label for="sku">S.K.U</label>
-                                    <input type="text" name="sku" class="form-control" id="sku" placeholder="Enter sku number" value="{{ old('sku') }}">
+                                    <input type="text" name="sku" class="form-control" id="sku" placeholder="Enter sku number" value="{{ old('sku') }}" required>
                                 </div>
 
                                 {{-- Barcode --}}
@@ -70,7 +80,7 @@
 
                             </div>
 
-                        
+
                             <div class="col-md-6 col-sm-6">
 
 
@@ -84,28 +94,28 @@
                                 {{-- Cost Price --}}
                                 <div class="form-group">
                                     <label for="cost_price">Cost Price</label>
-                                    <input type="text" name="cost_price" class="form-control" id="cost_price" placeholder="Enter TP of the product" value="{{ old('cost_price') }}" autocomplete="off">
+                                    <input type="text" name="cost_price" class="form-control" id="cost_price" placeholder="Enter TP of the product" value="{{ old('cost_price') }}" autocomplete="off" required>
                                 </div>
                                 {{-- Selling Price --}}
                                 <div class="form-group">
                                     <label for="selling_price">Selling Price</label>
-                                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder="Enter MRP of the product" value="{{ old('selling_price') }}" autocomplete="off">
+                                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder="Enter MRP of the product" value="{{ old('selling_price') }}" autocomplete="off" required>
                                 </div>
 
                                 {{-- Quantity --}}
                                 <div class="form-group">
                                     <label for="quantity">Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity of the product" value="@if(old('quantity')){{  old('quantity')  }}@else {{ 0 }}@endif">
+                                    <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Enter Quantity of the product" value="@if(old('quantity')){{  old('quantity')  }}@else {{ 0 }}@endif" required>
                                 </div>
 
                                 {{-- Description --}}
                                 <div class="form-group">
-                                    <label for="description">Description</label> 
+                                    <label for="description">Description</label>
                                     <textarea name="description" id="description" class="form-control">{{old('description')}}</textarea>
                                 </div>
-                                
 
-                                
+
+
                             </div>
                         </div>
 
@@ -124,7 +134,7 @@
                             <label for="simpleFormEmail">Status</label>
                             <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ old('status') }}">
                         </div> --}}
-                        
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.product.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
                     </form>
@@ -138,5 +148,5 @@
     <!--select2-->
     <script src="{{ asset('admin/assets/plugins/select2/js/select2.js') }}" ></script>
     <script src="{{ asset('admin/assets/js/pages/select2/select2-init.js') }}" ></script>
-   
+
 @endpush

@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->bigInteger('subcategory_id')->unsigned()->index();
             $table->string('sku')->unique();
             $table->string('product_name')->index();
+            $table->bigInteger('company_id')->unsigned()->index();
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
             $table->string('barcode')->unique()->nullable();
             $table->integer('base_unit_id')->unsigned();
             $table->text('description')->nullable();

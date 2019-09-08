@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Product\ProductsDataTable;
+use App\Models\Company;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -21,6 +22,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param ProductsDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
     public function index(ProductsDataTable $dataTable)
@@ -47,6 +49,7 @@ class ProductController extends Controller
         if(auth()->user()->can('create_product')){
             $data['subCategories'] = SubCategory::get(['id','name']);
             $data['baseUnits'] = Unit::get(['id','name']);
+            $data['companies'] = Company::get(['id','name']);
             return view('admin.product.create', $data);
         }
     }
@@ -64,13 +67,14 @@ class ProductController extends Controller
             DB::beginTransaction();
             try{
                 $product = Product::create([
-                    'subcategory_id' => $request->sub_category,
-                    'product_name'   => $request->product_name,
-                    'sku'            => $request->sku,
-                    'barcode'        => $request->barcode,
-                    'base_unit_id'   => $request->unit_id,
-                    'description'    => $request->description,
-                    'size'           => $request->size,
+                    'subcategory_id' => $request->input('sub_category'),
+                    'product_name'   => $request->input('product_name'),
+                    'company_id'     => $request->input('company_id'),
+                    'sku'            => $request->input('sku'),
+                    'barcode'        => $request->input('barcode'),
+                    'base_unit_id'   => $request->input('unit_id'),
+                    'description'    => $request->input('description'),
+                    'size'           => $request->input('size'),
                     'created_at'     => Carbon::now('+6'),
                     'updated_at'     => Carbon::now('+6')
 //                  'cost_price'      => $request->cost_price,
@@ -177,6 +181,7 @@ class ProductController extends Controller
         if(auth()->user()->can('edit_product')){
 
             $data['subCategories'] = SubCategory::get(['id','name']);
+            $data['companies'] = Company::get(['id','name']);
             return view('admin.product.edit', $data, compact('product'));
         }
         abort(403);

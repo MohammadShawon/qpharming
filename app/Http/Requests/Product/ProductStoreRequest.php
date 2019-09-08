@@ -25,6 +25,7 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'product_name' => 'required',
+            'company_id'   => 'required | exists:companies,id',
             'sku'          => 'required|unique:products',
             'barcode'      => 'nullable|numeric|unique:products',
             'unit_id'      => 'required',

@@ -27,6 +27,9 @@ class ProductsDataTable extends DataTable
             ->editColumn('subcategory_id',function ($data){
                 return $data->subcategory->category->name . '->' . $data->subcategory->name;
             })
+            ->editColumn('company_id',function ($data){
+                return $data->company->name ?? 'N/A';
+            })
             ->editColumn('base_unit_id', function($data){
                 return $data->unit->name;
             })
@@ -46,7 +49,7 @@ class ProductsDataTable extends DataTable
      */
     public function query(Product $model)
     {
-        return $model->newQuery()->select('id', 'subcategory_id','sku','product_name','barcode','base_unit_id','description','size', 'created_at', 'updated_at');
+        return $model->newQuery()->select('id', 'subcategory_id','sku','company_id','product_name','barcode','base_unit_id','description','size', 'created_at', 'updated_at');
     }
 
 
@@ -74,7 +77,7 @@ class ProductsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction([
-                        'width' => '15%',
+                        'width' => '16%',
                         'printable' => false,
                         'exportable' => false,
                         'searchable' => false
@@ -123,6 +126,14 @@ class ProductsDataTable extends DataTable
                 'orderable' => true
             ],
             [
+                'data' => 'company_id',
+                'name' => 'company_id',
+                'title' => 'Company Name',
+                'searchable' => true,
+                'visible' => true,
+                'orderable' => true
+            ],
+            [
                 'data' => 'subcategory_id',
                 'name' => 'subcategory_id',
                 'title' => 'Category',
@@ -166,7 +177,7 @@ class ProductsDataTable extends DataTable
                 'name' => 'description',
                 'title' => 'Description',
                 'searchable' => false,
-                'visible' => true,
+                'visible' => false,
                 'orderable' => false
             ],
         ];

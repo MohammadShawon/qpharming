@@ -26,7 +26,7 @@ class ProductUpdateRequest extends FormRequest
         return [
             'product_name' => 'required',
             'sku'          => 'required',
-            'barcode'      => 'required|numeric',
+            'barcode'      => 'nullable|numeric',
             'unit_id'      => 'required',
             'size'         => 'required',
 //            'cost_price'    => 'required',

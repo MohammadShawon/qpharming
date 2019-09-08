@@ -9,14 +9,14 @@
    <!--select2-->
    <link href="{{ asset('admin/assets/plugins/select2/css/select2.css') }}" rel="stylesheet" type="text/css" />
    <link href="{{ asset('admin/assets/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-   
+
 
 @endpush
 
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -43,9 +43,20 @@
                                     <label>Select SubCategory</label>
                                     <select name="sub_category" class="form-control  select2 " >
                                         @foreach ($subCategories as $subCategory)
-                                            <option 
+                                            <option
                                             {{ $product->subcategory_id == $subCategory->id ? 'selected':''}}
                                             value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- Sub-Category --}}
+                                <div class="form-group">
+                                    <label>Select Company</label>
+                                    <select name="sub_category" class="form-control  select2 " >
+                                        @foreach ($companies as $company)
+                                            <option
+                                                {{ $product->comapny_id === $company->id ? 'selected':''}}
+                                                value="{{ $company->id }}">{{ $company->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -64,7 +75,7 @@
 
                             </div>
 
-                        
+
                             <div class="col-md-6 col-sm-6">
 
                                 {{-- Base unit ID --}}
@@ -83,12 +94,12 @@
 
                                 {{-- Description --}}
                                 <div class="form-group">
-                                    <label for="description">Description</label> 
+                                    <label for="description">Description</label>
                                     <textarea name="description" id="description" class="form-control">{{ $product->description }}</textarea>
                                 </div>
-                                
 
-                                
+
+
                             </div>
                         </div>
 
@@ -107,7 +118,7 @@
                             <label for="simpleFormEmail">Status</label>
                             <input type="text" name="status" class="form-control" id="simpleFormEmail" placeholder="Enter farmer status" value="{{ old('status') }}">
                         </div> --}}
-                        
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.product.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
                     </form>
@@ -121,5 +132,5 @@
     <!--select2-->
     <script src="{{ asset('admin/assets/plugins/select2/js/select2.js') }}" ></script>
     <script src="{{ asset('admin/assets/js/pages/select2/select2-init.js') }}" ></script>
-   
+
 @endpush

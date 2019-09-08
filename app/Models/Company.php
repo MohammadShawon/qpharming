@@ -25,11 +25,16 @@ class Company extends Model implements Auditable
 
     // protected $casts = [
     //     'starting_date' => 'datetime',
-        
+
     // ];
-    
+
     public function purchases(){
         return $this->hasMany(Purchase::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function getRouteKeyName():string
