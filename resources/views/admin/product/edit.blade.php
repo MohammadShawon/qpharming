@@ -44,7 +44,7 @@
                                     <select name="sub_category" class="form-control  select2 " >
                                         @foreach ($subCategories as $subCategory)
                                             <option
-                                            {{ $product->subcategory_id == $subCategory->id ? 'selected':''}}
+                                            {{ $product->subcategory_id === $subCategory->id ? 'selected':''}}
                                             value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
                                         @endforeach
                                     </select>
@@ -52,7 +52,7 @@
                                 {{-- Sub-Category --}}
                                 <div class="form-group">
                                     <label>Select Company</label>
-                                    <select name="sub_category" class="form-control  select2 " >
+                                    <select name="company_id" class="form-control  select2 " >
                                         @foreach ($companies as $company)
                                             <option
                                                 {{ $product->comapny_id === $company->id ? 'selected':''}}

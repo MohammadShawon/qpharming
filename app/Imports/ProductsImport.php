@@ -23,6 +23,7 @@ class ProductsImport implements ToModel, WithHeadingRow,WithBatchInserts
         $product =   Product::create([
             'subcategory_id'    => $row['subcategoryid'],
             'product_name'      => $row['productname'],
+            'company_id'        => $row['companyid'],
             'sku'               => $row['sku'],
             'barcode'           => $row['barcode'],
             'base_unit_id'      => $row['baseunit'],

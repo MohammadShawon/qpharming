@@ -200,16 +200,17 @@ class ProductController extends Controller
         if(auth()->user()->can('edit_product')){
 
             $productResult = $product->update([
-                'subcategory_id' => $request->sub_category,
-                'product_name'   => $request->product_name,
-                'sku'            => $request->sku,
-                'barcode'        => $request->barcode,
-                'base_unit_id'   => $request->unit_id,
-                'description'    => $request->description,
-                'size'           => $request->size,
-                'cost_price'     => $request->cost_price,
-                'selling_price'  => $request->selling_price,
-                'quantity'       => $request->quantity,
+                'subcategory_id' => $request->input('sub_category'),
+                'product_name'   => $request->input('product_name'),
+                'company_id'     => $request->input('company_id'),
+                'sku'            => $request->input('sku'),
+                'barcode'        => $request->input('barcode'),
+                'base_unit_id'   => $request->input('unit_id'),
+                'description'    => $request->input('description'),
+                'size'           => $request->input('size'),
+                'cost_price'     => $request->input('cost_price'),
+                'selling_price'  => $request->input('selling_price'),
+                'quantity'       => $request->input('quantity'),
             ]);
             /* Check Product Update and toastr message */
             if($productResult){

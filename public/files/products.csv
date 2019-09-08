@@ -1,1 +1,1 @@
-SubCategoryId,Sku,ProductName,Barcode,BaseUnit,Description,Size,CostPrice,SellingPrice,Stock
+SubCategoryId,Sku,ProductName,Barcode,BaseUnit,Description,Size,CostPrice,SellingPrice,Stock,CompanyId

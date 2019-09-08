@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ProductsImport;
 use Brian2694\Toastr\Facades\Toastr;
 use Maatwebsite\Excel\Facades\Excel;
+use WebDriver\Exception;
 
 class ProductImportController extends Controller
 {
@@ -21,10 +22,18 @@ class ProductImportController extends Controller
 
         if ($request->has('header'))
         {
-            $data = Excel::import(new ProductsImport,$path);
-            if ($data)
+
+            try
             {
-                Toastr::success('Import Success','success');
+                $data = Excel::import(new ProductsImport,$path);
+                if ($data)
+                {
+                    Toastr::success('Import Success','success');
+                    return redirect()->route('admin.product.index');
+                }
+            }catch (\Exception $e)
+            {
+                Toastr::error('Import Failed!Check the fields.','error');
                 return redirect()->route('admin.product.index');
             }
 

@@ -68,8 +68,8 @@
                         <div class="col-12 col-sm-6 col-md-3">
                             <div class="form-group">
                                 <label class="">Bill Date</label>
-                                <div class="input-group date form_datetime" data-date="{{ Carbon\Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                    <input class="form-control" size="16" type="text" name="purchase_date" value="{{ Carbon\Carbon::now()->toDayDateTimeString() }}">
+                                <div class="input-group date form_date" data-date="{{ Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                    <input class="form-control" size="16" type="text" name="purchase_date" value="{{ Carbon\Carbon::now()->format('d M Y') }}">
                                     <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                     </span>
@@ -116,7 +116,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <tr ng-repeat="item in items  | filter: searchKeyword | limitTo:10">
 
-                                        <td width="80%">@{{item.product_name}}</td>
+                                        <td width="80%">@{{item.product_name}} </td>
                                         <td ><button class="btn btn-primary btn-xs" type="button" ng-click="addReceivingTemp(item, newreceivingtemp)"><span class="glyphicon glyphicon-share-alt" aria-hidden="true">&#x2705;</span></button></td>
 
                                     </tr>
