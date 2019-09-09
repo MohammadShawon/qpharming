@@ -28,7 +28,7 @@ trait HasPermissionsTrait
      */
     public function hasPermissionTo($permission)
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return $this->hasPermissionThroughRole($permission) ||  $this->hasPermission($permission);
     }
 
     /**
@@ -53,7 +53,7 @@ trait HasPermissionsTrait
          * */
         foreach ($permission->roles as $role)
         {
-            
+
             if ($this->roles->contains($role))
             {
                 return true;
@@ -109,7 +109,7 @@ trait HasPermissionsTrait
     public function refreshPermissions(...$permissions)
     {
         $this->permissions()->detach();
-        
+
 
         return $this->givePermissionTo($permissions);
     }

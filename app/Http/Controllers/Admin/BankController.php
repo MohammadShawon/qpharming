@@ -67,7 +67,8 @@ class BankController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param BanksDataTable $dataTable
+     * @param \App\Models\Bank $bank
      * @return \Illuminate\Http\Response
      */
     public function show(BanksDataTable $dataTable,Bank $bank)

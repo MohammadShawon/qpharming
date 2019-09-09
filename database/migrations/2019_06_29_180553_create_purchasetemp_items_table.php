@@ -21,7 +21,7 @@ class CreatePurchasetempItemsTable extends Migration
             $table->decimal('cost_price',15,2);
             $table->decimal('discount',15,2);
             $table->bigInteger('unit_id')->unsigned()->index();
-            $table->integer('quantity');
+            $table->decimal('quantity',8,2);
             $table->decimal('total_cost',15,2);
             $table->timestamps();
 

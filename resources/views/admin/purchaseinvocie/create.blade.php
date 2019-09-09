@@ -146,7 +146,7 @@
                                         <td>@{{newreceivingtemp.product.product_name}}</td>
                                         <td>@{{ newreceivingtemp.product.size }}</td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.cost_price" size="8"></td>
-                                        <td width="15%"><input type="number" style="text-align:center;width: 100%" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.quantity"></td>
+                                        <td width="15%"><input type="number" style="text-align:center;width: 100%" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.quantity" step="any"></td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.discount" size="2"></td>
                                         <td>@{{  (newreceivingtemp.cost_price * newreceivingtemp.quantity) - newreceivingtemp.discount | currency:'Tk'}}</td>
                                         <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeReceivingTemp(newreceivingtemp.id)"><span class="fa fa-remove" aria-hidden="true"></span></button></td>

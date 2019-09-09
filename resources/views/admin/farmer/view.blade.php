@@ -168,6 +168,9 @@ use Carbon\Carbon;
                             </b>
 
                     @endif
+                    <b>
+                        0
+                    </b>
 
                 </div>
             </div>
@@ -178,7 +181,7 @@ use Carbon\Carbon;
                     <strong>Total Died</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>{{ App\Helpers\Farmers::totalDied($farmer->id) }}</b>
+                    <b>{{ !empty($latestBatch) ? App\Helpers\Farmers::totalDied($farmer->id) : 0}}</b>
                 </div>
             </div>
         </div>
@@ -188,7 +191,7 @@ use Carbon\Carbon;
                     <b>Total Feed</b>
                 </header>
                 <div class="panel-body text-center">
-                    <b>{{ App\Helpers\Farmers::totalFeed($farmer->id) }} Kg</b>
+                    <b>{{ !empty($latestBatch) ? App\Helpers\Farmers::totalFeed($farmer->id) : 0 }} Kg</b>
                 </div>
             </div>
         </div>
@@ -198,7 +201,7 @@ use Carbon\Carbon;
                     <strong>Total Feed</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>{{ App\Helpers\Farmers::totalFeed($farmer->id) / 50 }} Sack</b>
+                    <b>{{ !empty($latestBatch) ? App\Helpers\Farmers::totalFeed($farmer->id) / 50 : 0 }} Sack</b>
                 </div>
             </div>
         </div>
@@ -208,7 +211,7 @@ use Carbon\Carbon;
                     <strong>Feed Left</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>{{ App\Helpers\Farmers::totalFeedLeft($farmer->id)  }} Sack</b>
+                    <b>{{ !empty($latestBatch) ? App\Helpers\Farmers::totalFeedLeft($farmer->id) : 0  }} Sack</b>
                 </div>
             </div>
         </div>
@@ -218,7 +221,7 @@ use Carbon\Carbon;
                     <strong>Weigh Per Pcs</strong>
                 </header>
                 <div class="panel-body text-center">
-                    <b>{{ App\Helpers\Farmers::totalWeight($farmer->id) }} Kg</b> (Now)
+                    <b>{{ !empty($latestBatch) ? App\Helpers\Farmers::totalWeight($farmer->id) : 0 }} Kg</b> (Now)
                 </div>
             </div>
         </div>
