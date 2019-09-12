@@ -17,7 +17,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -38,9 +38,9 @@
                                     <label for="payment_type">Payment Type</label>
                                     <select name="payment_type" class="form-control  select2 " id="payment_type">
 
-                                        <option value="cash" {{ $payment->payment_type == 'cash' ? 'selected' : ''}}>Cash</option>
-                                        <option value="check" {{ $payment->payment_type == 'check' ? 'selected' : ''}}>Check</option>
-                                        <option value="bank" {{ $payment->payment_type == 'bank' ? 'selected' : ''}}>Bank | Bkash | Rocket | Nagad</option>
+                                        <option value="cash" {{ $payment->payment_type === 'cash' ? 'selected' : ''}}>Cash</option>
+                                        <option value="check" {{ $payment->payment_type === 'check' ? 'selected' : ''}}>Check</option>
+                                        <option value="bank" {{ $payment->payment_type === 'bank' ? 'selected' : ''}}>Bank | Bkash | Rocket | Nagad</option>
                                     </select>
                                 </div>
 
@@ -56,11 +56,11 @@
                                     <label for="payee_type">Payee Type</label>
                                     <select name="payee_type" class="form-control  select2 " id="payee_type">
 
-                                        <option {{ $payment->payee_type == 'authority' ? 'selected' : ''}} value="authority">Authority</option>
-                                        <option {{ $payment->payee_type == 'farmer' ? 'selected' : ''}} value="farmer">Farmer</option>
-                                        <option {{ $payment->payee_type == 'staff' ? 'selected' : ''}} value="staff">Staff</option>
-                                        <option {{ $payment->payee_type == 'company' ? 'selected' : ''}} value="company">Company</option>
-                                        <option {{ $payment->payee_type == 'others' ? 'selected' : ''}} value="others">Others</option>
+                                        <option {{ $payment->payee_type === 'authority' ? 'selected' : ''}} value="authority">Authority</option>
+                                        <option {{ $payment->payee_type === 'farmer' ? 'selected' : ''}} value="farmer">Farmer</option>
+                                        <option {{ $payment->payee_type === 'staff' ? 'selected' : ''}} value="staff">Staff</option>
+                                        <option {{ $payment->payee_type === 'company' ? 'selected' : ''}} value="company">Company</option>
+                                        <option {{ $payment->payee_type === 'others' ? 'selected' : ''}} value="others">Others</option>
 
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                                     <select name="purposehead_id" class="form-control  select2 " >
                                         @foreach ($purposeheads as $purposehead)
                                             <option value="{{ $purposehead->id }}"
-                                            {{ $purposehead->id == $payment->purposehead_id ? 'selected' : ''}} >
+                                            {{ $purposehead->id === $payment->purposehead_id ? 'selected' : ''}} >
                                              {{ $purposehead->name }}
                                             </option>
                                         @endforeach
@@ -82,12 +82,12 @@
 
                                 {{--   Company      --}}
                                 <div class="form-group company">
-                                    <label>Select Company</label>
-                                    <select name="company_id" class="form-control  select2 " >
+                                    <label for="company">Select Company</label>
+                                    <select name="company_id" id="company" class="form-control  select2 " >
                                         @foreach ($companies as $company)
                                             <option value=""></option>
                                             <option value="{{ $company->id }}"
-                                                {{ $company->id == $payment->company_id ? 'selected' : ''}}>
+                                                {{ $company->id === $payment->company_id ? 'selected' : ''}}>
                                                 {{ $company->name }}
                                             </option>
                                         @endforeach
@@ -96,12 +96,12 @@
 
                                 {{--  Farmer   --}}
                                 <div class="form-group farmer">
-                                    <label>Select Farmer</label>
-                                    <select name="farmer_id" class="form-control  select2 " >
+                                    <label for="farmer">Select Farmer</label>
+                                    <select name="farmer_id" id="farmer" class="form-control  select2 " >
                                         <option value=""></option>
                                         @foreach ($farmers as $farmer)
                                             <option value="{{ $farmer->id }}"
-                                                {{ $farmer->id == $payment->farmer_id ? 'selected' : ''}}>
+                                                {{ $farmer->id === $payment->farmer_id ? 'selected' : ''}}>
                                                 {{ $farmer->name }}
                                             </option>
                                         @endforeach
@@ -110,12 +110,12 @@
 
                                 {{-- Staff --}}
                                 <div class="form-group staff">
-                                    <label>Select Staff</label>
-                                    <select name="user_id" class="form-control  select2 " >
+                                    <label for="staff">Select Staff</label>
+                                    <select name="user_id" id="staff" class="form-control  select2 " >
                                         <option value=""></option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}"
-                                                {{ $user->id == $payment->user_id ? 'selected' : ''}}>
+                                                {{ $user->id === $payment->user_id ? 'selected' : ''}}>
                                                 {{ $user->name }}
                                             </option>
                                         @endforeach
@@ -129,17 +129,17 @@
                                         <option value=""></option>
                                         @foreach ($banks as $bank)
                                             <option value="{{ $bank->id }}"
-                                                {{ $bank->id == $payment->bank_id ? 'selected' : ''}}>
+                                                {{ $bank->id === $payment->bank_id ? 'selected' : ''}}>
                                                 {{ $bank->bank_name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
 
-                                
-                                
+
+
                             </div>
-                        
+
                             <div class="col-md-6 col-sm-6">
 
                                 {{-- Payment Amount --}}
@@ -163,16 +163,16 @@
 
                                 {{-- Remarks --}}
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Remarks</label> 
+                                    <label for="simpleFormEmail">Remarks</label>
                                     <textarea name="remarks" id="simpleFormEmail" class="form-control">{{ $payment->remarks }}</textarea>
                                 </div>
-                                
+
 
                                 {{-- Payment Date --}}
                                 <div class="form-group">
                                     <label class="">Payment Date</label>
-                                    <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ $payment->payment_date }}">
+                                    <div class="input-group date form_date" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ \Carbon\Carbon::parse($payment->payment_date)->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -181,11 +181,11 @@
                                 </div>
                             </div>
                         </div>
-                       
-                        
+
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.payment.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
-                        
+
                     </form>
                 </div>
             </div>

@@ -9,6 +9,7 @@ use App\Models\Expense;
 use App\Models\ExpenseHead;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExpenseCotroller extends Controller
@@ -20,8 +21,9 @@ class ExpenseCotroller extends Controller
      */
     public function index()
     {
-        $expenses = Expense::latest()->get();
-        return view('admin.expense.index', compact('expenses'));
+        $data['expenses'] = Expense::where('status','active')->latest()->get();
+        $data['pending'] = Expense::where('status','pending')->latest()->get();
+        return view('admin.expense.index', $data);
     }
 
     /**
@@ -34,8 +36,8 @@ class ExpenseCotroller extends Controller
         /* Expense CREATE form */
         $users = User::latest()->get();
         $expenseheads = ExpenseHead::latest()->get();
-        $expenses = Expense::latest()->get();
-        return view('admin.expense.create', compact('expenses', 'users', 'expenseheads'));
+//        $expenses = Expense::latest()->get();
+        return view('admin.expense.create', compact( 'users', 'expenseheads'));
     }
 
     /**
@@ -48,11 +50,12 @@ class ExpenseCotroller extends Controller
     {
         /* Expense STORE */
         $expense = Expense::create([
-            'expensehead_id' => $request->expensehead_id,
-            'amount'         => $request->amount,
-            'description'    => $request->description,
-            'recipient_name' => $request->recipient_name,
-            'user_id'        => $request->user_id
+            'expensehead_id' => $request->input('expensehead_id'),
+            'amount'         => $request->input('amount'),
+            'description'    => $request->input('description'),
+            'recipient_name' => $request->input('recipient_name'),
+            'user_id'        => $request->input('user_id'),
+            'created_at'    => Carbon::parse($request->input('expense_date'))->format('Y-m-d'),
         ]);
 
         if($expense){
@@ -90,19 +93,20 @@ class ExpenseCotroller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ExpenseUpdateRequest $request
+     * @param Expense $expense
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseUpdateRequest $request, Expense $expense)
     {
         /* Expense UPDATE */
         $expenseUpdate = $expense->update([
-            'expensehead_id' => $request->expensehead_id,
-            'amount' => $request->amount,
-            'description' => $request->description,
-            'recipient_name' => $request->recipient_name,
-            'user_id' => $request->user_id
+            'expensehead_id' => $request->input('expensehead_id'),
+            'amount' => $request->input('amount'),
+            'description' => $request->input('description'),
+            'recipient_name' => $request->input('recipient_name'),
+            'user_id' => $request->input('user_id'),
+            'created_at'    => Carbon::parse($request->input('expense_date'))->format('Y-m-d'),
         ]);
 
         if($expenseUpdate){

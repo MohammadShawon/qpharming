@@ -24,33 +24,35 @@ $(document).ready(function(){
     $(".staff").hide();
     $("#payee_type").change(function () {
         let payee = $(this).val();
-        switch (payee) {
-            case 'authority':
-                $(".company").hide();
-                $(".farmer").hide();
-                $(".staff").hide();
-                break;
-
-            case 'company':
-                $(".company").show('slow');
-                $(".farmer").hide();
-                $(".staff").hide();
-                break;
-            case 'staff':
-                $(".company").hide();
-                $(".farmer").hide();
-                $(".staff").show('slow');
-                break;
-            case 'farmer':
-                $(".company").hide();
-                $(".farmer").show('slow');
-                $(".staff").hide();
-                break;
-            default:
-                $(".company").hide();
-                $(".farmer").hide();
-                $(".staff").hide();
-                break;
+        if (payee === 'authority') {
+            $("#staff").val('');
+            $("#farmer").val('');
+            $("#company").val('');
+            $(".company").hide();
+            $(".farmer").hide();
+            $(".staff").hide();
+        } else if (payee === 'company') {
+            $("#staff").val('');
+            $("#farmer").val('');
+            $(".company").show('slow');
+            $(".farmer").hide();
+            $(".staff").hide();
+        } else if (payee === 'staff') {
+            $("#farmer").val('');
+            $("#company").val('');
+            $(".company").hide();
+            $(".farmer").hide();
+            $(".staff").show('slow');
+        } else if (payee === 'farmer') {
+            $("#staff").val('');
+            $("#company").val('');
+            $(".company").hide();
+            $(".farmer").show('slow');
+            $(".staff").hide();
+        } else {
+            $(".company").hide();
+            $(".farmer").hide();
+            $(".staff").hide();
         }
 
     })

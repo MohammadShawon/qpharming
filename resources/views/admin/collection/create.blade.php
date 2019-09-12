@@ -17,7 +17,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -51,8 +51,8 @@
                                         <option value="cash">Cash</option>
                                         <option value="check">Check</option>
                                         <option value="bank">Bank | Bkash | Rocket | Nagad</option>
-    
-    
+
+
                                     </select>
                                 </div>
 
@@ -60,9 +60,9 @@
                                 <div class="form-group bank">
                                     <label for="bank_name">Bank name</label>
                                     <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ old('bank_name') }}">
-                                </div> 
+                                </div>
 
-                               
+
 
                                 {{-- Purpose Head --}}
                                 <div class="form-group">
@@ -71,10 +71,11 @@
                                         <option value="egg">Egg Sell</option>
                                         <option value="hen">Hen Sell</option>
                                         <option value="farmer">Farmer</option>
+                                        <option value="other">Others</option>
                                     </select>
-    
+
                                 </div>
-                                
+
                                 {{-- PurposeHead
                                 <div class="form-group">
                                     <label>Select PurposeHead</label>
@@ -85,7 +86,7 @@
                                     </select>
                                 </div>
 
-                                {{-- Company 
+                                {{-- Company
                                 <div class="form-group company">
                                     <label>Select Company</label>
                                     <select name="company_id" class="form-control  select2 " >
@@ -106,8 +107,8 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
-                                {{-- Staff 
+
+                                {{-- Staff
                                 <div class="form-group staff">
                                     <label>Select Staff</label>
                                     <select name="user_id" class="form-control  select2 " >
@@ -117,12 +118,12 @@
                                         @endforeach
                                     </select>
                                 </div> --}}
-                                
-                            </div> 
-                        
+
+                            </div>
+
                             <div class="col-md-6 col-sm-6">
 
-                                
+
 
                                 {{-- Amount --}}
                                 <div class="form-group">
@@ -145,15 +146,15 @@
 
                                 {{-- Remarks --}}
                                 <div class="form-group">
-                                    <label for="remarks">Remarks</label> 
+                                    <label for="remarks">Remarks</label>
                                     <textarea name="remarks" id="remarks" class="form-control">{{old('remarks')}}</textarea>
                                 </div>
-                                
+
 
                                 {{-- Collection Date --}}
                                 <div class="form-group">
                                     <label class="">Collection Date</label>
-                                    <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
+                                    <div class="input-group date form_date" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
                                         <input class="form-control" size="16" type="text" name="collection_date" value="{{ old('collection_date') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
@@ -163,11 +164,11 @@
                                 </div>
                             </div>
                         </div>
-                       
-                        
+
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.collection.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
-                        
+
                     </form>
                 </div>
             </div>

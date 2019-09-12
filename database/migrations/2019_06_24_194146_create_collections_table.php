@@ -25,7 +25,7 @@ class CreateCollectionsTable extends Migration
             $table->string('reference')->nullable();
             $table->string('remarks')->nullable();
             $table->dateTime('collection_date');
-            $table->enum('status',['active','pending','hold']);
+            $table->enum('status',['active','pending','hold'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

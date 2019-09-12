@@ -20,7 +20,7 @@ class CreateExpensesTable extends Migration
             $table->text('description')->nullable();
             $table->string('recipient_name')->nullable();
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->enum('status',['active','pending','hold']);
+            $table->enum('status',['active','pending','hold'])->default('pending');
             $table->timestamps();
 
         });

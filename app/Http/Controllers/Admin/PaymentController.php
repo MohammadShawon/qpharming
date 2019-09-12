@@ -26,7 +26,8 @@ class PaymentController extends Controller
     public function index()
     {
         /* Payment List */
-        $data['payments'] = Payment::latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date','user_id','payee_type']);
+        $data['payments'] = Payment::where('status','active')->latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date','user_id','payee_type']);
+        $data['pending'] = Payment::where('status','pending')->latest()->get(['id','company_id','farmer_id','payment_amount','payment_type','received_by','payment_date','user_id','payee_type']);
 
         return view('admin.payment.index', $data);
     }
@@ -44,7 +45,7 @@ class PaymentController extends Controller
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
         $data['users']          = User::get(['id','name']);
-        
+
         return view('admin.payment.create', $data);
     }
 
@@ -56,21 +57,22 @@ class PaymentController extends Controller
      */
     public function store(PaymentStoreRequest $request)
     {
+
         /* CREATE Payment */
         $payment = Payment::create([
-            'bank_id'        =>      $request->bank_id,
-            'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      ($request->company_id != null ? $request->company_id : null),
-            'farmer_id'      =>      ($request->farmer_id != null ? $request->farmer_id : null),
-            'user_id'        =>      ($request->user_id != null ? $request->user_id : null),
-            'payee_type'     =>      $request->payee_type,
-            'payment_amount' =>      $request->payment_amount,
-            'payment_type'   =>      $request->payment_type,
-            'bank_name'      =>      $request->bank_name,
-            'reference'      =>      $request->reference,
-            'received_by'    =>      $request->received_by,
-            'remarks'        =>      $request->remarks,
-            'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),
+            'bank_id'        =>      $request->input('bank_id'),
+            'purposehead_id' =>      $request->input('purposehead_id'),
+            'company_id'     =>      null ?? $request->input('company_id'),
+            'farmer_id'      =>      null ?? $request->input('farmer_id'),
+            'user_id'        =>      null ?? $request->input('user_id'),
+            'payee_type'     =>      $request->input('payee_type'),
+            'payment_amount' =>      $request->input('payment_amount'),
+            'payment_type'   =>      $request->input('payment_type'),
+            'bank_name'      =>      $request->input('bank_name'),
+            'reference'      =>      $request->input('reference'),
+            'received_by'    =>      $request->input('received_by'),
+            'remarks'        =>      $request->input('remarks'),
+            'payment_date'   =>      Carbon::parse($request->input('payment_date'))->format('Y-m-d H:i'),
         ]);
 
 
@@ -108,7 +110,7 @@ class PaymentController extends Controller
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
         $data['users']          = User::get(['id','name']);
-        
+
         return view('admin.payment.edit', $data, compact('payment'));
     }
 
@@ -123,19 +125,19 @@ class PaymentController extends Controller
     {
         /* Update Payment */
         $paymentUpdate = $payment->update([
-            'bank_id'        =>      $request->bank_id,
-            'purposehead_id' =>      $request->purposehead_id,
-            'company_id'     =>      ($request->payee_type == 'company' ? $request->company_id : null),
-            'farmer_id'      =>      ($request->payee_type == 'farmer' ? $request->farmer_id : null),
-            'user_id'        =>      ($request->payee_type == 'staff' ? $request->user_id : null),
-            'payee_type'     =>      $request->payee_type,
-            'payment_amount' =>      $request->payment_amount,
-            'payment_type'   =>      $request->payment_type,
-            'bank_name'      =>      $request->bank_name,
-            'reference'      =>      $request->reference,
-            'received_by'    =>      $request->received_by,
-            'remarks'        =>      $request->remarks,
-            'payment_date'   =>      Carbon::parse($request->payment_date)->format('Y-m-d H:i'),
+            'bank_id'        =>      $request->input('bank_id'),
+            'purposehead_id' =>      $request->input('purposehead_id'),
+            'company_id'     =>      $request->input('payee_type') === 'company' ? $request->input('company_id') : null,
+            'farmer_id'      =>      $request->input('payee_type') === 'farmer' ? $request->input('farmer_id') : null,
+            'user_id'        =>      $request->input('payee_type') === 'staff' ? $request->input('user_id') : null,
+            'payee_type'     =>      $request->input('payee_type'),
+            'payment_amount' =>      $request->input('payment_amount'),
+            'payment_type'   =>      $request->input('payment_type'),
+            'bank_name'      =>      $request->input('bank_name'),
+            'reference'      =>      $request->input('reference'),
+            'received_by'    =>      $request->input('received_by'),
+            'remarks'        =>      $request->input('remarks'),
+            'payment_date'   =>      Carbon::parse($request->input('payment_date'))->format('Y-m-d'),
         ]);
 
 

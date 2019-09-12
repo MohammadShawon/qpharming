@@ -21,7 +21,8 @@ class Payment extends Model implements Auditable
         'reference',
         'received_by',
         'remarks',
-        'payment_date'
+        'payment_date',
+        'status'
     ];
     public function bank(){
         return $this->belongsTo(Bank::class);
@@ -33,12 +34,12 @@ class Payment extends Model implements Auditable
     public function company(){
         return $this->belongsTo(Company::class);
     }
-    
+
     public function farmer(){
         return $this->belongsTo(Farmer::class);
     }
 
-    
+
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -9,7 +9,7 @@ class Expense extends Model implements Auditable
 {
 	use \OwenIt\Auditing\Auditable;
 	protected $fillable = [
-        'expensehead_id', 'amount', 'description', 'recipient_name', 'user_id'
+        'expensehead_id', 'amount', 'description', 'recipient_name', 'user_id','status','created_at'
     ];
     public function expensehead(){
         return $this->belongsTo(ExpenseHead::class);

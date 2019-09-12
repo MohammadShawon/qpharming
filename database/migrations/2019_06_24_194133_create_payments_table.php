@@ -28,7 +28,7 @@ class CreatePaymentsTable extends Migration
             $table->string('received_by')->nullable();
             $table->string('remarks')->nullable();
             $table->dateTime('payment_date');
-            $table->enum('status',['active','pending','hold']);
+            $table->enum('status',['active','pending','hold'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

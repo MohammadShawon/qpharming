@@ -17,7 +17,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -63,36 +63,37 @@
                                 <div class="form-group bank">
                                     <label for="bank_name">Bank name</label>
                                     <input type="text" name="bank_name" class="form-control" id="bank_name" placeholder="Enter bank name" value="{{ $collection->bank_name }}">
-                                </div> 
+                                </div>
 
                                {{-- Purpose Head --}}
                                <div class="form-group">
                                     <label for="collect_type">Purpose Head</label>
                                     <select name="collect_type" class="form-control  select2 " id="collect_type">
-                                        <option {{ $collection->collect_type == 'egg' ? 'selected' : ''}} value="egg">Egg Sell</option>
-                                        <option {{ $collection->collect_type == 'hen' ? 'selected' : ''}} value="hen">Hen Sell</option>
-                                        <option {{ $collection->collect_type == 'farmer' ? 'selected' : ''}} value="farmer">Farmer</option>
+                                        <option {{ $collection->collect_type === 'egg' ? 'selected' : ''}} value="egg">Egg Sell</option>
+                                        <option {{ $collection->collect_type === 'hen' ? 'selected' : ''}} value="hen">Hen Sell</option>
+                                        <option {{ $collection->collect_type === 'farmer' ? 'selected' : ''}} value="farmer">Farmer</option>
+                                        <option {{ $collection->collect_type === 'other' ? 'selected' : ''}} value="other">Others</option>
                                     </select>
                                 </div>
 
                                 {{-- Farmer --}}
-                                <div class="form-group">
+                                <div class="form-group" id="farmer">
                                     <label>Select Farmer</label>
                                     <select name="farmer_id" class="form-control  select2 " >
                                         @foreach ($farmers as $farmer)
                                         <option value=""></option>
                                             <option value="{{ $farmer->id }}"
-                                                {{ $farmer->id == $collection->farmer_id ? 'selected' : ''}} >
+                                                {{ $farmer->id === $collection->farmer_id ? 'selected' : ''}} >
                                                 {{ $farmer->name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
 
-                               
-                                
+
+
                             </div>
-                        
+
                             <div class="col-md-6 col-sm-6">
 
                                  {{-- Collection Amount --}}
@@ -101,21 +102,21 @@
                                     <input type="text" name="collection_amount" class="form-control" id="simpleFormEmail" placeholder="Enter Collection Amount" value="{{ $collection->collection_amount }}">
                                 </div>
 
-                                
+
                                 <div class="form-group">
                                     <label for="simpleFormEmail">Given By</label>
                                     <input type="text" name="given_by" class="form-control" id="simpleFormEmail" placeholder="Enter Giver name" value="{{ $collection->given_by }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Remarks</label> 
+                                    <label for="simpleFormEmail">Remarks</label>
                                     <textarea name="remarks" id="simpleFormEmail" class="form-control">{{ $collection->remarks }}</textarea>
                                 </div>
-                                
+
 
                                 <div class="form-group">
                                     <label class="">Collection Date</label>
-                                    <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="collection_date" value="{{ $collection->collection_date }}">
+                                    <div class="input-group date form_date" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="collection_date" value="{{ \Carbon\Carbon::parse($collection->collection_date)->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -124,11 +125,11 @@
                                 </div>
                             </div>
                         </div>
-                       
-                        
+
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.collection.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">UPDATE</button>
-                        
+
                     </form>
                 </div>
             </div>

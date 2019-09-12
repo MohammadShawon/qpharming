@@ -33,7 +33,9 @@ class ProductImportController extends Controller
                 }
             }catch (\Exception $e)
             {
-                Toastr::error('Import Failed!Check the fields.','error');
+
+                $message = explode(':',$e->getMessage());
+                Toastr::error($message[2],'error');
                 return redirect()->route('admin.product.index');
             }
 

@@ -243,7 +243,6 @@ use Carbon\Carbon;
                     <li class="nav-item">
                         <a href="#payments" data-toggle="tab">Payments Details</a>
                     </li>
-
                 </ul>
             </header>
             <div class="panel-body">

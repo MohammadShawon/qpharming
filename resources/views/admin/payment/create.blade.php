@@ -17,7 +17,7 @@
 @section('content')
     <div class="page-bar">
         <div class="page-title-breadcrumb">
-            
+
         </div>
     </div>
     <div class="row ">
@@ -39,7 +39,7 @@
                                         <option value="cash">Cash</option>
                                         <option value="check">Check</option>
                                         <option value="bank">Bank | Bkash | Rocket | Nagad</option>
-                                        
+
                                     </select>
 
                                 </div>
@@ -77,8 +77,8 @@
                                 </div>
                                 {{--   Company      --}}
                                 <div class="form-group company">
-                                    <label>Select Company</label>
-                                    <select name="company_id" class="form-control  select2 " >
+                                    <label for="company">Select Company</label>
+                                    <select name="company_id" id="company" class="form-control  select2 " >
                                         @foreach ($companies as $company)
                                             <option></option>
                                             <option value="{{ $company->id }}">{{ $company->name }}</option>
@@ -87,8 +87,8 @@
                                 </div>
                                 {{--  Farmer   --}}
                                 <div class="form-group farmer">
-                                    <label>Select Farmer</label>
-                                    <select name="farmer_id" class="form-control  select2 " >
+                                    <label for="farmer">Select Farmer</label>
+                                    <select name="farmer_id" id="farmer" class="form-control  select2 " >
                                         @foreach ($farmers as $farmer)
                                             <option></option>
                                             <option value="{{ $farmer->id }}">{{ $farmer->name }}</option>
@@ -98,8 +98,8 @@
 
                                 {{-- Staff --}}
                                 <div class="form-group staff">
-                                    <label>Select Staff</label>
-                                    <select name="user_id" class="form-control  select2 " >
+                                    <label for="staff">Select Staff</label>
+                                    <select name="user_id" id="staff" class="form-control  select2 " >
                                         @foreach ($users as $user)
                                             <option></option>
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -120,7 +120,7 @@
 
 
                             </div>
-                        
+
                             <div class="col-md-6 col-sm-6">
 
                                 {{-- Amount --}}
@@ -140,15 +140,15 @@
                                     <input type="text" name="received_by" class="form-control" id="simpleFormEmail" placeholder="Enter Reciever name" value="{{ old('received_by') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="simpleFormEmail">Remarks</label> 
+                                    <label for="simpleFormEmail">Remarks</label>
                                     <textarea name="remarks" id="simpleFormEmail" class="form-control">{{old('remarks')}}</textarea>
                                 </div>
-                                
+
 
                                 <div class="form-group">
                                     <label class="">Payment Date</label>
-                                    <div class="input-group date form_datetime" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy HH:ii p" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ Carbon::now()->format('d M Y h:i a') }}">
+                                    <div class="input-group date form_date" data-date="{{ Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="payment_date" value="{{ Carbon::now()->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -157,11 +157,11 @@
                                 </div>
                             </div>
                         </div>
-                       
-                        
+
+
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.payment.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
-                        
+
                     </form>
                 </div>
             </div>

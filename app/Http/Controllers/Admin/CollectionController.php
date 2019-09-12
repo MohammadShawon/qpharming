@@ -25,8 +25,9 @@ class CollectionController extends Controller
     public function index()
     {
         /* Collection List */
-        $collections = Collection::latest()->get();
-        return view('admin.collection.index', compact('collections'));
+        $data['collections'] = Collection::where('status','active')->latest()->get();
+        $data['pending'] = Collection::where('status','pending')->latest()->get();
+        return view('admin.collection.index', $data);
     }
 
     /**
@@ -42,7 +43,7 @@ class CollectionController extends Controller
         $data['farmers']        = Farmer::get(['id','name']);
         $data['companies']      = Company::get(['id','name']);
         $data['users']          = User::get(['id','name']);
-        
+
         return view('admin.collection.create', $data);
     }
 
@@ -54,19 +55,19 @@ class CollectionController extends Controller
      */
     public function store(CollectionStoreRequest $request)
     {
-        
+
         /* Insert Collection */
         $collection = Collection::create([
-            'bank_id'           =>      $request->bank_id,
-            'farmer_id'         =>      $request->farmer_id,
-            'collection_amount' =>      $request->collection_amount,
-            'collection_type'   =>      $request->collection_type,
-            'collect_type'      =>      $request->collect_type,
-            'bank_name'         =>      $request->bank_name,
-            'given_by'          =>      $request->given_by,
-            'reference'         =>      $request->reference,
-            'remarks'           =>      $request->remarks,
-            'collection_date'   =>      Carbon::parse($request->collection_date)->format('Y-m-d H:i'),
+            'bank_id'           =>      $request->input('bank_id'),
+            'farmer_id'         =>      $request->input('farmer_id'),
+            'collection_amount' =>      $request->input('collection_amount'),
+            'collection_type'   =>      $request->input('collection_type'),
+            'collect_type'      =>      $request->input('collect_type'),
+            'bank_name'         =>      $request->input('bank_name'),
+            'given_by'          =>      $request->input('given_by'),
+            'reference'         =>      $request->input('reference'),
+            'remarks'           =>      $request->input('remarks'),
+            'collection_date'   =>      Carbon::parse($request->input('collection_date'))->format('Y-m-d'),
         ]);
 
 
@@ -101,7 +102,7 @@ class CollectionController extends Controller
         /* Collection Edit form */
         $data['banks']          = Bank::get(['id','bank_name']);
         $data['farmers']        = Farmer::get(['id','name']);
-        
+
         return view('admin.collection.edit', $data, compact('collection'));
     }
 
@@ -116,16 +117,16 @@ class CollectionController extends Controller
     {
         /* Insert Collection */
         $collectionUpdate = $collection->update([
-            'bank_id'           =>      $request->bank_id,
-            'farmer_id'         =>      $request->farmer_id,
-            'collection_amount' =>      $request->collection_amount,
-            'collection_type'   =>      $request->collection_type,
-            'collect_type'      =>      $request->collect_type,
-            'bank_name'         =>      ($request->collection_type == 'cash') ? null : $request->bank_name,
-            'given_by'          =>      $request->given_by,
-            'reference'         =>      $request->reference,
-            'remarks'           =>      $request->remarks,
-            'collection_date'   =>      Carbon::parse($request->collection_date)->format('Y-m-d H:i'),
+            'bank_id'           =>      $request->input('bank_id'),
+            'farmer_id'         =>      $request->input('farmer_id'),
+            'collection_amount' =>      $request->input('collection_amount'),
+            'collection_type'   =>      $request->input('collection_type'),
+            'collect_type'      =>      $request->input('collect_type'),
+            'bank_name'         =>      ($request->input('collection_type') === 'cash') ? null : $request->input('bank_name'),
+            'given_by'          =>      $request->input('given_by'),
+            'reference'         =>      $request->input('reference'),
+            'remarks'           =>      $request->input('remarks'),
+            'collection_date'   =>      Carbon::parse($request->input('collection_date'))->format('Y-m-d'),
         ]);
 
 

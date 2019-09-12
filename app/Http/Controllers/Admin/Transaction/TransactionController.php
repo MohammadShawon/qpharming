@@ -21,10 +21,10 @@ class TransactionController extends Controller
      */
     public function index(TransactionsDataTable $dataTable)
     {
-        $data['payments'] = Payment::all();
-        $data['collections'] = Collection::all();
+        $data['payments'] = Payment::where('status','active')->get();
+        $data['collections'] = Collection::where('status','active')->get();
         $data['bank']       = Bank::all();
-        $data['expenses']       = Expense::all();
+        $data['expenses']       = Expense::where('status','active')->get();
 //        dd($dataTable->query());
         return $dataTable->render('admin.bank.transactions',$data);
     }

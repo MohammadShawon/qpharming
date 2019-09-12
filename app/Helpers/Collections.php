@@ -14,7 +14,7 @@ class Collections
     public static function dailyTotalCollection():float
     {
         $today = Carbon::today('+6')->format('Y-m-d');
-        $totalCollection = Collection::where('collection_date','like','%'.$today.'%')->sum('collection_amount');
+        $totalCollection = Collection::where('status','active')->where('collection_date','like','%'.$today.'%')->sum('collection_amount');
         return $totalCollection;
     }
 
@@ -25,6 +25,6 @@ class Collections
 
     public static function totalCollection():float
     {
-        return Collection::sum('collection_amount');
+        return Collection::where('status','active')->sum('collection_amount');
     }
 }
