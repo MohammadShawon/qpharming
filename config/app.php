@@ -189,7 +189,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\PermissionsServiceProvider::class,
+//        App\Providers\PermissionsServiceProvider::class,
 
 //        Datatables Service Providers
         Yajra\DataTables\DataTablesServiceProvider::class,
