@@ -18,9 +18,24 @@ class CompanyRecordsDataTable extends DataTable
     {
         return datatables($query)
             ->addIndexColumn()
+            ->addColumn('action',function ($data){
+                return $this->getActionColumn($data);
+            })
+            ->rawColumns(['action'])
             ->setRowClass(function ($data){
                 return $data->PurchaseNo === 'Payment' ? 'alert-success' : 'alert-danger';
             });
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    protected function getActionColumn($data): string
+    {
+        $showUrl = route('admin.purchases.show', $data->id);
+
+        return $data->PurchaseNo === 'Payment' ? "<a class='btn dark btn-outline btn-circle disabled' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>" : "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>";
     }
 
     /**
@@ -33,11 +48,11 @@ class CompanyRecordsDataTable extends DataTable
     {
         $purchase = DB::table('purchases')
             ->rightJoin('purchase_payments','purchases.id','=','purchase_payments.purchase_id')
-            ->select('purchases.purchase_no as PurchaseNo','purchases.purchase_date as date','purchases.payment_type as type','purchases.grand_total','purchase_payments.payment as payment','purchases.remarks')
+            ->select('purchases.id','purchases.purchase_no as PurchaseNo','purchases.purchase_date as date','purchases.payment_type as type','purchases.grand_total','purchase_payments.payment as payment','purchases.remarks')
             ->where('purchases.company_id','=',$this->company_id);
 
         $payment = DB::table('payments')
-                    ->select(DB::raw("'Payment' as PurchaseNo"),'payment_date as date','payment_type as type',DB::raw("'N/A' as 'grand_total'"),'payment_amount as payment','remarks')
+                    ->select('payments.id',DB::raw("'Payment' as PurchaseNo"),'payment_date as date','payment_type as type',DB::raw("'N/A' as 'grand_total'"),'payment_amount as payment','remarks')
                     ->where('company_id','=',$this->company_id)
                     ->unionAll($purchase)
                     ->orderBy('date','desc');
@@ -56,6 +71,12 @@ class CompanyRecordsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->addAction([
+                        'width' => '12%',
+                        'printable' => false,
+                        'exportable' => false,
+                        'searchable' => false
+                    ])
                     ->processing(true)
                     ->paging(true)
                     ->lengthMenu([[50, 100,500, -1], [50, 100,500, 'All']])

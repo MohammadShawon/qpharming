@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Reports;
 
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 class DailyReportController extends Controller
 {
@@ -15,6 +17,12 @@ class DailyReportController extends Controller
     public function index()
     {
         return view('admin.reports.daily.index');
+    }
+
+    public function topsheet()
+    {
+        $data['sales'] = Sale::all();
+        return PDF::loadHTML('<h1>Test</h1>');
     }
 
     /**
