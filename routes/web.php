@@ -138,6 +138,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('chicks/stocks','Stocks\ChicksStockController@index')->name('chicks.stocks');
     Route::get('feed/stocks','Stocks\FeedStockController@index')->name('feed.stocks');
     Route::get('medicine/stocks','Stocks\MedicineStockController@index')->name('medicine.stocks');
+    Route::get('stocks/transfer','Stocks\StockTransferController@createStockTransfer')->name('stocks.transfer.create');
+    Route::post('stocks/transfer','Stocks\StockTransferController@transfer')->name('stocks.transfer.store');
     /*
      * Ledger Records Route
      * */
