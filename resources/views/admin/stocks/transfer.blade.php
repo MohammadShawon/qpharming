@@ -24,43 +24,45 @@
                     </header>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ route('admin.stocks.transfer.store') }}">
-                        @csrf
+                 <div class="row">
+                     <div class="col-6">
+                         <form method="post" action="{{ route('admin.stocks.transfer.store') }}">
+                             @csrf
 
-                        {{-- Expense Head --}}
-                        <div class="form-group">
-                            <label for="branch_id">Select Branch</label>
-                            <select id="branch_id" name="branch_id" class="form-control select2 ">
-                                @foreach ($branches as $branch)
-                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                             {{-- Select Branch --}}
+                             <div class="form-group">
+                                 <label for="branch_id">Select Branch</label>
+                                 <select id="branch_id" name="branch_id" class="form-control select2 ">
+                                     @foreach ($branches as $branch)
+                                         <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                     @endforeach
+                                 </select>
+                             </div>
 
-                        {{-- Amount --}}
-                        <div class="form-group">
-                            <label for="quantity">Quantity</label>
-                            <input type="number" name="quantity" class="form-control" id="quantity" placeholder="Enter Transfer Quantity">
-                        </div>
+                             {{-- Select Item --}}
+                             <div class="form-group">
+                                 <label for="product_id">Select Product</label>
+                                 <select id="product_id" name="product_id" class="form-control select2 ">
+                                     @foreach ($products as $product)
+                                         <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                     @endforeach
+                                 </select>
+                             </div>
+                             <div class="row">
+                                 <div class="col-6">
+                                     {{-- Quantity --}}
+                                     <div class="form-group">
+                                         <label for="quantity">Quantity</label>
+                                         <input type="number" name="quantity" class="form-control" id="quantity" placeholder="" autocomplete="off" autofocus>
+                                     </div>
+                                 </div>
+                             </div>
 
-                        {{-- Description --}}
-                        <div class="form-group">
-                            <label for="description">Expense Description</label>
-                            <input type="textarea" name="description" class="form-control" id="description" placeholder="Enter expense description">
-                        </div>
-
-                        {{-- Recipent --}}
-                        <div class="form-group">
-                            <label for="recipient_name">Expense Recipent Nmae</label>
-                            <input type="text" name="recipient_name" class="form-control" id="recipient_name" placeholder="Enter expense recipient name">
-                        </div>
-
-
-
-
-                        <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.expense.index') }}">BACK</a>
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
-                    </form>
+                                                          <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.dashboard') }}">BACK</a>
+                             <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
+                         </form>
+                     </div>
+                 </div>
                 </div>
             </div>
         </div>

@@ -178,7 +178,7 @@ Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 //     return view('admin.dashboard');
 // });
 
-Route::get('dashboard', 'Admin\DashboardController@index');
+Route::get('dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 
 
 /*For checking errors page  START*/

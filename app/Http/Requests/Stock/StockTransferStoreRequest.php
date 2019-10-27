@@ -24,8 +24,8 @@ class StockTransferStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'branch_id'     => 'required | exists: branches, id',
-            'product_id'    => 'required | exists: products, id',
+            'branch_id'     => 'required | exists:branches,id',
+            'product_id'    => 'required | exists:products,id',
             'quantity'      => 'required',
         ];
     }

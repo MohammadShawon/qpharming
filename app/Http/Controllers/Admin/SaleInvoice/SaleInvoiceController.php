@@ -256,7 +256,7 @@ class SaleInvoiceController extends Controller
         {
 
             DB::rollback();
-            dd($e);
+//            dd($e);
             Toastr::error('Error Message -'.$e->getMessage(),'error');
             return redirect()->route('admin.sales.create');
         }

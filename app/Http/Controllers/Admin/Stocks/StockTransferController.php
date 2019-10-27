@@ -31,11 +31,18 @@ class StockTransferController extends Controller
         $this->stockTransferService = $stockTransferService;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createStockTransfer()
     {
         return $this->stockTransferService->createStockTransfer();
     }
 
+    /**
+     * @param StockTransferStoreRequest $request
+     * @return StockTransferStoreRequest
+     */
     public function transfer(StockTransferStoreRequest $request)
     {
         return $this->stockTransferService->transfer($request);
