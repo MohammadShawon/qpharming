@@ -205,14 +205,14 @@
                         </li>
                      </ul>
                 </li>
-                <li class="nav-item {{ Request::is('chick/stock*')||Request::is('feed/stock*')||Request::is('medicine/stock*') || Request::is('stocks/transfer*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chicks/stock*')||Request::is('feed/stock*')||Request::is('medicine/stock*') || Request::is('stocks/transfer*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">insert_chart</i>
                          <span class="title">Stocks</span>
                          <span class="arrow"></span>
                      </a>
                      <ul class="sub-menu">
-                        <li class="nav-item {{ Request::is('chick/stock*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('chicks/stock*') ? 'active' : '' }}">
                             <a href="{{ route('admin.chicks.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span>
                             </a>

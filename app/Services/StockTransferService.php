@@ -57,13 +57,12 @@ class StockTransferService
     private function removeQuantityFromMainBranch($request)
     {
 
-        $product = ProductPrice::where('product_id', $request->product_id)->first();
-        return $product->quantity - $product->sold  ;
+        $product = ProductPrice::where('product_id', $request->product_id)->where('quantity','>',0)->first();
+        app('log')->debug("product", [$product]);
         if ($request->quantity > ($product->quantity - $product->sold)) {
-
+            app('log')->debug("***** Before *****", [$request]);
             $productAllBatch = $this->stockTransferRepository->productAllBatch($request->product_id);
-
-
+            app('log')->debug("====== remove quantity========", [$productAllBatch]);
             $updateQuantity = 0;
             $totalUpdate = 0;
             foreach ($productAllBatch as $value) {

@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2",
         "barryvdh/laravel-cors": "^0.11.3",
-        "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-dompdf": "^0.8.5",
         "barryvdh/laravel-ide-helper": "^2.6",
         "barryvdh/laravel-snappy": "^0.4.4",
         "brian2694/laravel-toastr": "^5.5",
