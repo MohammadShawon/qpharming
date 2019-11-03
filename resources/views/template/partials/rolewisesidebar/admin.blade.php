@@ -170,7 +170,7 @@
 
                 {{--Records Area--}}
 
-                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicine*')||Request::is('farmer*')||Request::is('company*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chick/records*')||Request::is('feed/records*')||Request::is('medicine/records*')||Request::is('farmer/records*')||Request::is('company/records*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">library_books</i>
                          <span class="title">Records</span>
@@ -205,29 +205,34 @@
                         </li>
                      </ul>
                 </li>
-                <li class="nav-item {{ Request::is('chick*')||Request::is('feed*')||Request::is('medicine*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('chicks/stock*')||Request::is('feed/stock*')||Request::is('medicine/stock*') || Request::is('stocks/transfer*') ? 'active' : '' }}">
                     <a href="#" class="nav-link nav-toggle">
                          <i class="material-icons">insert_chart</i>
                          <span class="title">Stocks</span>
                          <span class="arrow"></span>
                      </a>
                      <ul class="sub-menu">
-                        <li class="nav-item {{ Request::is('chick*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('chicks/stock*') ? 'active' : '' }}">
                             <a href="{{ route('admin.chicks.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">adb</i>
                                 <span class="title">Chick</span>
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::is('feed*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('feed/stock*') ? 'active' : '' }}">
                             <a href="{{ route('admin.feed.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">spa</i>
                                 <span class="title">Feed</span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::is('medicine*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('medicine/stock*') ? 'active' : '' }}">
                             <a href="{{ route('admin.medicine.stocks') }}" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
                                 <span class="title">Medicine</span>
                             </a>
                         </li>
+                         <li class="nav-item {{ Request::is('stocks/transfer*') ? 'active' : '' }}">
+                             <a href="{{ route('admin.stocks.transfer.create') }}" class="nav-link nav-toggle"> <i class="material-icons">local_pharmacy</i>
+                                 <span class="title">Stock Transfer</span>
+                             </a>
+                         </li>
                      </ul>
                 </li>
                 <li class="nav-item {{ Request::is('bank*')||Request::is('purposehead*')||Request::is('payment*') ||Request::is('collection*')||Request::is('expensehead*')||Request::is('expense*') ? 'active' : '' }}">
@@ -288,11 +293,6 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item {{ Request::is('weekly*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.weekly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
-                                    <span class="title">Weekly</span>
-                                </a>
-                            </li>
                             <li class="nav-item {{ Request::is('monthly*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.monthly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Monthly</span>

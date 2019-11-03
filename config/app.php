@@ -200,6 +200,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 //      Auditing Service Provider
         OwenIt\Auditing\AuditingServiceProvider::class,
@@ -260,6 +261,7 @@ return [
         'Excel' => Maatwebsite\Excel\ExcelServiceProvider::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'DomPDF'    => Barryvdh\DomPDF\Facade::class,
 
     ],
 

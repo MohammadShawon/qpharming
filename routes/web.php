@@ -138,6 +138,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::get('chicks/stocks','Stocks\ChicksStockController@index')->name('chicks.stocks');
     Route::get('feed/stocks','Stocks\FeedStockController@index')->name('feed.stocks');
     Route::get('medicine/stocks','Stocks\MedicineStockController@index')->name('medicine.stocks');
+    Route::get('stocks/transfer','Stocks\StockTransferController@createStockTransfer')->name('stocks.transfer.create');
+    Route::post('stocks/transfer','Stocks\StockTransferController@transfer')->name('stocks.transfer.store');
     /*
      * Ledger Records Route
      * */
@@ -152,7 +154,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * All Reports Route
      * */
     Route::get('daily/reports','Reports\DailyReportController@index')->name('daily.reports');
-    Route::get('weekly/reports','Reports\WeeklyReportController@index')->name('weekly.reports');
+    Route::post('daily/reports','Reports\DailyReportController@store')->name('daily.reports.post');
+//    Route::get('weekly/reports','Reports\WeeklyReportController@index')->name('weekly.reports');
     Route::get('monthly/reports','Reports\MonthlyReportController@index')->name('monthly.reports');
 
     Route::get('daily/reports/topsheet','Reports\DailyReportController@topsheet');
@@ -176,7 +179,7 @@ Route::group(['as'=>'super-admin.', 'namespace'=>'SuperAdmin', ], function () {
 //     return view('admin.dashboard');
 // });
 
-Route::get('dashboard', 'Admin\DashboardController@index');
+Route::get('dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
 
 
 /*For checking errors page  START*/

@@ -293,11 +293,6 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item {{ Request::is('weekly*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.weekly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
-                                    <span class="title">Weekly</span>
-                                </a>
-                            </li>
                             <li class="nav-item {{ Request::is('monthly*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.monthly.reports') }}" class="nav-link nav-toggle"> <i class="material-icons">device_hub</i>
                                     <span class="title">Monthly</span>
