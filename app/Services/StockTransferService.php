@@ -5,8 +5,10 @@ namespace App\Services;
 
 
 use App\Http\Requests\Stock\StockTransferStoreRequest;
+use App\Models\Inventory;
 use App\Models\ProductPrice;
 use App\Repository\StockTransferRepository;
+use Carbon\Carbon;
 
 class StockTransferService
 {
@@ -58,7 +60,6 @@ class StockTransferService
     {
 
         $product = ProductPrice::where('product_id', $request->product_id)->where('quantity','>',0)->first();
-        app('log')->debug("product", [$product]);
         if ($request->quantity > ($product->quantity - $product->sold)) {
             app('log')->debug("***** Before *****", [$request]);
             $productAllBatch = $this->stockTransferRepository->productAllBatch($request->product_id);
@@ -84,7 +85,32 @@ class StockTransferService
             }
 
         }
+        else{
 
+            // Product Price Sold Quantity Updated
+            $product->sold += $request->quantity;
+            $product->save();
+            // Process Inventory
+            $this->processInventory($product,$request);
+        }
+    }
 
+    /**
+     * @param $product
+     * @param $request
+     * @return mixed
+     */
+    private function processInventory($product, $request)
+    {
+        return Inventory::create([
+            'product_id'        => $product->product_id,
+            'user_id'           => auth()->user()->id,
+            'branch_id'           => auth()->user()->branch_id,
+            'unit_id'           => $product->product->base_unit_id,
+            'in_out_qty'        => -$request->quantity,
+            'remarks'           => 'Stock Transfer',
+            'created_at'        => Carbon::now('+6'),
+            'updated_at'        => Carbon::now('+6'),
+        ]);
     }
 }

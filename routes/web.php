@@ -154,7 +154,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
      * All Reports Route
      * */
     Route::get('daily/reports','Reports\DailyReportController@index')->name('daily.reports');
-    Route::get('weekly/reports','Reports\WeeklyReportController@index')->name('weekly.reports');
+    Route::post('daily/reports','Reports\DailyReportController@store')->name('daily.reports.post');
+//    Route::get('weekly/reports','Reports\WeeklyReportController@index')->name('weekly.reports');
     Route::get('monthly/reports','Reports\MonthlyReportController@index')->name('monthly.reports');
 
     Route::get('daily/reports/topsheet','Reports\DailyReportController@topsheet');

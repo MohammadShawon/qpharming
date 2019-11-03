@@ -382,7 +382,7 @@ class SaleInvoiceController extends Controller
                         $inventory = Inventory::create([
                             'product_id'        => $saleProduct->product_id,
                             'user_id'           => auth()->user()->id,
-                            'branch_id'           => auth()->user()->id,
+                            'branch_id'           => auth()->user()->branch_id,
                             'unit_id'           => $saleProduct->unit_id,
                             'in_out_qty'        => -$saleProduct->quantity,
                             'remarks'           => 'Sale-'.$saleInvoice->sale_no,
