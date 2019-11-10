@@ -9,7 +9,7 @@ use App\Repository\PurchaseRepository;
 use App\Repository\SaleRepository;
 use Carbon\Carbon;
 
-class DailyReportService
+class MonthlyReportService
 {
     /**
      * @var SaleRepository
@@ -25,7 +25,7 @@ class DailyReportService
     private $accountsRepository;
 
     /**
-     * DailyReportService constructor.
+     * MonthlyReportService constructor.
      * @param SaleRepository $saleRepository
      * @param PurchaseRepository $purchaseRepository
      * @param AccountsRepository $accountsRepository
@@ -38,31 +38,24 @@ class DailyReportService
         $this->accountsRepository = $accountsRepository;
     }
 
-    /**
-     * @param $date
-     * @return mixed
-     */
-    public function getSaleByDay($date)
+    public function findSaleReportByMonth($fromDate, $toDate)
     {
-        $date = Carbon::parse($date)->format('Y-m-d');
-        return $this->saleRepository->findByDay($date);
+        $fromDate = Carbon::parse($fromDate)->format('Y-m-d');
+        $toDate = Carbon::parse($toDate)->format('Y-m-d');
+        return $this->saleRepository->findByMonth($fromDate, $toDate);
     }
 
-    /**
-     * @param $date
-     * @return mixed
-     */
-    public function getPurchaseByDay($date)
+    public function findPurchaseReportByMonth($fromDate, $toDate)
     {
-        $date = Carbon::parse($date)->format('Y-m-d');
-        return $this->purchaseRepository->findByDay($date);
+        $fromDate = Carbon::parse($fromDate)->format('Y-m-d');
+        $toDate = Carbon::parse($toDate)->format('Y-m-d');
+        return $this->purchaseRepository->findByMonth($fromDate, $toDate);
     }
 
-    public function getAccountsReportByDay($date)
+    public function findAccountReportByMonth($fromDate, $toDate)
     {
-        $date = Carbon::parse($date)->format('Y-m-d');
-        return $this->accountsRepository->findByDay($date);
+        $fromDate = Carbon::parse($fromDate)->format('Y-m-d');
+        $toDate = Carbon::parse($toDate)->format('Y-m-d');
+        return $this->accountsRepository->findByMonth($fromDate, $toDate);
     }
-
-
 }

@@ -20,7 +20,6 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^6.0",
         "laravel/helpers": "^1.1",
-        "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0.3",
         "maatwebsite/excel": "^3.1",

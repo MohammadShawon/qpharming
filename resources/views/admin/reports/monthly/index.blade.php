@@ -20,7 +20,7 @@
         <div class="col-8">
 
             <div class="card card-box">
-                <form action="" method="post">
+                <form action="{{ route('admin.monthly.reports.post') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-6">
@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label class="">From Date</label>
                                     <div class="input-group date form_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="batch_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
+                                        <input class="form-control" size="16" type="text" name="form_date" value="{{ \Carbon\Carbon::now()->subDays(30)->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -40,8 +40,8 @@
                         <div class="col-6">
                                 <div class="form-group">
                                     <label class="">To Date</label>
-                                    <div class="input-group date form_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
-                                        <input class="form-control" size="16" type="text" name="batch_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
+                                    <div class="input-group date to_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                        <input class="form-control" size="16" type="text" name="to_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="col-6 center">
-                        <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
+                        <button type="submit" class="btn btn-success m-t-15 waves-effect" formtarget="_blank">SUBMIT</button>
                     </div>
 
                 </form>

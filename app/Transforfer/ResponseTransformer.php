@@ -52,19 +52,19 @@ class ResponseTransformer
      */
     public static function validationError($e)
     {
-        $errors = $e->response->original;
-        $errMsg = '';
-        foreach ($errors as $key => $value) {
-            $errMsg .= $value[0] . ' ';
-        }
+//        $errors = $e->response->original;
+//        $errMsg = '';
+//        foreach ($errors as $key => $value) {
+//            $errMsg .= $value[0] . ' ';
+//        }
 
         //$errMsg = 'Invalid Data'; //turn this on if u dont want to show validation error response
 
         return [
-            'code'    => 406,
+            'code'    => 422,
             'success' => false,
             'message' => 'Request Rejected',
-            'errors'  => $errMsg,
+            'errors'  => $e->getMessage(),
         ];
     }
 }

@@ -25,21 +25,29 @@ class Purchase extends Model implements Auditable
         'created_at',
         'updated_at'
     ];
-
-    public function user(){
+    protected $with = ['purchaseitems','purchasepayment'];
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */public function user(){
         return $this->belongsTo(User::class);
     }
-    public function company(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */public function company(){
         return $this->belongsTo(Company::class);
     }
 
-    public function purchaseitems()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */public function purchaseitems()
     {
         return $this->hasMany(PurchaseItem::class);
     }
 
-    public function purchasepayment(){
-        return $this->hasMany(PurchasePayment::class);
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */public function purchasepayment(){
+        return $this->hasOne(PurchasePayment::class);
     }
 
 }

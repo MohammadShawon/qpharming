@@ -28,7 +28,6 @@ class ProductController extends Controller
     public function index(ProductsDataTable $dataTable)
     {
 
-
         /* Product List */
         if(auth()->user()->can('view_product')){
 //            $products = Product::latest()->get();
