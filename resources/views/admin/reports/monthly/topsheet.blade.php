@@ -1,14 +1,14 @@
 @extends('template.print')
-@section('title', 'Daily TopSheet')
+@section('title', 'Monthly TopSheet')
 @push('css')
 
 @endpush
 @section('content')
-    <h4 class="text-center">Top Sheet of ({{ \Carbon\Carbon::parse($request_date)->format('d-M-Y') }})</h4>
+    <h4 class="text-center">Top Sheet ({{ \Carbon\Carbon::parse($request_from_date)->format('d-M-Y') }} To {{ \Carbon\Carbon::parse($request_to_date)->format('d-M-Y') }})</h4>
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <h5 class="sub-header">Purchase</h5>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -39,7 +39,10 @@
                     </table>
                 </div>
             </div>
-            <div class="col-xs-6">
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
                 <h5 class="sub-header">Sales</h5>
                 <div class="table-responsive">
                     <table class="table table-striped">

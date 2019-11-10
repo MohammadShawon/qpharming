@@ -49,7 +49,7 @@ class ProductsDataTable extends DataTable
      */
     public function query(Product $model)
     {
-        return $model->newQuery()->select('id', 'subcategory_id','sku','company_id','product_name','barcode','base_unit_id','description','size', 'created_at', 'updated_at');
+        return $model->newQuery()->select('id', 'subcategory_id','company_id','sku','product_name','barcode','base_unit_id','description','size', 'created_at', 'updated_at');
     }
 
 

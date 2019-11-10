@@ -21,6 +21,8 @@ class FarmerInvoice extends Model implements Auditable
         'created_at',
         'updated_at'
     ];
+	protected $with = ['farmerinvoiceitems'];
+
     public function farmerbatch(){
         return $this->belongsTo(FarmerBatch::class, 'batch_number');
     }

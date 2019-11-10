@@ -1,8 +1,8 @@
 @extends('template.print')
-@section('title','Daily Sale Report')
+@section('title','Monthly Sale Report')
 
 @section('content')
-    <h4 class="text-center">Sales Report of ({{ \Carbon\Carbon::parse($request_date)->format('d-M-Y') }})</h4>
+    <h4 class="text-center">Sales Report ({{ \Carbon\Carbon::parse($request_from_date)->format('d-M-Y') }} To {{ \Carbon\Carbon::parse($request_to_date)->format('d-M-Y') }})</h4>
 <table class="table table-bordered">
         <thead>
             <tr>
