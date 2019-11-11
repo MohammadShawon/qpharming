@@ -212,6 +212,25 @@ class TransactionsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Bank/Transactions_' . date('YmdHis');
+        return 'Bank_Transactions_' . date('YmdHis');
+    }
+    /**
+     * @return array
+     */
+    protected function getBuilderParameters():array
+    {
+        return[
+            'dom'     => 'Blfrtip',
+            'order'   => [[0, 'desc']],
+            'buttons' => [
+                'create',
+                'excel',
+                'csv',
+                'pdf',
+                'print'
+
+            ],
+
+        ];
     }
 }
