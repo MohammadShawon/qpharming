@@ -40,13 +40,13 @@
                         <div class="col-6">
                                 <div class="form-group">
                                     <label class="">To Date</label>
-                                    <div class="input-group date to_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input1">
+                                    <div class="input-group date to_date" data-date="{{ \Carbon\Carbon::now() }}" data-date-format="dd MM yyyy" data-link-field="dtp_input2">
                                         <input class="form-control" size="16" type="text" name="to_date" value="{{ \Carbon\Carbon::now()->format('d M Y') }}">
                                         <span class="input-group-addon ml-2">
                                             <span class="fa fa-calendar"></span>
                                         </span>
                                     </div>
-                                    <input type="hidden" id="dtp_input1" value="" />
+                                    <input type="hidden" id="dtp_input2" value="" />
                                 </div>
                         </div>
                     </div>
