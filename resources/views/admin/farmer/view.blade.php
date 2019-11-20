@@ -70,6 +70,12 @@ use Carbon\Carbon;
                         <b>Address</b> <a class="pull-right">{{ $farmer->address}}</a>
                     </li>
                     <li class="list-group-item">
+                        <b>Chicks Price</b>
+                        <a class="pull-right">
+                            {{ \App\Helpers\Farmers::currentChicksPrice($farmer->id) }}
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <b>Total Cost</b>
                         <a class="pull-right">
                             {{ \App\Helpers\Farmers::totalCost($farmer->id) }}
