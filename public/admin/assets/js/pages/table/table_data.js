@@ -52,7 +52,6 @@ $(document).ready(function() {
             'copy', 'excel', 'pdf'
         ]
     } );
-
     $('#pending_payment').DataTable( {
         "scrollX": true,
         "buttons": [

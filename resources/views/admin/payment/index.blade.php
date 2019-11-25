@@ -96,7 +96,7 @@
                                                             <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                                             <td>
                                                                 <a  class="waves-effect btn btn-success" href="{{ route('admin.payment.show', $payment->id) }}"><i class="material-icons">visibility</i></a>
-
+                                                                @role('superadmin')
                                                                 <a  class="waves-effect btn btn-primary" href="{{ route('admin.payment.edit', $payment->id) }}"><i class="material-icons">edit</i></a>
 
                                                                 <button type="submit" class="waves-effect btn deepPink-bgcolor"
@@ -108,6 +108,7 @@
                                                                     @csrf
                                                                     @method("DELETE")
                                                                 </form>
+                                                                @endrole
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -138,7 +139,7 @@
                                             <div class="card-body">
                                                 <div class="table-scrollable">
                                                     <table class="table table-striped table-bordered table-hover table-checkable order-column" style="width: 100%" id="pending_payment">
-                                                        <thead>
+                                                        <thead >
                                                             <tr>
                                                                 <th> Serial </th>
                                                                 <th> Company / Farmer / Staff</th>
@@ -170,11 +171,11 @@
                                                                 </td>
                                                                 <td>{{ $value->payment_amount }}</td>
                                                                 <td>{{ $value->payment_type }}</td>
-                                                                <td>{{ Carbon::parse($value->payment_date)->toDayDateTimeString() }}</td>
+                                                                <td>{{ Carbon::parse($value->payment_date)->format('d-m-Y') }}</td>
 
-                                                                <td>
+                                                                <td width="25%">
                                                                     <a  class="waves-effect btn btn-success" href="{{ route('admin.payment.show', $value->id) }}"><i class="material-icons">visibility</i></a>
-
+                                                                    @role('superadmin')
                                                                     <a  class="waves-effect btn btn-primary" href="{{ route('admin.payment.edit', $value->id) }}"><i class="material-icons">edit</i></a>
 
                                                                     <button type="submit" class="waves-effect btn deepPink-bgcolor"
@@ -186,20 +187,12 @@
                                                                         @csrf
                                                                         @method("DELETE")
                                                                     </form>
+                                                                    @endrole
                                                                 </td>
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
-                                                        <tfoot>
-                                                        <tr>
-                                                            <th> Serial </th>
-                                                            <th> Company / Farmer /Staff</th>
-                                                            <th> Payment Amount </th>
-                                                            <th> Payment Type </th>
-                                                            <th> Payment Date </th>
-                                                            <th> Action </th>
-                                                        </tr>
-                                                        </tfoot>
+
                                                     </table>
                                                 </div>
                                             </div>
