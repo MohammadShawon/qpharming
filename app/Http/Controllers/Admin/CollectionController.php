@@ -126,6 +126,7 @@ class CollectionController extends Controller
             'given_by'          =>      $request->input('given_by'),
             'reference'         =>      $request->input('reference'),
             'remarks'           =>      $request->input('remarks'),
+            'status'            =>      $request->input('status'),
             'collection_date'   =>      Carbon::parse($request->input('collection_date'))->format('Y-m-d'),
         ]);
 

@@ -136,7 +136,15 @@
                                     </select>
                                 </div>
 
-
+                                {{--Pay  Status--}}
+                                <div class="form-group">
+                                    <label>Payment Status</label>
+                                    <select name="status" class="form-control  select2 " >
+                                        <option value="active" {{ $payment->status === 'active' ? 'selected' : ''}}>Approve</option>
+                                        <option value="pending" {{ $payment->status === 'pending' ? 'selected' : ''}}>Pending</option>
+                                        <option value="hold" {{ $payment->status === 'hold' ? 'selected' : ''}}>Hold</option>
+                                    </select>
+                                </div>
 
                             </div>
 

@@ -90,7 +90,15 @@
                                     </select>
                                 </div>
 
-
+                                {{--Collection  Status--}}
+                                <div class="form-group">
+                                    <label>Collection Status</label>
+                                    <select name="status" class="form-control  select2 " >
+                                        <option value="active" {{ $collection->status === 'active' ? 'selected' : ''}}>Approve</option>
+                                        <option value="pending" {{ $collection->status === 'pending' ? 'selected' : ''}}>Pending</option>
+                                        <option value="hold" {{ $collection->status === 'hold' ? 'selected' : ''}}>Hold</option>
+                                    </select>
+                                </div>
 
                             </div>
 

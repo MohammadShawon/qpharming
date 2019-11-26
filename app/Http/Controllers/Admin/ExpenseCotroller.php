@@ -106,6 +106,7 @@ class ExpenseCotroller extends Controller
             'description' => $request->input('description'),
             'recipient_name' => $request->input('recipient_name'),
             'user_id' => $request->input('user_id'),
+            'status'    => $request->input('status'),
             'created_at'    => Carbon::parse($request->input('expense_date'))->format('Y-m-d'),
         ]);
 

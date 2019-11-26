@@ -69,6 +69,7 @@ use Carbon\Carbon;
                     <li class="list-group-item">
                         <b>Address</b> <a class="pull-right">{{ $farmer->address}}</a>
                     </li>
+
                     <li class="list-group-item">
                         <b>Total Cost</b>
                         <a class="pull-right">
@@ -124,6 +125,19 @@ use Carbon\Carbon;
 
                                 <b>
                                     {{ $latestBatch->chicks_quantity }}
+                                </b>
+                            </a>
+                        @endif
+                    </li>
+
+                    <li class="list-group-item">
+
+                        Price
+                        @if(!empty($latestBatch))
+                            <a class="pull-right p-r-20 mdl-color-text--red-900">
+
+                                <b>
+                                    {{ \App\Helpers\Farmers::currentChicksPrice($farmer->id) }}
                                 </b>
                             </a>
                         @endif

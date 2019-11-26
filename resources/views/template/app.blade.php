@@ -60,7 +60,7 @@
 </head>
 
  <!-- END HEAD -->
-<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white white-sidebar-color logo-green header-green">
+<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white white-sidebar-color logo-green header-green" >
 
     {{-- START PAGE LOADER --}}
         <div id="preloader">
@@ -71,7 +71,7 @@
             </div>
         </div>
     {{-- END PAGE LOADER --}}
-        <div class="page-wrapper">
+        <div class="page-wrapper" id="app">
             <!-- start header -->
             @include('template.partials.topbar')
 {{--            @include('template.partials.quicklink')--}}
@@ -106,10 +106,9 @@
 
  <!-- start js include path -->
 
-
+    <script src="{{ asset('js/app.js') }}"></script>
     {{-- PAGE LOADER JS SCRIPT END --}}
  <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.4.1.min.js') }} " ></script>
-
  <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
 
  <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>

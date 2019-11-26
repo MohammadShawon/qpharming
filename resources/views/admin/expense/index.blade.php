@@ -154,8 +154,9 @@
                                                             </td>
                                                             <td>{{ $value->created_at->toDayDateTimeString() }}</td>
                                                             <td>
-                                                                <a  class="waves-effect btn btn-primary" href="{{ route('admin.expense.edit', $value->id) }}"><i class="material-icons">edit</i></a>
 
+                                                                <a  class="waves-effect btn btn-primary" href="{{ route('admin.expense.edit', $value->id) }}"><i class="material-icons">edit</i></a>
+                                                                @role('superadmin')
                                                                 <button type="submit" class="waves-effect btn deepPink-bgcolor"
                                                                         onclick="deleteExpense({{$value->id}})">
                                                                     <i class="material-icons">delete</i>
@@ -165,6 +166,7 @@
                                                                     @csrf
                                                                     @method("DELETE")
                                                                 </form>
+                                                                @endrole
                                                             </td>
                                                         </tr>
                                                     @endforeach

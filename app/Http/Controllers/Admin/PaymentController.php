@@ -136,6 +136,7 @@ class PaymentController extends Controller
             'bank_name'      =>      $request->input('bank_name'),
             'reference'      =>      $request->input('reference'),
             'received_by'    =>      $request->input('received_by'),
+            'status'         =>      $request->input('status'),
             'remarks'        =>      $request->input('remarks'),
             'payment_date'   =>      Carbon::parse($request->input('payment_date'))->format('Y-m-d'),
         ]);

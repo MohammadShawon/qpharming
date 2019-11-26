@@ -12,7 +12,7 @@
 
     <div class="btn-group">
         <a style="color:white; font-size:15px; padding: 3px 7px 5px 0;" href="{{ route('admin.payment.index') }}" id="addRow1" class="btn deepPink-bgcolor">
-            <i style="color:white; font-size:12px; padding: 3px;" class="fa fa-arrow-left"></i>BACK 
+            <i style="color:white; font-size:12px; padding: 3px;" class="fa fa-arrow-left"></i>BACK
         </a>
     </div>
     <div class="card">
@@ -45,39 +45,39 @@
                                 <div class="col-md-3 col-6"> <strong>Company</strong>
                                     <br>
                                     <p class="text-muted">
-                                        
+
                                         {{ ucwords($payment->payee_type) }}
-                                    
+
                                     </p>
                                 </div>
-                            @endif
-                            @if (is_null($payment->farmer_id) && is_null($payment->user_id))
+
+                            @elseif (is_null($payment->farmer_id) && is_null($payment->user_id))
                                 <div class="col-md-3 col-6"> <strong>Company</strong>
                                     <br>
                                     <p class="text-muted">
-                                        
+
                                         {{ $payment->company->name }}
-                                    
+
                                     </p>
                                 </div>
-                            @endif
-                            @if (is_null($payment->company_id) && is_null($payment->user_id))
+
+                            @elseif (is_null($payment->company_id) && is_null($payment->user_id))
                                 <div class="col-md-3 col-6 b-r"> <strong>Farmer</strong>
                                     <br>
                                     <p class="text-muted">
-                                        
+
                                         {{ $payment->farmer->name }}
-                                    
+
                                     </p>
                                 </div>
-                            @endif 
-                            @if (is_null($payment->company_id) && is_null($payment->farmer_id))
+
+                            @elseif (is_null($payment->company_id) && is_null($payment->farmer_id))
                                 <div class="col-md-3 col-6 b-r"> <strong>Staff</strong>
                                     <br>
                                     <p class="text-muted">
-                                        
+
                                         {{ $payment->user->name }}
-                                    
+
                                     </p>
                                 </div>
                             @endif
@@ -90,7 +90,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            
+
                             <div class="col-md-3 col-6 b-r"> <strong>Payment Type</strong>
                                 <br>
                                 <p class="text-muted">{{ $payment->payment_type }}</p>
@@ -107,9 +107,9 @@
                                 <br>
                                 <p class="text-muted">{{ Carbon::parse($payment->payment_date)->toDayDateTimeString() }}</p>
                             </div>
-                            
+
                         </div>
-                        
+
                         <hr>
                         {{-- <p class="m-t-30">Completed my graduation in Arts from the well known and renowned institution of India – SARDAR PATEL ARTS COLLEGE, BARODA in 2000-01, which was affiliated to M.S. University. I ranker in University exams from the same university from 1996-01.</p>
                         <p>Worked as  Professor and Head of the department at Sarda Collage, Rajkot, Gujarat from 2003-2015 </p>
@@ -154,7 +154,7 @@
 @endsection
 
 @push('js')
-    
+
 @endpush
 
 

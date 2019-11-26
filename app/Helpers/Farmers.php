@@ -14,7 +14,7 @@ use phpDocumentor\Reflection\Types\Object_;
 
 class Farmers
 {
-    public static function totalCost(int $farmer_id):int
+    public static function totalCost(int $farmer_id):float
     {
         $chicksQuantity = FarmerBatch::where('farmer_id',$farmer_id)->where('status','active')->first();
 
@@ -42,6 +42,31 @@ class Farmers
         return ($totalInvoiceAmount + $advancePayments + $opening_balance);
 
 
+    }
+
+    public static function currentChicksPrice(int $farmer_id): string
+    {
+        $chicksQuantity = FarmerBatch::where('farmer_id',$farmer_id)->where('status','active')->first();
+        $totalChicksPrice = 0;
+        $sellingPrice = 0;
+
+        if($chicksQuantity !== null)
+        {
+            $chicks = Category::where('name','Chicks')->with('products')->first();
+            $chicksPrice = [];
+            foreach ($chicks->products as $product)
+            {
+                if (ProductPrice::where('product_id',$product->id)->where('batch_no',$chicksQuantity->chicks_batch_no)->first())
+                {
+                    $chicksPrice = ProductPrice::where('product_id',$product->id)->where('batch_no',$chicksQuantity->chicks_batch_no)->first();
+                }
+            }
+
+            $totalChicksPrice = $chicksPrice->selling_price * $chicksQuantity->chicks_quantity;
+            $sellingPrice = $chicksPrice->selling_price;
+
+        }
+        return $totalChicksPrice . '/'. $sellingPrice;
     }
 
     public static function currentChicks(int $farmer_id):int

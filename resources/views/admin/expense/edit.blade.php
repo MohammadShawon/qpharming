@@ -77,6 +77,15 @@
                                 </div>
                             </div>
                         </div>
+                        {{--Collection  Status--}}
+                        <div class="form-group">
+                            <label>Expense Status</label>
+                            <select name="status" class="form-control  select2 " >
+                                <option value="active" {{ $expense->status === 'active' ? 'selected' : ''}}>Approve</option>
+                                <option value="pending" {{ $expense->status === 'pending' ? 'selected' : ''}}>Pending</option>
+                                <option value="hold" {{ $expense->status === 'hold' ? 'selected' : ''}}>Hold</option>
+                            </select>
+                        </div>
 
                         <a class="btn deepPink-bgcolor m-t-15 waves-effect" href="{{ route('admin.expense.index') }}">BACK</a>
                         <button type="submit" class="btn btn-success m-t-15 waves-effect">SUBMIT</button>
