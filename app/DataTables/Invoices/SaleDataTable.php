@@ -4,7 +4,7 @@ namespace App\DataTables\Invoices;
 
 use App\Models\Customer;
 use App\Models\Farmer;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
@@ -42,7 +42,10 @@ class SaleDataTable extends DataTable
                 return "<b>$data->grand_total</b>";
             })
             ->addColumn('action',function ($data){
-                return $this->getActionColumn($data);
+                if (auth()->user()->hasRole('superadmin')){
+                    return $this->getActionColumn($data);
+                }
+                return $this->getViewColumn($data);
             })
             ->rawColumns(['grand_total','action','type'])
             ->setRowClass('gradeX');
@@ -59,6 +62,20 @@ class SaleDataTable extends DataTable
         $show = !empty($data->customer_id) ? $showUrl : $showFarmer;
         return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$show'><i class='material-icons'>visibility</i></a> 
                         <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    protected function getViewColumn($data): string
+    {
+        $showUrl = route('admin.sales.show', $data->id);
+        $showFarmer = route('admin.farmerinvoice.show',$data->id);
+        $show = !empty($data->customer_id) ? $showUrl : $showFarmer;
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$show'><i class='material-icons'>visibility</i></a>";
+
     }
 
     /**

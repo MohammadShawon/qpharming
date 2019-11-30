@@ -29,7 +29,10 @@ class PurchaseDataTable extends DataTable
                 return "<span class='label label-sm label-success'>$data->payment_type</span>";
             })
             ->addColumn('action',function ($data){
-                return $this->getActionColumn($data);
+                if (auth()->user()->hasRole('superadmin')){
+                    return $this->getActionColumn($data);
+                }
+                return $this->getViewColumn($data);
             })
             ->rawColumns(['grand_total','action','payment_type'])
             ->setRowClass('gradeX');
@@ -47,9 +50,22 @@ class PurchaseDataTable extends DataTable
     }
 
     /**
+     * @param $data
+     * @return string
+     */
+    protected function getViewColumn($data): string
+    {
+        $showUrl = route('admin.sales.show', $data->id);
+        $showFarmer = route('admin.farmerinvoice.show',$data->id);
+        $show = !empty($data->customer_id) ? $showUrl : $showFarmer;
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$show'><i class='material-icons'>visibility</i></a>";
+
+    }
+
+    /**
      * Get query source of dataTable.
      *
-     * @param \App\User $model
+     * @param Purchase $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Purchase $model)
