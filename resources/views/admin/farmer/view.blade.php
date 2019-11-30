@@ -493,6 +493,11 @@ use Carbon\Carbon;
                                                                     </table>
 
                                                                 </div>
+                                                                <div class="fcr-calculation">
+                                                                    <a href="{{ route('admin.farmer.fcr_calculate.page',$farmer->id) }}">
+                                                                        <button class="btn btn-success">Generate FCR</button>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @endforeach

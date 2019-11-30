@@ -95,6 +95,8 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::patch('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@update');
     Route::delete('farmer/{id}/batch/{batch_id}', 'FarmerBatchController@destroy');
 
+    /*FCR Routes*/
+    Route::get('farmer/{id}/fcr','FcrCalculation\FcrController@index')->name('farmer.fcr_calculate.page');
 //    Route::get('farmer/profile', function (){ return view('admin.farmer.view2'); });
 
     Route::post('farmer/records/{id}', 'FarmerRecordController@store')->name('daily-record');
