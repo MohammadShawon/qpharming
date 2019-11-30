@@ -92,7 +92,7 @@
                                                         <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                                         <td>
                                                             <a  class="waves-effect btn btn-success" href="{{ route('admin.collection.show', $collection->id) }}"><i class="material-icons">visibility</i></a>
-
+                                                            @role('superadmin')
                                                             <a  class="waves-effect btn btn-primary" href="{{ route('admin.collection.edit', $collection->id) }}"><i class="material-icons">edit</i></a>
 
                                                             <button type="submit" class="waves-effect btn deepPink-bgcolor"
@@ -104,6 +104,7 @@
                                                                 @csrf
                                                                 @method("DELETE")
                                                             </form>
+                                                            @endrole
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -167,7 +168,7 @@
                                                             <td>{{ Carbon::parse($farmer->ending_date)->toDayDateTimeString() }}</td> --}}
                                                             <td>
                                                                 <a  class="waves-effect btn btn-success" href="{{ route('admin.collection.show', $value->id) }}"><i class="material-icons">visibility</i></a>
-
+                                                                @role('superadmin')
                                                                 <a  class="waves-effect btn btn-primary" href="{{ route('admin.collection.edit', $value->id) }}"><i class="material-icons">edit</i></a>
 
                                                                 <button type="submit" class="waves-effect btn deepPink-bgcolor"
@@ -179,6 +180,7 @@
                                                                     @csrf
                                                                     @method("DELETE")
                                                                 </form>
+                                                                @endrole
                                                             </td>
                                                         </tr>
                                                     @endforeach

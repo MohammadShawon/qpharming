@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\FarmerInvoice;
 use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\DataTables\Farmers\FarmersDatatable;
 use App\Models\Farmer;
@@ -132,6 +133,38 @@ class FarmerController extends Controller
         /* View a Single Farmer Informations */
         if (auth()->user()->can('view_farmer')) {
             $data['farmerInvoices'] = FarmerInvoice::where('farmer_id',$farmer->id)->with('farmerinvoiceitems')->get();
+           $data['feeds'] =  DB::table('farmer_invoice_items')
+                        ->join('farmer_invoices', 'farmer_invoice_items.farmerinvoice_id', '=', 'farmer_invoices.id')
+                        ->join('products',function ($join){
+                            $join->on('farmer_invoice_items.product_id', '=', 'products.id');
+                        })
+                        ->join('sub_categories', function ($join) {
+                            $join->on('products.subcategory_id', '=', 'sub_categories.id');
+                        })
+                        ->join('categories', function ($join) {
+                           $join->on('sub_categories.category_id', '=', 'categories.id');
+                        })
+                        ->select('farmer_invoice_items.*','categories.name','products.product_name','farmer_invoices.receipt_no','farmer_invoices.remarks','farmer_invoices.date')
+                        ->where('farmer_invoices.farmer_id',$farmer->id)
+                        ->where('categories.name','Feeds')
+                        ->get();
+
+            $data['medicines'] =  DB::table('farmer_invoice_items')
+                ->join('farmer_invoices', 'farmer_invoice_items.farmerinvoice_id', '=', 'farmer_invoices.id')
+                ->join('products',function ($join){
+                    $join->on('farmer_invoice_items.product_id', '=', 'products.id');
+                })
+                ->join('sub_categories', function ($join) {
+                    $join->on('products.subcategory_id', '=', 'sub_categories.id');
+                })
+                ->join('categories', function ($join) {
+                    $join->on('sub_categories.category_id', '=', 'categories.id');
+                })
+                ->select('farmer_invoice_items.*','categories.name','products.product_name','farmer_invoices.receipt_no','farmer_invoices.remarks','farmer_invoices.date')
+                ->where('farmer_invoices.farmer_id',$farmer->id)
+                ->where('categories.name','Medicines')
+                ->get();
+//            dd($data['feeds']);
             $data['payments'] = Payment::where('farmer_id',$farmer->id)->get();
             return view('admin.farmer.view',$data,compact('farmer'));
         }

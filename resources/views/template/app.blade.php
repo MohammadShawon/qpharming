@@ -71,7 +71,7 @@
             </div>
         </div>
     {{-- END PAGE LOADER --}}
-        <div class="page-wrapper" id="app">
+        <div class="page-wrapper">
             <!-- start header -->
             @include('template.partials.topbar')
 {{--            @include('template.partials.quicklink')--}}
@@ -106,28 +106,26 @@
 
  <!-- start js include path -->
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    {{-- PAGE LOADER JS SCRIPT END --}}
- <script src="{{ asset('admin/assets/plugins/jquery/jquery-3.4.1.min.js') }} " ></script>
- <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
 
- <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>
- <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }} "></script>
+    {{-- PAGE LOADER JS SCRIPT END --}}
+ <script src="{{ asset('admin/assets/plugins/jquery/jquery.min.js') }} " ></script>
+ <script src="{{ asset('admin/assets/plugins/popper/popper.min.js') }} " ></script>
 
     <!-- bootstrap -->
     <script src="{{ asset('admin/assets/plugins/bootstrap/js/bootstrap.bundle.js') }} " ></script>
 {{-- <script src="{{ asset('admin/assets/plugins/sparkline/jquery.sparkline.min.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/js/pages/sparkline/sparkline-data.js') }} " ></script>--}}
     {{-- PAGE LOADER JS SCRIPT START --}}
+    <!-- material -->
+    <script src="{{ asset('admin/assets/plugins/material/material.min.js') }} "></script>
+    <!-- animation -->
+    <script src="{{ asset('admin/assets/js/pages/ui/animations.js') }} " ></script>
 
  <!-- Common js-->
  <script src="{{ asset('admin/assets/js/app.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/layout.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/theme-color.js') }} " ></script>
- <!-- material -->
- <script src="{{ asset('admin/assets/plugins/material/material.min.js') }} "></script>
- <!-- animation -->
- <script src="{{ asset('admin/assets/js/pages/ui/animations.js') }} " ></script>
+
  <!-- chart js -->
 {{-- <script src="{{ asset('admin/assets/plugins/chart-js/Chart.bundle.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/plugins/chart-js/utils.js') }} " ></script>--}}
@@ -136,7 +134,9 @@
 {{-- <script src="{{ asset('admin/assets/plugins/summernote/summernote.min.js') }} " ></script>--}}
 {{-- <script src="{{ asset('admin/assets/js/pages/summernote/summernote-data.js') }} " ></script>--}}
 <!--  quicklink js -->
-{{--<script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>--}}
+<script src="{{ asset('admin/assets/quicklink/main.js') }}" ></script>
+    <script src="{{ asset('admin/assets/plugins/jquery-blockui/jquery.blockui.min.js') }} " ></script>
+    <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }} "></script>
 
  <!-- end js include path -->
 
