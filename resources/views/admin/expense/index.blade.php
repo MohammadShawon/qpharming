@@ -92,6 +92,7 @@
                                                         </td>
                                                         <td>{{ $expense->created_at->toDayDateTimeString() }}</td>
                                                         <td>
+                                                            @role('superadmin')
                                                             <a  class="waves-effect btn btn-primary" href="{{ route('admin.expense.edit', $expense->id) }}"><i class="material-icons">edit</i></a>
 
                                                             <button type="submit" class="waves-effect btn deepPink-bgcolor"
@@ -103,6 +104,7 @@
                                                                 @csrf
                                                                 @method("DELETE")
                                                             </form>
+                                                            @endrole
                                                         </td>
                                                     </tr>
                                                 @endforeach
