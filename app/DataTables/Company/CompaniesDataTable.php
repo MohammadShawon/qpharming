@@ -132,8 +132,8 @@ class CompaniesDataTable extends DataTable
         return [
             [
                 'defaultContent' => '',
-                'data'           => 'DT_RowIndex',
-                'name'           => 'DT_RowIndex',
+                'data'           => 'id',
+                'name'           => 'id',
                 'title'          => 'S. No',
                 'render'         => null,
                 'orderable'      => false,

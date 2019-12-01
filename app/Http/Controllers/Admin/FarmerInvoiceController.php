@@ -105,7 +105,6 @@ class FarmerInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         if (auth()->user()->can('create_sale'))
         {
             DB::beginTransaction();

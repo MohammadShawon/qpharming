@@ -68,6 +68,7 @@ class PurchaseTempController extends Controller
                 'product_id'    => $request->input('item_id'),
                 'batch_no'      =>  $batch->batch_no,
                 'cost_price'    => $batch->cost_price,
+                'selling_price' => $batch->selling_price,
                 'discount'      => 0,
                 'unit_id'       => $request->input('unit_id'),
                 'quantity'      => 1,
@@ -116,6 +117,7 @@ class PurchaseTempController extends Controller
 
         $purchaseTemp = PurchasetempItem::find($id);
         $purchaseTemp->cost_price = $request->input('cost_price');
+        $purchaseTemp->selling_price = $request->input('selling_price');
         $purchaseTemp->quantity = $request->input('quantity');
         $purchaseTemp->discount = $request->input('discount');
         $purchaseTemp->total_cost = $request->input('cost_price') * $request->input('quantity');

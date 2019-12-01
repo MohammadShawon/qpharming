@@ -192,4 +192,24 @@ class ProductsDataTable extends DataTable
     {
         return 'Products_' . date('YmdHis');
     }
+
+    /**
+     * @return array
+     */
+    protected function getBuilderParameters():array
+    {
+        return[
+            'dom'     => 'Blfrtip',
+            'order'   => [[0, 'desc']],
+            'buttons' => [
+                'create',
+                'excel',
+                'csv',
+                'pdf',
+                'print'
+
+            ],
+
+        ];
+    }
 }

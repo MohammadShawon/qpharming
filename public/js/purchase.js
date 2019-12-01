@@ -25,7 +25,7 @@
             });
         }
         $scope.updateReceivingTemp = function(newreceivingtemp) {
-            $http.put('/api/receivingtemp/' + newreceivingtemp.id, {cost_price:newreceivingtemp.cost_price, quantity: newreceivingtemp.quantity, discount: newreceivingtemp.discount }).
+            $http.put('/api/receivingtemp/' + newreceivingtemp.id, {cost_price:newreceivingtemp.cost_price, selling_price:newreceivingtemp.cost_price,quantity: newreceivingtemp.quantity, discount: newreceivingtemp.discount }).
             success(function(data, status, headers, config) {
             });
         }

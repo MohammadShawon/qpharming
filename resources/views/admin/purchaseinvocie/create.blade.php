@@ -136,6 +136,7 @@
                                         <th>Product name</th>
                                         <th>Size</th>
                                         <th>Cost Price</th>
+                                        <th>MRP</th>
                                         <th>Quantity</th>
                                         <th>Discount</th>
                                         <th>Total</th>
@@ -146,6 +147,7 @@
                                         <td>@{{newreceivingtemp.product.product_name}}</td>
                                         <td>@{{ newreceivingtemp.product.size }}</td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.cost_price" size="8"></td>
+                                        <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.selling_price" size="8"></td>
                                         <td width="15%"><input type="number" style="text-align:center;width: 100%" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.quantity" step="any"></td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.discount" size="2"></td>
                                         <td>@{{  (newreceivingtemp.cost_price * newreceivingtemp.quantity) - newreceivingtemp.discount | currency:'Tk'}}</td>
@@ -153,7 +155,7 @@
                                     </tr>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                         </td>
                                         <td class="text-center">
                                             <b>

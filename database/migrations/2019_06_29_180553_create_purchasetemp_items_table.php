@@ -19,6 +19,7 @@ class CreatePurchasetempItemsTable extends Migration
             $table->bigInteger('product_id')->unsigned()->index();
             $table->string('batch_no');
             $table->decimal('cost_price',15,2);
+            $table->decimal('selling_price',15,2);
             $table->decimal('discount',15,2);
             $table->bigInteger('unit_id')->unsigned()->index();
             $table->decimal('quantity',8,2);
