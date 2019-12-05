@@ -45,8 +45,14 @@ class PurchaseDataTable extends DataTable
     protected function getActionColumn($data): string
     {
         $showUrl = route('admin.purchases.show', $data->id);
-        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
-                        <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+        $deleteUrl = route('admin.purchases.destroy', $data->id);
+        $csrf = csrf_token();
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>
+                        <button class='btn red btn-outline btn-circle delete' type='submit' data-value='$data->id' onclick='deleteInvoice($data->id)' ><i class='material-icons'>delete</i></button>
+                        <form id='delete-form-{$data->id}' action='{$deleteUrl}' method='post' style='display:none;'>
+                                            <input type='hidden' name='_token' value='{$csrf}'>
+                                            <input type='hidden' name='_method' value='DELETE'>
+                                        </form>";
     }
 
     /**
@@ -55,10 +61,8 @@ class PurchaseDataTable extends DataTable
      */
     protected function getViewColumn($data): string
     {
-        $showUrl = route('admin.sales.show', $data->id);
-        $showFarmer = route('admin.farmerinvoice.show',$data->id);
-        $show = !empty($data->customer_id) ? $showUrl : $showFarmer;
-        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$show'><i class='material-icons'>visibility</i></a>";
+        $showUrl = route('admin.purchases.show', $data->id);
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>";
 
     }
 

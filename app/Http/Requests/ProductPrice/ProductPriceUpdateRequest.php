@@ -27,8 +27,8 @@ class ProductPriceUpdateRequest extends FormRequest
             'quantity' => 'required|numeric',
             'cost'     => 'required|numeric',
             'sell'     => 'required|numeric',
-            'mfg_date' => 'required',
-            'exp_date' => 'required',
+            'mfg_date' => 'date | nullable',
+            'exp_date' => 'date | nullable',
         ];
     }
 }

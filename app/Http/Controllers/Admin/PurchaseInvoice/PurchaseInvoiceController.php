@@ -140,6 +140,7 @@ class PurchaseInvoiceController extends Controller
                             'product_id'    => $purchaseProduct->product_id,
                             'batch_no'      => $purchaseProduct->batch_no,
                             'cost_price'    => $purchaseProduct->cost_price,
+                            'selling_price' => $purchaseProduct->selling_price,
                             'discount'      => $purchaseProduct->discount,
                             'unit_id'       => $purchaseProduct->unit_id,
                             'quantity'      => $purchaseProduct->quantity,
@@ -158,7 +159,8 @@ class PurchaseInvoiceController extends Controller
                             'quantity'          => $purchaseProduct->quantity,
                             'sold'              => 0,
                             'cost_price'        => $purchaseProduct->cost_price,
-                            'selling_price'     => ProductPrice::where('product_id',$purchaseProduct->product_id)->orderBy('created_at','desc')->first()->selling_price,
+                            'selling_price'     => $purchaseProduct->selling_price,
+//                            'selling_price'     => ProductPrice::where('product_id',$purchaseProduct->product_id)->orderBy('created_at','desc')->first()->selling_price,
                             'mfg_date'          => Carbon::now('+6'),
                             'exp_date'          => Carbon::now('+6'),
                         ]);
@@ -168,7 +170,7 @@ class PurchaseInvoiceController extends Controller
                          * */
                         $inventory = Inventory::create([
                             'product_id'    => $purchaseProduct->product_id,
-                            'branch_id'     => auth()->user()->id,
+                            'branch_id'     => auth()->user()->branch_id,
                             'user_id'       => auth()->user()->id,
                             'unit_id'       => $purchaseProduct->unit_id,
                             'in_out_qty'    => +$purchaseProduct->quantity,
@@ -274,10 +276,43 @@ class PurchaseInvoiceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        if (auth()->user()->can('delete_purchase')) {
+            try {
+                $invoice = Purchase::find($id);
+                $invoice_items = PurchaseItem::where('purchase_id', $id)->get();
+                foreach ($invoice_items as $invoice_item) {
+                    $productPrice = ProductPrice::where('product_id', $invoice_item->product_id)->orderBy('id', 'desc')->first();
+
+                    if (!empty($productPrice)) {
+                        $productPrice->delete();
+                        $inventory = Inventory::create([
+                            'product_id' => $invoice_item->product_id,
+                            'branch_id' => auth()->user()->branch_id,
+                            'user_id' => auth()->user()->id,
+                            'unit_id' => $invoice_item->unit_id,
+                            'in_out_qty' => -$invoice_item->quantity,
+                            'remarks' => 'DELETPUR-' . $invoice->purchase_no,
+                            'created_at' => Carbon::now('+6'),
+                            'updated_at' => Carbon::now('+6'),
+                        ]);
+                    }
+                }
+
+                $invoiceDelete = $invoice->delete();
+                if ($invoiceDelete) {
+                    Toastr::success('Purchase Invoice Deleted Successfully', 'Success');
+                    return redirect()->route('admin.purchases.index');
+                }
+
+            } catch (\Illuminate\Database\QueryException $e) {
+                dd($e->getMessage());
+                Toastr::error('Integrity constraint violation: You Cannot delete a parent row','error');
+                return redirect()->route('admin.purchases.index');
+            }
+        }
     }
 }

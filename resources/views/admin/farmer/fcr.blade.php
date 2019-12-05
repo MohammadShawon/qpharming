@@ -18,7 +18,6 @@ use Carbon\Carbon;
         </div>
         {{--Profile Quick Links--}}
         <div class="row justify-content-center">
-
             {{--Farmer Profile--}}
             <div class="col-md-6 justify-content-center">
 
@@ -52,6 +51,200 @@ use Carbon\Carbon;
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row justify-content-center">
+
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="given_chicks_quantity">Given Chicks Quantity</label>
+                                <input type="text" id="given_chicks_quantity" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="chicks_rate"> Chicks Rate</label>
+                                <input type="text" id="chicks_rate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="sold_quantity"> Sold Quantity</label>
+                                <input type="text" id="sold_quantity" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sold_kg"> Sold Kg</label>
+                                <input type="text" id="sold_kg" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="average_weight">Average Weight Per Chicks</label>
+                                <input type="text" id="average_weight" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_loose_quantity">Farm Loose Quantity</label>
+                                <input type="text" id="farm_loose_quantity" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_loose_kg">Farm Loose Kg</label>
+                                <input type="text" id="farm_loose_kg" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_stock_quantity">Farm Stock Quantity</label>
+                                <input type="text" id="farm_stock_quantity" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="farm_stock_kg">Farm Stock Kg</label>
+                                <input type="text" id="farm_stock_kg" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="missing_quantity">Missing Quantity</label>
+                                <input type="text" id="missing_quantity" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="missing_kg">Missing Kg</label>
+                                <input type="text" id="missing_kg" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cartoon_dead">Cartoon Dead</label>
+                                <input type="text" id="cartoon_dead" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_dead">Farm Dead</label>
+                                <input type="text" id="farm_dead" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="excess_dead">Excess Dead</label>
+                                <input type="text" id="excess_dead" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bonus_chicks">Bonus Chicks</label>
+                                <input type="text" id="bonus_chicks" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bonus_chicks_money">Bonus Chicks Money</label>
+                                <input type="text" id="bonus_chicks_money" class="form-control">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="farm_loose_cutting">Farm Loose Cutting</label>
+                                <input type="text" id="farm_loose_cutting" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_stock_cutting">Farm Stock Cutting</label>
+                                <input type="text" id="farm_stock_cutting" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="excess_dead_cutting">Excess Dead Cutting</label>
+                                <input type="text" id="excess_dead_cutting" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="missing_chicks_cutting">Missing Chicks Cutting</label>
+                                <input type="text" id="missing_chicks_cutting" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="excess_feed_cutting">Excess Feed Cutting(KG)</label>
+                                <input type="text" id="excess_feed_cutting" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="report_book_cutting">Report Book Cutting</label>
+                                <input type="text" id="report_book_cutting" class="form-control" value="30" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="transport_cost">Transport Cost</label>
+                                <input type="text" id="transport_cost" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stamp_cost">Stamp Cost</label>
+                                <input type="text" id="stamp_cost" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="advance_payment">Advance Payment Cutting</label>
+                                <input type="text" id="advance_payment" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="previous_due">Previous Due Cutting</label>
+                                <input type="text" id="previous_due" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="others_cutting">Others Cutting</label>
+                                <input type="text" id="others_cutting" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="feed_eaten_sacks">Feed Eaten Sacks Quantity</label>
+                                <input type="text" id="feed_eaten_sacks" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fcr">FCR Amount</label>
+                                <input type="text" id="fcr" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commission_rate">Commission Rate  </label>
+                                <input type="text" id="commission_rate" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="selling_rate">Selling Rate  </label>
+                                <input type="text" id="selling_rate" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="farm_loose_rate">Farm Loose Rate  </label>
+                                <input type="text" id="farm_loose_rate" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sub_total">Sub Total </label>
+                                <input type="text" id="sub_total" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="total_cutting_amount">Total Cutting Amount </label>
+                                <input type="text" id="total_cutting_amount" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="grand_total">Grand Total </label>
+                                <input type="text" id="grand_total" class="form-control">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
 
         </div>

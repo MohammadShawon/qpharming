@@ -169,7 +169,7 @@
                         <div class="col-3">
                             <div class="form-group">
                                 {!! Form::label('memo','Memo No') !!}
-                                {!! Form::text('memo',old('memo'),['class' => 'form-control']) !!}
+                                {!! Form::text('memo',old('memo'),['class' => 'form-control','required']) !!}
                             </div>
                         </div>
                     </div>

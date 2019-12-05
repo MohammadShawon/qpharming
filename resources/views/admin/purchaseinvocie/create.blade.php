@@ -136,6 +136,7 @@
                                         <th>Product name</th>
                                         <th>Size</th>
                                         <th>Cost Price</th>
+                                        <th>MRP</th>
                                         <th>Quantity</th>
                                         <th>Discount</th>
                                         <th>Total</th>
@@ -146,6 +147,7 @@
                                         <td>@{{newreceivingtemp.product.product_name}}</td>
                                         <td>@{{ newreceivingtemp.product.size }}</td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.cost_price" size="8"></td>
+                                        <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.selling_price" size="8"></td>
                                         <td width="15%"><input type="number" style="text-align:center;width: 100%" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.quantity" step="any"></td>
                                         <td><input type="text" style="text-align:center" autocomplete="off" ng-change="updateReceivingTemp(newreceivingtemp)" ng-model="newreceivingtemp.discount" size="2"></td>
                                         <td>@{{  (newreceivingtemp.cost_price * newreceivingtemp.quantity) - newreceivingtemp.discount | currency:'Tk'}}</td>
@@ -153,7 +155,7 @@
                                     </tr>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                         </td>
                                         <td class="text-center">
                                             <b>
@@ -169,9 +171,9 @@
                                         </td>
                                         <td>
                                             <b>
-                                                TA: @{{ sum(receivingtemp) | number:2 }}
+                                                TA: @{{ sum(receivingtemp) - sumDiscount(receivingtemp) | number:2 }}
                                             </b>
-                                            <input type="hidden" name="sub_total" value="@{{ sum(receivingtemp) }}">
+                                            <input type="hidden" name="sub_total" value="@{{ sum(receivingtemp) - sumDiscount(receivingtemp) }}">
                                         </td>
                                         <td></td>
                                     </tr>
@@ -201,8 +203,8 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="totalInvoiceAmount">Total Invoice Amount</label>
-                                                <input type="text" value="@{{ sum(receivingtemp) - invoiceDiscount | number:2 }}" class="form-control" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
-                                                <input type="hidden" name="grand_total" value="@{{ sum(receivingtemp) - invoiceDiscount }}">
+                                                <input type="text" value="@{{ sum(receivingtemp) - (invoiceDiscount + sumDiscount(receivingtemp)) | number:2 }}" class="form-control" id="totalInvoiceAmount" readonly style="font-weight: bold;text-align: center;font-size: 32px">
+                                                <input type="hidden" name="grand_total" value="@{{ sum(receivingtemp) - (invoiceDiscount + sumDiscount(receivingtemp)) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +223,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="amountDue">Amount Due</label>
-                                                <input type="text" id="amountDue" class="form-control" value="@{{ (sum(receivingtemp) - discount) - payment }}" readonly style="font-size: 18px;font-weight: bold; text-align: center">
+                                                <input type="text" id="amountDue" class="form-control" value="@{{ (sum(receivingtemp) - (sumDiscount(receivingtemp) + invoicDdiscount)) - payment }}" readonly style="font-size: 18px;font-weight: bold; text-align: center">
                                             </div>
                                         </div>
                                     </div>

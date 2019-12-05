@@ -15,6 +15,7 @@ class PurchasetempItem extends Model implements Auditable
         'product_id',
         'batch_no',
         'cost_price',
+        'selling_price',
         'discount',
         'unit_id',
         'quantity',
