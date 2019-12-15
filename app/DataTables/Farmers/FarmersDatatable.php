@@ -39,7 +39,10 @@ class FarmersDatatable extends DataTable
                 return FarmerCOst::runningDay($data->id);
             })
             ->addColumn('action',function ($data){
-                return $this->getActionColumn($data);
+                if (auth()->user()->hasRole('superadmin')){
+                    return $this->getActionColumn($data);
+                }
+                return $this->getViewColumn($data);
             })
             ->rawColumns(['status','action'])
             ->setRowClass('gradeX');
@@ -82,9 +85,21 @@ class FarmersDatatable extends DataTable
     {
         $showUrl = route('admin.farmer.show', $data->id);
         $editUrl = route('admin.farmer.edit', $data->id);
-        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a> 
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>
                         <a class='btn blue btn-outline btn-circle' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>
                         <button class='btn red btn-outline btn-circle delete' data-value='$data->id' ><i class='material-icons'>delete</i></button>";
+    }
+
+    /**
+     * @param $data
+     * @return string
+     */
+    protected function getViewColumn($data): string
+    {
+        $showUrl = route('admin.farmer.show', $data->id);
+        $editUrl = route('admin.farmer.edit', $data->id);
+        return "<a class='btn dark btn-outline btn-circle' data-value='$data->id' href='$showUrl'><i class='material-icons'>visibility</i></a>
+                        <a class='btn blue btn-outline btn-circle' data-value='$data->id' href='$editUrl'><i class='material-icons'>edit</i></a>";
     }
 
     /**
