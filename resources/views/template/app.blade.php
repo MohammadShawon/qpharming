@@ -125,6 +125,7 @@
  <script src="{{ asset('admin/assets/js/app.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/layout.js') }} " ></script>
  <script src="{{ asset('admin/assets/js/theme-color.js') }} " ></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
  <!-- chart js -->
 {{-- <script src="{{ asset('admin/assets/plugins/chart-js/Chart.bundle.js') }} " ></script>--}}
@@ -139,7 +140,8 @@
     <script src="{{ asset('admin/assets/plugins/jquery-slimscroll/jquery.slimscroll.js') }} "></script>
 
  <!-- end js include path -->
-
+    <!-- sweet aleart -->
+    <script src="{{ asset('admin/assets/js/sweetalert.min.js') }}"></script>
 
 
 <!-- toastr js -->
