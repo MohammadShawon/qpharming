@@ -26,4 +26,6 @@ class FarmerRepository
     {
         return $this->model->findOrFail($id);
     }
+
+
 }

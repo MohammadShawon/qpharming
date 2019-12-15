@@ -38,6 +38,18 @@ class FcrController extends Controller
     public function index()
     {
         $data['farmer'] = $this->fcrCalculationService->findById($this->request->id);
+        $data['batch'] = $this->fcrCalculationService->currentBatch($this->request->id);
+        if (!empty($data['batch']->batch_number))
+        {
+            $data['product'] = $this->fcrCalculationService->getChicksPrice($data['batch']->product_id,$data['batch']->chicks_batch_no);
+            $data['records'] = $this->fcrCalculationTransformer->getRecords($this->fcrCalculationService->currentBatchRecords($data['batch']->batch_number));
+        }
+//        dd($data['records']);
         return view('admin.farmer.fcr',$data);
+    }
+
+    public function store()
+    {
+        dd($this->request);
     }
 }

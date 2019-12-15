@@ -97,6 +97,7 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
 
     /*FCR Routes*/
     Route::get('farmer/{id}/fcr','FcrCalculation\FcrController@index')->name('farmer.fcr_calculate.page');
+    Route::post('farmer/{id}/fcr','FcrCalculation\FcrController@store')->name('farmer.fcr_calculate.store');
 //    Route::get('farmer/profile', function (){ return view('admin.farmer.view2'); });
 
     Route::post('farmer/records/{id}', 'FarmerRecordController@store')->name('daily-record');
