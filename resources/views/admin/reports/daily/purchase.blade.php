@@ -1,6 +1,8 @@
 @extends('template.print')
 @section('title','Daily Purchase Report')
-
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+    @endsection
 @section('content')
     <h4 class="text-center">Purchase Report of ({{ \Carbon\Carbon::parse($request_date)->format('d-M-Y') }})</h4>
 <table class="table table-bordered">

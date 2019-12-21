@@ -12809,7 +12809,11 @@ var app = new Vue({
       return Number(Number(this.chicks_rate) * Number(this.bonus_chicks));
     },
     excess_dead: function excess_dead() {
-      return Number(Number(this.bonus_chicks) - Number(this.farm_dead));
+      if (Number(this.farm_dead) < Number(this.bonus_chicks)) {
+        return Number(Number(this.bonus_chicks) - Number(this.farm_dead)) * -1;
+      }
+
+      return Math.abs(Number(Number(this.bonus_chicks) - Number(this.farm_dead)));
     },
     farm_loose_cutting: function farm_loose_cutting() {
       return Number(Number(this.farm_loose_kg) * Number(this.farm_loose_rate));
@@ -12824,7 +12828,7 @@ var app = new Vue({
       return Number(Number(this.missing_quantity) * Number(this.average_weight) * Number(this.selling_rate));
     },
     fcr: function fcr() {
-      return Number(Number(this.sold_kg) / Number(this.feed_eaten_sacks)).toFixed(5);
+      return Number((Number(this.sold_kg) + Number(this.farm_loose_kg) + Number(this.farm_stock_kg)) / Number(this.feed_eaten_sacks)).toFixed(5);
     },
     commission_rate: function commission_rate() {
       if (Number(this.fcr) >= 33) {

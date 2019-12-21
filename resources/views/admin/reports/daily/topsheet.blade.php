@@ -1,8 +1,8 @@
 @extends('template.print')
 @section('title', 'Daily TopSheet')
-@push('css')
-
-@endpush
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/print.css') }}">
+@endsection
 @section('content')
     <h4 class="text-center">Top Sheet of ({{ \Carbon\Carbon::parse($request_date)->format('d-M-Y') }})</h4>
 

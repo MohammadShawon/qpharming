@@ -32,5 +32,10 @@ class Farmer extends Model implements Auditable
         return $this->hasMany(FarmerBatch::class,'farmer_id','id');
     }
 
+    public function fcr()
+    {
+        return $this->hasMany(FcrData::class);
+    }
+
 
 }

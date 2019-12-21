@@ -59,6 +59,8 @@ use Carbon\Carbon;
                         FCR Calculation Form
                     </h3>
                 </div>
+            <input type="hidden" name="farmer_id" value="{{ $batch->farmer_id }}">
+            <input type="hidden" name="batch_number" value="{{ $batch->batch_number }}">
                 <div class="col-4">
                     <div class="card">
                         <div class="card-body">
@@ -108,7 +110,7 @@ use Carbon\Carbon;
 
                             <div class="form-group">
                                 <label for="farm_dead">Farm Dead</label>
-                                <input type="text" id="farm_dead" name="farm_dead" :value="farm_dead = {{ $records['total_died'] }}"  class="form-control">
+                                <input type="text" id="farm_dead" v-model:number="farm_dead" name="farm_dead" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -258,7 +260,12 @@ use Carbon\Carbon;
     </div>
 @endsection
 @push('js')
-
+    <script>
+        let farmer = {
+            'id': '{{ $batch->farmer_id }}',
+            'batch_number': '{{ $batch->batch_number }}'
+        }
+    </script>
 
     {{--<script src="{{ asset('admin/assets/js/pages/table/table_data.js') }}" ></script>--}}
 
