@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Collection;
 use App\Models\FarmerInvoice;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
@@ -166,6 +167,7 @@ class FarmerController extends Controller
                 ->get();
 //            dd($data['feeds']);
             $data['payments'] = Payment::where('farmer_id',$farmer->id)->get();
+            $data['collections'] = Collection::where('farmer_id',$farmer->id)->get();
             return view('admin.farmer.view',$data,compact('farmer'));
         }
     }

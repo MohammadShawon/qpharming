@@ -2,6 +2,7 @@
 namespace App\Helpers;
 
 use App\Models\Category;
+use App\Models\Collection;
 use App\Models\FarmerBatch;
 use App\Models\FarmerInvoice;
 use App\Models\FarmerRecord;
@@ -40,6 +41,26 @@ class Farmers
         $totalInvoiceAmount = FarmerInvoice::where('farmer_id',$farmer_id)->sum('total_amount');
         $advancePayments = Payment::where('farmer_id',$farmer_id)->sum('payment_amount');
         return ($totalInvoiceAmount + $advancePayments + $opening_balance);
+
+
+    }
+    public static function currentBalance(int $farmer_id):float
+    {
+        $totalCost = self::totalCost($farmer_id);
+        $collection = Collection::where('farmer_id', $farmer_id)->sum('collection_amount');
+
+
+        return ($totalCost - $collection);
+
+
+    }
+    public static function totalCollection(int $farmer_id):float
+    {
+
+        $collection = Collection::where('farmer_id', $farmer_id)->sum('collection_amount');
+
+
+        return $collection;
 
 
     }
