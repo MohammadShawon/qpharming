@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Repository\FarmerBatchRecordRepository;
 use App\Repository\FarmerBatchRepository;
 use App\Repository\FarmerRepository;
+use App\Repository\FcrDataRepository;
 use App\Repository\ProductPriceRepository;
 
 class FcrCalculationService
@@ -27,6 +28,10 @@ class FcrCalculationService
      * @var ProductPriceRepository
      */
     private $productPriceRepository;
+    /**
+     * @var FcrDataRepository
+     */
+    private $fcrDataRepository;
 
     /**
      * FcrCalculationService constructor.
@@ -34,14 +39,16 @@ class FcrCalculationService
      * @param FarmerBatchRepository $batchRepository
      * @param FarmerBatchRecordRepository $batchRecordRepository
      * @param ProductPriceRepository $productPriceRepository
+     * @param FcrDataRepository $fcrDataRepository
      */
-    public function __construct(FarmerRepository $farmerRepository, FarmerBatchRepository $batchRepository,FarmerBatchRecordRepository $batchRecordRepository, ProductPriceRepository $productPriceRepository)
+    public function __construct(FarmerRepository $farmerRepository, FarmerBatchRepository $batchRepository,FarmerBatchRecordRepository $batchRecordRepository, ProductPriceRepository $productPriceRepository, FcrDataRepository $fcrDataRepository)
     {
 
         $this->farmerRepository = $farmerRepository;
         $this->batchRepository = $batchRepository;
         $this->batchRecordRepository = $batchRecordRepository;
         $this->productPriceRepository = $productPriceRepository;
+        $this->fcrDataRepository = $fcrDataRepository;
     }
     public function findById($id)
     {
@@ -61,5 +68,25 @@ class FcrCalculationService
     public function getChicksPrice($product_id, $chicks_batch_no)
     {
         return $this->productPriceRepository->getChicksPrice($product_id, $chicks_batch_no);
+    }
+
+    public function storeData($request)
+    {
+        return $this->fcrDataRepository->storeData($request);
+    }
+
+    public function updateActiveBatch($farmer_id, $batch_number)
+    {
+        return $this->batchRepository->updateActiveBatch($farmer_id, $batch_number);
+    }
+
+    public function getData($batch_number)
+    {
+        return $this->fcrDataRepository->getData($batch_number);
+    }
+
+    public function getFarmerData($farmer_id)
+    {
+        return $this->farmerRepository->findById($farmer_id);
     }
 }

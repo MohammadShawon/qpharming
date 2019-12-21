@@ -18,4 +18,20 @@ class FcrCalculationTransformer
        ];
 
     }
+
+    public function fcrStored($fcr)
+    {
+        return ResponseTransformer::successResponse(201, 'Stored Fcr Data', [
+            'fcr' => $fcr
+        ]);
+    }
+
+    public function storeFailed($exception)
+    {
+        return ResponseTransformer::errorResponse(404, 'Error Response', [
+           'error' => $exception->getMessage()
+        ]);
+    }
+
+
 }

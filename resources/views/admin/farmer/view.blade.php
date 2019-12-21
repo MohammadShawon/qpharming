@@ -442,7 +442,7 @@ use Carbon\Carbon;
                                                                         @endif
                                                                         @if($farmerBatch->status === 'inactive')
                                                                             {{--View FUll Record Button --}}
-                                                                            <a href="" class="btn btn-primary btn-lg m-b-10">View Full Record</a>@endif
+                                                                            <a href="{{ route('admin.fcr.download.pdf', $farmerBatch->batch_number) }}" class="btn btn-primary btn-lg m-b-10">Download FCR</a>@endif
                                                                     </div>
                                                                 </div>
 
@@ -495,7 +495,9 @@ use Carbon\Carbon;
                                                                 </div>
                                                                 <div class="fcr-calculation">
                                                                     <a href="{{ route('admin.farmer.fcr_calculate.page',$farmer->id) }}">
+                                                                        @if($farmerBatch->status === 'active')
                                                                         <button class="btn btn-success">Generate FCR</button>
+                                                                            @endif
                                                                     </a>
                                                                 </div>
                                                             </div>

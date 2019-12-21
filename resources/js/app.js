@@ -30,6 +30,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#fcr',
     data: {
+
         given_chicks_quantity: 0,
         chicks_rate: 0,
         sold_quantity: 0,
@@ -51,8 +52,6 @@ const app = new Vue({
         others_cutting: 0,
         feed_eaten_sacks: 0,
 
-
-
     },
     computed: {
         average_weight() {
@@ -71,7 +70,12 @@ const app = new Vue({
             return Number(Number(this.chicks_rate) * Number(this.bonus_chicks))
         },
         excess_dead() {
-            return Number(Number(this.bonus_chicks) - Number(this.farm_dead))
+            if (Number(this.farm_dead) < Number(this.bonus_chicks))
+            {
+                return (Number(Number(this.bonus_chicks) - Number(this.farm_dead)) * -1);
+            }
+            return Math.abs(Number(Number(this.bonus_chicks) - Number(this.farm_dead)));
+
         },
         farm_loose_cutting() {
             return Number(Number(this.farm_loose_kg) * Number(this.farm_loose_rate));
@@ -80,13 +84,15 @@ const app = new Vue({
             return Number(Number(this.farm_stock_kg) * Number(this.selling_rate))
         },
         excess_dead_cutting() {
+
             return Number(Number(this.excess_dead) * Number(this.chicks_rate));
+
         },
         missing_chicks_cutting() {
             return Number(Number(this.missing_quantity) * Number(this.average_weight) * Number(this.selling_rate));
         },
         fcr() {
-            return Number(Number(this.sold_kg) / Number(this.feed_eaten_sacks)).toFixed(5);
+            return Number((Number(this.sold_kg)+ Number(this.farm_loose_kg) + Number(this.farm_stock_kg)) / Number(this.feed_eaten_sacks)).toFixed(5);
         },
         commission_rate() {
             if (Number(this.fcr) >= 33)
@@ -110,6 +116,7 @@ const app = new Vue({
                 return 0;
             }
         },
+
         sub_total() {
             return Number((Number(this.sold_kg) + Number(this.farm_loose_kg) + Number(this.farm_stock_kg)) * Number(this.commission_rate));
         },

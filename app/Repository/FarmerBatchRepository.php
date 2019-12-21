@@ -28,5 +28,13 @@ class FarmerBatchRepository
         return $this->model->where('farmer_id', $farmer_id)->where('status','active')->first();
     }
 
+    public function updateActiveBatch($farmer_id, $batch_number)
+    {
+        $batch = $this->model->where('farmer_id', $farmer_id)->where('batch_number', $batch_number)->first();
+        $batch->status = 'inactive';
+        $batch->save();
+        return $batch;
+    }
+
 
 }

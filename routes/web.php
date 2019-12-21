@@ -163,6 +163,11 @@ Route::group(['as'=>'admin.', 'namespace'=>'Admin','middleware' => ['role:supera
     Route::post('monthly/reports','Reports\MonthlyReportController@show')->name('monthly.reports.post');
 
     Route::get('daily/reports/topsheet','Reports\DailyReportController@topsheet');
+
+    /**
+     * FCR
+     */
+    Route::get('fcr/{batch_number}', 'FcrCalculation\FcrController@download')->name('fcr.download.pdf');
 });
 
 
@@ -206,3 +211,10 @@ Route::get('locale/{locale}', function ($locale){
 
 
 Route::get('/', 'Admin\DashboardController@index')->name('home');
+
+Route::get('/test', function (){
+//    return view('admin.print.fcr');
+    $report = DomPDF::loadView('admin.print.fcr')->setPaper('a4', 'landscape');
+    return $report->stream('sale.pdf');
+
+});
