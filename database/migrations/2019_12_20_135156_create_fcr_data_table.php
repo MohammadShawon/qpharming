@@ -22,7 +22,7 @@ class CreateFcrDataTable extends Migration
             $table->decimal('chicks_rate', 8,2);
             $table->decimal('sold_quantity', 8,2);
             $table->decimal('sold_kg', 8,2);
-            $table->decimal('average_weight', 8,5);
+            $table->decimal('average_weight', 8,2);
             $table->decimal('farm_loose_quantity', 8,2);
             $table->decimal('farm_loose_kg', 8,2);
             $table->decimal('farm_stock_quantity', 8,2);
@@ -46,12 +46,12 @@ class CreateFcrDataTable extends Migration
             $table->decimal('previous_due', 8,2);
             $table->decimal('others_cutting', 8,2);
             $table->decimal('feed_eaten_sacks', 8,2);
-            $table->decimal('fcr', 8,5);
-            $table->decimal('commission_rate', 8,5);
+            $table->decimal('fcr', 8,2);
+            $table->decimal('commission_rate', 8,2);
             $table->decimal('selling_rate', 8,2);
             $table->decimal('farm_loose_rate', 8,2);
-            $table->decimal('sub_total', 8,5);
-            $table->decimal('total_cutting_amount', 8,5);
+            $table->decimal('sub_total', 8,2);
+            $table->decimal('total_cutting_amount', 8,2);
             $table->decimal('grand_total', 8,2);
             $table->timestamps();
 

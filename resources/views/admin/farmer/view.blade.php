@@ -77,6 +77,18 @@ use Carbon\Carbon;
                                     {{ \App\Helpers\Farmers::totalCost($farmer->id) }}
                                 </a>
                             </li>
+                            <li class="list-group-item">
+                                <b>Total Collection</b>
+                                <a class="pull-right">
+                                    {{ \App\Helpers\Farmers::totalCollection($farmer->id) }}
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Current Balance</b>
+                                <a class="pull-right">
+                                    {{ \App\Helpers\Farmers::currentBalance($farmer->id) }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -261,6 +273,9 @@ use Carbon\Carbon;
                             </li>
                             <li class="nav-item">
                                 <a href="#payments" data-toggle="tab">Payments Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#collections" data-toggle="tab">Collection Details</a>
                             </li>
                         </ul>
                     </header>
@@ -556,6 +571,61 @@ use Carbon\Carbon;
                                                             </td>
                                                             <td>
                                                                 <b>{{ number_format($payments->sum('payment_amount'),2,'.',',') }}</b>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--Collections--}}
+                            <div class="tab-pane" id="collections">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body " style="">
+                                            <div class="table-scrollable">
+                                                @if(!$collections->isEmpty())
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Date</th>
+                                                            <th>Bank Name</th>
+                                                            <th>Type</th>
+                                                            <th>Amount</th>
+                                                            <th>Remarks</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <?php
+                                                        $serial =1;
+                                                        ?>
+                                                        <tbody>
+
+                                                        @foreach($collections as $collection)
+                                                            <tr>
+                                                                <td>{{ $serial++ }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($collection->collection_date)->format('d-M-Y') }}</td>
+                                                                <td>{{ $collection->bank->bank_name }}</td>
+                                                                <td>
+                                                                    {{ $collection->collection_type }}
+                                                                </td>
+                                                                <td>{{ $collection->collection_amount }}</td>
+                                                                <td>{{ $collection->remarks ?? 'N/A' }}</td>
+                                                            </tr>
+                                                        @endforeach
+
+
+                                                        </tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                <b>Total Collection Amount</b>
+                                                            </td>
+                                                            <td>
+                                                                <b>{{ number_format($collections->sum('collection_amount'),2,'.',',') }}</b>
                                                             </td>
                                                         </tr>
                                                         </tfoot>

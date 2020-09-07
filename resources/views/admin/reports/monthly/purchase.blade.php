@@ -2,7 +2,7 @@
 @section('title','Monthly Purchase Report')
 
 @section('content')
-    <h4 class="text-center">Sales Report ({{ \Carbon\Carbon::parse($request_from_date)->format('d-M-Y') }} To {{ \Carbon\Carbon::parse($request_to_date)->format('d-M-Y') }})</h4>
+    <h4 class="text-center">Purchase Report ({{ \Carbon\Carbon::parse($request_from_date)->format('d-M-Y') }} To {{ \Carbon\Carbon::parse($request_to_date)->format('d-M-Y') }})</h4>
 <table class="table table-bordered">
     <thead>
     <tr>
