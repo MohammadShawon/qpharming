@@ -280,7 +280,7 @@
                                         </div>
                                         <div>
                                                 <span class="clsAvailable">
-                                                    {{$user->branch->name}}
+                                                    {{$user->branch->name ?? ''}}
                                                 </span>
                                         </div>
                                     </div>
