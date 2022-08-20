@@ -15,3 +15,4 @@ yarn-error.log
 config/cors.php
 packages/Qbytesoft/qroles/Models/
 packages/Qbytesoft/qroles/migrations/
+.DS_Store
